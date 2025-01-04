@@ -1,5 +1,5 @@
 /**
- * Manage different sizes of a photo in JPG files.
+ * Photography editing and publishing workflow.
  *
  * @module
  */
