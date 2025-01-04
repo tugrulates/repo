@@ -178,6 +178,11 @@ function getLeagueCommand() {
     });
 }
 
+/**
+ * CLI interface.
+ *
+ * @ignore missing-return-type
+ */
 export async function getCommand() {
   const command = new Command()
     .name("duolingo")
@@ -209,6 +214,7 @@ export async function getCommand() {
   return command;
 }
 
+/** CLI entrypoint. */
 export async function main(): Promise<void> {
   username = new Config("username");
   token = new Config("token", { secret: true });

@@ -124,6 +124,11 @@ function getPhotosCommand() {
     });
 }
 
+/**
+ * CLI interface.
+ *
+ * @ignore missing-return-type
+ */
 export function getCommand() {
   const command = new Command()
     .name("500px")
@@ -136,6 +141,7 @@ export function getCommand() {
   return command;
 }
 
+/** CLI entrypoint. */
 export async function main(): Promise<void> {
   const command = getCommand();
   await command.parse();

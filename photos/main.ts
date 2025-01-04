@@ -37,6 +37,11 @@ function check(data: Photo) {
   return "";
 }
 
+/**
+ * CLI interface.
+ *
+ * @ignore missing-return-type
+ */
 export function getCommand() {
   return new Command()
     .name("photos")
@@ -61,7 +66,8 @@ export function getCommand() {
     });
 }
 
-export async function main() {
+/** CLI entrypoint. */
+export async function main(): Promise<void> {
   const command = getCommand();
   await command.parse();
 }

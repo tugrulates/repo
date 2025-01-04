@@ -23,6 +23,11 @@ function breadcrumb(document: Destination | Attraction) {
   } ]`;
 }
 
+/**
+ * CLI interface.
+ *
+ * @ignore missing-return-type
+ */
 export async function getCommand() {
   return new Command()
     .name("lonely-planet")
@@ -75,6 +80,7 @@ export async function getCommand() {
     );
 }
 
+/** CLI entrypoint. */
 export async function main(): Promise<void> {
   endpoint = new Config("endpoint");
   token = new Config("token", { secret: true });
