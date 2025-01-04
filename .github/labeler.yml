@@ -18,3 +18,6 @@ refactor:
 
 testing:
   - head-branch: ["^test/", "^testing/", "^tests/"]
+
+release:
+  - head-branch: ["^rel/", "^release/", "^version/"]
