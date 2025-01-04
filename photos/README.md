@@ -1,5 +1,7 @@
 # photos ([jsr.io](https://jsr.io/@tugrulates/photos))
 
+Managing photos.
+
 ## CLI
 
 Run `photos` after installation, or run `deno run -A @tugrulates/photos` without
@@ -13,6 +15,18 @@ installation.
 | `photos [directory] --json` | Data for a photo with all sizes.              |
 | `photos [file.jpg] --json`  | Data for a single size file.                  |
 | `photos [directory] --copy` | Copy EXIF data to all sizes.                  |
+
+## Types
+
+### [Exif](https://jsr.io/@tugrulates/photos/doc/~/Exif)
+
+Represents the EXIF (Exchangeable Image File Format) metadata of a photo.
+
+This only lists the fields relevant for my photography workflow.
+
+### [Photo](https://jsr.io/@tugrulates/photos/doc/~/Photo)
+
+Represents a photo with additional metadata and sizes.
 
 ## Functions
 
