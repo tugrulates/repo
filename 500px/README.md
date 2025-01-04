@@ -1,6 +1,8 @@
 # 500px ([jsr.io](https://jsr.io/@tugrulates/500px))
 
-Test doc.
+Interactions with 500px, the photo sharing platform.
+
+Provides classes and types, as well as a CLI interface.
 
 ## CLI
 
@@ -33,3 +35,25 @@ installation.
 Client for interacting with the 500px GraphQL API.
 
 Provides the logged out experience, and does not require authentication.
+
+## Types
+
+### [Category](https://jsr.io/@tugrulates/500px/doc/~/Category)
+
+A photo category on 500px.
+
+### [Photo](https://jsr.io/@tugrulates/500px/doc/~/Photo)
+
+A photo submitted to 500px and its stats.
+
+### [User](https://jsr.io/@tugrulates/500px/doc/~/User)
+
+A user on 500px.
+
+## Constants
+
+### [CATEGORIES](https://jsr.io/@tugrulates/500px/doc/~/CATEGORIES)
+
+Photo categories on 500px.
+
+Each photo belongs to a single category.

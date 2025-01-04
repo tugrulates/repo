@@ -15,7 +15,7 @@ export class FiveHundredPxClient {
    * @param options Optional configuration options.
    * @param options.token Optional authentication token.
    */
-  constructor(private options: { token?: string } = {}) {
+  constructor(options: { token?: string } = {}) {
     this.client = new GraphQLClient("https://api.500px.com/graphql", options);
   }
 

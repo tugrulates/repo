@@ -19,6 +19,9 @@ interface JSDocNode {
   jsDoc: {
     doc: string;
   };
+  variableDef?: {
+    kind: string;
+  };
 }
 
 async function getModuleConfig(path: string): Promise<Config> {
@@ -48,6 +51,8 @@ async function getJsdoc(path: string, config: Config): Promise<{
   module?: JSDocNode;
   classes: JSDocNode[];
   functions: JSDocNode[];
+  types: JSDocNode[];
+  constants: JSDocNode[];
 }> {
   // Deno.command instead of dax
   // see https://github.com/dsherret/dax/issues/297
@@ -60,14 +65,14 @@ async function getJsdoc(path: string, config: Config): Promise<{
     throw new Error(`Cannot parse JSDoc: ${error}`);
   }
   const jsdoc = JSON.parse(new TextDecoder().decode(stdout)) as JSDoc;
+  const nodes = jsdoc.nodes.toSorted((a, b) => a.name.localeCompare(b.name));
   return {
-    module: jsdoc.nodes.find((n) => n.kind == "moduleDoc"),
-    classes: jsdoc.nodes
-      .filter((n) => n.kind == "class")
-      .toSorted((a, b) => a.name.localeCompare(b.name)),
-    functions: jsdoc.nodes
-      .filter((n) => n.kind == "function")
-      .toSorted((a, b) => a.name.localeCompare(b.name)),
+    module: nodes.find((n) => n.kind == "moduleDoc"),
+    classes: nodes.filter((n) => n.kind == "class"),
+    functions: nodes.filter((n) => n.kind == "function"),
+    types: nodes.filter((n) => n.kind == "interface"),
+    constants: nodes.filter((n) => n.kind == "variable")
+      .filter((n) => n.variableDef?.kind == "const"),
   };
 }
 
@@ -125,6 +130,16 @@ export async function generateReadme(path: string): Promise<string> {
       );
     }
   }
+  if (jsdoc.types?.length) {
+    readme.push("## Types", "");
+    for (const c of jsdoc.types) {
+      readme.push(
+        `### [${c.name}](https://jsr.io/${config.name}/doc/~/${c.name})`,
+        "",
+        c.jsDoc?.doc,
+      );
+    }
+  }
   if (jsdoc.functions?.length) {
     readme.push("## Functions", "");
     for (const f of jsdoc.functions) {
@@ -132,6 +147,16 @@ export async function generateReadme(path: string): Promise<string> {
         `### [${f.name}](https://jsr.io/${config.name}/doc/~/${f.name})`,
         "",
         f.jsDoc?.doc,
+      );
+    }
+  }
+  if (jsdoc.constants?.length) {
+    readme.push("## Constants", "");
+    for (const c of jsdoc.constants) {
+      readme.push(
+        `### [${c.name}](https://jsr.io/${config.name}/doc/~/${c.name})`,
+        "",
+        c.jsDoc?.doc,
       );
     }
   }
