@@ -124,12 +124,7 @@ function getPhotosCommand() {
     });
 }
 
-/**
- * CLI interface.
- *
- * @ignore missing-return-type
- */
-export function getCommand() {
+function getCommand() {
   const command = new Command()
     .name("500px")
     .description("Interact with 500px.")

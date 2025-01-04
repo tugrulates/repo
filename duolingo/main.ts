@@ -178,12 +178,7 @@ function getLeagueCommand() {
     });
 }
 
-/**
- * CLI interface.
- *
- * @ignore missing-return-type
- */
-export async function getCommand() {
+async function getCommand() {
   const command = new Command()
     .name("duolingo")
     .description("Interact with Duolingo.")
