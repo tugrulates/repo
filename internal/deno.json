@@ -1,0 +1,11 @@
+{
+  "name": "@tugrulates/internal",
+  "version": "0.1.0",
+  "exports": {
+    "./async": "./async.ts",
+    "./cli": "./cli.ts",
+    "./readme": "./readme.ts",
+    "./graphql": "./graphql.ts",
+    "./request": "./request.ts"
+  }
+}

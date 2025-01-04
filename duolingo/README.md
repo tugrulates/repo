@@ -1,105 +1,93 @@
-# duolingo
+# duolingo ([jsr.io](https://jsr.io/@tugrulates/duolingo))
 
-```
-Usage: duolingo <command> [options]
+Interact with Duolingo, the language learning platform.
 
-Description:
+## CLI
 
-  Interact with Duolingo.
+Run `duolingo` after installation, or run `deno run -A @tugrulates/duolingo`
+without installation.
 
-Options:
+### Examples
 
-  -h, --help              - Show this help.
-  --username  <username>  - Username.
-  --token     <token>     - JWT token.
-  --clear                 - Clear the cached configuration.
+| Command                                                        | Description                                        |
+| -------------------------------------------------------------- | -------------------------------------------------- |
+| `duolingo --username <username> --token <token>`               | Configure.                                         |
+| `duolingo --clear`                                             | Clear the cached configuration.                    |
+| `duolingo feed`                                                | Prints the feed.                                   |
+| `duolingo feed --engage`                                       | Engages with the feed.                             |
+| `duolingo feed --json \| jq`                                   | Query JSON over the feed.                          |
+| `duolingo follows`                                             | Prints follow counts.                              |
+| `duolingo follows --follows`                                   | Follow users who follow.                           |
+| `duolingo follows --unfollow`                                  | Unfollow users who dont' follow.                   |
+| `duolingo follows --follow --unfollow`                         | Matches both lists.                                |
+| `duolingo follows --json`                                      | Outputs JSON of follower information.              |
+| `duolingo follows --json \| jq`                                | Query JSON for follower information.               |
+| `duolingo follows --json \| jq '.dontFollowBack[].username'`   | List users who are followed but don't follow back. |
+| `duolingo follows --json \| jq '.notFollowingBack[].username'` | List users who follow but are not followed back.   |
+| `duolingo league`                                              | Prints the league.                                 |
+| `duolingo league --follow`                                     | Follows users in the league.                       |
+| `duolingo league --json \| jq`                                 | Query JSON over the league.                        |
 
-Commands:
+## Classes
 
-  feed     - Prints and interacts with the feed.
-  follows  - Prints and manages follower information on Duolingo.
-  league   - Prints and interacts with the current Duolingo league.
+### [DuolingoClient](https://jsr.io/@tugrulates/duolingo/doc/~/DuolingoClient)
 
-Examples:
+A client for interacting with the Duolingo API.
 
-  duolingo --username <username> --token <token> Configure.
-  duolingo --clear                               Clear the cached configuration.
-```
+Requires the JWT (JSON web token) for the logged-in user.
 
-## feed
+## Types
 
-```
-Usage: duolingo feed
+### [FeedCard](https://jsr.io/@tugrulates/duolingo/doc/~/FeedCard)
 
-Description:
+A Duolingo feed card, like a milestone or league promotion.
 
-  Prints and interacts with the feed.
+### [Friend](https://jsr.io/@tugrulates/duolingo/doc/~/Friend)
 
-Options:
+A user other than the current user on Duolingo.
 
-  -h, --help              - Show this help.
-  --username  <username>  - Username.
-  --token     <token>     - JWT token.
-  --engage                - Engage with the feed events.
-  --json                  - Output the feed as JSON.
+### [League](https://jsr.io/@tugrulates/duolingo/doc/~/League)
 
-Examples:
+A Duolingo league and its user rankings.
 
-  duolingo feed             Prints the feed.
-  duolingo feed --engage    Engages with the feed.
-  duolingo feed --json | jq Query JSON over the feed.
-```
+### [LeagueUser](https://jsr.io/@tugrulates/duolingo/doc/~/LeagueUser)
 
-## follows
+A user in a Duolingo league.
 
-```
-Usage: duolingo follows
+## Functions
 
-Description:
+### [engageWithCard](https://jsr.io/@tugrulates/duolingo/doc/~/engageWithCard)
 
-  Prints and manages follower information on Duolingo.
+Engages with the event, following the user or sending a reaction.
 
-Options:
+### [followLeagueUsers](https://jsr.io/@tugrulates/duolingo/doc/~/followLeagueUsers)
 
-  -h, --help              - Show this help.
-  --username  <username>  - Username.
-  --token     <token>     - JWT token.
-  --follow                - Follow users who follow.
-  --unfollow              - Unfollow users who don't follow.
-  --json                  - Output the follower information as JSON.
+Follows all the users in the league.
 
-Examples:
+### [getEmoji](https://jsr.io/@tugrulates/duolingo/doc/~/getEmoji)
 
-  duolingo follows                                            Prints follow counts.
-  duolingo follows --follows                                  Follow users who follow.
-  duolingo follows --unfollow                                 Unfollow users who dont' follow.
-  duolingo follows --follow --unfollow                        Matches both lists.
-  duolingo follows --json                                     Outputs JSON of follower information.
-  duolingo follows --json | jq                                Query JSON for follower information.
-  duolingo follows --json | jq '.dontFollowBack[].username'   List users who are followed but don't follow back.
-  duolingo follows --json | jq '.notFollowingBack[].username' List users who follow but are not followed back.
-```
+Returns the display emoji for the card.
 
-## league
+### [getLeagueUserEmoji](https://jsr.io/@tugrulates/duolingo/doc/~/getLeagueUserEmoji)
 
-```
-Usage: duolingo league
+Returns the emoji for the user's reaction.
 
-Description:
+### [getReaction](https://jsr.io/@tugrulates/duolingo/doc/~/getReaction)
 
-  Prints and interacts with the current Duolingo league.
+Returns the reaction on the card, or picks an appripriate one.
 
-Options:
+## Constants
 
-  -h, --help              - Show this help.
-  --username  <username>  - Username.
-  --token     <token>     - JWT token.
-  --follow                - Follow users in the league.
-  --json                  - Output the league as JSON.
+### [LANGUAGES](https://jsr.io/@tugrulates/duolingo/doc/~/LANGUAGES)
 
-Examples:
+Language codes on Duolingo, with their names, and flags.
 
-  duolingo league             Prints the league.
-  duolingo league --follow    Follows users in the league.
-  duolingo league --json | jq Query JSON over the league.
-```
+This only lists target languages, and not source languages.
+
+### [LEAGUES](https://jsr.io/@tugrulates/duolingo/doc/~/LEAGUES)
+
+Duolingo leagues tiers, their names, and emojis.
+
+### [REACTIONS](https://jsr.io/@tugrulates/duolingo/doc/~/REACTIONS)
+
+Reactions to Duolingo feed events and the corresponding emojis.

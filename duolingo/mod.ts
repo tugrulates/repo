@@ -1,6 +1,14 @@
-import { main } from "./cli.ts";
-export * from "./client.ts";
+/**
+ * Interact with Duolingo, the language learning platform.
+ *
+ * @module
+ */
 
-if (import.meta.main) {
-  await main();
-}
+import { main } from "./main.ts";
+
+export * from "./client.ts";
+export * from "./data.ts";
+export * from "./interaction.ts";
+export * from "./types.ts";
+
+if (import.meta.main) await main();

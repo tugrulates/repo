@@ -1,6 +1,6 @@
 import { toPascalCase } from "@std/text";
 import * as uuid from "@std/uuid";
-import { JsonClient } from "../common/request.ts";
+import { JsonClient } from "@tugrulates/internal/request";
 import type { Attraction, Destination, Story } from "./types.ts";
 
 /** A results page for a query on the Lonely Planet. */

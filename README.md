@@ -1,11 +1,7 @@
-# scripts
+# lib
 
-Various scripts that I use for automation and data collection.
+Monorepo with various libraries and tools.
 
-# Installation
-
-```sh
-git clone https://github.com/tugrulates/scripts.git scripts
-cd scripts
-deno task install
-```
+These are all written in TypeScript and are intended to be used with the
+[Deno](https://deno.com) runtime. Packages are published to
+[JSR](https://jsr.io).

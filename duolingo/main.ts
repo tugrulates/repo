@@ -1,17 +1,16 @@
 import { Command } from "@cliffy/command";
 import { Table } from "@cliffy/table";
-import { pool } from "../common/async.ts";
-import { Config } from "../common/cli.ts";
+import { pool } from "@tugrulates/internal/async";
+import { Config } from "@tugrulates/internal/cli";
 import { DuolingoClient } from "./client.ts";
-import { LANGUAGES, LEAGUES, REACTIONS } from "./data.ts";
-import type {
-  FeedCard,
-  Friend,
-  LanguageCode,
-  League,
-  LeagueUser,
-  Reaction,
-} from "./types.ts";
+import { LEAGUES } from "./data.ts";
+import {
+  engageWithCard,
+  followLeagueUsers,
+  getEmoji,
+  getLeagueUserEmoji,
+} from "./interaction.ts";
+import type { FeedCard, League } from "./types.ts";
 
 let username: Config | undefined;
 let token: Config | undefined;
@@ -22,36 +21,6 @@ export async function getClient(): Promise<DuolingoClient> {
     throw new Error("Username and token not configured.");
   }
   return new DuolingoClient(await username.get(), await token.get());
-}
-
-/**
- * Engages with the event, following the user or sending a reaction.
- *
- * @param followers List of followers, to skip in follow-backs.
- * @param card Card to engage with.
- * @returns True if the event was engaged with.
- */
-async function engageWithCard(
-  followers: Friend[],
-  card: FeedCard,
-): Promise<boolean> {
-  const client = await getClient();
-  if (card.cardType === "FOLLOW") {
-    const user = followers.find((user) => user.userId === card.userId);
-    if (!user?.isFollowing) {
-      await client.followUser(card.userId);
-      return true;
-    }
-  } else if (
-    card.cardType === "KUDOS_OFFER" ||
-    card.cardType === "SHARE_SENTENCE_OFFER"
-  ) {
-    if (!card.reactionType) {
-      await client.sendReaction(card.eventId, getReaction(card));
-      return true;
-    }
-  }
-  return false;
 }
 
 /**
@@ -78,44 +47,6 @@ async function getFollows() {
 }
 
 /**
- * Follows all the users in the league.
- *
- * @param users Users to follow.
- */
-async function followLeagueUsers(users: LeagueUser[]) {
-  const client = await getClient();
-  const userId = await client.getUserId();
-  const following = await client.getFollowing();
-
-  await pool(
-    users
-      .filter((user) => user.user_id !== userId)
-      .filter((user) => !following.find((f) => f.userId === user.user_id)),
-    async (user) => await client.followUser(user.user_id),
-  );
-}
-
-/**
- * Returns the emoji for the user's reaction.
- *
- * @param user User to get the emoji for.
- * @returns Emoji for the user's reaction.
- */
-function getLeagueUserEmoji(user: LeagueUser): string {
-  if (user.reaction === "ANGRY") return "😡";
-  if (user.reaction === "CAT") return "😺";
-  if (user.reaction === "EYES") return "👀";
-  if (user.reaction === "FLEX") return "💪";
-  if (user.reaction === "POOP") return "💩";
-  if (user.reaction === "POPCORN") return "🍿";
-  if (user.reaction === "SUNGLASSES") return "😎";
-  if (user.reaction.startsWith("FLAG")) {
-    return LANGUAGES[user.reaction.split(",")[1] as LanguageCode].emoji;
-  }
-  return "";
-}
-
-/**
  * Outputs the league to the console.
  *
  * @param league League to output.
@@ -136,39 +67,6 @@ async function outputLeague(league: League) {
     )
     .columns([{ align: "right" }, {}, {}, { align: "right" }])
     .render();
-}
-
-/**
- * Returns the reaction on the card, or picks an appripriate one.
- *
- * @param card Card to get the reaction for.
- * @returns Reaction on the card.
- */
-function getReaction(card: FeedCard): Reaction {
-  if (card.reactionType) return card.reactionType;
-  if (card.cardType === "SHARE_SENTENCE_OFFER") return "like";
-  const number = card.body.match(/\d+/);
-  if (number && Number(number[0]) % 100 === 0) return "cheer";
-  if (
-    card.triggerType === "top_three" || card.triggerType === "league_promotion"
-  ) return "love";
-  if (card.triggerType === "resurrection") return "high_five";
-  if (card.triggerType === "monthly_goal") return "support";
-  if (card.defaultReaction !== null) return card.defaultReaction;
-  return "cheer";
-}
-
-/**
- * Returns the display emoji for the card.
- *
- * @param card Card to get the emoji for.
- * @returns Display emoji for the card.
- */
-function getEmoji(card: FeedCard): string {
-  if (card.cardType === "FOLLOW" || card.cardType === "FOLLOW_BACK") {
-    return "👤";
-  }
-  return REACTIONS[getReaction(card)];
 }
 
 /**
@@ -198,7 +96,7 @@ function getFeedCommand() {
       await pool(
         cards,
         async (card) => {
-          if (!engage || await engageWithCard(followers, card)) {
+          if (!engage || await engageWithCard(client, followers, card)) {
             if (!json) console.log(`${getEmoji(card)} ${getSummary(card)}`);
           }
         },
@@ -274,12 +172,17 @@ function getLeagueCommand() {
     .action(async ({ follow, json }) => {
       const client = await getClient();
       const league = await client.getLeague();
-      if (follow) await followLeagueUsers(league.rankings);
+      if (follow) await followLeagueUsers(client, league.rankings);
       if (json) console.log(JSON.stringify(league, undefined, 2));
       else await outputLeague(league);
     });
 }
 
+/**
+ * CLI interface.
+ *
+ * @ignore missing-return-type
+ */
 export async function getCommand() {
   const command = new Command()
     .name("duolingo")
@@ -311,6 +214,7 @@ export async function getCommand() {
   return command;
 }
 
+/** CLI entrypoint. */
 export async function main(): Promise<void> {
   username = new Config("username");
   token = new Config("token", { secret: true });

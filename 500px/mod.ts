@@ -1,6 +1,13 @@
-import { main } from "./cli.ts";
-export * from "./client.ts";
+/**
+ * Interact with 500px, the photo sharing platform.
+ *
+ * @module
+ */
 
-if (import.meta.main) {
-  await main();
-}
+import { main } from "./main.ts";
+
+export * from "./client.ts";
+export * from "./data.ts";
+export * from "./types.ts";
+
+if (import.meta.main) await main();

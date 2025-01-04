@@ -1,4 +1,4 @@
-import { GraphQLClient } from "../common/graphql.ts";
+import { GraphQLClient } from "@tugrulates/internal/graphql";
 import type { Category, Photo, User } from "./types.ts";
 
 /**
@@ -15,7 +15,7 @@ export class FiveHundredPxClient {
    * @param options Optional configuration options.
    * @param options.token Optional authentication token.
    */
-  constructor(private options: { token?: string } = {}) {
+  constructor(options: { token?: string } = {}) {
     this.client = new GraphQLClient("https://api.500px.com/graphql", options);
   }
 

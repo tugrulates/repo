@@ -1,27 +1,59 @@
-# lonely-planet
+# lonely-planet ([jsr.io](https://jsr.io/@tugrulates/lonely-planet))
 
-```
-Usage: lonely-planet [keywords...]
+Interact with Lonely Planet, the travel guide website.
 
-Description:
+## CLI
 
-  Explores data from Lonely Planet.
+Run `lonely-planet` after installation, or run
+`deno run -A @tugrulates/lonely-planet` without installation.
 
-Options:
+### Examples
 
-  -h, --help                  - Show this help.
-  --endpoint      <endpoint>  - Typesense endpoint for Lonely Planet.
-  --token         <token>     - Typesense token for Lonely Planet.
-  --destinations              - Include destinations in the results.
-  --attractions               - Include attractions in the results.
-  --stories                   - Include stories in the results.
-  --json                      - Output the search results as concatenated JSON.
+| Command                                                | Description                        |
+| ------------------------------------------------------ | ---------------------------------- |
+| `lonely-planet big sur`                                | Search destinations for 'big sur'. |
+| `lonely-planet --attractions amsterdam`                | Search attractions.                |
+| `lonely-planet --stories amsterdam`                    | Search stories.                    |
+| `lonely-planet --destinations --attractions --stories` | All.                               |
+| `lonely-planet --json \| jq`                           | Stream destinations as json.       |
 
-Examples:
+## Classes
 
-  lonely-planet big sur                                Search destinations for 'big sur'.
-  lonely-planet --attractions amsterdam                Search attractions.
-  lonely-planet --stories amsterdam                    Search stories.
-  lonely-planet --destinations --attractions --stories All.
-  lonely-planet --json | jq                            Stream destinations as json.
-```
+### [LonelyPlanetClient](https://jsr.io/@tugrulates/lonely-planet/doc/~/LonelyPlanetClient)
+
+Client for interacting with the Lonely Planet API.
+
+Requires credentials to the Typesense API, which can be obtained from the Lonely
+Planet frontend.
+
+## Types
+
+### [Attraction](https://jsr.io/@tugrulates/lonely-planet/doc/~/Attraction)
+
+A Lonely Planet attraction.
+
+### [Breadcrumb](https://jsr.io/@tugrulates/lonely-planet/doc/~/Breadcrumb)
+
+Global path component of a Lonely Planet document.
+
+### [Destination](https://jsr.io/@tugrulates/lonely-planet/doc/~/Destination)
+
+A Lonely Planet destination.
+
+### [Document](https://jsr.io/@tugrulates/lonely-planet/doc/~/Document)
+
+A Lonely Planet document.
+
+### [Image](https://jsr.io/@tugrulates/lonely-planet/doc/~/Image)
+
+A Lonely Planet image.
+
+### [Story](https://jsr.io/@tugrulates/lonely-planet/doc/~/Story)
+
+A Lonely Planet story.
+
+## Constants
+
+### [EMOJIS](https://jsr.io/@tugrulates/lonely-planet/doc/~/EMOJIS)
+
+Lonely Planet document type emojis.

@@ -1,4 +1,9 @@
-import { AnyVariables, cacheExchange, Client, fetchExchange } from "@urql/core";
+import {
+  type AnyVariables,
+  cacheExchange,
+  Client,
+  fetchExchange,
+} from "@urql/core";
 import { retryExchange } from "@urql/exchange-retry";
 import { RequestError } from "./request.ts";
 

@@ -1,9 +1,10 @@
 {
   "workspace": [
-    "500px",
-    "duolingo",
-    "lonely-planet",
-    "photos"
+    "./500px",
+    "./duolingo",
+    "./internal",
+    "./lonely-planet",
+    "./photos"
   ],
   "tasks": {
     "build": "deno task --recursive compile",
@@ -11,10 +12,9 @@
       "command": "mkdir -p $HOME/.local/bin && cp dist/* $HOME/.local/bin",
       "dependencies": ["build"]
     },
-    "lint": "deno fmt --check && deno lint",
-    "typecheck": "deno check **/*.ts",
+    "readme": "ls -1 */**/deno.json | xargs dirname | xargs deno -A ./internal/readme.ts",
     "test": "deno test -RWE --unstable-kv --doc */*.ts",
-    "ok": "deno task lint && deno task typecheck && deno task test"
+    "ok": "deno fmt -q --check && deno lint -q && deno check -q **/*.ts && deno doc --lint **/*.ts && test -q"
   },
   "imports": {
     "@david/dax": "jsr:@david/dax@^0.42.0",
