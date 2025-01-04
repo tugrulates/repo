@@ -1,8 +1,6 @@
 /**
  * Interactions with 500px, the photo sharing platform.
  *
- * Provides classes, functions and types, as well as a CLI interface.
- *
  * @module
  */
 

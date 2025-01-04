@@ -2,8 +2,6 @@
 
 Interactions with Duolingo, the language learning platform.
 
-Provides classes and types, as well as a CLI interface.
-
 ## CLI
 
 Run `duolingo` after installation, or run `deno run -A @tugrulates/duolingo`

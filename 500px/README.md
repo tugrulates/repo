@@ -2,8 +2,6 @@
 
 Interactions with 500px, the photo sharing platform.
 
-Provides classes and types, as well as a CLI interface.
-
 ## CLI
 
 Run `500px` after installation, or run `deno run -A @tugrulates/500px` without

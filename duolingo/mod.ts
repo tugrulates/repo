@@ -1,8 +1,6 @@
 /**
  * Interactions with Duolingo, the language learning platform.
  *
- * Provides classes and types, as well as a CLI interface.
- *
  * @module
  */
 
