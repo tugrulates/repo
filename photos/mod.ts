@@ -1,5 +1,5 @@
 /**
- * Managing photos.
+ * Manage different sizes of a photo in JPG files.
  *
  * @module
  */

@@ -1,5 +1,5 @@
 /**
- * Interactions with Duolingo, the language learning platform.
+ * Interact with Duolingo, the language learning platform.
  *
  * @module
  */

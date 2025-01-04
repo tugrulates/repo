@@ -1,5 +1,5 @@
 /**
- * Interactions with 500px, the photo sharing platform.
+ * Interact with 500px, the photo sharing platform.
  *
  * @module
  */

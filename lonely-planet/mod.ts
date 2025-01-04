@@ -1,5 +1,5 @@
 /**
- * Interactions with Lonely Planet, the travel guide website.
+ * Interact with Lonely Planet, the travel guide website.
  *
  * @module
  */
