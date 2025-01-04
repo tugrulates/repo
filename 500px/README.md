@@ -1,6 +1,6 @@
 # 500px ([jsr.io](https://jsr.io/@tugrulates/500px))
 
-Interactions with 500px, the photo sharing platform.
+Interact with 500px, the photo sharing platform.
 
 ## CLI
 

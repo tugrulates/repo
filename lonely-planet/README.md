@@ -1,6 +1,6 @@
 # lonely-planet ([jsr.io](https://jsr.io/@tugrulates/lonely-planet))
 
-Interactions with Lonely Planet, the travel guide website.
+Interact with Lonely Planet, the travel guide website.
 
 ## CLI
 

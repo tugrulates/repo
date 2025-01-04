@@ -1,6 +1,6 @@
 # duolingo ([jsr.io](https://jsr.io/@tugrulates/duolingo))
 
-Interactions with Duolingo, the language learning platform.
+Interact with Duolingo, the language learning platform.
 
 ## CLI
 

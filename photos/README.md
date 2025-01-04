@@ -1,6 +1,6 @@
 # photos ([jsr.io](https://jsr.io/@tugrulates/photos))
 
-Managing photos.
+Manage different sizes of a photo in JPG files.
 
 ## CLI
 
