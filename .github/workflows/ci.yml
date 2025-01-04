@@ -21,3 +21,11 @@ jobs:
 
       - name: Build
         run: deno task build
+
+      - name: Publish (dry-run)
+        run: deno publish --dry-run
+        if: github.ref != 'refs/heads/main'
+
+      - name: Publish
+        run: deno publish
+        if: github.ref == 'refs/heads/main'

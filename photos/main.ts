@@ -37,12 +37,7 @@ function check(data: Photo) {
   return "";
 }
 
-/**
- * CLI interface.
- *
- * @ignore missing-return-type
- */
-export function getCommand() {
+function getCommand() {
   return new Command()
     .name("photos")
     .example("photos", "Lists for all photos under current directory.")
