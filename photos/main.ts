@@ -51,11 +51,11 @@ function getCommand() {
   return new Command()
     .name("photos")
     .example("photos", "Lists all photos under current directory.")
-    .example("photos [photo] --json", "Data for a photo with all sizes.")
-    .example("photos [photo] --copy", "Copy EXIF data to all sizes.")
+    .example("photos [photo] --json", "Data for a photo with all variants.")
+    .example("photos [photo] --copy", "Copy EXIF data to all variants.")
     .description("Manage photos.")
     .arguments("[photos...:file]")
-    .option("--copy", "Copy the EXIF from source jpg file to other jpg files.")
+    .option("--copy", "Copy the EXIF from source JPG to other variants.")
     .option("--json", "Output the EXIF information as JSON.")
     .action(async ({ copy, json }, ...photos) => {
       for await (let photo of getPhotos(photos)) {
