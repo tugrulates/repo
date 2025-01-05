@@ -23,6 +23,7 @@
     "@cliffy/prompt": "jsr:@cliffy/prompt@1.0.0-rc.7",
     "@cliffy/table": "jsr:@cliffy/table@1.0.0-rc.7",
     "@std/async": "jsr:@std/async@^1.0.9",
+    "@std/collections": "jsr:@std/collections@^1.0.9",
     "@std/fs": "jsr:@std/fs@^1.0.8",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/text": "jsr:@std/text@^1.0.9",
