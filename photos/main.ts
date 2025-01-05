@@ -1,38 +1,48 @@
 import { colors } from "@cliffy/ansi/colors";
 import { Command } from "@cliffy/command";
-import { copyExif, getData } from "./exif.ts";
-import { allPhotos } from "./file.ts";
+import { omit } from "@std/collections/omit";
+import { expandGlob } from "@std/fs";
+import { join } from "@std/path";
+import { OPTIONAL_FIELDS, VARIANT_FIELDS } from "./fields.ts";
+import { copyExifToVariants, getPhoto } from "./photo.ts";
 import type { Photo } from "./types.ts";
 
-/**
- * Returns a warning message if the photo is missing required fields.
- *
- * @param data Photo data to check.
- * @returns Message with the following text: [⚠️ warnings...].
- */
+const SOURCE_FILE = "source.jpg";
+
+async function isFile(path: string): Promise<boolean> {
+  try {
+    const info = await Deno.lstat(path);
+    return info.isFile;
+  } catch {
+    return false;
+  }
+}
+
+async function* getPhotos(photos: string[]): AsyncGenerator<Photo> {
+  if (photos.length === 0) {
+    for await (const entry of expandGlob(join("*", SOURCE_FILE))) {
+      yield await getPhoto(entry.path);
+    }
+  }
+  for (const photo of photos) {
+    if (await isFile(photo)) {
+      yield (await getPhoto(photo));
+    } else if (await isFile(join(photo, SOURCE_FILE))) {
+      yield getPhoto(join(photo, SOURCE_FILE));
+    }
+  }
+}
+
 function check(data: Photo) {
   const result = [];
-  for (
-    const field of [
-      "title",
-      "description",
-      "keywords",
-      "date",
-      "location",
-      "camera",
-      "lens",
-    ] as const
-  ) {
-    if (!data[field]) result.push(field);
+  for (const [field, value] of Object.entries(omit(data, OPTIONAL_FIELDS))) {
+    if (!value) result.push(`missing:${field}`);
   }
-  if (!data.title) result.push("title");
-  if (!data.description) result.push("description");
-  if (!data.keywords) result.push("keywords");
-  if (!data.date) result.push("date");
-  if (!data.location) result.push("location");
-  if (!data.camera) result.push("camera");
-  if (!data.lens) result.push("lens");
-  if (!data.sizes.every((size) => size.sameExif)) result.push("inconsistent");
+  for (const size of data.variants) {
+    for (const field in omit(size, VARIANT_FIELDS)) {
+      if (field in data) result.push(`${size.src}:${field}`);
+    }
+  }
   if (result.length) return `[${colors.yellow(result.join(", "))}]`;
   return "";
 }
@@ -40,23 +50,21 @@ function check(data: Photo) {
 function getCommand() {
   return new Command()
     .name("photos")
-    .example("photos", "Lists for all photos under current directory.")
-    .example("photos [directory] --json", "Data for a photo with all sizes.")
-    .example("photos [file.jpg] --json", "Data for a single size file.")
-    .example("photos [directory] --copy", "Copy EXIF data to all sizes.")
+    .example("photos", "Lists all photos under current directory.")
+    .example("photos [photo] --json", "Data for a photo with all sizes.")
+    .example("photos [photo] --copy", "Copy EXIF data to all sizes.")
     .description("Manage photos.")
     .arguments("[photos...:file]")
     .option("--copy", "Copy the EXIF from source jpg file to other jpg files.")
     .option("--json", "Output the EXIF information as JSON.")
     .action(async ({ copy, json }, ...photos) => {
-      for await (const photo of (photos.length > 0 ? photos : allPhotos())) {
-        let data = await getData(photo);
+      for await (let photo of getPhotos(photos)) {
         if (copy) {
-          await copyExif(photo);
-          data = await getData(photo);
+          await copyExifToVariants(photo);
+          photo = await getPhoto(photo.src);
         }
-        if (json) console.log(JSON.stringify(data));
-        else console.log(`🖼  ${data.title} ${check(data)}`);
+        if (json) console.log(JSON.stringify(photo));
+        else console.log(`🖼  ${photo.title} ${check(photo)}`);
       }
     });
 }

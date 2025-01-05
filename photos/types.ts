@@ -4,6 +4,12 @@
  * This only lists the fields relevant for my photography workflow.
  */
 export interface Exif {
+  /** Source file for this photo. */
+  src: string;
+  /** The pixel width of the photo. */
+  width?: number;
+  /** The pixel height of the photo. */
+  height?: number;
   /** The title of the photo. */
   title?: string;
   /** Text describing the contents of the photo. */
@@ -14,12 +20,20 @@ export interface Exif {
   date?: string;
   /** The location where the photo was taken. */
   location?: string;
+  /** The city that the photo was taken in. */
+  city?: string;
+  /** The state that the photo was taken in. */
+  state?: string;
+  /** The country that the photo was taken in. */
+  country?: string;
   /** The camera or phone used to take the photo. */
   camera?: string;
   /** Lens properties that were used to take the photo. */
   lens?: string;
-  /** The pixel resolution of the photo. */
-  size?: string;
+  /** The software used to edit the photo. */
+  editing?: string;
+  /** The license of the photo. */
+  license?: string;
 }
 
 /**
@@ -28,14 +42,9 @@ export interface Exif {
  * @extends Exif with all fields except resolution, which are listed on individial
  * file sizes instead.
  */
-export interface Photo extends Omit<Exif, "size"> {
+export interface Photo extends Exif {
   /** Exchangable id of the photo. */
-  slug: string;
-  /** Different size variants of this photo. */
-  sizes: {
-    file: string;
-    description?: string;
-    size?: string;
-    sameExif: boolean;
-  }[];
+  id: string;
+  /** Different variants of this photo, with only the differences. */
+  variants: Exif[];
 }
