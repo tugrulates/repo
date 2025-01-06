@@ -9,10 +9,22 @@ interface PhotoTags extends Tags {
   License?: string;
 }
 
+/**
+ * Return an `exiftool` instance.
+ *
+ * @returns The system `exiftool` if it exists, bundled version otherwise.
+ */
 async function getExiftool(): Promise<ExifTool> {
   const command = new Deno.Command("exiftool", { args: ["-v"] });
-  const { code } = await command.output();
-  return new ExifTool({ exiftoolPath: code === 0 ? "exiftool" : undefined });
+  try {
+    await command.output();
+    return new ExifTool({ exiftoolPath: "exiftool" });
+  } catch (e: unknown) {
+    if (e instanceof Deno.errors.NotFound) {
+      return new ExifTool();
+    }
+    throw e;
+  }
 }
 
 function getDate(tags: Tags): string | undefined {
