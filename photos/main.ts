@@ -2,7 +2,7 @@ import { colors } from "@cliffy/ansi/colors";
 import { Command } from "@cliffy/command";
 import { omit } from "@std/collections/omit";
 import { expandGlob } from "@std/fs";
-import { join } from "@std/path";
+import { basename, join } from "@std/path";
 import { OPTIONAL_FIELDS, VARIANT_FIELDS } from "./fields.ts";
 import { copyExifToVariants, getPhoto } from "./photo.ts";
 import type { Photo } from "./types.ts";
@@ -40,7 +40,7 @@ function check(data: Photo) {
   }
   for (const size of data.variants) {
     for (const field in omit(size, VARIANT_FIELDS)) {
-      if (field in data) result.push(`${size.src}:${field}`);
+      if (field in data) result.push(`${basename(size.src)}:${field}`);
     }
   }
   if (result.length) return `[${colors.yellow(result.join(", "))}]`;
