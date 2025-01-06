@@ -31,7 +31,7 @@ export interface Exif {
   /** Lens properties that were used to take the photo. */
   lens?: string;
   /** The software used to edit the photo. */
-  editing?: string;
+  software?: string;
   /** The license of the photo. */
   license?: string;
 }

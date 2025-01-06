@@ -1,10 +1,33 @@
-import $ from "@david/dax";
 import { pick } from "@std/collections";
 import { basename, dirname, join } from "@std/path";
+import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
 import { FIELDS } from "./fields.ts";
 import type { Exif, Photo } from "./types.ts";
 
-const EXIFTOOL = ["exiftool", "-q", "-overwrite_original_in_place"];
+interface PhotoTags extends Tags {
+  State?: string;
+  License?: string;
+}
+
+async function getExiftool(): Promise<ExifTool> {
+  const command = new Deno.Command("exiftool", { args: ["-v"] });
+  const { code } = await command.output();
+  return new ExifTool({ exiftoolPath: code === 0 ? "exiftool" : undefined });
+}
+
+function getDate(tags: Tags): string | undefined {
+  const date = tags.DateTimeOriginal;
+  if (date instanceof ExifDateTime) return date.toISOString();
+  return date;
+}
+
+function getSoftwareAgent(tags: Tags): string | undefined {
+  const history = tags.History;
+  if (typeof history === "string") return history;
+  return (Array.isArray(history) ? history : [history]).find((h) =>
+    h?.Action === "produced"
+  )?.SoftwareAgent;
+}
 
 /**
  * Returns the EXIF data for the file.
@@ -17,28 +40,28 @@ const EXIFTOOL = ["exiftool", "-q", "-overwrite_original_in_place"];
  * timezones.
  */
 async function getExif(src: string): Promise<Exif> {
-  const lines = await $`${EXIFTOOL} -d "%Y-%m-%dT%H:%M:%S%z" ${src}`.lines();
-  const data = Object.fromEntries(
-    lines.map((line) => line.match(/^([^:]+?)\s*:\s*(.*?)$/)?.slice(1) ?? []),
-  );
+  const exiftool = await getExiftool();
+  const tags = await exiftool.read<PhotoTags>(src);
   return {
     src,
-    width: parseInt(data["Image Width"]),
-    height: parseInt(data["Image Height"]),
-    title: data["Title (en)"],
-    description: data["Image Description"],
-    keywords: data["Keywords"]?.split(",").map((s: string) => s.trim()),
-    date: data["Offset Time Original"]
-      ? data["Date/Time Original"]
-      : data["Create Date"],
-    location: data["Location"],
-    city: data["City"],
-    state: data["State"],
-    country: data["Country"],
-    camera: data["Camera Model Name"],
-    lens: data["Lens Model"],
-    editing: data["History Software Agent"],
-    license: data["License"],
+    width: tags.ImageWidth,
+    height: tags.ImageHeight,
+    title: tags.Headline,
+    description: tags.ImageDescription,
+    keywords: Array.isArray(tags.Keywords)
+      ? tags.Keywords
+      : tags.Keywords
+      ? [tags.Keywords]
+      : [],
+    date: getDate(tags),
+    location: tags.Location,
+    city: tags.City,
+    state: tags.State,
+    country: tags.Country,
+    camera: tags.Make && tags.Model && `${tags.Make} ${tags.Model}`,
+    lens: tags.LensModel,
+    software: getSoftwareAgent(tags),
+    license: tags.License,
   };
 }
 
@@ -48,20 +71,27 @@ async function getExif(src: string): Promise<Exif> {
  * @param photo Photo data for managing EXIF.
  */
 export async function copyExifToVariants(photo: Photo) {
-  const baseArgs =
-    await $`${EXIFTOOL} -CreateDate -ImageDescription ${photo.src} -args`
-      .lines();
+  const exiftool = await getExiftool();
   await Promise.all(photo.variants.map(async (variant) => {
+    const tags = await exiftool.read<PhotoTags>(photo.src);
     const groupMatch = /.*-(\d+).jpg/.exec(variant.src);
-    const args = baseArgs.map((arg) =>
-      arg
-        .replace(/^-CreateDate=/, "-SubSecDateTimeOriginal=")
-        .replace(
-          /^(-ImageDescription=.*?)(\.?)$/,
-          groupMatch ? `$1 (image ${groupMatch[1]}).` : "$1$2",
-        )
+    const description = groupMatch && tags.ImageDescription?.replace(
+      /^(.*?)(\.?)$/,
+      `$1 (image ${groupMatch[1]}).`,
     );
-    await $`${EXIFTOOL} -tagsfromfile ${photo.src} -codedcharacterset=UTF8 ${args} -all ${variant.src}`;
+    await exiftool.write(
+      variant.src,
+      {},
+      {
+        writeArgs: [
+          "-tagsfromfile",
+          photo.src,
+          "-all",
+          "-overwrite_original_in_place",
+          ...(description ? [`-ImageDescription=${description}`] : []),
+        ],
+      },
+    );
   }));
 }
 
