@@ -1,3 +1,5 @@
+// deno-lint-ignore-file camelcase -- fields are named as they are in the API
+
 import type { LANGUAGES, LEAGUES, REACTIONS } from "./data.ts";
 
 /** Code for a language track on Duolingo. */
