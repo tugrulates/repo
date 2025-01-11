@@ -1,23 +1,15 @@
-bug:
-  - head-branch: ["^bug/", "^fix/", "^bugfix/"]
-
-feature:
-  - head-branch: ["^feat/", "^feature/", "^new/"]
-
-dependencies:
-  - head-branch: ["^dep/", "^deps/"]
-
-documentation:
-  - head-branch: ["^doc/", "^docs/", "^readme/"]
-
-performance:
-  - head-branch: ["^perf/", "^optimize/"]
-
-refactor:
-  - head-branch: ["^lint/", "^nit/", "^refactor/", "^tidy/"]
-
-testing:
-  - head-branch: ["^test/", "^testing/", "^tests/"]
-
-release:
-  - head-branch: ["^rel/", "^release/", "^version/"]
+500px:
+  - changed-files:
+      - any-glob-to-any-file: 500px/**
+duolingo:
+  - changed-files:
+      - any-glob-to-any-file: duolingo/**
+internal:
+  - changed-files:
+      - any-glob-to-any-file: internal/**
+lonely-planet:
+  - changed-files:
+      - any-glob-to-any-file: lonely-planet/**
+photos:
+  - changed-files:
+      - any-glob-to-any-file: photos/**
