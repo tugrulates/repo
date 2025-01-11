@@ -19,17 +19,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           types: |
-            BREAKING
+            build
+            chore
+            ci
+            docs
             feat
             fix
-            docs
-            refactor
             perf
-            test
-            ci
-            chore
+            refactor
             revert
+            style
+            test
           scopes: |
+            \*
             500px
             duolingo
             internal
