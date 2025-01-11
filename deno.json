@@ -12,7 +12,7 @@
       "command": "mkdir -p $HOME/.local/bin && cp dist/* $HOME/.local/bin",
       "dependencies": ["build"]
     },
-    "test": "deno test -RWE --unstable-kv --doc */*.ts",
+    "test": "deno test -RWES --unstable-kv --doc */*.ts",
     "ok": "deno fmt -q --check && deno lint -q && deno check -q **/*.ts && deno doc --lint **/*.ts && test -q"
   },
   "compilerOptions": {
