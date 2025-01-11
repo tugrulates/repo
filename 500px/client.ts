@@ -139,9 +139,9 @@ export class FiveHundredPxClient {
         ? data.feed.pageInfo.endCursor
         : null),
       {
+        ...options,
         categories: options.categories?.map((category) => category.id),
         showNude: options.categories?.some((category) => category.nude),
-        limit: options.limit,
       },
     )).map((card) => card.cardNode);
   }

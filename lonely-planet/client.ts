@@ -98,11 +98,12 @@ export class LonelyPlanetClient {
       >(
         `/multi_search?x-typesense-api-key=${this.token}`,
         body,
-      )).results[0];
-      if ("error" in results) {
-        throw new Error(results.error);
+      )).results;
+      if (!results[0]) break;
+      if ("error" in results[0]) {
+        throw new Error(results[0].error);
       } else if ("hits" in results) {
-        for (const hit of results.hits) {
+        for (const hit of results[0].hits) {
           const document = hit.document;
           // ignore documents from old ID formats, as these are duplicates
           if (uuid.validate(document.id)) {
@@ -119,7 +120,7 @@ export class LonelyPlanetClient {
             } as T;
           }
         }
-        if (!results.hits.length) break;
+        if (!results[0].hits.length) break;
         page++;
       } else {
         break;
