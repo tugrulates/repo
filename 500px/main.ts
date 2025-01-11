@@ -137,7 +137,7 @@ function getCommand() {
 }
 
 /** CLI entrypoint. */
-export async function main(): Promise<void> {
+export async function main() {
   const command = getCommand();
   await command.parse();
 }

@@ -76,7 +76,7 @@ async function getCommand() {
 }
 
 /** CLI entrypoint. */
-export async function main(): Promise<void> {
+export async function main() {
   endpoint = new Config("endpoint");
   token = new Config("token", { secret: true });
   const command = await getCommand();
