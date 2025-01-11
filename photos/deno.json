@@ -4,5 +4,8 @@
   "exports": "./mod.ts",
   "tasks": {
     "compile": "deno compile -A -o=../dist/ mod.ts"
+  },
+  "imports": {
+    "exiftool-vendored": "npm:exiftool-vendored@^29.0.0"
   }
 }
