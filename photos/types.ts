@@ -7,33 +7,33 @@ export interface Exif {
   /** Source file for this photo. */
   src: string;
   /** The pixel width of the photo. */
-  width?: number;
+  width?: number | undefined;
   /** The pixel height of the photo. */
-  height?: number;
+  height?: number | undefined;
   /** The title of the photo. */
-  title?: string;
+  title?: string | undefined;
   /** Text describing the contents of the photo. */
-  description?: string;
+  description?: string | undefined;
   /** Keywords for findability. */
-  keywords?: string[];
+  keywords?: string[] | undefined;
   /** The date the photo was taken. */
-  date?: string;
+  date?: string | undefined;
   /** The location where the photo was taken. */
-  location?: string;
+  location?: string | undefined;
   /** The city that the photo was taken in. */
-  city?: string;
+  city?: string | undefined;
   /** The state that the photo was taken in. */
-  state?: string;
+  state?: string | undefined;
   /** The country that the photo was taken in. */
-  country?: string;
+  country?: string | undefined;
   /** The camera or phone used to take the photo. */
-  camera?: string;
+  camera?: string | undefined;
   /** Lens properties that were used to take the photo. */
-  lens?: string;
+  lens?: string | undefined;
   /** The software used to edit the photo. */
-  software?: string;
+  software?: string | undefined;
   /** The license of the photo. */
-  license?: string;
+  license?: string | undefined;
 }
 
 /**

@@ -131,11 +131,13 @@ async function request<T>(
         "User-Agent": options.userAgent ??
           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1.1 Safari/605.1.15",
       },
-      body: options.body
-        ? (typeof options.body === "string"
-          ? options.body
-          : JSON.stringify(options.body))
-        : undefined,
+      ...options.body
+        ? {
+          body: (typeof options.body === "string"
+            ? options.body
+            : JSON.stringify(options.body)),
+        }
+        : {},
     });
     if (RETRYABLE_STATUSES.includes(response.status)) {
       await response.body?.cancel();

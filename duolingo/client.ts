@@ -28,9 +28,11 @@ export class DuolingoClient {
   async getUserId(): Promise<number> {
     if (!this.username) throw new Error("Username is required");
     if (this.userid) return this.userid;
-    this.userid = (await this.client.get<{ users: { id: number }[] }>(
+    const user = (await this.client.get<{ users: { id: number }[] }>(
       `/2017-06-30/users?fields=users%7Bid%7D&username=${this.username}`,
-    )).users[0].id;
+    )).users[0];
+    if (!user) throw new Error("User not found");
+    this.userid = user.id;
     return this.userid;
   }
 
