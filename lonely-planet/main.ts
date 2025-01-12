@@ -53,7 +53,7 @@ async function getCommand() {
         const client = await getClient();
         const rows: string[][] = [];
         if (destinations) {
-          for await (const doc of client.searchDestionations(keywords)) {
+          for await (const doc of client.searchDestinations(keywords)) {
             if (json) console.log(JSON.stringify(doc));
             else rows.push([EMOJIS[doc.type], doc.title, breadcrumb(doc)]);
           }

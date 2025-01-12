@@ -1,5 +1,4 @@
 import { toPascalCase } from "@std/text";
-import * as uuid from "@std/uuid";
 import { JsonClient } from "@tugrulates/internal/request";
 import type { Attraction, Destination, Story } from "./types.ts";
 
@@ -38,7 +37,7 @@ export class LonelyPlanetClient {
    * @param keywords The keywords to search for.
    * @returns Generator for the search results.
    */
-  async *searchDestionations(keywords: string[]): AsyncGenerator<Destination> {
+  async *searchDestinations(keywords: string[]): AsyncGenerator<Destination> {
     for await (
       const document of this.search<Destination>("places", keywords)
     ) {
@@ -102,23 +101,19 @@ export class LonelyPlanetClient {
       if (!results[0]) break;
       if ("error" in results[0]) {
         throw new Error(results[0].error);
-      } else if ("hits" in results) {
+      } else if ("hits" in results[0]) {
         for (const hit of results[0].hits) {
           const document = hit.document;
-          // ignore documents from old ID formats, as these are duplicates
-          if (uuid.validate(document.id)) {
-            // cleanup types
-            let type = toPascalCase(document.type);
-            if (type === "" && "breadcrumb" in document) {
-              const parentType = document.breadcrumb.at(-1)?.type;
-              if (parentType === "Continent") type = "Country";
-              else if (parentType === "Country") type = "Region";
-            }
-            yield {
-              ...document,
-              type,
-            } as T;
+          let type = toPascalCase(document.type);
+          if (type === "" && "breadcrumb" in document) {
+            const parentType = document.breadcrumb.at(-1)?.type;
+            if (parentType === "Continent") type = "Country";
+            else if (parentType === "Country") type = "Region";
           }
+          yield {
+            ...document,
+            type,
+          } as T;
         }
         if (!results[0].hits.length) break;
         page++;
