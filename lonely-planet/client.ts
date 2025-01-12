@@ -1,10 +1,21 @@
+import { DOMParser } from "@b-fuze/deno-dom";
 import { toPascalCase } from "@std/text";
 import { JsonClient } from "@tugrulates/internal/request";
 import type { Attraction, Destination, Story } from "./types.ts";
 
+const SITE = "https://www.lonelyplanet.com";
+const TYPESENSE_PATTERN =
+  /{server:{apiKey:"([^"]+)",nodes:\[{host:"".concat\("([^"]+)"\),port:"(\d+)",protocol:"(\w+)"}\]/;
+
 /** A results page for a query on the Lonely Planet. */
 interface Results {
   hits: [{ document: Destination | Attraction | Story }];
+}
+
+/** Typesense credentials for the Lonely Planet corpus. */
+interface Typesense {
+  endpoint: string;
+  token: string;
 }
 
 /** A Typesense server error. */
@@ -15,21 +26,9 @@ interface Error {
 
 /**
  * Client for interacting with the Lonely Planet API.
- *
- * Requires credentials to the Typesense API, which can be obtained from the Lonely Planet frontend.
  */
 export class LonelyPlanetClient {
-  private client: JsonClient;
-
-  /**
-   * Creates an instance of the Lonely Planet client.
-   *
-   * @param endpoint The endpoint for the Lonely Planet API.
-   * @param token The Typesense API key.
-   */
-  constructor(endpoint: string, private token: string) {
-    this.client = new JsonClient(endpoint);
-  }
+  private typesense?: Typesense = undefined;
 
   /**
    * Searches Lonely Planet for destinations with the given keywords.
@@ -92,10 +91,10 @@ export class LonelyPlanetClient {
           page,
         }],
       };
-      const results = (await this.client.post<
-        { results: (Results | Error)[] }
-      >(
-        `/multi_search?x-typesense-api-key=${this.token}`,
+      const { endpoint, token } = await this.getTypesense();
+      const client = new JsonClient(endpoint);
+      const results = (await client.post<{ results: (Results | Error)[] }>(
+        `/multi_search?x-typesense-api-key=${token}`,
         body,
       )).results;
       if (!results[0]) break;
@@ -121,5 +120,41 @@ export class LonelyPlanetClient {
         break;
       }
     }
+  }
+
+  /** Load and parse the homepage to scrape Typesense details. */
+  private async getTypesense(): Promise<Typesense> {
+    if (this.typesense) return this.typesense;
+
+    const response = await fetch(SITE);
+    if (!response.ok) throw new Error("Failed to fetch homepage.");
+    const doc = new DOMParser().parseFromString(
+      await response.text(),
+      "text/html",
+    );
+    const scripts = doc.querySelector("head")?.querySelectorAll("script");
+    for (const script of scripts ?? []) {
+      const src = script.attributes.getNamedItem("src")?.value;
+      if (!src || !/webpack/.test(src)) continue;
+      const response = await fetch(new URL(src, SITE));
+      if (!response.ok) throw new Error(`Failed to fetch webpack script.`);
+      const text = await response.text();
+      for (const src of text.matchAll(/"(static\/chunks\/[^"]+?\.js)"/g)) {
+        const response = await fetch(new URL(`/_next/${src[1]}`, SITE));
+        if (!response.ok) throw new Error(`Failed to fetch next script.`);
+        const text = await response.text();
+        const [, token, host, port, protocol] = TYPESENSE_PATTERN.exec(text) ??
+          [];
+        if (token && host) {
+          return this.typesense = {
+            endpoint: `${protocol ?? "https"}://${host}${
+              port ? `:${port}` : ""
+            }`,
+            token,
+          };
+        }
+      }
+    }
+    throw new Error("Typesense details not found.");
   }
 }
