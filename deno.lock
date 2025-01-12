@@ -9,23 +9,23 @@
     "jsr:@cliffy/prompt@1.0.0-rc.7": "1.0.0-rc.7",
     "jsr:@cliffy/table@1.0.0-rc.7": "1.0.0-rc.7",
     "jsr:@std/assert@*": "1.0.10",
+    "jsr:@std/assert@^1.0.10": "1.0.10",
     "jsr:@std/assert@~1.0.6": "1.0.10",
     "jsr:@std/async@^1.0.9": "1.0.9",
     "jsr:@std/bytes@^1.0.2": "1.0.4",
     "jsr:@std/collections@^1.0.9": "1.0.9",
     "jsr:@std/crypto@^1.0.3": "1.0.3",
     "jsr:@std/encoding@~1.0.5": "1.0.6",
-    "jsr:@std/fmt@1": "1.0.3",
-    "jsr:@std/fmt@~1.0.2": "1.0.3",
-    "jsr:@std/fs@1": "1.0.8",
-    "jsr:@std/fs@^1.0.8": "1.0.8",
+    "jsr:@std/fmt@~1.0.2": "1.0.4",
+    "jsr:@std/fs@^1.0.8": "1.0.9",
+    "jsr:@std/fs@^1.0.9": "1.0.9",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@~0.224.9": "0.224.9",
-    "jsr:@std/path@1": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/path@~1.0.6": "1.0.8",
-    "jsr:@std/text@^1.0.9": "1.0.9",
-    "jsr:@std/text@~1.0.7": "1.0.9",
+    "jsr:@std/testing@^1.0.9": "1.0.9",
+    "jsr:@std/text@^1.0.9": "1.0.10",
+    "jsr:@std/text@~1.0.7": "1.0.10",
     "jsr:@std/uuid@^1.0.4": "1.0.4",
     "npm:@types/node@*": "22.5.4",
     "npm:@urql/core@^5.1.0": "5.1.0",
@@ -38,7 +38,7 @@
       "dependencies": [
         "jsr:@cliffy/internal",
         "jsr:@std/encoding",
-        "jsr:@std/fmt@~1.0.2",
+        "jsr:@std/fmt",
         "jsr:@std/io"
       ]
     },
@@ -48,7 +48,7 @@
         "jsr:@cliffy/flags",
         "jsr:@cliffy/internal",
         "jsr:@cliffy/table",
-        "jsr:@std/fmt@~1.0.2",
+        "jsr:@std/fmt",
         "jsr:@std/text@~1.0.7"
       ]
     },
@@ -71,7 +71,7 @@
         "jsr:@cliffy/internal",
         "jsr:@cliffy/keycode",
         "jsr:@std/assert@~1.0.6",
-        "jsr:@std/fmt@~1.0.2",
+        "jsr:@std/fmt",
         "jsr:@std/io",
         "jsr:@std/path@~1.0.6",
         "jsr:@std/text@~1.0.7"
@@ -80,7 +80,7 @@
     "@cliffy/table@1.0.0-rc.7": {
       "integrity": "9fdd9776eda28a0b397981c400eeb1aa36da2371b43eefe12e6ff555290e3180",
       "dependencies": [
-        "jsr:@std/fmt@~1.0.2"
+        "jsr:@std/fmt"
       ]
     },
     "@std/assert@1.0.10": {
@@ -104,11 +104,11 @@
     "@std/encoding@1.0.6": {
       "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
     },
-    "@std/fmt@1.0.3": {
-      "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
+    "@std/fmt@1.0.4": {
+      "integrity": "e14fe5bedee26f80877e6705a97a79c7eed599e81bb1669127ef9e8bc1e29a74"
     },
-    "@std/fs@1.0.8": {
-      "integrity": "161c721b6f9400b8100a851b6f4061431c538b204bb76c501d02c508995cffe0",
+    "@std/fs@1.0.9": {
+      "integrity": "3eef7e3ed3d317b29432c7dcb3b20122820dbc574263f721cb0248ad91bad890",
       "dependencies": [
         "jsr:@std/path@^1.0.8"
       ]
@@ -122,8 +122,17 @@
     "@std/path@1.0.8": {
       "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
     },
-    "@std/text@1.0.9": {
-      "integrity": "b2db4abc3e6ab93eb0280a0d5e126fd3fca80955bcc297ccaaf555e995eab747"
+    "@std/testing@1.0.9": {
+      "integrity": "9bdd4ac07cb13e7594ac30e90f6ceef7254ac83a9aeaa089be0008f33aab5cd4",
+      "dependencies": [
+        "jsr:@std/assert@^1.0.10",
+        "jsr:@std/fs@^1.0.9",
+        "jsr:@std/internal",
+        "jsr:@std/path@^1.0.8"
+      ]
+    },
+    "@std/text@1.0.10": {
+      "integrity": "9dcab377450253c0efa9a9a0c731040bfd4e1c03f8303b5934381467b7954338"
     },
     "@std/uuid@1.0.4": {
       "integrity": "f4233149cc8b4753cc3763fd83a7c4101699491f55c7be78dc7b30281946d7a0",
@@ -134,8 +143,8 @@
     }
   },
   "npm": {
-    "@0no-co/graphql.web@1.0.12": {
-      "integrity": "sha512-BTDjjsV/zSPy5fqItwm+KWUfh9CSe9tTtR6rCB72ddtkAxdcHbi4Ir4r/L1Et4lyxmL+i7Rb3m9sjLLi9tYrzA=="
+    "@0no-co/graphql.web@1.0.13": {
+      "integrity": "sha512-jqYxOevheVTU1S36ZdzAkJIdvRp2m3OYIG5SEoKDw5NI8eVwkoI0D/Q3DYNGmXCxkA6CQuoa7zvMiDPTLqUNuw=="
     },
     "@photostructure/tz-lookup@11.0.0": {
       "integrity": "sha512-QMV5/dWtY/MdVPXZs/EApqzyhnqDq1keYEqpS+Xj2uidyaqw2Nk/fWcsszdruIXjdqp1VoWNzsgrO6bUHU1mFw=="
@@ -204,10 +213,12 @@
       "jsr:@cliffy/flags@1.0.0-rc.7",
       "jsr:@cliffy/prompt@1.0.0-rc.7",
       "jsr:@cliffy/table@1.0.0-rc.7",
+      "jsr:@std/assert@^1.0.10",
       "jsr:@std/async@^1.0.9",
       "jsr:@std/collections@^1.0.9",
       "jsr:@std/fs@^1.0.8",
       "jsr:@std/path@^1.0.8",
+      "jsr:@std/testing@^1.0.9",
       "jsr:@std/text@^1.0.9",
       "jsr:@std/uuid@^1.0.4"
     ],

@@ -12,7 +12,7 @@
       "command": "mkdir -p $HOME/.local/bin && cp dist/* $HOME/.local/bin",
       "dependencies": ["build"]
     },
-    "test": "deno test -RWES --unstable-kv --doc --reporter dot */*.ts",
+    "test": "deno test -A --unstable-kv --doc --reporter dot */*.ts",
     "lint": "deno fmt -q --check && deno lint -q && deno check -q **/*.ts && deno doc --lint **/*.ts",
     "ok": {
       "command": "true",
@@ -42,10 +42,12 @@
     "@cliffy/flags": "jsr:@cliffy/flags@1.0.0-rc.7",
     "@cliffy/prompt": "jsr:@cliffy/prompt@1.0.0-rc.7",
     "@cliffy/table": "jsr:@cliffy/table@1.0.0-rc.7",
+    "@std/assert": "jsr:@std/assert@^1.0.10",
     "@std/async": "jsr:@std/async@^1.0.9",
     "@std/collections": "jsr:@std/collections@^1.0.9",
     "@std/fs": "jsr:@std/fs@^1.0.8",
     "@std/path": "jsr:@std/path@^1.0.8",
+    "@std/testing": "jsr:@std/testing@^1.0.9",
     "@std/text": "jsr:@std/text@^1.0.9",
     "@std/uuid": "jsr:@std/uuid@^1.0.4"
   }
