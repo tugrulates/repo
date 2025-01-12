@@ -4,7 +4,7 @@ import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
 import { FIELDS } from "./fields.ts";
 import type { Exif, Photo } from "./types.ts";
 
-export class ExifToolResourceManager {
+class ExifToolResourceManager {
   private exiftool: ExifTool | null = null;
 
   async get(): Promise<ExifTool> {
