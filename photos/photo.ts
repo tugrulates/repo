@@ -12,13 +12,12 @@ class ExifToolResourceManager {
 
     const command = new Deno.Command("exiftool", { args: ["-v"] });
     try {
+      // check system exiftool
       await command.output();
       this.exiftool = new ExifTool({ exiftoolPath: "exiftool" });
-    } catch (e: unknown) {
-      if (e instanceof Deno.errors.NotFound) {
-        this.exiftool = new ExifTool();
-      }
-      throw e;
+    } catch {
+      // fall back to bundled exiftool
+      this.exiftool = new ExifTool();
     }
     return this.exiftool;
   }
