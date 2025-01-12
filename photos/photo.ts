@@ -4,28 +4,36 @@ import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
 import { FIELDS } from "./fields.ts";
 import type { Exif, Photo } from "./types.ts";
 
+class ExifToolResourceManager {
+  private exiftool: ExifTool | null = null;
+
+  async get(): Promise<ExifTool> {
+    if (this.exiftool) return this.exiftool;
+
+    const command = new Deno.Command("exiftool", { args: ["-v"] });
+    try {
+      await command.output();
+      this.exiftool = new ExifTool({ exiftoolPath: "exiftool" });
+    } catch (e: unknown) {
+      if (e instanceof Deno.errors.NotFound) {
+        this.exiftool = new ExifTool();
+      }
+      throw e;
+    }
+    return this.exiftool;
+  }
+
+  async [Symbol.asyncDispose]() {
+    await this.exiftool?.end();
+  }
+}
+
 interface PhotoTags extends Tags {
   State?: string;
   License?: string;
 }
 
-/**
- * Return an `exiftool` instance.
- *
- * @returns The system `exiftool` if it exists, bundled version otherwise.
- */
-async function getExiftool(): Promise<ExifTool> {
-  const command = new Deno.Command("exiftool", { args: ["-v"] });
-  try {
-    await command.output();
-    return new ExifTool({ exiftoolPath: "exiftool" });
-  } catch (e: unknown) {
-    if (e instanceof Deno.errors.NotFound) {
-      return new ExifTool();
-    }
-    throw e;
-  }
-}
+await using manager = new ExifToolResourceManager();
 
 function getDate(tags: Tags): string | undefined {
   const date = tags.DateTimeOriginal;
@@ -52,7 +60,7 @@ function getSoftwareAgent(tags: Tags): string | undefined {
  * timezones.
  */
 async function getExif(src: string): Promise<Exif> {
-  const exiftool = await getExiftool();
+  const exiftool = await manager.get();
   const tags = await exiftool.read<PhotoTags>(src);
   return {
     src,
@@ -83,7 +91,7 @@ async function getExif(src: string): Promise<Exif> {
  * @param photo Photo data for managing EXIF.
  */
 export async function copyExifToVariants(photo: Photo) {
-  const exiftool = await getExiftool();
+  const exiftool = await manager.get();
   await Promise.all(photo.variants.map(async (variant) => {
     const tags = await exiftool.read<PhotoTags>(photo.src);
     const groupMatch = /.*-(\d+).jpg/.exec(variant.src);
