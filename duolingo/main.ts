@@ -172,9 +172,14 @@ function getLeagueCommand() {
     .action(async ({ follow, json }) => {
       const client = await getClient();
       const league = await client.getLeague();
-      if (follow) await followLeagueUsers(client, league.rankings);
-      if (json) console.log(JSON.stringify(league, undefined, 2));
-      else await outputLeague(league);
+      if (league) {
+        if (follow) await followLeagueUsers(client, league.rankings);
+        if (json) console.log(JSON.stringify(league, undefined, 2));
+        else await outputLeague(league);
+      } else {
+        if (json) console.log("{}");
+        else console.log("🏆 The league has not started yet.");
+      }
     });
 }
 
