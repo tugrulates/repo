@@ -75,13 +75,15 @@ export class DuolingoClient {
   /**
    * Gets the league for the user.
    *
-   * @returns The league that the user is currently in.
+   * @returns The league that the user is currently in, null if league is not started.
    */
-  async getLeague(): Promise<League> {
+  async getLeague(): Promise<League | null> {
     const me = await this.getUserId();
-    return (await this.client.get<{ active: { cohort: League } }>(
+    const response = await this.client.get<{ active: { cohort: League } }>(
       `/leaderboards/7d9f5dd1-8423-491a-91f2-2532052038ce/users/${me}?client_unlocked=true&get_reactions=true`,
-    )).active.cohort;
+    );
+    if (!response.active) return null;
+    return response.active.cohort;
   }
 
   /**
