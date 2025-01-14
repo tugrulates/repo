@@ -1,4 +1,4 @@
-# lib
+# libs
 
 Monorepo with various libraries and tools.
 
