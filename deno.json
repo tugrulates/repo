@@ -4,8 +4,7 @@
     "./duolingo",
     "./internal",
     "./lonely-planet",
-    "./photos",
-    "./testing"
+    "./photos"
   ],
   "tasks": {
     "build": "deno task --recursive compile",
