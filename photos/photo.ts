@@ -1,3 +1,4 @@
+import { which } from "@david/which";
 import { pick } from "@std/collections";
 import { basename, dirname, join } from "@std/path";
 import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
@@ -9,17 +10,8 @@ class ExifToolResourceManager {
 
   async get(): Promise<ExifTool> {
     if (this.exiftool) return this.exiftool;
-
-    const command = new Deno.Command("exiftool", { args: ["-v"] });
-    try {
-      // check system exiftool
-      await command.output();
-      this.exiftool = new ExifTool({ exiftoolPath: "exiftool" });
-    } catch {
-      // fall back to bundled exiftool
-      this.exiftool = new ExifTool();
-    }
-    return this.exiftool;
+    const exiftoolPath = await which("exiftool");
+    return new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} });
   }
 
   async [Symbol.asyncDispose]() {
