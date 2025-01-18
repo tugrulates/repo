@@ -13,12 +13,9 @@
       "command": "mkdir -p $HOME/.local/bin && cp dist/* $HOME/.local/bin",
       "dependencies": ["build"]
     },
-    "test": "deno test -A --unstable-kv --doc --reporter dot */*.ts",
+    "test": "deno test -A --unstable-kv --doc */*.ts",
     "lint": "deno fmt -q --check && deno lint -q && deno check -q **/*.ts && deno doc --lint **/*.ts",
-    "ok": {
-      "command": "true",
-      "dependencies": ["lint", "test"]
-    }
+    "ok": "deno task lint && deno task test"
   },
   "compilerOptions": {
     "exactOptionalPropertyTypes": true,
