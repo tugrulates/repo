@@ -6,7 +6,7 @@ import { FIELDS } from "./fields.ts";
 import type { Exif, Photo } from "./types.ts";
 
 class ExifToolResourceManager {
-  private exiftool: ExifTool | null = null;
+  private exiftool?: ExifTool = undefined;
 
   async get(): Promise<ExifTool> {
     if (this.exiftool) return this.exiftool;

@@ -51,7 +51,7 @@ class MockManager {
     for (const [path, test] of this.paths) {
       const contents = [`export const mock = {}`];
       for (const [key, calls] of test) {
-        const json = JSON.stringify(calls, null, 2);
+        const json = JSON.stringify(calls, undefined, 2);
         contents.push(`mock[\`${key}\`] = \n${json}\n`);
       }
       await Deno.mkdir(dirname(path), { recursive: true });
