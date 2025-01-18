@@ -1,6 +1,6 @@
 export const snapshot = {};
 
-snapshot[`photos > getPhoto() 1`] = `
+snapshot[`getPhoto() 1`] = `
 {
   camera: "Apple iPhone 13 mini",
   city: "San Francisco",
@@ -84,7 +84,7 @@ snapshot[`photos > getPhoto() 1`] = `
 }
 `;
 
-snapshot[`photos > copyExifToVariants() 1`] = `
+snapshot[`copyExifToVariants() 1`] = `
 {
   camera: "Apple iPhone 13 mini",
   city: "Ankara",
@@ -196,7 +196,7 @@ snapshot[`photos > copyExifToVariants() 1`] = `
 }
 `;
 
-snapshot[`photos > copyExifToVariants() 2`] = `
+snapshot[`copyExifToVariants() 2`] = `
 {
   camera: "Apple iPhone 13 mini",
   city: "Ankara",

@@ -1,6 +1,6 @@
 export const snapshot = {};
 
-snapshot[`searchDestinations 1`] = `
+snapshot[`LonelyPlanetClient > searchDestinations() 1`] = `
 [
   {
     breadcrumb: [
@@ -40,7 +40,7 @@ snapshot[`searchDestinations 1`] = `
 ]
 `;
 
-snapshot[`searchAttractions 1`] = `
+snapshot[`LonelyPlanetClient > searchAttractions() 1`] = `
 [
   {
     breadcrumb: [
@@ -107,7 +107,7 @@ snapshot[`searchAttractions 1`] = `
 ]
 `;
 
-snapshot[`searchStories 1`] = `
+snapshot[`LonelyPlanetClient > searchStories() 1`] = `
 [
   {
     date: "2024-12-19T15:00:00.000Z",

@@ -1,6 +1,6 @@
 export const snapshot = {};
 
-snapshot[`mockFetch 1`] = `
+snapshot[`mockFetch() 1`] = `
 '<!doctype html>
 <html>
 <head>
