@@ -28,6 +28,7 @@
         "camelcase",
         "default-param-last",
         "eqeqeq",
+        "no-non-null-assertion",
         "no-sync-fn-in-async-fn",
         "no-throw-literal",
         "single-var-declarator"
