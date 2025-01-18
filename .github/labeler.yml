@@ -13,3 +13,6 @@ lonely-planet:
 photos:
   - changed-files:
       - any-glob-to-any-file: photos/**
+testing:
+  - changed-files:
+      - any-glob-to-any-file: testing/**
