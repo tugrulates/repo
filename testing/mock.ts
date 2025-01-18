@@ -16,10 +16,10 @@ class MockManager {
   addCall(t: Deno.TestContext, name: string, result: object) {
     const path = MockManager.testPath(t);
     if (!this.paths.has(path)) this.paths.set(path, new Map());
-    const test = this.paths.get(path)!;
+    const test = this.paths.get(path);
     const key = MockManager.testKey(t, name);
-    if (!test.has(key)) test.set(key, []);
-    test.get(key)!.push(result);
+    if (!test?.has(key)) test?.set(key, []);
+    test?.get(key)?.push(result);
   }
 
   async getCalls<T>(t: Deno.TestContext, name: string) {
@@ -126,14 +126,12 @@ export class MockFetch {
           "fetch",
         );
       }
-      const found = this.calls?.findIndex((call) =>
+      const found = this.calls?.find((call) =>
         call.request.input === input.toString()
-      ) ?? -1;
-      if (found < 0) {
-        throw new Error("No matching fetch call found");
-      }
-      call = this.calls[found]!;
-      this.calls.splice(found, 1);
+      );
+      if (found === undefined) throw new Error("No matching fetch call found");
+      this.calls.splice(this.calls.indexOf(found), 1);
+      call = found;
     }
     return new Response(call.response.body, {
       status: call.response.status,
@@ -190,6 +188,8 @@ export class MockFetch {
  * The mock file that is created under the `__mocks__` directory needs to be
  * committed to version control. This allows for tests not needing to rely on
  * actual network calls, and the changes in mock behavior to be peer-reviewed.
+ *
+ * @todo Match calls by method in addition to URL.
  *
  * @param context The test context.
  * @returns The mock fetch instance.
