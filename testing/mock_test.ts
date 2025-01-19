@@ -1,16 +1,37 @@
-import { assertEquals, assertRejects, assertThrows } from "@std/assert";
+import {
+  assert,
+  assertEquals,
+  assertFalse,
+  assertRejects,
+  assertThrows,
+} from "@std/assert";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { mockFetch } from "@tugrulates/testing";
+import { getMockMode, MockError, mockFetch } from "@tugrulates/testing";
 
-Deno.test("mockFetch()", async (t) => {
-  using _mock = mockFetch(t);
+Deno.test("mockFetch() stubs fetch", async (t) => {
+  using _fetch = mockFetch(t);
   const response = await fetch("https://example.com");
   assertEquals(response.status, 200);
   await assertSnapshot(t, await response.text());
 });
 
+Deno.test("mockFetch() implements spy like interface", async (t) => {
+  const original = globalThis.fetch;
+  const fetch = mockFetch(t);
+  try {
+    assert(fetch.original === original);
+    const response = await fetch("https://example.com");
+    assertEquals(response.status, 200);
+    assertFalse(fetch.restored);
+    await assertSnapshot(t, await response.text());
+  } finally {
+    fetch.restore();
+    assert(fetch.restored);
+  }
+});
+
 Deno.test("mockFetch() replays multiple calls", async (t) => {
-  using _mock = mockFetch(t);
+  using fetch = mockFetch(t);
   await Promise.all([
     fetch("https://example.com"),
     fetch("https://example.com"),
@@ -18,31 +39,45 @@ Deno.test("mockFetch() replays multiple calls", async (t) => {
   ]);
 });
 
+Deno.test("mockFetch() replays by method", async (t) => {
+  using fetch = mockFetch(t);
+  const responses = await Promise.all([
+    fetch("https://example.com"), // GET
+    fetch("https://example.com", { method: "GET" }),
+    fetch("https://example.com", { method: "POST" }),
+  ]);
+  assertEquals(responses.map((r) => r.status), [200, 200, 403]);
+});
+
 Deno.test("mockFetch() checks missing mock file", async (t) => {
-  using _mock = mockFetch(t);
+  using fetch = mockFetch(t);
   // never record mocks for this test
-  if (Deno.args.includes("--update")) return;
-  await assertRejects(async () => await fetch("https://example.com"));
+  if (getMockMode() === "update") return;
+  await assertRejects(
+    async () => await fetch("https://example.com"),
+    MockError,
+  );
 });
 
 Deno.test("mockFetch() checks call not recorded", async (t) => {
-  using _mock = mockFetch(t);
+  using fetch = mockFetch(t);
   // this call be recored into mock
   await fetch("https://example.com");
   // next fetch call will not be found in mock
-  if (Deno.args.includes("--update")) return;
-  await assertRejects(async () => await fetch("https://example.com"));
+  if (getMockMode() === "update") return;
+  await assertRejects(
+    async () => await fetch("https://example.com"),
+    MockError,
+  );
 });
 
 Deno.test("mockFetch() checks call not replayed", async (t) => {
-  const mock = mockFetch(t);
+  const fetch = mockFetch(t);
   try {
     // this call be recored into mock, but not replayed
-    if (Deno.args.includes("--update")) {
-      await fetch("https://example.com");
-    }
+    if (getMockMode() === "update") await fetch("https://example.com");
   } finally {
-    if (Deno.args.includes("--update")) mock.restore();
-    else assertThrows(() => mock.restore());
+    if (getMockMode() === "update") fetch.restore();
+    else assertThrows(() => fetch.restore(), MockError);
   }
 });
