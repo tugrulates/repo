@@ -84,6 +84,119 @@ class MockManager {
   }
 }
 
+/** A mock console that records calls to itself instead of printing. */
+export interface MockConsole extends Disposable {
+  /** Logs a message with the `debug` level. */
+  debug: (...data: unknown[]) => void;
+  /** Logs a message with the `log` level. */
+  log: (...data: unknown[]) => void;
+  /** Logs a message with the `info` level. */
+  info: (...data: unknown[]) => void;
+  /** Logs a message with the `warn` level. */
+  warn: (...data: unknown[]) => void;
+  /** Logs a message with the `error` level. */
+  error: (...data: unknown[]) => void;
+  /** The recorded calls to the Console. */
+  calls: {
+    level: "debug" | "log" | "info" | "warn" | "error";
+    data: unknown[];
+  }[];
+  /** Whether or not the original instance console has been restored. */
+  restored: boolean;
+  /** If mocking an instance console, this restores the original instance console. */
+  restore: () => void;
+}
+
+/**
+ * Create a mock for common `console` methods.
+ *
+ * @example
+ * ```ts
+ * import { mockConsole } from "@tugrulates/testing";
+ * import { assertEquals } from "@std/assert";
+ *
+ * Deno.test("mockConsole", async (t) => {
+ *  using console = mockConsole();
+ *  console.log("message");
+ *  assertEquals(console.calls, [{ level: "log", data: ["message"] }]);
+ * });
+ * ```
+ *
+ * @returns The mock console instance.
+ */
+export function mockConsole(): MockConsole {
+  const calls = [] as {
+    level: "debug" | "log" | "info" | "warn" | "error";
+    data: unknown[];
+  }[];
+
+  const [debug, log, info, warn, error] = [
+    stub(
+      globalThis.console,
+      "debug",
+      (...data: unknown[]) => calls.push({ level: "debug", data }),
+    ),
+    stub(
+      globalThis.console,
+      "log",
+      (...data: unknown[]) => calls.push({ level: "log", data }),
+    ),
+    stub(
+      globalThis.console,
+      "info",
+      (...data: unknown[]) => calls.push({ level: "info", data }),
+    ),
+    stub(
+      globalThis.console,
+      "warn",
+      (...data: unknown[]) => calls.push({ level: "warn", data }),
+    ),
+    stub(
+      globalThis.console,
+      "error",
+      (...data: unknown[]) => calls.push({ level: "error", data }),
+    ),
+  ];
+
+  const console = {
+    debug: debug.fake,
+    log: log.fake,
+    info: info.fake,
+    warn: warn.fake,
+    error: error.fake,
+    calls,
+    get restored() {
+      return debug.restored && log.restored && info.restored &&
+        warn.restored && error.restored;
+    },
+    restore() {
+      debug.restore();
+      log.restore();
+      info.restore();
+      warn.restore();
+      error.restore();
+    },
+    [Symbol.dispose]: () => {
+      console.restore();
+    },
+  };
+  return console;
+}
+
+/** A mock for global fetch that records and replays responses. */
+export interface MockFetch extends Disposable {
+  (input: URL | Request | string, init?: RequestInit): Promise<Response>;
+  /** The function that is mocked. */
+  original: (
+    input: URL | Request | string,
+    init?: RequestInit,
+  ) => Promise<Response>;
+  /** Whether or not the original instance method has been restored. */
+  restored: boolean;
+  /** If mocking an instance method, this restores the original instance method. */
+  restore(): void;
+}
+
 interface FetchRequest {
   input: string | URL | Request;
   init?: RequestInit | undefined;
@@ -99,17 +212,6 @@ interface FetchResponse {
 interface FetchCall {
   request: FetchRequest;
   response: FetchResponse;
-}
-
-/** A mock that can replay recorded calls. */
-export interface Mock<Args extends unknown[], Return> extends Disposable {
-  (...args: Args): Return;
-  /** The function that is mocked. */
-  original: (...args: Args) => Return;
-  /** Whether or not the original instance method has been restored. */
-  restored: boolean;
-  /** If mocking an instance method, this restores the original instance method. */
-  restore(): void;
 }
 
 function getFetchRequestSignature(request: FetchRequest): string {
@@ -165,12 +267,10 @@ function getFetchRequestSignature(request: FetchRequest): string {
  * @param context The test context.
  * @returns The mock fetch instance.
  */
-export function mockFetch(context: Deno.TestContext): Mock<
-  [input: string | URL | Request, init?: RequestInit | undefined],
-  Promise<Response>
-> {
+export function mockFetch(context: Deno.TestContext): MockFetch {
   let calls: FetchCall[] | undefined = undefined;
-  const mock = async function (
+
+  const spy = stub(globalThis, "fetch", async function (
     input: URL | Request | string,
     init?: RequestInit,
   ) {
@@ -198,7 +298,6 @@ export function mockFetch(context: Deno.TestContext): Mock<
         );
       }
       const signature = getFetchRequestSignature({ input, init });
-      console.log(signature);
       const found = calls?.find((call) =>
         getFetchRequestSignature(call.request) === signature
       );
@@ -213,42 +312,35 @@ export function mockFetch(context: Deno.TestContext): Mock<
       statusText: call.response.statusText,
       headers: new Headers(call.response.headers),
     });
-  } as Mock<
-    [input: string | URL | Request, init?: RequestInit | undefined],
-    Promise<Response>
-  >;
-  const spy = stub(globalThis, "fetch", mock);
-  Object.defineProperties(mock, {
-    original: {
-      enumerable: true,
-      value: spy.original,
-    },
-    restored: {
-      enumerable: true,
-      get: () => spy.restored,
-    },
-    restore: {
-      enumerable: true,
-      value: () => {
-        spy.restore();
-        if (getMockMode() === "replay") {
-          if (calls === undefined) {
-            throw new MockError("No fetch calls made");
-          }
-          if (calls.length > 0) {
-            throw new MockError(
-              "Unmatched fetch calls: " +
-                calls.map((c) => getFetchRequestSignature(c.request)),
-            );
-          }
+  });
+
+  const fetch = Object.assign(spy.fake, {
+    original: spy.original,
+    restore() {
+      spy.restore();
+      if (getMockMode() === "replay") {
+        if (calls === undefined) {
+          throw new MockError("No fetch calls made");
         }
-      },
+        if (calls.length > 0) {
+          throw new MockError(
+            "Unmatched fetch calls: " +
+              calls.map((c) => getFetchRequestSignature(c.request)),
+          );
+        }
+      }
     },
-    [Symbol.dispose]: {
-      value: () => {
-        mock.restore();
-      },
+    [Symbol.dispose]() {
+      fetch.restore();
     },
   });
-  return mock;
+
+  return Object.defineProperties(fetch, {
+    restored: {
+      enumerable: true,
+      get() {
+        return spy.restored;
+      },
+    },
+  }) as MockFetch;
 }

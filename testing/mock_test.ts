@@ -6,7 +6,68 @@ import {
   assertThrows,
 } from "@std/assert";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { getMockMode, MockError, mockFetch } from "@tugrulates/testing";
+import {
+  getMockMode,
+  mockConsole,
+  MockError,
+  mockFetch,
+} from "@tugrulates/testing";
+
+Deno.test("mockConsole() stubs console", () => {
+  using mock = mockConsole();
+  console.debug("Hello, Debug!");
+  console.log("Hello, Log!");
+  console.info("Hello, Info!");
+  console.warn("Hello, Warn!");
+  console.error("Hello, Error!");
+  assertEquals(mock.calls, [
+    { level: "debug", data: ["Hello, Debug!"] },
+    { level: "log", data: ["Hello, Log!"] },
+    { level: "info", data: ["Hello, Info!"] },
+    { level: "warn", data: ["Hello, Warn!"] },
+    { level: "error", data: ["Hello, Error!"] },
+  ]);
+});
+
+Deno.test("mockConsole() implements spy like interface", () => {
+  const console = mockConsole();
+  try {
+    console.debug("Hello, Debug!");
+    console.log("Hello, Log!");
+    console.info("Hello, Info!");
+    console.warn("Hello, Warn!");
+    console.error("Hello, Error!");
+    assertEquals(console.calls, [
+      { level: "debug", data: ["Hello, Debug!"] },
+      { level: "log", data: ["Hello, Log!"] },
+      { level: "info", data: ["Hello, Info!"] },
+      { level: "warn", data: ["Hello, Warn!"] },
+      { level: "error", data: ["Hello, Error!"] },
+    ]);
+    assertFalse(console.restored);
+  } finally {
+    console.restore();
+    assert(console.restored);
+  }
+});
+
+Deno.test("mockConsole() captures multiple calls", () => {
+  using console = mockConsole();
+  console.debug("First!");
+  console.debug("Second!");
+  assertEquals(console.calls, [
+    { level: "debug", data: ["First!"] },
+    { level: "debug", data: ["Second!"] },
+  ]);
+});
+
+Deno.test("mockConsole() captures multiple arguments", () => {
+  using console = mockConsole();
+  console.debug("First!", "Second!");
+  assertEquals(console.calls, [
+    { level: "debug", data: ["First!", "Second!"] },
+  ]);
+});
 
 Deno.test("mockFetch() stubs fetch", async (t) => {
   using _fetch = mockFetch(t);
