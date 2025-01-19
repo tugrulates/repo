@@ -21,7 +21,7 @@ mock[`mockFetch() > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=744"
+          "max-age=447"
         ],
         [
           "content-type",
@@ -29,7 +29,7 @@ mock[`mockFetch() > fetch`] =
         ],
         [
           "date",
-          "Sat, 18 Jan 2025 20:49:45 GMT"
+          "Sun, 19 Jan 2025 15:22:47 GMT"
         ],
         [
           "etag",
@@ -66,7 +66,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=691"
+          "max-age=594"
         ],
         [
           "connection",
@@ -78,7 +78,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "date",
-          "Sat, 18 Jan 2025 20:49:46 GMT"
+          "Sun, 19 Jan 2025 15:22:48 GMT"
         ],
         [
           "etag",
@@ -110,7 +110,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=785"
+          "max-age=484"
         ],
         [
           "content-type",
@@ -118,7 +118,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "date",
-          "Sat, 18 Jan 2025 20:49:46 GMT"
+          "Sun, 19 Jan 2025 15:22:48 GMT"
         ],
         [
           "etag",
@@ -154,7 +154,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=785"
+          "max-age=484"
         ],
         [
           "content-type",
@@ -162,7 +162,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "date",
-          "Sat, 18 Jan 2025 20:49:46 GMT"
+          "Sun, 19 Jan 2025 15:22:48 GMT"
         ],
         [
           "etag",
@@ -203,7 +203,7 @@ mock[`mockFetch() checks call not recorded > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2993"
+          "max-age=484"
         ],
         [
           "content-type",
@@ -211,7 +211,7 @@ mock[`mockFetch() checks call not recorded > fetch`] =
         ],
         [
           "date",
-          "Sat, 18 Jan 2025 20:49:47 GMT"
+          "Sun, 19 Jan 2025 15:22:48 GMT"
         ],
         [
           "etag",
@@ -252,7 +252,7 @@ mock[`mockFetch() checks call not replayed > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2993"
+          "max-age=1335"
         ],
         [
           "content-type",
@@ -260,7 +260,7 @@ mock[`mockFetch() checks call not replayed > fetch`] =
         ],
         [
           "date",
-          "Sat, 18 Jan 2025 20:49:47 GMT"
+          "Sun, 19 Jan 2025 15:22:49 GMT"
         ],
         [
           "etag",
