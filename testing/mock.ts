@@ -84,17 +84,21 @@ class MockManager {
   }
 }
 
+interface FetchRequest {
+  input: string | URL | Request;
+  init?: RequestInit | undefined;
+}
+
+interface FetchResponse {
+  body: string;
+  status: number;
+  statusText: string;
+  headers: [string, string][];
+}
+
 interface FetchCall {
-  request: {
-    input: string | URL | Request;
-    init?: RequestInit | undefined;
-  };
-  response: {
-    body: string;
-    status: number;
-    statusText: string;
-    headers: [string, string][];
-  };
+  request: FetchRequest;
+  response: FetchResponse;
 }
 
 /** A mock that can replay recorded calls. */
@@ -106,6 +110,22 @@ export interface Mock<Args extends unknown[], Return> extends Disposable {
   restored: boolean;
   /** If mocking an instance method, this restores the original instance method. */
   restore(): void;
+}
+
+function getFetchRequestSignature(request: FetchRequest): string {
+  if (request.input instanceof Request) {
+    return getFetchRequestSignature({
+      input: new URL(request.input.url),
+      init: { method: request.init?.method ?? request.input.method },
+    });
+  }
+  if (typeof request.input === "string") {
+    return getFetchRequestSignature({
+      input: new URL(request.input),
+      init: request.init,
+    });
+  }
+  return `${request.input.toString()} ${request.init?.method ?? "GET"}`;
 }
 
 /**
@@ -142,8 +162,6 @@ export interface Mock<Args extends unknown[], Return> extends Disposable {
  * committed to version control. This allows for tests not needing to rely on
  * actual network calls, and the changes in mock behavior to be peer-reviewed.
  *
- * @todo Match calls by method in addition to URL.
- *
  * @param context The test context.
  * @returns The mock fetch instance.
  */
@@ -179,12 +197,13 @@ export function mockFetch(context: Deno.TestContext): Mock<
           "fetch",
         );
       }
+      const signature = getFetchRequestSignature({ input, init });
+      console.log(signature);
       const found = calls?.find((call) =>
-        `${call.request.input} ${call.request.init?.method ?? "GET"}` ===
-          `${input} ${init?.method ?? "GET"}`
+        getFetchRequestSignature(call.request) === signature
       );
       if (found === undefined) {
-        throw new MockError("No matching fetch call found");
+        throw new MockError(`No matching fetch call found: ${signature}`);
       }
       calls.splice(calls.indexOf(found), 1);
       call = found;
@@ -211,15 +230,18 @@ export function mockFetch(context: Deno.TestContext): Mock<
     restore: {
       enumerable: true,
       value: () => {
+        spy.restore();
         if (getMockMode() === "replay") {
           if (calls === undefined) {
-            throw new MockError("No fetch calls recorded");
+            throw new MockError("No fetch calls made");
           }
           if (calls.length > 0) {
-            throw new MockError("Unmatched fetch calls");
+            throw new MockError(
+              "Unmatched fetch calls: " +
+                calls.map((c) => getFetchRequestSignature(c.request)),
+            );
           }
         }
-        spy.restore();
       },
     },
     [Symbol.dispose]: {
