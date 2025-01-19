@@ -14,4 +14,4 @@ import { main } from "./main.ts";
 export * from "./photo.ts";
 export * from "./types.ts";
 
-if (import.meta.main) await main();
+if (import.meta.main) await main(Deno.args);
