@@ -1,6 +1,6 @@
 {
   "name": "@tugrulates/photos",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "exports": "./mod.ts",
   "tasks": {
     "compile": "deno compile -A -o=../dist/ mod.ts"

@@ -1,6 +1,6 @@
 {
   "name": "@tugrulates/500px",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "exports": "./mod.ts",
   "tasks": {
     "compile": "deno compile -N=api.500px.com --no-prompt --include=graphql -o=../dist/ mod.ts"
