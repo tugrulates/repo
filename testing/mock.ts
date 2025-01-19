@@ -1,7 +1,22 @@
 import { basename, dirname, fromFileUrl, join } from "@std/path";
-import { type Stub, stub } from "@std/testing/mock";
+import { MockError, stub } from "@std/testing/mock";
 
 const MOCKS = "__mocks__";
+
+export { MockError } from "@std/testing/mock";
+
+/** The mode of mock. */
+export type MockMode = "replay" | "update";
+
+/**
+ * Get the mode of the mocking system. Defaults to `replay`, unless the `-u`
+ * or `--update` flag is passed, in which case this will be set to `update`.
+ */
+export function getMockMode(): MockMode {
+  return Deno.args.some((arg) => arg === "--update" || arg === "-u")
+    ? "update"
+    : "replay";
+}
 
 class MockManager {
   static instance = new MockManager();
@@ -47,12 +62,21 @@ class MockManager {
   }
 
   private async close() {
-    if (!isUpdating()) return;
+    if (getMockMode() === "replay") return;
+
     for (const [path, test] of this.paths) {
       const contents = [`export const mock = {}`];
       for (const [key, calls] of test) {
-        const json = JSON.stringify(calls, undefined, 2);
-        contents.push(`mock[\`${key}\`] = \n${json}\n`);
+        const serialized = Deno.inspect(calls, {
+          breakLength: Infinity,
+          compact: false,
+          depth: Infinity,
+          iterableLimit: Infinity,
+          sorted: true,
+          strAbbreviateSize: Infinity,
+          trailingComma: true,
+        }).replaceAll("\r", "\\r");
+        contents.push(`mock[\`${key}\`] = \n${serialized}\n`);
       }
       await Deno.mkdir(dirname(path), { recursive: true });
       await Deno.writeTextFile(path, contents.join("\n\n"));
@@ -60,13 +84,9 @@ class MockManager {
   }
 }
 
-function isUpdating() {
-  return Deno.args.includes("--update");
-}
-
 interface FetchCall {
   request: {
-    input: string;
+    input: string | URL | Request;
     init?: RequestInit | undefined;
   };
   response: {
@@ -77,96 +97,29 @@ interface FetchCall {
   };
 }
 
-/**
- * Return type of the {@linkcode mockFetch} function.
- */
-export class MockFetch {
-  private stub: Stub<
-    typeof globalThis,
-    [input: string | URL | Request, init?: RequestInit | undefined],
-    Promise<Response>
-  >;
-  private calls: FetchCall[] | undefined = undefined;
-
-  /** Create a new MockFetch, to override calls to the global `fetch` function. */
-  constructor(private t: Deno.TestContext) {
-    this.stub = stub(
-      globalThis,
-      "fetch",
-      (input: URL | Request | string, init?: RequestInit) =>
-        this.call(input, init),
-    );
-  }
-
-  /** Either spy on or delegate global `fetch`, depending on whether `--update` flag. */
-  private async call(
-    input: URL | Request | string,
-    init?: RequestInit,
-  ): Promise<Response> {
-    let call: FetchCall;
-    if (isUpdating()) {
-      const response = await this.stub.original.call(globalThis, input, init);
-      call = {
-        request: {
-          input: input.toString(),
-          init,
-        },
-        response: {
-          body: await response.text(),
-          status: response.status,
-          statusText: response.statusText,
-          headers: Array.from(response.headers.entries()),
-        },
-      };
-      MockManager.instance.addCall(this.t, "fetch", call);
-    } else {
-      if (!this.calls) {
-        this.calls = await MockManager.instance.getCalls<FetchCall>(
-          this.t,
-          "fetch",
-        );
-      }
-      const found = this.calls?.find((call) =>
-        call.request.input === input.toString()
-      );
-      if (found === undefined) throw new Error("No matching fetch call found");
-      this.calls.splice(this.calls.indexOf(found), 1);
-      call = found;
-    }
-    return new Response(call.response.body, {
-      status: call.response.status,
-      statusText: call.response.statusText,
-      headers: new Headers(call.response.headers),
-    });
-  }
-
-  /** Restore global `fetch` to its original value. */
-  restore() {
-    if (!isUpdating()) {
-      if (this.calls === undefined) throw new Error("No fetch calls recorded");
-      if (this.calls.length > 0) throw new Error("Unmatched fetch calls");
-    }
-    this.stub.restore();
-  }
-
-  /** Dispose of the mock, and restore global `fetch`. */
-  [Symbol.dispose]() {
-    this.restore();
-  }
+/** A mock that can replay recorded calls. */
+export interface Mock<Args extends unknown[], Return> extends Disposable {
+  (...args: Args): Return;
+  /** The function that is mocked. */
+  original: (...args: Args) => Return;
+  /** Whether or not the original instance method has been restored. */
+  restored: boolean;
+  /** If mocking an instance method, this restores the original instance method. */
+  restore(): void;
 }
 
 /**
  * Create a mock for the global `fetch` function.
  *
  * Usage is {@link ../../std/testing/doc/snapshot/~ | @std/testing/snapshot}
- * style. Running tests with `--update` flag will create a mock file in the
- * `__mocks__` directory, using real fetch calls. The mock file will be used
- * in subsequent test runs, when the `--update` flag is not present.
+ * style. Running tests with `--update` or `-u` flag will create a mock file
+ * in the `__mocks__` directory, using real fetch calls. The mock file will
+ * be used in subsequent test runs, when the these flags are not present.
  *
  * When running tests with the mock, responses will be returned from matching
- * requests with URL and method. If no matching request is found, an error
- * will be thrown. If at the end of the test, there are still unhandled calls,
- * an error will be thrown.
+ * requests with URL and method. If no matching request is found, or, If at the
+ * end of the test, there are still unhandled calls, a {@link MockError} will
+ * be thrown.
  *
  * @example
  * ```ts
@@ -174,7 +127,7 @@ export class MockFetch {
  * import { assertEquals } from "@std/assert";
  *
  * Deno.test("mockFetch", async (t) => {
- *  using _fetch = mockFetch(t);
+ *  using fetch = mockFetch(t);
  *  const response = await fetch("https://example.com");
  *  assertEquals(response.status, 200);
  * });
@@ -194,6 +147,86 @@ export class MockFetch {
  * @param context The test context.
  * @returns The mock fetch instance.
  */
-export function mockFetch(context: Deno.TestContext): MockFetch {
-  return new MockFetch(context);
+export function mockFetch(context: Deno.TestContext): Mock<
+  [input: string | URL | Request, init?: RequestInit | undefined],
+  Promise<Response>
+> {
+  let calls: FetchCall[] | undefined = undefined;
+  const mock = async function (
+    input: URL | Request | string,
+    init?: RequestInit,
+  ) {
+    let call: FetchCall;
+    if (getMockMode() === "update") {
+      const response = await spy.original.call(globalThis, input, init);
+      call = {
+        request: {
+          input: input.toString(),
+          init,
+        },
+        response: {
+          body: await response.text(),
+          status: response.status,
+          statusText: response.statusText,
+          headers: Array.from(response.headers.entries()),
+        },
+      };
+      MockManager.instance.addCall(context, "fetch", call);
+    } else {
+      if (!calls) {
+        calls = await MockManager.instance.getCalls<FetchCall>(
+          context,
+          "fetch",
+        );
+      }
+      const found = calls?.find((call) =>
+        `${call.request.input} ${call.request.init?.method ?? "GET"}` ===
+          `${input} ${init?.method ?? "GET"}`
+      );
+      if (found === undefined) {
+        throw new MockError("No matching fetch call found");
+      }
+      calls.splice(calls.indexOf(found), 1);
+      call = found;
+    }
+    return new Response(call.response.body, {
+      status: call.response.status,
+      statusText: call.response.statusText,
+      headers: new Headers(call.response.headers),
+    });
+  } as Mock<
+    [input: string | URL | Request, init?: RequestInit | undefined],
+    Promise<Response>
+  >;
+  const spy = stub(globalThis, "fetch", mock);
+  Object.defineProperties(mock, {
+    original: {
+      enumerable: true,
+      value: spy.original,
+    },
+    restored: {
+      enumerable: true,
+      get: () => spy.restored,
+    },
+    restore: {
+      enumerable: true,
+      value: () => {
+        if (getMockMode() === "replay") {
+          if (calls === undefined) {
+            throw new MockError("No fetch calls recorded");
+          }
+          if (calls.length > 0) {
+            throw new MockError("Unmatched fetch calls");
+          }
+        }
+        spy.restore();
+      },
+    },
+    [Symbol.dispose]: {
+      value: () => {
+        mock.restore();
+      },
+    },
+  });
+  return mock;
 }
