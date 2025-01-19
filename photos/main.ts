@@ -1,4 +1,3 @@
-import { colors } from "@cliffy/ansi/colors";
 import { Command } from "@cliffy/command";
 import { omit } from "@std/collections/omit";
 import { expandGlob } from "@std/fs";
@@ -33,7 +32,7 @@ async function* getPhotos(photos: string[]): AsyncGenerator<Photo> {
   }
 }
 
-function check(data: Photo) {
+function getWarnings(data: Photo): string[] {
   const result = [];
   for (const [field, value] of Object.entries(omit(data, OPTIONAL_FIELDS))) {
     if (!value) result.push(`missing:${field}`);
@@ -43,8 +42,7 @@ function check(data: Photo) {
       if (field in data) result.push(`${basename(size.src)}:${field}`);
     }
   }
-  if (result.length) return `[${colors.yellow(result.join(", "))}]`;
-  return "";
+  return result;
 }
 
 function getCommand() {
@@ -57,6 +55,8 @@ function getCommand() {
     .arguments("[photos...:file]")
     .option("--copy", "Copy the EXIF from source JPG to other variants.")
     .option("--json", "Output the EXIF information as JSON.")
+    .help({ colors: Deno.stdout.isTerminal() })
+    .noExit()
     .action(async ({ copy, json }, ...photos) => {
       for await (let photo of getPhotos(photos)) {
         if (copy) {
@@ -64,13 +64,24 @@ function getCommand() {
           photo = await getPhoto(photo.src);
         }
         if (json) console.log(JSON.stringify(photo));
-        else console.log(`🖼  ${photo.title} ${check(photo)}`);
+        else {
+          const warnings = getWarnings(photo);
+          if (warnings.length > 0) {
+            console.log(
+              `🖼  ${photo.title} [%c${warnings.join(" ")}%c]`,
+              "color: yellow",
+              "color: reset",
+            );
+          } else {
+            console.log(`🖼  ${photo.title}`);
+          }
+        }
       }
     });
 }
 
 /** CLI entrypoint. */
-export async function main() {
+export async function main(args: string[]) {
   const command = getCommand();
-  await command.parse();
+  await command.parse(args);
 }
