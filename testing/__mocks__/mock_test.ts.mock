@@ -20,7 +20,7 @@ mock[`mockFetch() stubs fetch > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=1450",
+          "max-age=1508",
         ],
         [
           "content-type",
@@ -28,7 +28,7 @@ mock[`mockFetch() stubs fetch > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:09 GMT",
+          "Sun, 19 Jan 2025 18:39:17 GMT",
         ],
         [
           "etag",
@@ -70,7 +70,7 @@ mock[`mockFetch() implements spy like interface > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2107",
+          "max-age=1515",
         ],
         [
           "content-type",
@@ -78,7 +78,7 @@ mock[`mockFetch() implements spy like interface > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:09 GMT",
+          "Sun, 19 Jan 2025 18:39:18 GMT",
         ],
         [
           "etag",
@@ -116,7 +116,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2899",
+          "max-age=1678",
         ],
         [
           "connection",
@@ -128,7 +128,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:10 GMT",
+          "Sun, 19 Jan 2025 18:39:18 GMT",
         ],
         [
           "etag",
@@ -161,7 +161,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2122",
+          "max-age=1515",
         ],
         [
           "content-type",
@@ -169,7 +169,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:10 GMT",
+          "Sun, 19 Jan 2025 18:39:18 GMT",
         ],
         [
           "etag",
@@ -188,6 +188,97 @@ mock[`mockFetch() replays multiple calls > fetch`] =
       statusText: "OK",
     },
   },
+  {
+    request: {
+      init: undefined,
+      input: "https://example.com/",
+    },
+    response: {
+      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
+      headers: [
+        [
+          "accept-ranges",
+          "bytes",
+        ],
+        [
+          "alt-svc",
+          'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
+        ],
+        [
+          "cache-control",
+          "max-age=1515",
+        ],
+        [
+          "content-type",
+          "text/html",
+        ],
+        [
+          "date",
+          "Sun, 19 Jan 2025 18:39:18 GMT",
+        ],
+        [
+          "etag",
+          '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
+        ],
+        [
+          "last-modified",
+          "Mon, 13 Jan 2025 20:11:20 GMT",
+        ],
+        [
+          "vary",
+          "Accept-Encoding",
+        ],
+      ],
+      status: 200,
+      statusText: "OK",
+    },
+  },
+  {
+    request: {
+      init: undefined,
+      input: "https://example.com",
+    },
+    response: {
+      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
+      headers: [
+        [
+          "accept-ranges",
+          "bytes",
+        ],
+        [
+          "cache-control",
+          "max-age=1515",
+        ],
+        [
+          "content-type",
+          "text/html",
+        ],
+        [
+          "date",
+          "Sun, 19 Jan 2025 18:39:18 GMT",
+        ],
+        [
+          "etag",
+          '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
+        ],
+        [
+          "last-modified",
+          "Mon, 13 Jan 2025 20:11:20 GMT",
+        ],
+        [
+          "vary",
+          "Accept-Encoding",
+        ],
+      ],
+      status: 200,
+      statusText: "OK",
+    },
+  },
+]
+
+
+mock[`mockFetch() with URL > fetch`] = 
+[
   {
     request: {
       init: undefined,
@@ -206,7 +297,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2122",
+          "max-age=2446",
         ],
         [
           "content-type",
@@ -214,7 +305,57 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:10 GMT",
+          "Sun, 19 Jan 2025 18:39:19 GMT",
+        ],
+        [
+          "etag",
+          '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
+        ],
+        [
+          "last-modified",
+          "Mon, 13 Jan 2025 20:11:20 GMT",
+        ],
+        [
+          "vary",
+          "Accept-Encoding",
+        ],
+      ],
+      status: 200,
+      statusText: "OK",
+    },
+  },
+]
+
+
+mock[`mockFetch() with Request > fetch`] = 
+[
+  {
+    request: {
+      init: undefined,
+      input: "https://example.com",
+    },
+    response: {
+      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
+      headers: [
+        [
+          "accept-ranges",
+          "bytes",
+        ],
+        [
+          "alt-svc",
+          'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
+        ],
+        [
+          "cache-control",
+          "max-age=2446",
+        ],
+        [
+          "content-type",
+          "text/html",
+        ],
+        [
+          "date",
+          "Sun, 19 Jan 2025 18:39:19 GMT",
         ],
         [
           "etag",
@@ -246,8 +387,12 @@ mock[`mockFetch() replays by method > fetch`] =
       input: "https://example.com",
     },
     response: {
-      body: `<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access "http&#58;&#47;&#47;example&#46;com&#47;" on this server.<P>\nReference&#32;&#35;18&#46;ce20c817&#46;1737306551&#46;27525741\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;ce20c817&#46;1737306551&#46;27525741</P>\n</BODY>\n</HTML>\n`,
+      body: `<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access "http&#58;&#47;&#47;example&#46;com&#47;" on this server.<P>\nReference&#32;&#35;18&#46;c820c817&#46;1737311960&#46;920c6c0c\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;c820c817&#46;1737311960&#46;920c6c0c</P>\n</BODY>\n</HTML>\n`,
       headers: [
+        [
+          "alt-svc",
+          'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
+        ],
         [
           "cache-control",
           "max-age=0",
@@ -262,7 +407,7 @@ mock[`mockFetch() replays by method > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:11 GMT",
+          "Sun, 19 Jan 2025 18:39:20 GMT",
         ],
         [
           "mime-version",
@@ -288,12 +433,8 @@ mock[`mockFetch() replays by method > fetch`] =
           "bytes",
         ],
         [
-          "alt-svc",
-          'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-        ],
-        [
           "cache-control",
-          "max-age=2121",
+          "max-age=3128",
         ],
         [
           "content-type",
@@ -301,7 +442,7 @@ mock[`mockFetch() replays by method > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:11 GMT",
+          "Sun, 19 Jan 2025 18:39:20 GMT",
         ],
         [
           "etag",
@@ -334,7 +475,7 @@ mock[`mockFetch() replays by method > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=2121",
+          "max-age=3128",
         ],
         [
           "content-type",
@@ -342,7 +483,7 @@ mock[`mockFetch() replays by method > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:11 GMT",
+          "Sun, 19 Jan 2025 18:39:20 GMT",
         ],
         [
           "etag",
@@ -384,7 +525,7 @@ mock[`mockFetch() checks call not recorded > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=532",
+          "max-age=3127",
         ],
         [
           "content-type",
@@ -392,7 +533,57 @@ mock[`mockFetch() checks call not recorded > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:11 GMT",
+          "Sun, 19 Jan 2025 18:39:21 GMT",
+        ],
+        [
+          "etag",
+          '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
+        ],
+        [
+          "last-modified",
+          "Mon, 13 Jan 2025 20:11:20 GMT",
+        ],
+        [
+          "vary",
+          "Accept-Encoding",
+        ],
+      ],
+      status: 200,
+      statusText: "OK",
+    },
+  },
+]
+
+
+mock[`mockFetch() checks no call made > fetch`] = 
+[
+  {
+    request: {
+      init: undefined,
+      input: "https://example.com",
+    },
+    response: {
+      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
+      headers: [
+        [
+          "accept-ranges",
+          "bytes",
+        ],
+        [
+          "alt-svc",
+          'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
+        ],
+        [
+          "cache-control",
+          "max-age=2450",
+        ],
+        [
+          "content-type",
+          "text/html",
+        ],
+        [
+          "date",
+          "Sun, 19 Jan 2025 18:39:21 GMT",
         ],
         [
           "etag",
@@ -434,7 +625,7 @@ mock[`mockFetch() checks call not replayed > fetch`] =
         ],
         [
           "cache-control",
-          "max-age=532",
+          "max-age=2449",
         ],
         [
           "content-type",
@@ -442,7 +633,48 @@ mock[`mockFetch() checks call not replayed > fetch`] =
         ],
         [
           "date",
-          "Sun, 19 Jan 2025 17:09:11 GMT",
+          "Sun, 19 Jan 2025 18:39:22 GMT",
+        ],
+        [
+          "etag",
+          '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
+        ],
+        [
+          "last-modified",
+          "Mon, 13 Jan 2025 20:11:20 GMT",
+        ],
+        [
+          "vary",
+          "Accept-Encoding",
+        ],
+      ],
+      status: 200,
+      statusText: "OK",
+    },
+  },
+  {
+    request: {
+      init: undefined,
+      input: "https://example.com",
+    },
+    response: {
+      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
+      headers: [
+        [
+          "accept-ranges",
+          "bytes",
+        ],
+        [
+          "cache-control",
+          "max-age=2448",
+        ],
+        [
+          "content-type",
+          "text/html",
+        ],
+        [
+          "date",
+          "Sun, 19 Jan 2025 18:39:23 GMT",
         ],
         [
           "etag",

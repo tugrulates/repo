@@ -35,8 +35,21 @@ Deno.test("mockFetch() replays multiple calls", async (t) => {
   await Promise.all([
     fetch("https://example.com"),
     fetch("https://example.com"),
+    fetch("https://example.com/"), // same as the prior two
     fetch("http://example.com"),
   ]);
+});
+
+Deno.test("mockFetch() with URL", async (t) => {
+  using fetch = mockFetch(t);
+  if (getMockMode() === "update") await fetch("https://example.com");
+  else await fetch(new URL("https://example.com"));
+});
+
+Deno.test("mockFetch() with Request", async (t) => {
+  using fetch = mockFetch(t);
+  if (getMockMode() === "update") await fetch("https://example.com");
+  else await fetch(new Request("https://example.com"));
 });
 
 Deno.test("mockFetch() replays by method", async (t) => {
@@ -71,9 +84,21 @@ Deno.test("mockFetch() checks call not recorded", async (t) => {
   );
 });
 
+Deno.test("mockFetch() checks no call made", async (t) => {
+  const fetch = mockFetch(t);
+  try {
+    // this call be recored into mock, but not replayed
+    if (getMockMode() === "update") await fetch("https://example.com");
+  } finally {
+    if (getMockMode() === "update") fetch.restore();
+    else assertThrows(() => fetch.restore(), MockError);
+  }
+});
+
 Deno.test("mockFetch() checks call not replayed", async (t) => {
   const fetch = mockFetch(t);
   try {
+    await fetch("https://example.com");
     // this call be recored into mock, but not replayed
     if (getMockMode() === "update") await fetch("https://example.com");
   } finally {
