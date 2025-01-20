@@ -8,16 +8,6 @@ export { MockError } from "@std/testing/mock";
 /** The mode of mock. */
 export type MockMode = "replay" | "update";
 
-/**
- * Get the mode of the mocking system. Defaults to `replay`, unless the `-u`
- * or `--update` flag is passed, in which case this will be set to `update`.
- */
-export function getMockMode(): MockMode {
-  return Deno.args.some((arg) => arg === "--update" || arg === "-u")
-    ? "update"
-    : "replay";
-}
-
 class MockManager {
   static instance = new MockManager();
   private paths = new Map<string, Map<string, object[]>>();
@@ -105,6 +95,16 @@ export interface MockConsole extends Disposable {
   restored: boolean;
   /** If mocking an instance console, this restores the original instance console. */
   restore: () => void;
+}
+
+/**
+ * Get the mode of the mocking system. Defaults to `replay`, unless the `-u`
+ * or `--update` flag is passed, in which case this will be set to `update`.
+ */
+export function getMockMode(): MockMode {
+  return Deno.args.some((arg) => arg === "--update" || arg === "-u")
+    ? "update"
+    : "replay";
 }
 
 /**

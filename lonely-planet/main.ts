@@ -25,6 +25,8 @@ function getCommand() {
     .option("--attractions", "Include attractions in the results.")
     .option("--stories", "Include stories in the results.")
     .option("--json", "Output the search results as concatenated JSON.")
+    .help({ colors: Deno.stdout.isTerminal() })
+    .noExit()
     .action(
       async ({ destinations, attractions, stories, json }, ...keywords) => {
         if (!destinations && !attractions && !stories) destinations = true;
@@ -54,7 +56,7 @@ function getCommand() {
 }
 
 /** CLI entrypoint. */
-export async function main() {
+export async function main(args: string[]) {
   const command = getCommand();
-  await command.parse();
+  await command.parse(args);
 }
