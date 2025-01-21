@@ -6,7 +6,7 @@ Deno.test(
   "lonely-planet --help",
   async (t) => {
     using console = mockConsole();
-    await main(["lonely-planet", "--help"]);
+    await main(["--help"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -16,7 +16,7 @@ Deno.test(
   async (t) => {
     using console = mockConsole();
     using _fetch = mockFetch(t);
-    await main(["lonely-planet", "the", "netherlands"]);
+    await main(["the", "netherlands"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -26,7 +26,7 @@ Deno.test(
   async (t) => {
     using console = mockConsole();
     using _fetch = mockFetch(t);
-    await main(["lonely-planet", "the", "netherlands", "--json"]);
+    await main(["the", "netherlands", "--json"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -36,7 +36,7 @@ Deno.test(
   async (t) => {
     using console = mockConsole();
     using _fetch = mockFetch(t);
-    await main(["lonely-planet", "--destinations", "amsterdam"]);
+    await main(["--destinations", "amsterdam"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -46,7 +46,7 @@ Deno.test(
   async (t) => {
     using console = mockConsole();
     using _fetch = mockFetch(t);
-    await main(["lonely-planet", "--attractions", "haarlem"]);
+    await main(["--attractions", "haarlem"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -56,7 +56,7 @@ Deno.test(
   async (t) => {
     using console = mockConsole();
     using _fetch = mockFetch(t);
-    await main(["lonely-planet", "--stories", "utrecht"]);
+    await main(["--stories", "utrecht"]);
     await assertSnapshot(t, console.calls);
   },
 );
