@@ -1,0 +1,280 @@
+export const snapshot = {};
+
+snapshot[`lonely-planet --help 1`] = `
+[
+  {
+    data: [
+      "
+Usage: lonely-planet [keywords...]
+
+Description:
+
+  Explores data from Lonely Planet.
+
+Options:
+
+  -h, --help      - Show this help.                                  
+  --destinations  - Include destinations in the results.             
+  --attractions   - Include attractions in the results.              
+  --stories       - Include stories in the results.                  
+  --json          - Output the search results as concatenated JSON.  
+
+Examples:
+
+  lonely-planet big sur                                Search destinations for 'big sur'.
+  lonely-planet --attractions amsterdam                Search attractions.               
+  lonely-planet --stories amsterdam                    Search stories.                   
+  lonely-planet --destinations --attractions --stories All.                              
+  lonely-planet --json | jq                            Stream destinations as json.      
+",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`lonely-planet [keywords...] 1`] = `
+[
+  {
+    data: [
+      "🏳️ The Netherlands                      [ Europe ]                              
+🏞️ Southeastern Netherlands             [ Europe > The Netherlands ]            
+🏞️ Central Netherlands                  [ Europe > The Netherlands ]            
+🏙️ Amsterdam                            [ Europe > The Netherlands ]            
+🏙️ Rotterdam                            [ Europe > The Netherlands ]            
+🏘️ Medieval Centre & Red Light District [ Europe > The Netherlands > Amsterdam ]
+🏘️ Amsterdam Noord                      [ Europe > The Netherlands > Amsterdam ]
+🏞️ South Holland & Zeeland              [ Europe > The Netherlands ]            
+🏘️ De Pijp                              [ Europe > The Netherlands > Amsterdam ]
+🏞️ North Holland & Flevoland            [ Europe > The Netherlands ]            
+🏞️ Utrecht Province                     [ Europe > The Netherlands ]            
+🏞️ Friesland                            [ Europe > The Netherlands ]            
+🏞️ South Holland                        [ Europe > The Netherlands ]            
+🏙️ Den Haag                             [ Europe > The Netherlands ]            
+🏙️ Utrecht                              [ Europe > The Netherlands ]            
+🏙️ Groningen                            [ Europe > The Netherlands ]            
+🏙️ Maastricht                           [ Europe > The Netherlands ]            
+🏞️ Frisian Islands                      [ Europe > The Netherlands ]            
+🏙️ Nijmegen                             [ Europe > The Netherlands ]            
+🏙️ Leeuwarden                           [ Europe > The Netherlands ]            
+🏙️ Haarlem                              [ Europe > The Netherlands ]            
+🏙️ Den Bosch                            [ Europe > The Netherlands ]            
+🏙️ Leiden                               [ Europe > The Netherlands ]            
+🏙️ Delft                                [ Europe > The Netherlands ]            
+🏙️ Eindhoven                            [ Europe > The Netherlands ]            ",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`lonely-planet [keywords...] --json 1`] = `
+[
+  {
+    data: [
+      '{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"}],"excerpt":"Tradition and innovation intertwine here: artistic masterpieces, centuries-old windmills, tulip fields and romantic candlelit cafés coexist with visionary architecture, cutting-edge design and phenomenal nightlife.","featuredImage":{"alt":"Traditional dutch windmills and houses near the canal in Zaanstad village, Zaanse Schans, Netherlands.","caption":"Traditional dutch windmills and houses near the canal in Zaanstad village, Zaanse Schans, Netherlands.","credit":"© Olena_Z/Getty Images/iStockphoto","height":3169,"name":"GettyImages-937057490.jpeg","title":"GettyImages-937057490.jpeg","url":"https://lp-cms-production.imgix.net/2023-03/GettyImages-937057490.jpeg","width":4765},"id":"24256","internalRanking":13.48548,"slug":"the-netherlands","title":"The Netherlands","type":"Country"}',
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Things are different below the rivers: the provinces of Noord Brabant and Limburg have a character that's more Catholic, more relaxed, and in the case of southern Limburg, hillier than elsewhere in the Netherlands. Among the obvious southern influences are a preference for good beer and food, as embodied in the concept Bourgondisch: eating and drinking with a verve worthy of the epicurean inhabitants of France's Burgundy.","featuredImage":{"alt":"View over statue of Beeld van Minckelers on markt in Maastricht.\\\\n17th, architecture, attraction, belfort, belfry, benelux, blue, building, century, city, crowd, day, dusk, dutch, europe, european, evening, gathering, hall, historic, history, holland, huge, illumination, landmark, limburg, maastricht, market, netherlands, night, nobody, old, outside, people, pieter, restaurant, scenic, sightseeing, square, tourism, tourist, tower, town, travel, twilight, urban, view","caption":"View over statue of Beeld van Minckelers on markt in Maastricht.\\\\n17th, architecture, attraction, belfort, belfry, benelux, blue, building, century, city, crowd, day, dusk, dutch, europe, european, evening, gathering, hall, historic, history, holland, huge, illumination, landmark, limburg, maastricht, market, netherlands, night, nobody, old, outside, people, pieter, restaurant, scenic, sightseeing, square, tourism, tourist, tower, town, travel, twilight, urban, view","credit":"©pavel dudek/Shutterstock","height":1624,"name":"shutterstockRF303054407.jpg","title":"shutterstockRF303054407.jpg","url":"https://lp-cms-production.imgix.net/2023-09/shutterstockRF303054407.jpg","width":2525},"id":"24546","internalRanking":4.36551,"slug":"the-netherlands/southeastern-netherlands","title":"Southeastern Netherlands","type":"Region"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"The 'forgotten' provinces of the central Netherlands, Overijssel and Gelderland, combine historic trade centres of abundant cultural wealth with natural beauty. Hoge Veluwe National Park, containing the Kröller-Müller Museum (with one of the world's finest Van Gogh collections), should star in any Dutch itinerary.","featuredImage":{"alt":"Spring lake in Natura 2000 Nature reserve Springendal on misty morning in August; Shutterstock ID 1013020459; Your name (First / Last): Daniel Fahey; GL account no.: 65050; Netsuite department name: Online Editorial; Full Product or Project name including edition: Central Netherlands lp.com page","caption":"Spring lake in Natura 2000 Nature reserve Springendal on misty morning in August; Shutterstock ID 1013020459; Your name (First / Last): Daniel Fahey; GL account no.: 65050; Netsuite department name: Online Editorial; Full Product or Project name including edition: Central Netherlands lp.com page","credit":"Shutterstock / Rudmer Zwerver","height":1197,"name":"6638b429fbef8dcce3f0a9f5719fc831-central-netherlands.jpg","title":"6638b429fbef8dcce3f0a9f5719fc831-central-netherlands.jpg","url":"https://lp-cms-production.imgix.net/2019-06/6638b429fbef8dcce3f0a9f5719fc831-central-netherlands.jpg","width":2129},"id":"24326","internalRanking":4.31669,"slug":"the-netherlands/central-netherlands","title":"Central Netherlands","type":"Region"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Golden Age canals lined by tilting gabled buildings are the backdrop for Amsterdam's treasure-packed museums, vintage-filled shops and hyper-creative drinking, dining and design scenes.","featuredImage":{"alt":"Man riding bike through Amsterdam.","caption":"Man riding bike through Amsterdam.","credit":"© Raquel Arocena Torres/Getty Images","height":4000,"name":"man riding bike raquel arocena torres GettyImages-1272262535 rfc.jpg","title":"man riding bike raquel arocena torres GettyImages-1272262535 rfc.jpg","url":"https://lp-cms-production.imgix.net/2021-10/man%20riding%20bike%20raquel%20arocena%20torres%20GettyImages-1272262535%20rfc.jpg","width":6000},"id":"24251","internalRanking":11.37215,"slug":"the-netherlands/amsterdam","title":"Amsterdam","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Innovation is the mantra in the Netherlands' second city, and the locals embrace it with an enthusiasm that makes a visit here an exciting proposition.","featuredImage":{"alt":"Rotterdam's Delfshaven with his Historic Boats","caption":"Rotterdam's Delfshaven with his Historic Boats","credit":"Getty Images","height":2323,"name":"25b16feb8d0061ec61a188edd0577c26-delfshaven.jpg","title":"25b16feb8d0061ec61a188edd0577c26-delfshaven.jpg","url":"https://lp-cms-production.imgix.net/2019-06/25b16feb8d0061ec61a188edd0577c26-delfshaven.jpg","width":3499},"id":"188216","internalRanking":8.63551,"slug":"the-netherlands/rotterdam","title":"Rotterdam","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"},{"slug":"the-netherlands/amsterdam","title":"Amsterdam","type":"City"}],"excerpt":"Amsterdam's oldest quarter is remarkably preserved, looking much as it did in its Golden Age heyday. It's the busiest part of town for visitors. While some come to see the Royal Palace and Oude Kerk, others make a beeline for the coffeeshops and Red Light District.","featuredImage":{"alt":"The Royal Palace in Amsterdam is situated in the west side of Dam Square in the centre of Amsterdam, Holland. Beautiful blue sky with cloudscape over the palace. The Netherlands.","caption":"The Royal Palace in Amsterdam is situated in the west side of Dam Square in the centre of Amsterdam, Holland. Beautiful blue sky with cloudscape over the palace. The Netherlands.","credit":"Getty Images/iStockphoto","height":4912,"name":"The Royal Palace, Amsterdam, Netherlands","title":"The Royal Palace, Amsterdam, Netherlands","url":"https://lp-cms-production.imgix.net/2022-02/iStock-476182609%20RFC.jpg","width":7360},"id":"24286","internalRanking":8.50106,"slug":"the-netherlands/amsterdam/medieval-centre-and-red-light-district","title":"Medieval Centre & Red Light District","type":"Neighborhood"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"},{"slug":"the-netherlands/amsterdam","title":"Amsterdam","type":"City"}],"excerpt":"Amsterdam Noord, a quick free ferry ride across the IJ River from central Amsterdam, is a previously neglected area that has been reinvented as the city's hippest neighbourhood. It encompasses ex-industrial areas, cutting-edge architecture, and hangars turned hipster hangouts with walls covered in street art, all minutes away from fields, horses and the odd windmill. Noord is perfect for exploring by bike, stopping to eat and drink in its alternative venues. It's a great area to escape the crowds of central Amsterdam, too.","featuredImage":{"alt":"AMSTERDAM, HOLLAND - AUGUST 01: EYE Film Institute and Overhoeks Tower in Amsterdam, Holland. August 01, 2012 Amsterdam, Holland. EYE Film Institute includes a cinematography museum.; Shutterstock ID 111061883; Your name (First / Last): Daniel Fahey; GL account no.: 65050; Netsuite department name: Online Editorial; Full Product or Project name including edition: Amsterdam-Noord neighbourhood","caption":"AMSTERDAM, HOLLAND - AUGUST 01: EYE Film Institute and Overhoeks Tower in Amsterdam, Holland. August 01, 2012 Amsterdam, Holland. EYE Film Institute includes a cinematography museum.; Shutterstock ID 111061883; Your name (First / Last): Daniel Fahey; GL account no.: 65050; Netsuite department name: Online Editorial; Full Product or Project name including edition: Amsterdam-Noord neighbourhood","credit":"Shutterstock / Igor Plotnikov","height":1702,"name":"0d3566c4e927e260ef944dacc04ed05a-amsterdam-noord.jpg","title":"0d3566c4e927e260ef944dacc04ed05a-amsterdam-noord.jpg","url":"https://lp-cms-production.imgix.net/2019-06/0d3566c4e927e260ef944dacc04ed05a-amsterdam-noord.jpg","width":3024},"id":"141996","internalRanking":6.10925,"slug":"the-netherlands/amsterdam/amsterdam-noord","title":"Amsterdam Noord","type":"Neighborhood"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"It's the contrasts that make South Holland and Zeeland such compelling destinations. One day, you're in the ongoing architectural experiment that is Rotterdam, marvelling at its ever-growing portfolio of cutting-edge buildings. The next day you might be in Delft, where the historic town centre is so well-preserved that you'll feel as if you've been transported back to Holland's 17th-century Golden Age. And the contrasts aren't confined to building stock: Den Haag has a sophisticated urban charm, enchanting visitors with its art, fine dining and cultural scene; Zeeland has a dramatic back-of-beyond feel, with a sparsely populated and windswept landscape; and Gouda plays to every Dutch stereotype, with wheels of its famous yellow cheese and traditionally garbed locals ever-present. The bottom line for travellers is that there's something for everyone here, whether it be windmills or wine bars, tulips or tasting menus.","featuredImage":{"alt":"The Westkapelse Zeedijk forms part of the dutch coastal flood defense system. This modern dike, with a layer of basalt stones covered with sand and grass, protects he whole island of Walcheren against coastal floods. Modern flood protection measures allow for recreational and economic activities and development of a natural environment. Picture is taken on a stormy day in summer when a thunderstorm is approaching.","caption":"The Westkapelse Zeedijk forms part of the dutch coastal flood defense system. This modern dike, with a layer of basalt stones covered with sand and grass, protects he whole island of Walcheren against coastal floods. Modern flood protection measures allow for recreational and economic activities and development of a natural environment. Picture is taken on a stormy day in summer when a thunderstorm is approaching.","credit":"Getty Images/iStockphoto","height":2083,"name":"Approaching thunderstorm and dutch coastal flood defense","title":"Approaching thunderstorm and dutch coastal flood defense","url":"https://lp-cms-production.imgix.net/2022-02/iStock-621839846%20RFC.jpg","width":5029},"id":"188126","internalRanking":5.05184,"slug":"the-netherlands/south-holland-zeeland","title":"South Holland & Zeeland","type":"Region"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"},{"slug":"the-netherlands/amsterdam","title":"Amsterdam","type":"City"}],"excerpt":"A hotbed of creativity, multicultural De Pijp is less than five minutes from Centraal Station by metro yet preserves its village-like atmosphere. The neighbourhood's centrepiece is Amsterdam's largest street market, the colourful Albert Cuypmarkt, and the fashion boutiques, vintage shops, experimental restaurants and free-spirited cafés (pubs) that surround it.","featuredImage":{"alt":"Sarphati Park streetscape in the De Pijp area.","caption":"Sarphati Park streetscape in the De Pijp area.","credit":null,"height":2606,"name":"cea3e9d621ccc174356d6d7c88a67745378a261eda501d7b7174e7ca785f104e.jpg","title":"cea3e9d621ccc174356d6d7c88a67745378a261eda501d7b7174e7ca785f104e.jpg","url":"https://lp-cms-production.imgix.net/2019-06/cea3e9d621ccc174356d6d7c88a67745378a261eda501d7b7174e7ca785f104e.jpg","width":4021},"id":"24266","internalRanking":4.58497,"slug":"the-netherlands/amsterdam/de-pijp","title":"De Pijp","type":"Neighborhood"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"The quintessentially Dutch province of Noord-Holland (North Holland) wraps around Amsterdam like a crown. Less than 20km west of Amsterdam, but entirely its own city, elegant Haarlem is the region's capital and a charming example of 17th-century grandeur. Canals traverse its centre, while wide, sandy beaches fringe its western edge.","featuredImage":{"alt":"Rows of purple Dutch tulips on a bulb field in the Flevopolder - Flevoland.","caption":"Rows of purple Dutch tulips on a bulb field in the Flevopolder - Flevoland.","credit":"Getty Images/iStockphoto","height":3535,"name":"Rows of purple Dutch tulips on a bulb field","title":"Rows of purple Dutch tulips on a bulb field","url":"https://lp-cms-production.imgix.net/2022-04/iStock-1369815697%20RFC.jpg","width":6285},"id":"188556","internalRanking":4.45852,"slug":"the-netherlands/north-holland-flevoland","title":"North Holland & Flevoland","type":"Region"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Don't underrate the petite province of Utrecht. Its famous namesake city – with its throngs of students, tree-lined canals and medieval quarter – deserves the limelight. No set piece, it has a plethora of hip, fun bars and cafes. Those with calmer tastes can visit more than a dozen museums big and small. Or wander the back streets and revel in reminders of the 17th century.","featuredImage":{"alt":"Utrecht University at Dom Square in Utrecht.","caption":"Utrecht University at Dom Square in Utrecht.","credit":"©Olena Z/Shutterstock","height":3264,"name":"shutterstockRF_1047609355.jpg","title":"shutterstockRF_1047609355.jpg","url":"https://lp-cms-production.imgix.net/2022-02/shutterstockRF_1047609355.jpg","width":4928},"id":"24616","internalRanking":3.84811,"slug":"the-netherlands/utrecht-province","title":"Utrecht Province","type":"Region"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      '{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"This unspoilt northerly province is the spot to take your foot off the pedal and go slow, Friesian-style, amid raw coastal nature and a profusion of namesake black-and-white cows.","featuredImage":{"alt":"heather flowering at misty sunrise, Friesland, Netherlands; Shutterstock ID 331078466; Your name (First / Last): Daniel Fahey; GL account no.: 65050; Netsuite department name: Online Editorial; Full Product or Project name including edition: Friesland page","caption":"heather flowering at misty sunrise, Friesland, Netherlands; Shutterstock ID 331078466; Your name (First / Last): Daniel Fahey; GL account no.: 65050; Netsuite department name: Online Editorial; Full Product or Project name including edition: Friesland page","credit":null,"height":2000,"name":"1de75384ebec16691177cdaf71d3d8bd-friesland.jpg","title":"1de75384ebec16691177cdaf71d3d8bd-friesland.jpg","url":"https://lp-cms-production.imgix.net/2019-06/1de75384ebec16691177cdaf71d3d8bd-friesland.jpg","width":3000},"id":"24466","internalRanking":3.80444,"slug":"the-netherlands/friesland","title":"Friesland","type":"Region"}',
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Home to two of the country's major cities – Rotterdam and Den Haag – and to many of its prettiest and most historic towns, Zuid-Holland (South Holland) is popular with domestic and international tourists alike. Along with the provinces of Noord-Holland (North Holland) and Utrecht, it is part of the Randstad, the economic and population heart of the Netherlands. Known for its architecture, museums, sandy beaches and bird-filled national parks, it is a region that richly rewards those who visit.","featuredImage":{"alt":"July 24th, 2019: Castle 'Duivenvoorde', which dates from the 13th century in the province of Zuid-Holland.","caption":"July 24th, 2019: Castle 'Duivenvoorde', which dates from the 13th century in the province of Zuid-Holland.","credit":"©R. de Bruijn_Photography/Shutterstock","height":4429,"name":"shutterstockRF_1535223683.jpg","title":"shutterstockRF_1535223683.jpg","url":"https://lp-cms-production.imgix.net/2022-04/shutterstockRF_1535223683.jpg","width":6643},"id":"188136","internalRanking":3.28151,"slug":"the-netherlands/the-randstad","title":"South Holland","type":"Region"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"There's a lot more to Den Haag than immediately meets the eye. The popular perception of the Netherlands' third-largest city is of a stately, regal place populated with bureaucrats and businesspeople. While this is true to some extent, there is so much more: the city's cultural scene – anchored by the presence of the world-renowned Mauritshuis museum and Nederlands Dans Theater (and about to be boosted by the opening of the Spuiplein cultural precinct) – is one of the most exciting in the country; its culinary scene is replete with contemporary restaurants expertly experimenting with modern European cuisine; and its entertainment scene has moved far past the embassy cocktail parties that once predominated, making the party precinct of Grote Markt and the much-loved Paard live-music venue essential stops for every visitor. Easy to explore on foot or by tram, this is a city that amply rewards those who stay for a few days.","featuredImage":{"alt":"Vredespaleis The Hague by night","caption":"Vredespaleis The Hague by night","credit":null,"height":3840,"name":"76842393.jpg","title":"76842393.jpg","url":"https://lp-cms-production.imgix.net/2019-06/76842393.jpg","width":5760},"id":"188776","internalRanking":3.1043,"slug":"the-netherlands/the-randstad/den-haag","title":"Den Haag","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"It's hard not to fall in love with Utrecht, one of the Netherlands' oldest urban centres and for centuries its religious heart. Now a vibrant university city, the compact medieval core radiates out from the iconic 15th-century Domtoren, ringed by a loop of very pretty tree-lined canals. Their central sections have distinctive double-level sides inset with what were once medieval warehouses – many now forming fascinating venues to eat, drink, dance or sleep, with terrace-walkways that extend right to the waterside. The brilliant cafe culture goes well beyond the canals – Utrecht's vibrant concert schedules are a big draw and, if the budget stretches, it's worth luxuriating in one of numerous historic mansions that have been turned into indulgent boutique hotels.","featuredImage":{"alt":null,"caption":null,"credit":null,"height":2952,"name":"57386144.jpg","title":"57386144.jpg","url":"https://lp-cms-production.imgix.net/2019-06/57386144.jpg","width":4428},"id":"150766","internalRanking":2.39132,"slug":"the-netherlands/the-randstad/utrecht-city","title":"Utrecht","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Looking at a map of the Netherlands, Groningen seems a long way from anywhere – but this vibrant, youthful city is among the country's most progressive urban metropolises, with a 40,000-strong student population injecting bags of creative zest into its buzzing cafe culture, hedonistic nightlife and rampant cultural scene.","featuredImage":{"alt":"Ships in Groningen","caption":"Ships in Groningen","credit":"Getty Images/iStockphoto","height":3348,"name":"GettyImages-460387209_super.jpg","title":"GettyImages-460387209_super.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-460387209_super.jpg","width":4968},"id":"159436","internalRanking":2.21976,"slug":"the-netherlands/the-north-and-east/groningen-city","title":"Groningen","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Lively and energetic, Maastricht has Roman history, a maze of tunnel-caves and historical buildings aplenty, plus a Burgundian sophistication to its dining, a bacchanalian delight to its drinking culture, and a student-friendly street-life out of all proportion to its size. The people are irreverent, shrugging off the shackles of Dutch restraint while speaking a dialect ('Mestreechs') that baffles Hollanders. No visit to the Netherlands is complete without a visit.","featuredImage":{"alt":"The Netherlands Maastricht at dusk","caption":"The Netherlands Maastricht at dusk","credit":"Getty Images/iStockphoto","height":4000,"name":"GettyImages-514855827_super.jpg","title":"GettyImages-514855827_super.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-514855827_super.jpg","width":6000},"id":"159346","internalRanking":2.10812,"slug":"the-netherlands/the-southeast/maastricht","title":"Maastricht","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      '{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"The crescent of islands over Friesland – Vlieland, Terschelling, Ameland and Schiermonnikoog – form a unique natural entity and a distinct Dutch region. A natural barrier between the Frisian coast and the North Sea, they hem in the mudflats of the Waddenzee, a Unesco World Heritage site since 2009 and a hot spot for wadlopen (mudflat walking) with professional guides. Villages, polders and salt marshes fringe the islands along their Waddenzee shores, while swaths of beach and dunes lace the seaward side. Inland, expect ample forest and heath crisscrossed with hiking and cycling trails.","featuredImage":{"alt":"view of the Ameland Lighthouse, known as Bornrif, is a lighthouse on the Dutch island Ameland, one of the Frisian Islands, on the edge of the North Sea, The Netherlands","caption":"view of the Ameland Lighthouse, known as Bornrif, is a lighthouse on the Dutch island Ameland, one of the Frisian Islands, on the edge of the North Sea, The Netherlands","credit":"©Melanie Lemahieu/Shutterstock","height":2362,"name":"shutterstockRF_331097798.jpg","title":"shutterstockRF_331097798.jpg","url":"https://lp-cms-production.imgix.net/2022-02/shutterstockRF_331097798.jpg","width":3543},"id":"24476","internalRanking":1.91003,"slug":"the-netherlands/frisian-islands","title":"Frisian Islands","type":"Region"}',
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      '{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"From Roman camp to Catholic university town of 13,000 students, Nijmegen buzzes with energy and is vibrant place to spend a couple of days. This is the oldest town in the Netherlands, with a compact medieval centre yet all the urban-cool of a big city. Historic cafes, specialist craft-coffee shops and a decent smattering of museums and monuments lace its streets that stagger gently from the 16th-century Lower Town by the banks of the Waal River to the older Upper Town. In summer, Dutch party lovers pour into town for its annual four-day hiking fest and Zomerfeesten music festival.","featuredImage":{"alt":"Central town square in Nijmegan","caption":"Central town square in Nijmegan","credit":"Getty Images/Lonely Planet Images","height":3267,"name":"GettyImages-475978935_high.jpg","title":"GettyImages-475978935_high.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-475978935_high.jpg","width":4900},"id":"24386","internalRanking":1.84839,"slug":"the-netherlands/nijmegen","title":"Nijmegen","type":"City"}',
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"An unexpected combination of style, gritty back alleys, cafe-lined canals and urban renewal, Friesland's capital is well worth a visit. Its superb trinity of museums and inventive cultural projects left over from a fabulous year as European Capital of Culture in 2018 are fascinating to explore. A continuous flow of cyclists ride happily along the broad paths that flank the city's canals, whose tunnels are atmospherically illuminated purple at night. Stick around and sample some of the northern hospitality, easily found in Leeuwarden's many bars and cafes throbbing with fun-loving Liwwadders (as people from Leeuwarden are officially known).","featuredImage":{"alt":"View on De Oldehove. An unfinished and leaning church tower in the medieval centre of the Dutch city of Leeuwarden.; Shutterstock ID 691110064","caption":"View on De Oldehove. An unfinished and leaning church tower in the medieval centre of the Dutch city of Leeuwarden.; Shutterstock ID 691110064","credit":"Shutterstock / Harry Wedzinga","height":3922,"name":"2a234a6fb211dc9be506e514cc99d080-leeuwarden.jpg","title":"2a234a6fb211dc9be506e514cc99d080-leeuwarden.jpg","url":"https://lp-cms-production.imgix.net/2019-06/2a234a6fb211dc9be506e514cc99d080-leeuwarden.jpg","width":5884},"id":"24516","internalRanking":1.76276,"slug":"the-netherlands/leeuwarden","title":"Leeuwarden","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      '{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"This classic Dutch city of cobbled streets, historic buildings, grand churches, even grander museums, cosy bars, fine cafes and canals is just a 15-minute train ride from Amsterdam. To its west are the coastal dunes of the Zuid-Kennemerland National Park and the popular beaches of Zandvoort and Bloemendaal aan Zee.","featuredImage":{"alt":"Postcard from Haarlem","caption":"Postcard from Haarlem","credit":"Getty Images/Moment Open","height":3776,"name":"GettyImages-539970901_super.jpg","title":"GettyImages-539970901_super.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-539970901_super.jpg","width":5664},"id":"188646","internalRanking":1.7525,"slug":"the-netherlands/the-randstad/haarlem","title":"Haarlem","type":"City"}',
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Den Bosch ('the Forest') is the commonly used short form of ’s-Hertogenbosch (Duke's Forest), though the trees have long gone and it's now the capital of Noord Brabant. It's best known as the birthplace of 15th-century painter Jheronimus van Aken, who later took his surname from the town and is remembered worldwide under the name Hieronymous (or Jeroen) Bosch for his surreal hell-scenes. As well as sights linked to him, the city also has a remarkable statue-festooned church, many attractive old streets, a great cafe-dining scene and some unique tunnel canals. The area was hotly contested during the Eighty Years' War, and you can still see where lines of fortifications followed the shape of the canals.","featuredImage":{"alt":"St. Johannes cathedral","caption":"St. Johannes cathedral","credit":"Getty Images","height":4908,"name":"GettyImages-467096069_full.jpg","title":"GettyImages-467096069_full.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-467096069_full.jpg","width":7356},"id":"24586","internalRanking":1.73099,"slug":"the-netherlands/the-southeast/den-bosch","title":"Den Bosch","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Vibrant Leiden is one of the Netherlands' great cities. Woven with canals lined by beautiful 17th-century buildings, its cache of museums, all within walking distance of each other, are a major draw, as is wandering the picturesque canals and soaking up the nightlife, fuelled by a 27,000-strong student population.","featuredImage":{"alt":"Netherlands, Leiden, view across canal with Leiden university's Academy Building on the right","caption":"Netherlands, Leiden, view across canal with Leiden university's Academy Building on the right","credit":"Getty Images/Dorling Kindersley","height":3346,"name":"GettyImages-175133284_full.jpg","title":"GettyImages-175133284_full.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-175133284_full.jpg","width":5019},"id":"188146","internalRanking":1.2904,"slug":"the-netherlands/the-randstad/leiden","title":"Leiden","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"An amalgam of austere medieval magnificence and Golden Age glory, Delft's exquisite town centre is a hugely popular Dutch day-trip destination, awash with visitors strolling its narrow, canal-lined streets and central Markt. The centre is time-capsule-like, having changed little since Golden Age artist Johannes Vermeer, who was born in Delft and lived his whole life here, painted his famous View of Delft in 1660–61.","featuredImage":{"alt":"A canal in the historic centre of Delft","caption":"A canal in the historic centre of Delft","credit":"Getty Images","height":3744,"name":"GettyImages-500741461_full.jpg","title":"GettyImages-500741461_full.jpg","url":"https://lp-cms-production.imgix.net/2019-06/GettyImages-500741461_full.jpg","width":5616},"id":"188156","internalRanking":1.22963,"slug":"the-netherlands/the-randstad/delft","title":"Delft","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      \`{"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"If you find yourself in the Netherlands' fifth-biggest city it's probably for an international budget flight or to watch a football match at PSV's Philips Stadium. But Eindhoven is also a vibrant centre for creative design and post-industrial reinvention. OK, so visually the townscape has all the charm of Minsk on a bad hair day, but before rushing on, do at least consider visiting the fascinating Philips Museum, which tells the story of the global electronics company that essentially created modern Eindhoven. There's also a highly thought-provoking modern-art gallery and a UFO-shaped quirk of 1960s architecture.","featuredImage":{"alt":"Waterfront buildings at Eindhoven city in the Netherlands.","caption":"Waterfront buildings at Eindhoven city in the Netherlands.","credit":"©Juan Monte/EyeEm/Getty Images","height":3994,"name":"Panoramic View Of City Against Sky","title":"Panoramic View Of City Against Sky","url":"https://lp-cms-production.imgix.net/2022-02/GettyRF_742338977.jpg","width":6000},"id":"24596","internalRanking":0.7993,"slug":"the-netherlands/eindhoven","title":"Eindhoven","type":"City"}\`,
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`lonely-planet --destinations 1`] = `
+[
+  {
+    data: [
+      "🏙️ Amsterdam                            [ Europe > The Netherlands ]            
+🏘️ Amsterdam Noord                      [ Europe > The Netherlands > Amsterdam ]
+🏘️ Medieval Centre & Red Light District [ Europe > The Netherlands > Amsterdam ]
+🏘️ De Pijp                              [ Europe > The Netherlands > Amsterdam ]",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`lonely-planet --attractions 1`] = `
+[
+  {
+    data: [
+      "🎡 Frans Hals Museum – Hof         [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Grote Kerk van St Bavo          [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Zuid-Kennemerland National Park [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Frans Hals Museum – Hal         [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Teylers Museum                  [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Haarlemmerhout                  [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Corrie ten Boom House           [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Erebegraafplaats Bloemendaal    [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 De Zandwaaier Visitor Centre    [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Stadhuis                        [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Bakenesserkerk                  [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Proveniershuis                  [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Laurens Coster Statue           [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Nieuwe Kerk                     [ Europe > The Netherlands > Haarlem > Attractions ]                       
+🎡 Haarlemmerpoort                 [ Europe > The Netherlands > Amsterdam > Jordaan & the West > Attractions ]",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`lonely-planet --stories 1`] = `
+[
+  {
+    data: [
+      "📰 How to spend a perfect day in Utrecht",
+    ],
+    level: "log",
+  },
+]
+`;
