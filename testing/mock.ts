@@ -1,3 +1,4 @@
+import { omit } from "@std/collections";
 import { basename, dirname, fromFileUrl, join } from "@std/path";
 import { MockError, stub } from "@std/testing/mock";
 
@@ -203,7 +204,7 @@ export interface MockFetch extends Disposable {
 
 interface FetchRequest {
   input: string | URL | Request;
-  init?: RequestInit | undefined;
+  init?: Omit<RequestInit, "signal"> | undefined;
 }
 
 interface FetchResponse {
@@ -284,7 +285,7 @@ export function mockFetch(context: Deno.TestContext): MockFetch {
       call = {
         request: {
           input: input.toString(),
-          init,
+          ...(init ? { init: omit(init, ["signal"]) } : {}),
         },
         response: {
           body: await response.text(),
