@@ -127,7 +127,7 @@ export class LonelyPlanetClient {
     if (this.typesense) return this.typesense;
 
     const response = await fetch(SITE);
-    if (!response.ok) throw new Error("Failed to fetch homepage.");
+    if (!response.ok) throw new Error("Failed to fetch homepage");
     const doc = new DOMParser().parseFromString(
       await response.text(),
       "text/html",
@@ -137,11 +137,11 @@ export class LonelyPlanetClient {
       const src = script.attributes.getNamedItem("src")?.value;
       if (!src || !/webpack/.test(src)) continue;
       const response = await fetch(new URL(src, SITE));
-      if (!response.ok) throw new Error(`Failed to fetch webpack script.`);
+      if (!response.ok) throw new Error(`Failed to fetch webpack script`);
       const text = await response.text();
       for (const src of text.matchAll(/"(static\/chunks\/[^"]+?\.js)"/g)) {
         const response = await fetch(new URL(`/_next/${src[1]}`, SITE));
-        if (!response.ok) throw new Error(`Failed to fetch next script.`);
+        if (!response.ok) throw new Error(`Failed to fetch next script`);
         const text = await response.text();
         const [, token, host, port, protocol] = TYPESENSE_PATTERN.exec(text) ??
           [];
@@ -155,6 +155,6 @@ export class LonelyPlanetClient {
         }
       }
     }
-    throw new Error("Typesense details not found.");
+    throw new Error("Typesense details not found");
   }
 }

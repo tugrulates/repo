@@ -141,7 +141,7 @@ async function request<T>(
     });
     if (RETRYABLE_STATUSES.includes(response.status)) {
       await response.body?.cancel();
-      throw new RequestError(response.statusText);
+      throw new Error(response.statusText);
     }
     return response;
   }, options.retry);

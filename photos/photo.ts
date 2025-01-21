@@ -130,7 +130,7 @@ export async function getPhoto(path: string): Promise<Photo> {
   const files = await getFiles(dirname(path));
   const exif = await Promise.all(files.map((f) => getExif(f)));
   const photo = exif.find((e) => e.src === path);
-  if (!photo) throw new Error(`EXIF cannot be extracted for ${path}.`);
+  if (!photo) throw new Error(`EXIF cannot be extracted for ${path}`);
   return {
     id: basename(dirname(path)),
     ...photo,
