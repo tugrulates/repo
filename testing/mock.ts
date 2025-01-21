@@ -30,8 +30,12 @@ class MockManager {
   async getCalls<T>(t: Deno.TestContext, name: string) {
     const path = MockManager.testPath(t);
     const key = MockManager.testKey(t, name);
-    const { mock } = await import(path);
-    return (mock[key] ?? []) as T[];
+    try {
+      const { mock } = await import(path);
+      return (mock[key] ?? []) as T[];
+    } catch {
+      throw new MockError(`Failed to load mock: ${path} ${key}`);
+    }
   }
 
   private static testPath(context: Deno.TestContext) {
