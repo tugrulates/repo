@@ -9,7 +9,7 @@ Deno.test(
   { sanitizeOps: false, sanitizeResources: false },
   async (t) => {
     using console = mockConsole();
-    await main(["photos", "--help"]);
+    await main(["--help"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -19,7 +19,7 @@ Deno.test(
   { sanitizeOps: false, sanitizeResources: false },
   async (t) => {
     using console = mockConsole();
-    await main(["photos", "photos/testdata/floating-around"]);
+    await main(["photos/testdata/floating-around"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -30,7 +30,6 @@ Deno.test(
   async (t) => {
     using console = mockConsole();
     await main([
-      "photos",
       "photos/testdata/floating-around",
       "photos/testdata/winter-pause",
     ]);
@@ -43,7 +42,7 @@ Deno.test(
   { sanitizeOps: false, sanitizeResources: false },
   async (t) => {
     using console = mockConsole();
-    await main(["photos", "photos/testdata/floating-around/source.jpg"]);
+    await main(["photos/testdata/floating-around/source.jpg"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -53,7 +52,7 @@ Deno.test(
   { sanitizeOps: false, sanitizeResources: false },
   async (t) => {
     using console = mockConsole();
-    await main(["photos", "photos/testdata/floating-around", "--json"]);
+    await main(["photos/testdata/floating-around", "--json"]);
     await assertSnapshot(t, console.calls);
   },
 );
@@ -68,19 +67,19 @@ Deno.test(
       const photo = join(dir, "winter-pause");
       await t.step("before", async () => {
         using console = mockConsole();
-        await main(["photos", photo]);
+        await main([photo]);
         await assertSnapshot(t, console.calls);
       });
 
       await t.step("copy", async () => {
         using console = mockConsole();
-        await main(["photos", photo, "--copy"]);
+        await main([photo, "--copy"]);
         await assertSnapshot(t, console.calls);
       });
 
       await t.step("after", async () => {
         using console = mockConsole();
-        await main(["photos", photo]);
+        await main([photo]);
         await assertSnapshot(t, console.calls);
       });
     } finally {
