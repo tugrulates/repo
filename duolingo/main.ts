@@ -18,7 +18,7 @@ let token: Config | undefined;
 /** Duolingo client built from common CLI options. */
 export async function getClient(): Promise<DuolingoClient> {
   if (!username || !token) {
-    throw new Error("Username and token not configured.");
+    throw new Error("Username and token not configured");
   }
   return new DuolingoClient(await username.get(), await token.get());
 }
