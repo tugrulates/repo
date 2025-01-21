@@ -223,7 +223,7 @@ function getFetchRequestSignature(request: FetchRequest): string {
   if (request.input instanceof Request) {
     return getFetchRequestSignature({
       input: new URL(request.input.url),
-      init: { method: request.init?.method ?? request.input.method },
+      init: { ...request.input, ...request.init },
     });
   }
   if (typeof request.input === "string") {
@@ -232,7 +232,11 @@ function getFetchRequestSignature(request: FetchRequest): string {
       init: request.init,
     });
   }
-  return `${request.input.toString()} ${request.init?.method ?? "GET"}`;
+  return [
+    request.input.toString(),
+    request.init?.method ?? "GET",
+    request.init?.body,
+  ].join(" ");
 }
 
 /**
