@@ -129,6 +129,8 @@ function getCommand() {
     .name("500px")
     .description("Interact with 500px.")
     .usage("<command> [options]")
+    .help({ colors: Deno.stdout.isTerminal() })
+    .noExit()
     .action((): void => command.showHelp())
     .command("discover", getDiscoverCommand())
     .command("follows", getFollowsCommand())
@@ -137,7 +139,7 @@ function getCommand() {
 }
 
 /** CLI entrypoint. */
-export async function main() {
+export async function main(args: string[]) {
   const command = getCommand();
-  await command.parse();
+  await command.parse(args);
 }
