@@ -218,6 +218,8 @@ async function getCommand(config: Config<DuolingoConfig>) {
       "JWT token.",
       token ? { default: token } : {},
     )
+    .help({ colors: Deno.stdout.isTerminal() })
+    .noExit()
     .globalAction((options) => config.set(options))
     .command("feed", getFeedCommand(config))
     .command("follows", getFollowsCommand(config))
@@ -226,8 +228,8 @@ async function getCommand(config: Config<DuolingoConfig>) {
 }
 
 /** CLI entrypoint. */
-export async function main() {
-  using config = new Config<DuolingoConfig>();
+export async function main(args: string[], options?: { path?: string }) {
+  using config = new Config<DuolingoConfig>(options);
   const command = await getCommand(config);
-  await command.parse();
+  await command.parse(args);
 }
