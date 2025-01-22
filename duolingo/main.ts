@@ -1,7 +1,8 @@
 import { Command } from "@cliffy/command";
+import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@tugrulates/internal/async";
-import { Config } from "@tugrulates/internal/cli";
+import { Config } from "@tugrulates/internal/config";
 import { DuolingoClient } from "./client.ts";
 import { LEAGUES } from "./data.ts";
 import {
@@ -12,15 +13,17 @@ import {
 } from "./interaction.ts";
 import type { FeedCard, League } from "./types.ts";
 
-let username: Config | undefined;
-let token: Config | undefined;
+type DuolingoConfig = { username: string; token: string };
 
 /** Duolingo client built from common CLI options. */
-export async function getClient(): Promise<DuolingoClient> {
-  if (!username || !token) {
-    throw new Error("Username and token not configured");
-  }
-  return new DuolingoClient(await username.get(), await token.get());
+async function getClient(
+  config: Config<DuolingoConfig>,
+): Promise<DuolingoClient> {
+  let { username, token } = await config.get();
+  if (!username) username = await Input.prompt("Username");
+  if (!token) token = await Secret.prompt("Token");
+  if (!username || !token) throw new Error("Username and token are required.");
+  return new DuolingoClient(username, token);
 }
 
 /**
@@ -28,8 +31,7 @@ export async function getClient(): Promise<DuolingoClient> {
  *
  * @returns Users who are followed, users who follow, and their difference sets.
  */
-async function getFollows() {
-  const client = await getClient();
+async function getFollows(client: DuolingoClient) {
   const [following, followers] = await Promise.all([
     client.getFollowing(),
     client.getFollowers(),
@@ -51,8 +53,7 @@ async function getFollows() {
  *
  * @param league League to output.
  */
-async function outputLeague(league: League) {
-  const client = await getClient();
+async function outputLeague(client: DuolingoClient, league: League) {
   const following = await client.getFollowing();
   const tier = LEAGUES[league.tier];
   new Table()
@@ -80,7 +81,7 @@ function getSummary(card: FeedCard): string {
     `${card.displayName} ${card.body.toLowerCase()}`;
 }
 
-function getFeedCommand() {
+function getFeedCommand(config: Config<DuolingoConfig>) {
   return new Command()
     .description("Prints and interacts with the feed.")
     .example("duolingo feed", "Prints the feed.")
@@ -89,7 +90,7 @@ function getFeedCommand() {
     .option("--engage", "Engage with the feed events.")
     .option("--json", "Output the feed as JSON.")
     .action(async ({ engage, json }) => {
-      const client = await getClient();
+      const client = await getClient(config);
       const followers = await client.getFollowers();
       const cards = await client.getFeedCards();
       if (json) console.log(JSON.stringify(cards, undefined, 2));
@@ -104,7 +105,7 @@ function getFeedCommand() {
     });
 }
 
-function getFollowsCommand() {
+function getFollowsCommand(config: Config<DuolingoConfig>) {
   return new Command()
     .description("Prints and manages follower information on Duolingo.")
     .example("duolingo follows", "Prints follow counts.")
@@ -128,8 +129,8 @@ function getFollowsCommand() {
     .option("--unfollow", "Unfollow users who don't follow.")
     .option("--json", "Output the follower information as JSON.")
     .action(async ({ follow, unfollow, json }) => {
-      const client = await getClient();
-      let result = await getFollows();
+      const client = await getClient(config);
+      let result = await getFollows(client);
 
       if (follow || unfollow) {
         if (follow) {
@@ -150,7 +151,7 @@ function getFollowsCommand() {
             },
           );
         }
-        result = await getFollows();
+        result = await getFollows(client);
       }
 
       if (json) console.log(JSON.stringify(result, undefined, 2));
@@ -161,7 +162,7 @@ function getFollowsCommand() {
     });
 }
 
-function getLeagueCommand() {
+function getLeagueCommand(config: Config<DuolingoConfig>) {
   return new Command()
     .description("Prints and interacts with the current Duolingo league.")
     .example("duolingo league", "Prints the league.")
@@ -170,12 +171,12 @@ function getLeagueCommand() {
     .option("--follow", "Follow users in the league.")
     .option("--json", "Output the league as JSON.")
     .action(async ({ follow, json }) => {
-      const client = await getClient();
+      const client = await getClient(config);
       const league = await client.getLeague();
       if (league) {
         if (follow) await followLeagueUsers(client, league.rankings);
         if (json) console.log(JSON.stringify(league, undefined, 2));
-        else await outputLeague(league);
+        else await outputLeague(client, league);
       } else {
         if (json) console.log("{}");
         else console.log("🏆 The league has not started yet.");
@@ -183,41 +184,48 @@ function getLeagueCommand() {
     });
 }
 
-async function getCommand() {
+async function getCommand(config: Config<DuolingoConfig>) {
+  const { username, token } = await config.get();
   const command = new Command()
     .name("duolingo")
     .description("Interact with Duolingo.")
     .example("duolingo --username <username> --token <token>", "Configure.")
     .example("duolingo --clear", "Clear the cached configuration.")
     .usage("<command> [options]")
+    .option("--clear", "Clear the cached configuration.", {
+      standalone: true,
+      action: () => config.clear(),
+    })
+    .globalEnv(
+      "DUOLINGO_USERNAME=<username:string>",
+      "Username.",
+      { prefix: "DUOLINGO_" },
+    )
     .globalOption(
       "--username <username:string>",
       "Username.",
-      await username?.option(),
+      username ? { default: username } : {},
+    )
+    .globalEnv(
+      "DUOLINGO_TOKEN=<token:string>",
+      "JWT token.",
+      { prefix: "DUOLINGO_" },
     )
     .globalOption(
       "--token <token:string>",
       "JWT token.",
-      await token?.option(),
+      token ? { default: token } : {},
     )
-    .option("--clear", "Clear the cached configuration.", {
-      standalone: true,
-      action: async () => {
-        await username?.clear();
-        await token?.clear();
-      },
-    })
-    .action((): void => command.showHelp())
-    .command("feed", getFeedCommand())
-    .command("follows", getFollowsCommand())
-    .command("league", getLeagueCommand());
+    .globalAction((options) => config.set(options))
+    .command("feed", getFeedCommand(config))
+    .command("follows", getFollowsCommand(config))
+    .command("league", getLeagueCommand(config));
   return command;
 }
 
 /** CLI entrypoint. */
 export async function main() {
-  username = new Config("username");
-  token = new Config("token", { secret: true });
-  const command = await getCommand();
+  using config = new Config<DuolingoConfig>();
+  const command = await getCommand(config);
   await command.parse();
 }

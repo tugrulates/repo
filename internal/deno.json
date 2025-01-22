@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "exports": {
     "./async": "./async.ts",
-    "./cli": "./cli.ts",
+    "./config": "./config.ts",
     "./graphql": "./graphql.ts",
     "./request": "./request.ts"
   }
