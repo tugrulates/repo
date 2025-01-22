@@ -2,7 +2,7 @@
 
 [![JSR @tugrulates](https://jsr.io/badges/@tugrulates)](https://jsr.io/@tugrulates)
 [![codecov](https://codecov.io/gh/tugrulates/repo/branch/main/graph/badge.svg)](https://codecov.io/gh/tugrulates/repo)
-[![ci](https://github.com/tugrulates/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/tgurulates/repo/actions/workflows/ci.yml)
+[![ci](https://github.com/tugrulates/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/tugrulates/repo/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/tugrulates/repo/blob/main/LICENSE)
 
 Personal repository with various libraries and applications.
