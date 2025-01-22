@@ -1,18 +1,22 @@
-# libs
+# Monorepo
 
-Monorepo with various libraries and tools.
+[![JSR @tugrulates](https://jsr.io/badges/@tugrulates)](https://jsr.io/@tugrulates)
+[![codecov](https://codecov.io/gh/tugrulates/repo/branch/main/graph/badge.svg)](https://codecov.io/gh/tugrulates/repo)
+[![ci](https://github.com/tugrulates/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/tugrulates/repo/actions/workflows/ci.yml)
+[![license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/tugrulates/repo/blob/main/LICENSE)
+
+Personal repository with various libraries and applications.
 
 I maintain these for my personal use, but you are welcome to make contributions.
-My plan is to makee a release version of any component that becomes useful.
 
-# Library
+# Packages
 
-The library is intended to be used with the [Deno](https://deno.com) runtime.
-The documentation can be found on [JSR](https://jsr.io/@tugrulates).
+The published packages are intended to be used with the [Deno](https://deno.com)
+runtime. The documentation can be found on [JSR](https://jsr.io/@tugrulates).
 
-# Tools
+# Binaries
 
-Currently the following tools are available:
+Currently the following binary tools are available:
 
 - `500px` - Interact with 500px, the photography community.
 - `duolingo` - Interact with Duolingo, the language learning platform.
@@ -22,8 +26,8 @@ Currently the following tools are available:
 These can be installed from the source.
 
 ```sh
-git clone https://github.com/tugrulates/lib.git
-cd lib
+git clone https://github.com/tugrulates/repo.git
+cd repo
 deno task install
 ```
 
