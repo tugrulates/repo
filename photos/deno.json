@@ -3,6 +3,6 @@
   "version": "0.1.4",
   "exports": "./mod.ts",
   "tasks": {
-    "compile": "deno compile -A -o=../dist/ mod.ts"
+    "compile": "deno compile -A --include=deno.json -o=../dist/ mod.ts"
   }
 }

@@ -1,5 +1,6 @@
 import { Command } from "@cliffy/command";
 import { Table } from "@cliffy/table";
+import { getPackage } from "@tugrulates/internal/package";
 import { LonelyPlanetClient } from "./client.ts";
 import { EMOJIS } from "./data.ts";
 import type { Attraction, Destination } from "./types.ts";
@@ -11,22 +12,21 @@ function breadcrumb(document: Destination | Attraction) {
   } ]`;
 }
 
-function getCommand() {
+async function getCommand() {
   return new Command()
     .name("lonely-planet")
     .description("Explores data from Lonely Planet.")
+    .version((await getPackage()).version ?? "")
     .example("lonely-planet big sur", "Search destinations for 'big sur'.")
     .example("lonely-planet --attractions amsterdam", "Search attractions.")
     .example("lonely-planet --stories amsterdam", "Search stories.")
     .example("lonely-planet --destinations --attractions --stories", "All.")
     .example("lonely-planet --json | jq", "Stream destinations as json.")
-    .arguments("[...keywords:string]")
+    .arguments("[keywords...:string]")
     .option("--destinations", "Include destinations in the results.")
     .option("--attractions", "Include attractions in the results.")
     .option("--stories", "Include stories in the results.")
     .option("--json", "Output the search results as concatenated JSON.")
-    .help({ colors: Deno.stdout.isTerminal() })
-    .noExit()
     .action(
       async ({ destinations, attractions, stories, json }, ...keywords) => {
         if (!destinations && !attractions && !stories) destinations = true;
@@ -57,6 +57,6 @@ function getCommand() {
 
 /** CLI entrypoint. */
 export async function main(args: string[]) {
-  const command = getCommand();
+  const command = await getCommand();
   await command.parse(args);
 }

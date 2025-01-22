@@ -3,6 +3,6 @@
   "version": "0.1.1",
   "exports": "./mod.ts",
   "tasks": {
-    "compile": "deno compile -R=$HOME/.scripts -W=$HOME/.scripts -E=HOME -N --unstable-kv --no-prompt -o=../dist/ mod.ts"
+    "compile": "deno compile -R=$HOME/.scripts -W=$HOME/.scripts -E=HOME -N --unstable-kv --no-prompt --include=deno.json -o=../dist/ mod.ts"
   }
 }

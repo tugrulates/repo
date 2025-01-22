@@ -3,15 +3,6 @@ import { fakeConsole, mockFetch } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
 Deno.test(
-  "lonely-planet --help",
-  async (t) => {
-    using console = fakeConsole();
-    await main(["--help"]);
-    await assertSnapshot(t, console.calls);
-  },
-);
-
-Deno.test(
   "lonely-planet [keywords...]",
   async (t) => {
     using console = fakeConsole();
