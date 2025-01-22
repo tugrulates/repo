@@ -3,6 +3,6 @@
   "version": "0.1.2",
   "exports": "./mod.ts",
   "tasks": {
-    "compile": "deno compile -R=$HOME/.duolingo -W=$HOME/.duolingo -E=HOME -N=www.duolingo.com --unstable-kv --no-prompt --include=deno.json -o=../dist/ mod.ts"
+    "compile": "deno compile $COMPILE_ARGS -R=$HOME/.duolingo -W=$HOME/.duolingo -E=HOME -N=www.duolingo.com --unstable-kv --no-prompt --include=deno.json -o=../dist/ mod.ts"
   }
 }

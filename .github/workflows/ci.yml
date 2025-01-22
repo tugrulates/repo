@@ -20,22 +20,6 @@ jobs:
       - name: Test
         run: deno task lint
 
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup
-        uses: denoland/setup-deno@v2
-
-      - name: Build
-        run: deno task build
-
-      - name: Publish (dry-run)
-        run: deno publish --dry-run
-
   test:
     runs-on: ubuntu-latest
 
@@ -56,3 +40,45 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  build:
+    strategy:
+      matrix:
+        target: [
+          "x86_64-pc-windows-msvc",
+          "x86_64-apple-darwin",
+          "aarch64-apple-darwin",
+          "x86_64-unknown-linux-gnu",
+          "aarch64-unknown-linux-gnu",
+        ]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Build
+        run: COMPILE_ARGS="--target=${{ matrix.target }}" deno task build
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target }}
+          path: dist/
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Publish (dry run)
+        run: deno publish --dry-run
