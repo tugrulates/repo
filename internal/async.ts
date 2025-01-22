@@ -3,7 +3,7 @@ import { pooledMap as denoPooledMap } from "@std/async";
 /**
  * Maps an array of data to an array of results with concurrency control.
  *
- * @example Usage
+ * @example
  * ```ts
  * import { assertEquals } from "jsr:@std/assert";
  *
