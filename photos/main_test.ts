@@ -5,16 +5,6 @@ import { fakeConsole } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
 Deno.test(
-  "photos --help",
-  { sanitizeOps: false, sanitizeResources: false },
-  async (t) => {
-    using console = fakeConsole();
-    await main(["--help"]);
-    await assertSnapshot(t, console.calls);
-  },
-);
-
-Deno.test(
   "photos [photo]",
   { sanitizeOps: false, sanitizeResources: false },
   async (t) => {

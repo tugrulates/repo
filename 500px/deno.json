@@ -3,6 +3,6 @@
   "version": "0.1.1",
   "exports": "./mod.ts",
   "tasks": {
-    "compile": "deno compile -N=api.500px.com --no-prompt --include=graphql -o=../dist/ mod.ts"
+    "compile": "deno compile -N=api.500px.com --no-prompt --include=deno.json --include=graphql -o=../dist/ mod.ts"
   }
 }

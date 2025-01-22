@@ -1,38 +1,5 @@
 export const snapshot = {};
 
-snapshot[`lonely-planet --help 1`] = `
-[
-  {
-    data: [
-      "
-Usage: lonely-planet [keywords...]
-
-Description:
-
-  Explores data from Lonely Planet.
-
-Options:
-
-  -h, --help      - Show this help.                                  
-  --destinations  - Include destinations in the results.             
-  --attractions   - Include attractions in the results.              
-  --stories       - Include stories in the results.                  
-  --json          - Output the search results as concatenated JSON.  
-
-Examples:
-
-  lonely-planet big sur                                Search destinations for 'big sur'.
-  lonely-planet --attractions amsterdam                Search attractions.               
-  lonely-planet --stories amsterdam                    Search stories.                   
-  lonely-planet --destinations --attractions --stories All.                              
-  lonely-planet --json | jq                            Stream destinations as json.      
-",
-    ],
-    level: "log",
-  },
-]
-`;
-
 snapshot[`lonely-planet [keywords...] 1`] = `
 [
   {

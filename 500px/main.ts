@@ -1,5 +1,6 @@
 import { Command, EnumType } from "@cliffy/command";
 import { Table } from "@cliffy/table";
+import { getPackage } from "@tugrulates/internal/package";
 import { FiveHundredPxClient } from "./client.ts";
 import { CATEGORIES } from "./data.ts";
 import type { Photo } from "./types.ts";
@@ -124,13 +125,12 @@ function getPhotosCommand() {
     });
 }
 
-function getCommand() {
+async function getCommand() {
   const command = new Command()
     .name("500px")
     .description("Interact with 500px.")
     .usage("<command> [options]")
-    .help({ colors: Deno.stdout.isTerminal() })
-    .noExit()
+    .version((await getPackage()).version ?? "")
     .action((): void => command.showHelp())
     .command("discover", getDiscoverCommand())
     .command("follows", getFollowsCommand())
@@ -140,6 +140,6 @@ function getCommand() {
 
 /** CLI entrypoint. */
 export async function main(args: string[]) {
-  const command = getCommand();
+  const command = await getCommand();
   await command.parse(args);
 }

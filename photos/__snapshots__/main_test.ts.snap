@@ -1,34 +1,5 @@
 export const snapshot = {};
 
-snapshot[`photos --help 1`] = `
-[
-  {
-    data: [
-      "
-Usage: photos [photos...]
-
-Description:
-
-  Manage photos.
-
-Options:
-
-  -h, --help  - Show this help.                                   
-  --copy      - Copy the EXIF from source JPG to other variants.  
-  --json      - Output the EXIF information as JSON.              
-
-Examples:
-
-  photos                Lists all photos under current directory.
-  photos [photo] --json Data for a photo with all variants.      
-  photos [photo] --copy Copy EXIF data to all variants.          
-",
-    ],
-    level: "log",
-  },
-]
-`;
-
 snapshot[`photos [photo] 1`] = `
 [
   {

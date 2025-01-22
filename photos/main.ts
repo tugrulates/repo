@@ -2,6 +2,7 @@ import { Command } from "@cliffy/command";
 import { omit } from "@std/collections/omit";
 import { expandGlob } from "@std/fs";
 import { basename, join } from "@std/path";
+import { getPackage } from "@tugrulates/internal/package";
 import { OPTIONAL_FIELDS, VARIANT_FIELDS } from "./fields.ts";
 import { copyExifToVariants, getPhoto } from "./photo.ts";
 import type { Photo } from "./types.ts";
@@ -45,9 +46,10 @@ function getWarnings(data: Photo): string[] {
   return result;
 }
 
-function getCommand() {
+async function getCommand() {
   return new Command()
     .name("photos")
+    .version((await getPackage()).version ?? "")
     .example("photos", "Lists all photos under current directory.")
     .example("photos [photo] --json", "Data for a photo with all variants.")
     .example("photos [photo] --copy", "Copy EXIF data to all variants.")
@@ -55,8 +57,6 @@ function getCommand() {
     .arguments("[photos...:file]")
     .option("--copy", "Copy the EXIF from source JPG to other variants.")
     .option("--json", "Output the EXIF information as JSON.")
-    .help({ colors: Deno.stdout.isTerminal() })
-    .noExit()
     .action(async ({ copy, json }, ...photos) => {
       for await (let photo of getPhotos(photos)) {
         if (copy) {
@@ -82,6 +82,6 @@ function getCommand() {
 
 /** CLI entrypoint. */
 export async function main(args: string[]) {
-  const command = getCommand();
+  const command = await getCommand();
   await command.parse(args);
 }
