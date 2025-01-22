@@ -1,6 +1,7 @@
 # Monorepo
 
-[![JSR @std](https://jsr.io/badges/@tugrulates)](https://jsr.io/@tugrulates)
+[![JSR @tugrulates](https://jsr.io/badges/@tugrulates)](https://jsr.io/@tugrulates)
+[![ci](https://github.com/tugrulates/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/tgurulates/repo/actions/workflows/ci.yml)
 
 Personal repository with various libraries and applications.
 
