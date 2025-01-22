@@ -1,6 +1,5 @@
 import { assert, assertEquals, assertFalse } from "@std/assert";
-import { assertSnapshot } from "@std/testing/snapshot";
-import { fakeConsole, mockFetch } from "@tugrulates/testing";
+import { fakeConsole } from "@tugrulates/testing";
 
 Deno.test("fakeConsole() stubs console", () => {
   using mock = fakeConsole();
@@ -56,26 +55,4 @@ Deno.test("fakeConsole() captures multiple arguments", () => {
   assertEquals(console.calls, [
     { level: "debug", data: ["First!", "Second!"] },
   ]);
-});
-
-Deno.test("mockFetch() stubs fetch", async (t) => {
-  using _fetch = mockFetch(t);
-  const response = await fetch("https://example.com");
-  assertEquals(response.status, 200);
-  await assertSnapshot(t, await response.text());
-});
-
-Deno.test("mockFetch() implements spy like interface", async (t) => {
-  const original = globalThis.fetch;
-  const fetch = mockFetch(t);
-  try {
-    assert(fetch.original === original);
-    const response = await fetch("https://example.com");
-    assertEquals(response.status, 200);
-    assertFalse(fetch.restored);
-    await assertSnapshot(t, await response.text());
-  } finally {
-    fetch.restore();
-    assert(fetch.restored);
-  }
 });

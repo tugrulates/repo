@@ -104,15 +104,13 @@ export interface MockFetch extends Disposable {
 }
 
 interface FetchRequest {
-  input: string | URL | Request;
-  init?: Omit<RequestInit, "signal"> | undefined;
+  input: string;
+  init?: Omit<RequestInit, "signal">;
 }
 
 interface FetchResponse {
   body: string;
-  status: number;
-  statusText: string;
-  headers: [string, string][];
+  init: ResponseInit;
 }
 
 interface FetchCall {
@@ -120,24 +118,53 @@ interface FetchCall {
   response: FetchResponse;
 }
 
-function getFetchRequestSignature(request: FetchRequest): string {
-  if (request.input instanceof Request) {
-    return getFetchRequestSignature({
-      input: new URL(request.input.url),
-      init: { ...request.input, ...request.init },
-    });
-  }
-  if (typeof request.input === "string") {
-    return getFetchRequestSignature({
-      input: new URL(request.input),
-      init: request.init,
-    });
-  }
+function getSignature(request: FetchRequest): string {
   return [
-    request.input.toString(),
+    request.input,
     request.init?.method ?? "GET",
-    request.init?.body,
-  ].join(" ");
+    request.init?.body ?? "",
+  ].join(" ").trimEnd();
+}
+
+function stripHeaders(headers: HeadersInit): HeadersInit {
+  const stripped = new Headers(headers);
+  stripped.delete("Authorization");
+  stripped.delete("Cookie");
+  stripped.delete("Set-Cookie");
+  return Object.fromEntries(stripped.entries());
+}
+
+function getRequestData(
+  input: URL | Request | string,
+  init?: RequestInit,
+): FetchRequest {
+  if (input instanceof Request) {
+    return getRequestData(new URL(input.url), { ...input, ...init });
+  }
+  if (typeof input === "string") {
+    return getRequestData(new URL(input), init);
+  }
+  if (init) {
+    init = {
+      ...init?.headers ? { headers: stripHeaders(init?.headers) } : {},
+      ...omit(init, ["headers", "signal"]),
+    };
+  }
+  return {
+    input: input.toString(),
+    ...init ? { init } : {},
+  };
+}
+
+async function getResponseData(response: Response): Promise<FetchResponse> {
+  return {
+    body: await response.text(),
+    init: {
+      status: response.status,
+      statusText: response.statusText,
+      headers: stripHeaders(response.headers),
+    },
+  };
 }
 
 /**
@@ -184,20 +211,13 @@ export function mockFetch(context: Deno.TestContext): MockFetch {
     input: URL | Request | string,
     init?: RequestInit,
   ) {
+    const request = getRequestData(input, init);
     let call: FetchCall;
     if (getMockMode() === "update") {
       const response = await spy.original.call(globalThis, input, init);
       call = {
-        request: {
-          input: input.toString(),
-          ...(init ? { init: omit(init, ["signal"]) } : {}),
-        },
-        response: {
-          body: await response.text(),
-          status: response.status,
-          statusText: response.statusText,
-          headers: Array.from(response.headers.entries()),
-        },
+        request,
+        response: await getResponseData(response),
       };
       MockManager.instance.addCall(context, "fetch", call);
     } else {
@@ -207,21 +227,17 @@ export function mockFetch(context: Deno.TestContext): MockFetch {
           "fetch",
         );
       }
-      const signature = getFetchRequestSignature({ input, init });
+      const signature = getSignature(request);
       const found = calls?.find((call) =>
-        getFetchRequestSignature(call.request) === signature
+        getSignature(call.request) === signature
       );
       if (found === undefined) {
-        throw new MockError(`No matching fetch call found: ${signature}`);
+        throw new MockError(`No matching fetch call found: ${request.input}`);
       }
       calls.splice(calls.indexOf(found), 1);
       call = found;
     }
-    return new Response(call.response.body, {
-      status: call.response.status,
-      statusText: call.response.statusText,
-      headers: new Headers(call.response.headers),
-    });
+    return new Response(call.response.body, call.response.init);
   });
 
   const fetch = Object.assign(spy.fake, {
@@ -235,7 +251,7 @@ export function mockFetch(context: Deno.TestContext): MockFetch {
         if (calls.length > 0) {
           throw new MockError(
             "Unmatched fetch calls: " +
-              calls.map((c) => getFetchRequestSignature(c.request)),
+              calls.map((c) => getSignature(c.request)),
           );
         }
       }
