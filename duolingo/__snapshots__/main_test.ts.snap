@@ -1,0 +1,424 @@
+export const snapshot = {};
+
+snapshot[`duolingo feed 1`] = `
+[
+  {
+    data: [
+      "🎉 yonca did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 yonca completed 3 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Ciflorette completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Batuhan Bensoy completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Machiko completed 10 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 RightPlaceWrongPersonByRM shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 RightPlaceWrongPersonByRM shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Denver shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 João Alfredo completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Paula Corina did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Marlova completed 35 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Raku completed 115 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Duo hi did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💯 İremnur earned a total of 30000 xp!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Raizy shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Raizy shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Koro completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💯 Magno Henrique completed a 1300 day streak!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Vyrna23 completed 10 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Duo hi learned a total of 175 words!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Cris did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Cris completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Gyuri Enikő completed a 30 day streak!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Olga completed 3 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 drumwhacker completed 15 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Denver completed 60 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Norma did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Dino shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Dino shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 GULCAN completed 115 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Denver shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Denver shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 angeles soto lopez completed 60 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Widya completed 85 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Szabó Márti completed 45 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 frankrae completed 35 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Petinol completed 3 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Marcelo Costa Filho did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💖 Nesrin finished top 3 on the leaderboard and was promoted to the amethyst league!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Kailey469 did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Joanna completed 115 friends quests in a row!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🙏 TheFatRat112 came back to learn french after 1 month!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Arina did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💯 Erik completed a 1200 day streak!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💖 Budzo11 finished top 3 on the leaderboard and was promoted to the obsidian league!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Marina shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 ✨Soͥumͣyͫa✨ shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👤 ‎Даня started following you!‎",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Гончаров кинни бсд completed a 75 day streak!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💖 thePickle111 was promoted to the sapphire league!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💯 Josa Fav completed a 1500 day streak!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Raizy did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👍 Raizy shared a sentence",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Victor waithaka completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Машшка completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Selene did more than 10 lessons in a day!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Hans Svendsen completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💪 Federico completed the january challenge!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "🎉 Vira completed a 250 day streak!",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "💯 Marco completed a 1000 day streak!",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`duolingo follows 1`] = `
+[
+  {
+    data: [
+      "👤 Following 354 people.",
+    ],
+    level: "log",
+  },
+  {
+    data: [
+      "👤 Followed by 359 people.",
+    ],
+    level: "log",
+  },
+]
+`;
+
+snapshot[`duolingo league 1`] = `
+[
+  {
+    data: [
+      "🩷  Pearl League                
+ 1. Ina               👤 1013 XP
+ 2. Michele 😎        👤  553 XP
+ 3. paulettka Kozdra  👤  516 XP
+ 4. galina            👤  440 XP
+ 5. AnFe              👤  363 XP
+ 6. cloclo            👤  314 XP
+ 7. Malu              👤  296 XP
+ 8. Juraj             👤  188 XP
+ 9. Ujco              👤  179 XP
+10. SimonG            👤  174 XP
+11. Ziv Dor Guetta 🇪🇸 👤  171 XP
+12. Mika 🇸🇪           👤  143 XP
+13. Bravo 😎          👤  130 XP
+14. Alexey SKV        👤  127 XP
+15. fulgencio         👤  120 XP
+16. Emese Szabó       👤  112 XP
+17. Mona. 🇩🇪          👤   94 XP
+18. Blai              👤   90 XP
+19. Bíborka Salamon   👤   89 XP
+20. Angela            👤   88 XP
+21. Anne Sophie       👤   84 XP
+22. Wera Bos 🍿       👤   82 XP
+23. Janet Koyumdjian  👤   80 XP
+24. Yvonne 😺         👤   65 XP
+25. Nathan Lesman     👤   59 XP
+26. Karolina          👤   58 XP
+27. winters 😡        👤   55 XP
+28. Ania              👤   37 XP
+29. Annajc 😡         👤   30 XP
+30. Tuğrul 👀         👤   30 XP",
+    ],
+    level: "log",
+  },
+]
+`;
