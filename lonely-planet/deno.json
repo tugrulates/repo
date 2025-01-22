@@ -1,6 +1,6 @@
 {
   "name": "@tugrulates/lonely-planet",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "exports": "./mod.ts",
   "tasks": {
     "compile": "deno compile -R=$HOME/.scripts -W=$HOME/.scripts -E=HOME -N --unstable-kv --no-prompt --include=deno.json -o=../dist/ mod.ts"
