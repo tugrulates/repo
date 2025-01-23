@@ -1,4 +1,4 @@
-export const mock = {}
+export const mock = {};
 
 mock[`500px discover > fetch`] = 
 [
@@ -374,8 +374,7 @@ mock[`500px discover > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`500px follows <username> > fetch`] = 
 [
@@ -534,8 +533,7 @@ mock[`500px follows <username> > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`500px photos <username> > fetch`] = 
 [
@@ -570,4 +568,4 @@ mock[`500px photos <username> > fetch`] =
       },
     },
   },
-]
+];

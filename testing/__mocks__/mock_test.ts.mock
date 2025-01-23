@@ -1,4 +1,4 @@
-export const mock = {}
+export const mock = {};
 
 mock[`mockFetch() stubs fetch > fetch`] = 
 [
@@ -12,10 +12,10 @@ mock[`mockFetch() stubs fetch > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=997",
+          "cache-control": "max-age=1810",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:00 GMT",
+          date: "Thu, 23 Jan 2025 23:07:15 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -24,8 +24,7 @@ mock[`mockFetch() stubs fetch > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`mockFetch() implements spy like interface > fetch`] = 
 [
@@ -39,10 +38,10 @@ mock[`mockFetch() implements spy like interface > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=1719",
+          "cache-control": "max-age=3093",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:01 GMT",
+          date: "Thu, 23 Jan 2025 23:07:15 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -51,8 +50,7 @@ mock[`mockFetch() implements spy like interface > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`mockFetch() replays multiple calls > fetch`] = 
 [
@@ -65,11 +63,32 @@ mock[`mockFetch() replays multiple calls > fetch`] =
       init: {
         headers: {
           "accept-ranges": "bytes",
-          "cache-control": "max-age=849",
+          "cache-control": "max-age=2894",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
           connection: "keep-alive",
-          date: "Wed, 22 Jan 2025 16:29:01 GMT",
+          date: "Thu, 23 Jan 2025 23:07:16 GMT",
+          etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
+          vary: "Accept-Encoding",
+        },
+        status: 200,
+        statusText: "OK",
+      },
+    },
+  },
+  {
+    request: {
+      input: "https://example.com/",
+    },
+    response: {
+      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
+      init: {
+        headers: {
+          "accept-ranges": "bytes",
+          "cache-control": "max-age=2789",
+          "content-type": "text/html",
+          "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
+          date: "Thu, 23 Jan 2025 23:07:16 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -88,10 +107,10 @@ mock[`mockFetch() replays multiple calls > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=628",
+          "cache-control": "max-age=2789",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:01 GMT",
+          date: "Thu, 23 Jan 2025 23:07:16 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -109,10 +128,10 @@ mock[`mockFetch() replays multiple calls > fetch`] =
       init: {
         headers: {
           "accept-ranges": "bytes",
-          "cache-control": "max-age=628",
+          "cache-control": "max-age=2789",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:01 GMT",
+          date: "Thu, 23 Jan 2025 23:07:16 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -121,29 +140,7 @@ mock[`mockFetch() replays multiple calls > fetch`] =
       },
     },
   },
-  {
-    request: {
-      input: "https://example.com/",
-    },
-    response: {
-      body: '<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n    <meta charset="utf-8" />\n    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />\n    <meta name="viewport" content="width=device-width, initial-scale=1" />\n    <style type="text/css">\n    body {\n        background-color: #f0f0f2;\n        margin: 0;\n        padding: 0;\n        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;\n        \n    }\n    div {\n        width: 600px;\n        margin: 5em auto;\n        padding: 2em;\n        background-color: #fdfdff;\n        border-radius: 0.5em;\n        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);\n    }\n    a:link, a:visited {\n        color: #38488f;\n        text-decoration: none;\n    }\n    @media (max-width: 700px) {\n        div {\n            margin: 0 auto;\n            width: auto;\n        }\n    }\n    </style>    \n</head>\n\n<body>\n<div>\n    <h1>Example Domain</h1>\n    <p>This domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.</p>\n    <p><a href="https://www.iana.org/domains/example">More information...</a></p>\n</div>\n</body>\n</html>\n',
-      init: {
-        headers: {
-          "accept-ranges": "bytes",
-          "cache-control": "max-age=628",
-          "content-type": "text/html",
-          "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:01 GMT",
-          etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
-          vary: "Accept-Encoding",
-        },
-        status: 200,
-        statusText: "OK",
-      },
-    },
-  },
-]
-
+];
 
 mock[`mockFetch() with URL > fetch`] = 
 [
@@ -157,10 +154,10 @@ mock[`mockFetch() with URL > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=627",
+          "cache-control": "max-age=2789",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:02 GMT",
+          date: "Thu, 23 Jan 2025 23:07:16 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -169,8 +166,7 @@ mock[`mockFetch() with URL > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`mockFetch() with Request > fetch`] = 
 [
@@ -184,10 +180,10 @@ mock[`mockFetch() with Request > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=627",
+          "cache-control": "max-age=2788",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:02 GMT",
+          date: "Thu, 23 Jan 2025 23:07:17 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -196,11 +192,33 @@ mock[`mockFetch() with Request > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`mockFetch() replays by method > fetch`] = 
 [
+  {
+    request: {
+      init: {
+        method: "POST",
+      },
+      input: "https://example.com/",
+    },
+    response: {
+      body: `<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access "http&#58;&#47;&#47;example&#46;com&#47;" on this server.<P>\nReference&#32;&#35;18&#46;562d3e17&#46;1737673637&#46;8265f4e8\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;562d3e17&#46;1737673637&#46;8265f4e8</P>\n</BODY>\n</HTML>\n`,
+      init: {
+        headers: {
+          "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
+          "cache-control": "max-age=0",
+          "content-length": "361",
+          "content-type": "text/html",
+          "mime-version": "1.0",
+          date: "Thu, 23 Jan 2025 23:07:17 GMT",
+        },
+        status: 403,
+        statusText: "Forbidden",
+      },
+    },
+  },
   {
     request: {
       input: "https://example.com/",
@@ -210,11 +228,10 @@ mock[`mockFetch() replays by method > fetch`] =
       init: {
         headers: {
           "accept-ranges": "bytes",
-          "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=931",
+          "cache-control": "max-age=1816",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:03 GMT",
+          date: "Thu, 23 Jan 2025 23:07:17 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -235,10 +252,10 @@ mock[`mockFetch() replays by method > fetch`] =
       init: {
         headers: {
           "accept-ranges": "bytes",
-          "cache-control": "max-age=931",
+          "cache-control": "max-age=1816",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:03 GMT",
+          date: "Thu, 23 Jan 2025 23:07:17 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -247,30 +264,7 @@ mock[`mockFetch() replays by method > fetch`] =
       },
     },
   },
-  {
-    request: {
-      init: {
-        method: "POST",
-      },
-      input: "https://example.com/",
-    },
-    response: {
-      body: `<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access "http&#58;&#47;&#47;example&#46;com&#47;" on this server.<P>\nReference&#32;&#35;18&#46;ce20c817&#46;1737563343&#46;52333c69\n<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;ce20c817&#46;1737563343&#46;52333c69</P>\n</BODY>\n</HTML>\n`,
-      init: {
-        headers: {
-          "cache-control": "max-age=0",
-          "content-length": "361",
-          "content-type": "text/html",
-          "mime-version": "1.0",
-          date: "Wed, 22 Jan 2025 16:29:03 GMT",
-        },
-        status: 403,
-        statusText: "Forbidden",
-      },
-    },
-  },
-]
-
+];
 
 mock[`mockFetch() checks call not recorded > fetch`] = 
 [
@@ -284,10 +278,10 @@ mock[`mockFetch() checks call not recorded > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=930",
+          "cache-control": "max-age=1815",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:04 GMT",
+          date: "Thu, 23 Jan 2025 23:07:18 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -296,8 +290,7 @@ mock[`mockFetch() checks call not recorded > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`mockFetch() checks no call made > fetch`] = 
 [
@@ -311,10 +304,10 @@ mock[`mockFetch() checks no call made > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=599",
+          "cache-control": "max-age=2763",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:04 GMT",
+          date: "Thu, 23 Jan 2025 23:07:19 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -323,8 +316,7 @@ mock[`mockFetch() checks no call made > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`mockFetch() checks call not replayed > fetch`] = 
 [
@@ -338,10 +330,10 @@ mock[`mockFetch() checks call not replayed > fetch`] =
         headers: {
           "accept-ranges": "bytes",
           "alt-svc": 'h3=":443"; ma=93600,h3-29=":443"; ma=93600,h3-Q050=":443"; ma=93600,quic=":443"; ma=93600; v="46,43"',
-          "cache-control": "max-age=599",
+          "cache-control": "max-age=2763",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:04 GMT",
+          date: "Thu, 23 Jan 2025 23:07:19 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -359,10 +351,10 @@ mock[`mockFetch() checks call not replayed > fetch`] =
       init: {
         headers: {
           "accept-ranges": "bytes",
-          "cache-control": "max-age=598",
+          "cache-control": "max-age=2763",
           "content-type": "text/html",
           "last-modified": "Mon, 13 Jan 2025 20:11:20 GMT",
-          date: "Wed, 22 Jan 2025 16:29:05 GMT",
+          date: "Thu, 23 Jan 2025 23:07:19 GMT",
           etag: '"84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"',
           vary: "Accept-Encoding",
         },
@@ -371,4 +363,4 @@ mock[`mockFetch() checks call not replayed > fetch`] =
       },
     },
   },
-]
+];
