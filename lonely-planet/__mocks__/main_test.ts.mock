@@ -1,4 +1,4 @@
-export const mock = {}
+export const mock = {};
 
 mock[`lonely-planet [keywords...] > fetch`] = 
 [
@@ -242,8 +242,7 @@ mock[`lonely-planet [keywords...] > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`lonely-planet [keywords...] --json > fetch`] = 
 [
@@ -487,8 +486,7 @@ mock[`lonely-planet [keywords...] --json > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`lonely-planet --destinations > fetch`] = 
 [
@@ -732,8 +730,7 @@ mock[`lonely-planet --destinations > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`lonely-planet --attractions > fetch`] = 
 [
@@ -977,8 +974,7 @@ mock[`lonely-planet --attractions > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`lonely-planet --stories > fetch`] = 
 [
@@ -1222,4 +1218,4 @@ mock[`lonely-planet --stories > fetch`] =
       },
     },
   },
-]
+];

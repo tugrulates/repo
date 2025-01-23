@@ -60,7 +60,7 @@ class MockManager {
     if (getMockMode() === "replay") return;
 
     for (const [path, test] of this.paths) {
-      const contents = [`export const mock = {}`];
+      const contents = [`export const mock = {};\n`];
       for (const [key, calls] of test) {
         const serialized = Deno.inspect(calls, {
           breakLength: Infinity,
@@ -71,10 +71,10 @@ class MockManager {
           strAbbreviateSize: Infinity,
           trailingComma: true,
         }).replaceAll("\r", "\\r");
-        contents.push(`mock[\`${key}\`] = \n${serialized}\n`);
+        contents.push(`mock[\`${key}\`] = \n${serialized};\n`);
       }
       await Deno.mkdir(dirname(path), { recursive: true });
-      await Deno.writeTextFile(path, contents.join("\n\n"));
+      await Deno.writeTextFile(path, contents.join("\n"));
     }
   }
 }

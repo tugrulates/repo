@@ -1,4 +1,4 @@
-export const mock = {}
+export const mock = {};
 
 mock[`duolingo feed > fetch`] = 
 [
@@ -95,8 +95,7 @@ mock[`duolingo feed > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`duolingo follows > fetch`] = 
 [
@@ -230,8 +229,7 @@ mock[`duolingo follows > fetch`] =
       },
     },
   },
-]
-
+];
 
 mock[`duolingo league > fetch`] = 
 [
@@ -328,4 +326,4 @@ mock[`duolingo league > fetch`] =
       },
     },
   },
-]
+];
