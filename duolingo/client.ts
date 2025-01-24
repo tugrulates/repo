@@ -94,7 +94,6 @@ export class DuolingoClient {
     await this.client.post(`/card/reaction`, {
       groupId: eventId,
       reaction: reaction.toUpperCase(),
-      reactionTimestamp: new Date().getTime(),
       trackingProperties: { screen: "kudos_feed" },
       userId: await this.getUserId(),
     });

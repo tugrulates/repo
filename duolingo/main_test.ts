@@ -18,7 +18,7 @@ Deno.test(
   },
 );
 
-Deno.test.ignore(
+Deno.test(
   "duolingo feed --engage",
   async (t) => {
     using console = fakeConsole();
@@ -38,7 +38,7 @@ Deno.test(
   },
 );
 
-Deno.test.ignore(
+Deno.test(
   "duolingo follows --follow",
   async (t) => {
     using console = fakeConsole();
@@ -48,7 +48,7 @@ Deno.test.ignore(
   },
 );
 
-Deno.test.ignore(
+Deno.test(
   "duolingo follows --unfollow",
   async (t) => {
     using console = fakeConsole();
