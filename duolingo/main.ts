@@ -78,8 +78,11 @@ async function outputLeague(client: DuolingoClient, league: League) {
  * @returns Display summary of the card.
  */
 function getSummary(card: FeedCard): string {
-  return card.header?.replace(/<[^>]+>/g, "") ??
-    `${card.displayName} ${card.body.toLowerCase()}`;
+  return card.header
+    ? card.header
+      .replace(/[\u200E-\u200F]/g, "")
+      .replace(/<[^>]+>/g, "")
+    : `${card.displayName} ${card.body.toLowerCase()}`;
 }
 
 function getFeedCommand(config: Config<DuolingoConfig>) {
