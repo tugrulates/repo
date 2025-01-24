@@ -124,7 +124,7 @@ snapshot[`duolingo feed 1`] = `
   },
   {
     data: [
-      "👤 ‎Deborah followed you back!‎",
+      "👤 Deborah followed you back!",
     ],
     level: "log",
   },

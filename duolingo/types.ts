@@ -56,7 +56,7 @@ export interface FeedCard {
   /** The unique identifier of the event. */
   eventId: string;
   /** The title for the card. */
-  header: string;
+  header?: string;
   /** Whether the card allows interaction. */
   isInteractionEnabled: boolean;
   /** Whether the user is verified. */
