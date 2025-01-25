@@ -141,8 +141,10 @@ function getFollowsCommand(config: Config<DuolingoConfig>) {
           await pool(
             result.notFollowingBack,
             async (user) => {
-              await client.followUser(user.userId);
-              if (!json) console.log(`✅ Followed ${user.username}.`);
+              if (user.canFollow) {
+                await client.followUser(user.userId);
+                if (!json) console.log(`✅ Followed ${user.username}.`);
+              }
             },
           );
         }

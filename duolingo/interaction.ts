@@ -76,7 +76,7 @@ export async function engageWithCard(
 ): Promise<boolean> {
   if (card.cardType === "FOLLOW") {
     const user = followers.find((user) => user.userId === card.userId);
-    if (!user?.isFollowing) {
+    if (!user?.isFollowing && !user?.canFollow) {
       await client.followUser(card.userId);
       return true;
     }
@@ -101,13 +101,12 @@ export async function followLeagueUsers(
   client: DuolingoClient,
   users: LeagueUser[],
 ) {
-  const userId = await client.getUserId();
-  const following = await client.getFollowing();
+  const leagueUsers = await Promise.all(
+    users.map((user) => client.getUser(user.user_id)),
+  );
 
   await pool(
-    users
-      .filter((user) => user.user_id !== userId)
-      .filter((user) => !following.find((f) => f.userId === user.user_id)),
-    async (user) => await client.followUser(user.user_id),
+    leagueUsers.filter((user) => user.canFollow && !user.isFollowing),
+    async (user) => await client.followUser(user.userId),
   );
 }

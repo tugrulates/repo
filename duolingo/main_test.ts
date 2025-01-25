@@ -68,7 +68,7 @@ Deno.test(
   },
 );
 
-Deno.test.ignore(
+Deno.test(
   "duolingo league --follow",
   async (t) => {
     using console = fakeConsole();
