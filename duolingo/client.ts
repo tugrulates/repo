@@ -99,6 +99,12 @@ export class DuolingoClient {
     });
   }
 
+  /**
+   * Gets a user's basic profile information.
+   *
+   * @param userId The numeric ID of the user to get the profile for.
+   * @returns The user's profile.
+   */
   async getUser(userId: number): Promise<User> {
     const user = await this.client.get<Omit<User, "userId">>(
       `/2017-06-30/friends/users/${userId}/profile?pageSize=0`,
