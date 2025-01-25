@@ -6,29 +6,33 @@ import type { LANGUAGES, LEAGUES, REACTIONS } from "./data.ts";
 export type LanguageCode = keyof typeof LANGUAGES;
 
 /** A user other than the current user on Duolingo. */
-export interface Friend {
+export interface User {
+  /** The user's unique numeric ID. */
+  userId: number;
   /** Whether the user can be followed. */
   canFollow: boolean;
-  /** The user's display name. */
-  displayName: string;
-  /** Whether the user has a subscription to Duolingo Plus. */
-  hasSubscription: boolean;
-  /** Whether the user is recently active. */
-  isCurrentlyActive: boolean;
   /** Whether the user is followed by the current user. */
   isFollowedBy: boolean;
   /** Whether the current user is following the user. */
   isFollowing: boolean;
   /** Whether the user is verified. */
   isVerified: boolean;
+}
+
+/** A follower or followed user. */
+export interface Friend extends User {
+  /** The user's display name. */
+  displayName: string;
+  /** Whether the user has a subscription to Duolingo Plus. */
+  hasSubscription: boolean;
+  /** Whether the user is recently active. */
+  isCurrentlyActive: boolean;
   /** The user's profile picture URL. */
   picture: string;
   /** The user's Duolingo subscription type. */
   subscriptionItemType: string;
   /** The user's total experience points. */
   totalXp: number;
-  /** The user's unique numeric ID. */
-  userId: number;
   /** The user's unique profile handle. */
   username: string;
 }

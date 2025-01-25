@@ -1,5 +1,5 @@
 import { JsonClient } from "@tugrulates/internal/request";
-import type { FeedCard, Friend, League, Reaction } from "./types.ts";
+import type { FeedCard, Friend, League, Reaction, User } from "./types.ts";
 
 /**
  * A client for interacting with the Duolingo API.
@@ -97,6 +97,13 @@ export class DuolingoClient {
       trackingProperties: { screen: "kudos_feed" },
       userId: await this.getUserId(),
     });
+  }
+
+  async getUser(userId: number): Promise<User> {
+    const user = await this.client.get<Omit<User, "userId">>(
+      `/2017-06-30/friends/users/${userId}/profile?pageSize=0`,
+    );
+    return { userId, ...user };
   }
 
   /**

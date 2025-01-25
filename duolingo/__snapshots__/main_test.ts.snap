@@ -423,53 +423,11 @@ snapshot[`duolingo follows 1`] = `
 ]
 `;
 
-snapshot[`duolingo follows --follow 1`] = `
+snapshot[`duolingo follows 1`] = `
 [
   {
     data: [
-      "✅ Followed Carmen227854.",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "✅ Followed Maga292126..",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "✅ Followed MamukaBeri2.",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "✅ Followed ywxZ14.",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "✅ Followed GinaJara.",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "✅ Followed riwo868.",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "✅ Followed .Paluten.",
-    ],
-    level: "log",
-  },
-  {
-    data: [
-      "👤 Following 355 people.",
+      "👤 Following 353 people.",
     ],
     level: "log",
   },

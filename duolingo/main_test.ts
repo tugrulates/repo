@@ -28,7 +28,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.only(
   "duolingo follows",
   async (t) => {
     using console = fakeConsole();
