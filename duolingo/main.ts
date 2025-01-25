@@ -63,7 +63,7 @@ async function outputLeague(client: DuolingoClient, league: League) {
       league.rankings.map((user, index) => [
         `${index + 1}.`,
         `${user.display_name} ${getLeagueUserEmoji(user)}`,
-        following ? "👤" : "",
+        following.find((f) => f.userId === user.user_id) ? "👤" : "",
         `${user.score.toString()} XP`,
       ]),
     )
