@@ -1,7 +1,7 @@
 import { copy } from "@std/fs";
 import { join } from "@std/path";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { fakeConsole } from "@tugrulates/testing";
+import { fakeConsole, tempDir } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
 Deno.test(
@@ -51,29 +51,26 @@ Deno.test(
   "photos [photo] --copy",
   { sanitizeOps: false, sanitizeResources: false },
   async (t) => {
-    const dir = await Deno.makeTempDir();
-    try {
-      await copy("photos/testdata", dir, { overwrite: true });
-      const photo = join(dir, "winter-pause");
-      await t.step("before", async () => {
-        using console = fakeConsole();
-        await main([photo]);
-        await assertSnapshot(t, console.calls);
-      });
+    await using dir = await tempDir();
 
-      await t.step("copy", async () => {
-        using console = fakeConsole();
-        await main([photo, "--copy"]);
-        await assertSnapshot(t, console.calls);
-      });
+    await copy("photos/testdata", dir.path, { overwrite: true });
+    const photo = join(dir.path, "winter-pause");
+    await t.step("before", async () => {
+      using console = fakeConsole();
+      await main([photo]);
+      await assertSnapshot(t, console.calls);
+    });
 
-      await t.step("after", async () => {
-        using console = fakeConsole();
-        await main([photo]);
-        await assertSnapshot(t, console.calls);
-      });
-    } finally {
-      await Deno.remove(dir, { recursive: true });
-    }
+    await t.step("copy", async () => {
+      using console = fakeConsole();
+      await main([photo, "--copy"]);
+      await assertSnapshot(t, console.calls);
+    });
+
+    await t.step("after", async () => {
+      using console = fakeConsole();
+      await main([photo]);
+      await assertSnapshot(t, console.calls);
+    });
   },
 );
