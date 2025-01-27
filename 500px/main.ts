@@ -130,7 +130,7 @@ async function getCommand() {
     .name("500px")
     .description("Interact with 500px.")
     .usage("<command> [options]")
-    .version((await getPackage()).version ?? "")
+    .version((await getPackage()).config.version ?? "")
     .action((): void => command.showHelp())
     .command("discover", getDiscoverCommand())
     .command("follows", getFollowsCommand())

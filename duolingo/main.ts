@@ -196,7 +196,7 @@ async function getCommand(config: Config<DuolingoConfig>) {
     .name("duolingo")
     .description("Interact with Duolingo.")
     .usage("--username <username> --token <token> <command> [options]")
-    .version((await getPackage()).version ?? "")
+    .version((await getPackage()).config.version ?? "")
     .example("duolingo --username <username> --token <token>", "Configure.")
     .example("duolingo --clear", "Clear the cached configuration.")
     .option("--clear", "Clear the cached configuration.", {

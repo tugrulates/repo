@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "compile": "deno compile $COMPILE_ARGS -A --include=deno.json -o=../dist/ main.ts"
+  }
+}

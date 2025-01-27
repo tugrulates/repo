@@ -16,7 +16,7 @@ async function getCommand() {
   return new Command()
     .name("lonely-planet")
     .description("Explores data from Lonely Planet.")
-    .version((await getPackage()).version ?? "")
+    .version((await getPackage()).config.version ?? "")
     .example("lonely-planet big sur", "Search destinations for 'big sur'.")
     .example("lonely-planet --attractions amsterdam", "Search attractions.")
     .example("lonely-planet --stories amsterdam", "Search stories.")
