@@ -413,7 +413,7 @@ async function main(args: string[]) {
     .option("--release", "Creates draft releases for updated packages.", {
       default: false,
     })
-    .option("--sign", "Signs created tags.", { default: false })
+    .option("--sign=<string>", "Signs created tags with given key.")
     .type("update", new EnumType(["major", "minor", "patch"]))
     .option(
       "--type=<type:update>",
@@ -450,11 +450,12 @@ async function main(args: string[]) {
         await gitUser({
           ...actor ? { name: actor } : {},
           ...email ? { email } : {},
+          ...sign ? { sign } : {},
         });
 
         if (bump) await createOrUpdatePullRequest(updates, { token });
         if (release) {
-          await createOrUpdateRelease(updates, { commit, sign, token });
+          await createOrUpdateRelease(updates, { commit, sign: !!sign, token });
         }
       },
     );

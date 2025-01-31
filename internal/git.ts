@@ -34,6 +34,8 @@ export interface GitUser {
   name?: string;
   /** E-mail of the user. */
   email?: string;
+  /** Signing key for the user. */
+  key?: string;
 }
 
 export async function gitUser(
@@ -42,6 +44,7 @@ export async function gitUser(
 ): Promise<void> {
   if (user.name) await run(["config", "user.name", user.name], options);
   if (user.email) await run(["config", "user.email", user.email], options);
+  if (user.key) await run(["config", "user.signingkey", user.key], options);
 }
 
 /** Options for initializing repositories. */
