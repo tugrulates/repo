@@ -24,7 +24,7 @@ jobs:
         uses: denoland/setup-deno@v2
 
       - name: Release packages
-        run: deno run -A internal/package.ts --release --sign
+        run: gpg --gen-key && deno run -A internal/package.ts --release --sign
         env:
           GITHUB_ACTOR: "${{ github.actor }}"
           GITHUB_EMAIL: "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
