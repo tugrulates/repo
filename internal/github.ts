@@ -50,7 +50,8 @@ export interface GitHubRef {
 /** A GitHub pull request for a repository. */
 export interface PullRequest {
   /** Pull request URL. */
-  url: string;
+  // deno-lint-ignore camelcase
+  html_url: string;
   /** Pull request number. */
   number: number;
   /** Pull request title. */

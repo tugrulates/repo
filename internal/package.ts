@@ -343,11 +343,11 @@ async function createOrUpdatePullRequest(
   if (pr) {
     await gitPushCommits({ force: true }); // can this be done without force?
     await updatePullRequest({ ...pr, title, body }, { token });
-    console.log(`🤖 Updated release PR ${pr.number} (${pr.url})`);
+    console.log(`🤖 Updated release PR ${pr.number} (${pr.html_url})`);
   } else {
     await gitPushCommits();
     const pr = await createPullRequest({ token, title, body, draft: true });
-    console.log(`🤖 Created release PR ${pr.number} (${pr.url})`);
+    console.log(`🤖 Created release PR ${pr.number} (${pr.html_url})`);
   }
 }
 
