@@ -321,8 +321,8 @@ async function createOrUpdatePullRequest(
   { token }: PullRequestOptions,
 ) {
   if (!packages.some((pkg) => pkg.update)) {
-    console.log("🚫 No packages to update.");
-    Deno.exit(1);
+    console.log("🚫 No packages to bump.");
+    return;
   }
 
   const title = "chore: release";
@@ -362,16 +362,18 @@ async function createOrUpdateRelease(
   packages: Package[],
   { commit, token }: ReleaseOptions,
 ) {
-  await pool(packages, async (pkg) => {
-    if (
-      !pkg.config.version ||
-      !canParse(pkg.config.version) ||
-      (pkg.version && lessThan(parse(pkg.config.version), pkg.version))
-    ) {
-      return;
-    }
+  const releases = packages.filter((pkg) =>
+    pkg.config.version && canParse(pkg.config.version) &&
+    (!pkg.version || lessThan(pkg.version, parse(pkg.config.version)))
+  );
+  if (!releases.length) {
+    console.log("🚫 No packages to release.");
+    return;
+  }
 
-    const tag = versionTag(pkg, pkg.config.version);
+  await pool(releases, async (pkg) => {
+    const version = parse(pkg.config.version ?? "0.0.0");
+    const tag = versionTag(pkg, format(version));
     await gitTag(tag, { message: tagMessage(pkg), commit });
     await gitPushTag(tag);
 
@@ -379,15 +381,13 @@ async function createOrUpdateRelease(
       name: tag,
       body: await releaseBody(pkg),
       draft: true,
-      prerelease: !!parse(pkg.config.version).prerelease?.length,
+      prerelease: !!version.prerelease?.length,
     };
 
     let [release] = await findReleases({ token, tag, draft: true });
     if (release) {
       release = await updateRelease({ ...release, ...data }, { token });
-      console.log(
-        `🚀 Updated release ${release.name} (${release.html_url})`,
-      );
+      console.log(`🚀 Updated release ${release.name} (${release.html_url})`);
     } else {
       release = await createRelease(tag, { token, ...data });
       console.log(`🚀 Created release ${release.name} (${release.html_url})`);
