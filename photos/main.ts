@@ -49,7 +49,7 @@ function getWarnings(data: Photo): string[] {
 async function getCommand() {
   return new Command()
     .name("photos")
-    .version((await getPackage()).version ?? "")
+    .version((await getPackage()).config.version ?? "")
     .example("photos", "Lists all photos under current directory.")
     .example("photos [photo] --json", "Data for a photo with all variants.")
     .example("photos [photo] --copy", "Copy EXIF data to all variants.")

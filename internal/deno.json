@@ -4,6 +4,8 @@
   "exports": {
     "./async": "./async.ts",
     "./config": "./config.ts",
+    "./git": "./git.ts",
+    "./github": "./github.ts",
     "./graphql": "./graphql.ts",
     "./package": "./package.ts",
     "./request": "./request.ts"
