@@ -9,7 +9,14 @@ import {
   normalize,
   resolve,
 } from "@std/path";
-import { format, increment, parse } from "@std/semver";
+import {
+  canParse,
+  format,
+  increment,
+  lessThan,
+  parse,
+  type SemVer,
+} from "@std/semver";
 import { toPascalCase } from "@std/text";
 import { pool } from "./async.ts";
 import {
@@ -40,7 +47,7 @@ export interface Package {
   /** Package module name. */
   module: string;
   /** Last release version, may be different than config version */
-  version?: string;
+  version?: SemVer;
   /** Package config from `deno.json`. */
   config: PackageConfig;
 }
@@ -76,7 +83,7 @@ export async function getPackage(options?: PackageOptions): Promise<Package> {
       module: basename(config.name ?? resolve(directory)),
       config,
     };
-    let version: string | undefined;
+    let version: SemVer | undefined;
     try {
       version = await getLastVersion(pkg, options);
     } catch {
@@ -105,7 +112,9 @@ export async function writeConfig(pkg: Package): Promise<void> {
 }
 
 function versionTag(pkg: Package, version?: string): string {
-  return `${pkg.module}@${version ?? pkg.version}`;
+  if (!version && pkg.version) version = format(pkg.version);
+  if (!version) throw new Error(`Cannot determine version for ${pkg.module}`);
+  return `${pkg.module}@${version}`;
 }
 
 /** Options for package retrieval. */
@@ -146,7 +155,7 @@ export interface VersionOptions {
 async function getLastVersion(
   pkg: Package,
   options?: VersionOptions,
-): Promise<string | undefined> {
+): Promise<SemVer | undefined> {
   const [tag] = pkg.config.version
     ? await gitListTags({
       dir: pkg.directory,
@@ -155,7 +164,11 @@ async function getLastVersion(
       ...options?.commit ? { to: options.commit } : {},
     })
     : [];
-  return tag?.split("@")[1];
+  const version = tag?.split("@")[1];
+  if (!version || !canParse(version)) {
+    throw new Error(`Cannot parse semantic version from tag: ${tag}`);
+  }
+  return parse(version);
 }
 
 /** Finds all commits affecting a package since its last release. */
@@ -177,7 +190,7 @@ export async function getChangelog(
 /** Options for calculating version updates. */
 export interface VersionUpdateOptions extends VersionOptions {
   /** Use a specific starting version. */
-  oldVersion?: string;
+  oldVersion?: SemVer;
   /** Force an update type, even if changelog is empty. */
   type?: "major" | "minor" | "patch";
 }
@@ -187,36 +200,23 @@ export interface VersionUpdate {
   /** Version update tag to create. */
   tag: string;
   /** Version update tag to replace. */
-  oldTag: string;
+  oldTag?: string;
   /** Update type. */
   type: "major" | "minor" | "patch";
   /** Old version. */
-  oldVersion: string;
+  oldVersion?: SemVer;
   /** New version. */
-  newVersion: string;
+  newVersion: SemVer;
 }
 
-function updateType(version: string, changelog: Commit[]) {
+export function updateType(version: SemVer, changelog: Commit[]) {
   if (changelog.length === 0) return undefined;
-  const semver = parse(version);
-  return (changelog.some((c) => c.breaking) && semver.major > 0)
+  return (changelog.some((c) => c.breaking) && version.major > 0)
     ? "major"
     : (changelog.some((c) => c.type === "feat") ||
         changelog.some((c) => c.breaking))
     ? "minor"
     : "patch";
-}
-
-/** Calculates new package version using a list of conventional commits since last update. */
-export function calculateVersion(
-  pkg: Package,
-  changelog: Commit[],
-  options?: VersionUpdateOptions,
-): string {
-  const currentVersion = options?.oldVersion ?? pkg.config.version ?? "0.0.0";
-  const type = updateType(currentVersion, changelog);
-  if (!type) return currentVersion;
-  return format(increment(parse(currentVersion), type));
 }
 
 interface BumpedPackage extends Package {
@@ -226,7 +226,7 @@ interface BumpedPackage extends Package {
 
 function tagMessage(pkg: BumpedPackage): string {
   if (!pkg.update) return "";
-  const title = pkg.update.oldVersion === "0.0.0"
+  const title = pkg.update.oldVersion
     ? "Initial release"
     : `${toPascalCase(pkg.update.type)} release`;
   const changelog = pkg.changelog?.map((c) => ` * ${c.title}`).join(
@@ -238,13 +238,12 @@ function tagMessage(pkg: BumpedPackage): string {
 
 async function releaseBody(pkg: BumpedPackage): Promise<string> {
   if (!pkg.update) return "";
-  const isInitialRelease = pkg.update.oldVersion === "0.0.0";
-  const title = isInitialRelease ? "Initial release" : "Changes";
+  const title = pkg.update.oldVersion ? "Changes" : "Initial release";
   const changelog = pkg.changelog?.map((c) => ` * ${c.title}`).join("\n");
   const repo = await getRemoteRepo();
-  const fullChangelogUrl = isInitialRelease
-    ? `commits/${pkg.update.tag}/${pkg.directory}`
-    : `compare/${pkg.update.oldTag}...${pkg.update.tag}`;
+  const fullChangelogUrl = pkg.update.oldTag
+    ? `compare/${pkg.update.oldTag}...${pkg.update.tag}`
+    : `commits/${pkg.update.tag}/${pkg.directory}`;
   return [
     `## ${title}`,
     "",
@@ -264,8 +263,10 @@ function outputPackages(packages: BumpedPackage[]) {
       "📦",
       pkg.directory,
       pkg.config.name,
-      pkg.update?.oldVersion ?? pkg.config.version,
-      ...pkg.update ? ["👉", pkg.update.newVersion] : [],
+      pkg.update?.oldVersion
+        ? format(pkg.update?.oldVersion)
+        : pkg.config.version,
+      ...pkg.update ? ["👉", format(pkg.update.newVersion)] : [],
     ]),
   ).render();
 
@@ -293,18 +294,19 @@ async function updatePackage(
 ): Promise<BumpedPackage> {
   if (!pkg.config.name || !pkg.config.version) return pkg;
   const changelog = await getChangelog(pkg, { commit });
-  const oldVersion = pkg.version ?? "0.0.0";
-  if (!type) type = updateType(oldVersion, changelog);
+  const oldVersion = pkg.version;
+  type ??= updateType(oldVersion ?? parse("0.0.0"), changelog);
   if (!type) return pkg;
-  const newVersion = format(increment(parse(oldVersion), type));
+  const newVersion = increment(oldVersion ?? parse("0.0.0"), type);
   return {
     ...pkg,
     changelog,
     update: {
-      tag: versionTag(pkg, newVersion),
-      oldTag: versionTag(pkg, oldVersion),
+      ...oldVersion
+        ? { oldVersion, oldTag: versionTag(pkg, format(oldVersion)) }
+        : {},
+      tag: versionTag(pkg, format(newVersion)),
       type,
-      oldVersion,
       newVersion,
     },
   };
@@ -333,7 +335,7 @@ async function createOrUpdatePullRequest(
   await gitCheckout({ newBranch: "test" });
   await Promise.all(packages.map(async (pkg) => {
     if (pkg.update) {
-      pkg.config.version = pkg.update.newVersion;
+      pkg.config.version = format(pkg.update.newVersion);
       await writeConfig(pkg);
     }
   }));
@@ -361,7 +363,13 @@ async function createOrUpdateRelease(
   { commit, token }: ReleaseOptions,
 ) {
   await pool(packages, async (pkg) => {
-    if (!pkg.config.version || pkg.config.version === pkg.version) return;
+    if (
+      !pkg.config.version ||
+      !canParse(pkg.config.version) ||
+      (pkg.version && lessThan(parse(pkg.config.version), pkg.version))
+    ) {
+      return;
+    }
 
     const tag = versionTag(pkg, pkg.config.version);
     await gitTag(tag, { message: tagMessage(pkg), commit });
