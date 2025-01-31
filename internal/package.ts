@@ -355,12 +355,13 @@ async function createOrUpdatePullRequest(
 
 interface ReleaseOptions {
   commit: string;
+  sign: boolean;
   token: string;
 }
 
 async function createOrUpdateRelease(
   packages: Package[],
-  { commit, token }: ReleaseOptions,
+  { commit, sign, token }: ReleaseOptions,
 ) {
   const releases = packages.filter((pkg) =>
     pkg.config.version && canParse(pkg.config.version) &&
@@ -374,7 +375,7 @@ async function createOrUpdateRelease(
   await pool(releases, async (pkg) => {
     const version = parse(pkg.config.version ?? "0.0.0");
     const tag = versionTag(pkg, format(version));
-    await gitTag(tag, { message: tagMessage(pkg), commit });
+    await gitTag(tag, { sign, message: tagMessage(pkg), commit });
     await gitPushTag(tag);
 
     const data = {
@@ -406,16 +407,13 @@ async function main(args: string[]) {
       "Calculate changes over given commit or symbolic ref.",
       { default: "HEAD" },
     )
-    .option(
-      "--bump",
-      "Updates packages versions, and creates a release PR.",
-      { default: false },
-    )
-    .option(
-      "--release",
-      "Creates draft releases for updated packages.",
-      { default: false },
-    )
+    .option("--bump", "Updates packages versions, and creates a release PR.", {
+      default: false,
+    })
+    .option("--release", "Creates draft releases for updated packages.", {
+      default: false,
+    })
+    .option("--sign", "Signs created tags.", { default: false })
     .type("update", new EnumType(["major", "minor", "patch"]))
     .option(
       "--type=<type:update>",
@@ -438,7 +436,7 @@ async function main(args: string[]) {
     )
     .action(
       async (
-        { commit, type, bump, release, actor, email, token },
+        { commit, type, bump, release, sign, actor, email, token },
         ...directories
       ) => {
         if (directories.length === 0) directories = ["."];
@@ -455,7 +453,9 @@ async function main(args: string[]) {
         });
 
         if (bump) await createOrUpdatePullRequest(updates, { token });
-        if (release) await createOrUpdateRelease(updates, { commit, token });
+        if (release) {
+          await createOrUpdateRelease(updates, { commit, sign, token });
+        }
       },
     );
   await command.parse(args);

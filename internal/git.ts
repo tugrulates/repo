@@ -172,6 +172,8 @@ export interface GitTagOptions extends GitOptions {
   commit?: Commit | string;
   /** Tag message. */
   message?: string;
+  /** Whether to sign the tag, requires a message. */
+  sign?: boolean;
   /** Replace existing tags instead of failing. */
   force?: boolean;
 }
@@ -183,8 +185,12 @@ export async function gitTag(
 ): Promise<void> {
   const args = ["tag", name];
   if (options?.commit) args.push(commitRef(options.commit));
-  if (options?.message) args.push("-m", options.message, "-s");
+  if (options?.message) args.push("-m", options.message);
+  if (options?.sign) args.push("-s");
   if (options?.force) args.push("--force");
+  if (options?.sign && !options.message) {
+    throw new Error("Tag signing requires a message");
+  }
   await run(args, options);
 }
 
