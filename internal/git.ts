@@ -183,7 +183,7 @@ export async function gitTag(
 ): Promise<void> {
   const args = ["tag", name];
   if (options?.commit) args.push(commitRef(options.commit));
-  if (options?.message) args.push("-m", options.message);
+  if (options?.message) args.push("-m", options.message, "-s");
   if (options?.force) args.push("--force");
   await run(args, options);
 }
