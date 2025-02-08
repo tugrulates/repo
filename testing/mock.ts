@@ -109,8 +109,8 @@ interface FetchRequest {
 }
 
 interface FetchResponse {
-  body: string;
   init: ResponseInit;
+  body?: string;
 }
 
 interface FetchCall {
@@ -158,7 +158,7 @@ function getRequestData(
 
 async function getResponseData(response: Response): Promise<FetchResponse> {
   return {
-    body: await response.text(),
+    ...response?.body && { body: await response.text() },
     init: {
       status: response.status,
       statusText: response.statusText,
