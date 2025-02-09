@@ -106,3 +106,13 @@ Deno.test("mockFetch() checks call not replayed", async (t) => {
     else assertThrows(() => fetch.restore(), MockError);
   }
 });
+
+Deno.test("mockFetch() matches body", async (t) => {
+  using fetch = mockFetch(t);
+  const responses = await Promise.all([
+    fetch("https://example.com", { method: "POST", body: "body" }),
+    fetch("https://example.com", { method: "POST", body: "" }),
+    fetch("https://example.com", { method: "POST" }),
+  ]);
+  assertEquals(responses.map((r) => r.status), [403, 403, 403]);
+});

@@ -122,8 +122,8 @@ function getSignature(request: FetchRequest): string {
   return [
     request.input,
     request.init?.method ?? "GET",
-    request.init?.body ?? "",
-  ].join(" ").trimEnd();
+    request.init?.body,
+  ].filter((x) => x !== undefined || x !== null).join(" ").trimEnd();
 }
 
 function stripHeaders(headers: HeadersInit): HeadersInit {
