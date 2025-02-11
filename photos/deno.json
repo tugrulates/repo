@@ -2,7 +2,22 @@
   "name": "@tugrulates/photos",
   "version": "0.1.5",
   "exports": "./mod.ts",
-  "tasks": {
-    "compile": "deno compile $COMPILE_ARGS -A --include=deno.json -o=../dist/ mod.ts"
+  "compile": {
+    "main": "mod.ts",
+    "permissions": {
+      "read": true,
+      "write": true,
+      "env": [
+        "PATH",
+        "EXIFTOOL_HOME",
+        "NODE_V8_COVERAGE",
+        "DENO_TRACE_PERMISSIONS"
+      ],
+      "sys": [
+        "cpus",
+        "uid"
+      ],
+      "run": true
+    }
   }
 }

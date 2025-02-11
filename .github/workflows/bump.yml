@@ -1,0 +1,25 @@
+name: Bump
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Bump versions
+        run: deno task version --bump
+        env:
+          GITHUB_ACTOR: "${{ github.actor }}"
+          GITHUB_EMAIL: "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

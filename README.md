@@ -28,7 +28,8 @@ These can be installed from the source.
 ```sh
 git clone https://github.com/tugrulates/repo.git
 cd repo
-deno task install
+deno task install duolingo
+duolingo --help
 ```
 
 You can also run the JSR packages directly.
