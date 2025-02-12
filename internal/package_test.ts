@@ -74,7 +74,7 @@ Deno.test("getPackage() returns given package", async () => {
 
 Deno.test("getPackage() returns release version at release commit", async () => {
   await using repo = await tempRepo();
-  await createPackage(repo.path(), { name: "@scope/module", version: "1.2.3" });
+  await createPackage(repo.path(), { name: "@scope/module", version: "1.2.4" });
   await repo.commit("initial", { allowEmpty: true });
   await repo.tag("module@1.2.4");
   const pkg = await getPackage({ directory: repo.directory });
@@ -94,7 +94,7 @@ Deno.test("getPackage() calculates patch version update", async () => {
   assertEquals(pkg.version, `1.2.4-pre.1+${commit.short}`);
   assertEquals(pkg.release?.version, "1.2.3");
   assertEquals(pkg.update?.type, "patch");
-  assertEquals(pkg.update?.version, "1.2.4");
+  assertEquals(pkg.update?.version, `1.2.4-pre.1+${commit.short}`);
   assertEquals(pkg.update?.changelog, [conventional(commit)]);
 });
 
@@ -108,7 +108,7 @@ Deno.test("getPackage() calculates minor version update", async () => {
   assertEquals(pkg.version, `1.3.0-pre.1+${commit.short}`);
   assertEquals(pkg.release?.version, "1.2.3");
   assertEquals(pkg.update?.type, "minor");
-  assertEquals(pkg.update?.version, "1.3.0");
+  assertEquals(pkg.update?.version, `1.3.0-pre.1+${commit.short}`);
   assertEquals(pkg.update?.changelog, [conventional(commit)]);
 });
 
@@ -124,7 +124,7 @@ Deno.test("getPackage() calculates major version update", async () => {
   assertEquals(pkg.version, `2.0.0-pre.1+${commit.short}`);
   assertEquals(pkg.release?.version, "1.2.3");
   assertEquals(pkg.update?.type, "major");
-  assertEquals(pkg.update?.version, "2.0.0");
+  assertEquals(pkg.update?.version, `2.0.0-pre.1+${commit.short}`);
   assertEquals(pkg.update?.changelog, [conventional(commit)]);
 });
 
@@ -140,12 +140,75 @@ Deno.test("getPackage() handles multiple commits in changelog", async () => {
   assertEquals(pkg.version, `1.3.0-pre.3+${commit3.short}`);
   assertEquals(pkg.release?.version, "1.2.3");
   assertEquals(pkg.update?.type, "minor");
-  assertEquals(pkg.update?.version, "1.3.0");
+  assertEquals(pkg.update?.version, `1.3.0-pre.3+${commit3.short}`);
   assertEquals(pkg.update?.changelog, [
     conventional(commit3),
     conventional(commit2),
     conventional(commit1),
   ]);
+});
+
+Deno.test("getPackage() handles forced patch update", async () => {
+  await using repo = await tempRepo();
+  await createPackage(repo.path(), { name: "@scope/module", version: "1.2.4" });
+  await repo.commit("initial", { allowEmpty: true });
+  await repo.tag("module@1.2.3");
+  const pkg = await getPackage({ directory: repo.directory });
+  assertEquals(pkg.version, "1.2.4");
+  assertEquals(pkg.release?.version, "1.2.3");
+  assertEquals(pkg.update?.type, "patch");
+  assertEquals(pkg.update?.version, "1.2.4");
+  assertEquals(pkg.update?.changelog, []);
+});
+
+Deno.test("getPackage() handles forced minor update", async () => {
+  await using repo = await tempRepo();
+  await createPackage(repo.path(), { name: "@scope/module", version: "1.3.0" });
+  await repo.commit("initial", { allowEmpty: true });
+  await repo.tag("module@1.2.3");
+  const pkg = await getPackage({ directory: repo.directory });
+  assertEquals(pkg.version, "1.3.0");
+  assertEquals(pkg.release?.version, "1.2.3");
+  assertEquals(pkg.update?.type, "minor");
+  assertEquals(pkg.update?.version, "1.3.0");
+  assertEquals(pkg.update?.changelog, []);
+});
+
+Deno.test("getPackage() handles forced major update", async () => {
+  await using repo = await tempRepo();
+  await createPackage(repo.path(), { name: "@scope/module", version: "2.0.0" });
+  await repo.commit("initial", { allowEmpty: true });
+  await repo.tag("module@1.2.3");
+  const pkg = await getPackage({ directory: repo.directory });
+  assertEquals(pkg.version, "2.0.0");
+  assertEquals(pkg.release?.version, "1.2.3");
+  assertEquals(pkg.update?.type, "major");
+  assertEquals(pkg.update?.version, "2.0.0");
+  assertEquals(pkg.update?.changelog, []);
+});
+
+Deno.test("getPackage() overrides calculated update", async () => {
+  await using repo = await tempRepo();
+  await createPackage(repo.path(), { name: "@scope/module", version: "2.2.2" });
+  await repo.commit("initial", { allowEmpty: true });
+  await repo.tag("module@1.2.3");
+  const commit = await repo.commit("fix(module): description", {
+    allowEmpty: true,
+  });
+  const pkg = await getPackage({ directory: repo.directory });
+  assertEquals(pkg.version, "2.2.2");
+  assertEquals(pkg.release?.version, "1.2.3");
+  assertEquals(pkg.update?.type, "major");
+  assertEquals(pkg.update?.version, "2.2.2");
+  assertEquals(pkg.update?.changelog, [conventional(commit)]);
+});
+
+Deno.test("getPackage() returns rejects forced downgrade", async () => {
+  await using repo = await tempRepo();
+  await createPackage(repo.path(), { name: "@scope/module", version: "1.2.0" });
+  await repo.commit("initial", { allowEmpty: true });
+  await repo.tag("module@1.2.4");
+  await assertRejects(() => getPackage({ directory: repo.directory }));
 });
 
 Deno.test("getWorkspace() returns non-workspace package", async () => {

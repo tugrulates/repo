@@ -3,13 +3,14 @@ import { Table } from "@cliffy/table";
 import { assert } from "@std/assert";
 import { format as formatBytes } from "@std/fmt/bytes";
 import { join } from "@std/path";
-import { parse as parseVersion } from "@std/semver";
+import { format as formatVersion, parse as parseVersion } from "@std/semver";
 import { pool } from "@tugrulates/internal/async";
 import { compile, compileTargets } from "@tugrulates/internal/compile";
 import { git, type User } from "@tugrulates/internal/git";
 import { github, type Repository } from "@tugrulates/internal/github";
 import {
   displayVersion,
+  getPackage,
   getWorkspace,
   type Package,
   PackageError,
@@ -59,22 +60,30 @@ async function bumpVersions(
     console.log("🚫 No packages to bump.");
     return;
   }
+  await Promise.all(packages.map(async (pkg) => {
+    // update config versions
+    assert(pkg.update, "Cannot bump a package without update");
+    pkg.config.version = formatVersion({
+      ...parseVersion(pkg.update.version),
+      prerelease: [],
+      build: [],
+    });
+    await writeConfig(pkg);
+  }));
+  packages = await Promise.all(
+    packages.map(async (pkg) => await getPackage({ directory: pkg.directory })),
+  );
   const title = "chore: release";
   const body = (await Promise.all(packages.map(async (pkg) => {
     return [
-      `# ${pkg.module}@${pkg.update?.version}`,
+      `# ${pkg.module}@${pkg.version}`,
       "",
       await releaseBody(pkg) ?? "",
     ];
   }))).flat().join("\n\n");
   {
     // commit version bump changes
-    /** @todo change release branch name */
     await repo.git.checkout({ newBranch: BRANCH });
-    await Promise.all(packages.map(async (pkg) => {
-      pkg.config.version = pkg.update?.version;
-      await writeConfig(pkg);
-    }));
     await repo.git.config({ user });
     await repo.git.commit(title, { body, all: true });
   }
