@@ -38,7 +38,7 @@ async function releaseBody(pkg: Package): Promise<string> {
     "## Details",
     "",
     ` * [Full changelog](${repo.url}/${fullChangelogUrl})`,
-    ` * [Documentation](https://jsr.io/${tag})`,
+    ` * [Documentation](https://jsr.io/${pkg.config.name}@${pkg.version})`,
   ]
     .join("\n");
 }
