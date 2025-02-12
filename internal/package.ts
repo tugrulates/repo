@@ -5,6 +5,7 @@ import {
   canParse as canParseVersion,
   format as formatVersion,
   increment as incrementVersion,
+  lessOrEqual,
   parse as parseVersion,
 } from "@std/semver";
 import {
@@ -101,7 +102,7 @@ export interface Config {
   /** Package name. */
   name?: string;
   /** Package version. */
-  version?: string | undefined;
+  version?: string;
   /** Workspace packages. */
   workspace?: string[];
   /** Configuration for compiling the package. */
@@ -205,28 +206,21 @@ export async function getPackage(options?: PackageOptions): Promise<Package> {
     module: basename(config.name ?? directory),
     config: config,
   };
-  if (!config.version) return pkg;
-  pkg.version = config.version;
+  if (pkg.config.version === undefined) return pkg;
   try {
     // this works if we are in a git repository
-    await findRelease(pkg);
-    await findUpdate(pkg);
+    const release = await getRelease(pkg);
+    if (release) pkg.release = release;
+    const update = await getUpdate(pkg);
+    if (update) pkg.update = update;
   } catch (e: unknown) {
     if (!(e instanceof GitError)) throw e;
   }
-  if (pkg.update) {
-    pkg.version = formatVersion({
-      ...parseVersion(pkg.update.version),
-      ...pkg.update.changelog[0] && {
-        prerelease: [`pre.${pkg.update.changelog.length}`],
-        build: [pkg.update.changelog[0].short],
-      },
-    });
-  } else if (pkg.release) {
-    pkg.version = pkg.release.version;
-  } else {
-    pkg.version = config.version;
-  }
+  pkg.version = pkg.update
+    ? pkg.update.version
+    : pkg.release
+    ? pkg.release.version
+    : pkg.config.version;
   return pkg;
 }
 
@@ -265,7 +259,7 @@ async function getConfig(directory: string): Promise<Config> {
   }
 }
 
-async function findRelease(pkg: Package) {
+async function getRelease(pkg: Package): Promise<Release | undefined> {
   const repo = git({ cwd: pkg.directory });
   const name = `${pkg.module}@*`;
   const sort = "version";
@@ -280,10 +274,10 @@ async function findRelease(pkg: Package) {
       `Cannot parse semantic version from tag: ${tag.name}`,
     );
   }
-  pkg.release = { version, tag };
+  return { version, tag };
 }
 
-async function findUpdate(pkg: Package) {
+async function getUpdate(pkg: Package): Promise<Update | undefined> {
   const log = await git({ cwd: pkg.directory }).log({
     ...pkg.release?.tag !== undefined
       ? { range: { from: pkg.release.tag } }
@@ -292,16 +286,35 @@ async function findUpdate(pkg: Package) {
   const changelog = log.map((c) => conventional(c)).filter((c) =>
     c.modules.includes(pkg.module) || c.modules.includes("*")
   );
-  if (!changelog.length) return;
+  if (pkg.release?.version !== pkg.config.version) {
+    return { ...forcedUpdate(pkg), changelog };
+  }
+  if (!changelog.length) return undefined;
   const type = (changelog.some((c) => c.breaking) &&
-      parseVersion(pkg?.version ?? "0.0.0").major > 0)
+      parseVersion(pkg.release?.version ?? "0.0.0").major > 0)
     ? "major"
     : (changelog.some((c) => c.type === "feat") ||
         changelog.some((c) => c.breaking))
     ? "minor"
     : "patch";
-  const version = formatVersion(
-    incrementVersion(parseVersion(pkg.release?.version ?? "0.0.0"), type),
-  );
-  pkg.update = { type, version, changelog };
+  const version = formatVersion({
+    ...incrementVersion(parseVersion(pkg.release?.version ?? "0.0.0"), type),
+    ...changelog[0] &&
+      { prerelease: [`pre.${changelog.length}`], build: [changelog[0].short] },
+  });
+  return { type, version, changelog };
+}
+
+function forcedUpdate(pkg: Package): Update {
+  const oldVersion = parseVersion(pkg.release?.version ?? "0.0.0");
+  const newVersion = parseVersion(pkg.config.version ?? "0.0.0");
+  if (lessOrEqual(newVersion, oldVersion)) {
+    throw new PackageError("Cannot force update to an older version");
+  }
+  const type = newVersion.major > oldVersion.major
+    ? "major"
+    : newVersion.minor > oldVersion.minor
+    ? "minor"
+    : "patch";
+  return { type, version: formatVersion(newVersion), changelog: [] };
 }

@@ -3,7 +3,7 @@ import { Table } from "@cliffy/table";
 import { assert } from "@std/assert";
 import { format as formatBytes } from "@std/fmt/bytes";
 import { join } from "@std/path";
-import { parse as parseVersion } from "@std/semver";
+import { format as formatVersion, parse as parseVersion } from "@std/semver";
 import { pool } from "@tugrulates/internal/async";
 import { compile, compileTargets } from "@tugrulates/internal/compile";
 import { git, type User } from "@tugrulates/internal/git";
@@ -69,10 +69,15 @@ async function bumpVersions(
   }))).flat().join("\n\n");
   {
     // commit version bump changes
-    /** @todo change release branch name */
     await repo.git.checkout({ newBranch: BRANCH });
     await Promise.all(packages.map(async (pkg) => {
-      pkg.config.version = pkg.update?.version;
+      assert(pkg.update, "Cannot bump a package without update");
+      pkg.config.version = formatVersion({
+        ...parseVersion(pkg.update.version),
+        prerelease: [],
+        build: [],
+      });
+      pkg.config.version = pkg.update.version;
       await writeConfig(pkg);
     }));
     await repo.git.config({ user });
