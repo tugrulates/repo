@@ -16,7 +16,7 @@ import {
   PackageError,
 } from "@tugrulates/internal/package";
 
-const BRANCH = "automated-release/bump";
+const BRANCH = "automated/bump";
 
 function changelogText(pkg: Package): string {
   return pkg.update?.changelog?.map((c) => ` * ${c.summary}`).join("\n") ?? "";
