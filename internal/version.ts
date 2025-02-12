@@ -18,12 +18,13 @@ import {
 
 const BRANCH = "release/version-bump";
 
+function changelogText(pkg: Package): string {
+  return pkg.update?.changelog?.map((c) => ` * ${c.summary}`).join("\n") ?? "";
+}
+
 async function releaseBody(pkg: Package): Promise<string> {
   assert(pkg.version, "Cannot release a package without version");
   const title = pkg.release ? "Changelog" : "Initial release";
-  const changelog = pkg.update?.changelog?.map((c) => ` * ${c.summary}`).join(
-    "\n",
-  );
   const repo = await github().repo();
   const tag = `${pkg.module}@${pkg.version}`;
   const fullChangelogUrl = pkg?.release
@@ -32,7 +33,7 @@ async function releaseBody(pkg: Package): Promise<string> {
   return [
     `## ${title}`,
     "",
-    changelog,
+    changelogText(pkg),
     "",
     "## Details",
     "",
@@ -74,13 +75,15 @@ async function bumpVersions(
     packages.map(async (pkg) => await getPackage({ directory: pkg.directory })),
   );
   const title = "chore: release";
-  const body = (await Promise.all(packages.map(async (pkg) => {
-    return [
-      `# ${pkg.module}@${pkg.version}`,
-      "",
-      await releaseBody(pkg) ?? "",
-    ];
-  }))).flat().join("\n\n");
+  const body = packages
+    .map((
+      pkg,
+    ) => [
+      `## ${pkg.module}@${pkg.version} [${pkg.update?.type}]`,
+      changelogText(pkg),
+    ])
+    .flat()
+    .join("\n\n");
   {
     // commit version bump changes
     await repo.git.checkout({ newBranch: BRANCH });
