@@ -86,7 +86,7 @@ async function bumpVersions(
       pr.update({ body });
       console.log(`🤖 Updated release PR ${pr.number} (${pr.url})`);
     } else {
-      await repo.git.push();
+      await repo.git.push({ branch: BRANCH });
       const pr = await repo.pulls.create({ title, body, isDraft: true });
       console.log(`🤖 Created release PR ${pr.number} (${pr.url})`);
     }
