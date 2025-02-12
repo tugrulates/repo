@@ -1,6 +1,6 @@
 {
   "name": "@tugrulates/duolingo",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "exports": "./mod.ts",
   "compile": {
     "main": "mod.ts",
