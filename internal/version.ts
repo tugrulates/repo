@@ -79,7 +79,7 @@ async function bumpVersions(
     .map((
       pkg,
     ) => [
-      `# ${pkg.module}@${pkg.version} [${pkg.update?.type}]`,
+      `## ${pkg.module}@${pkg.version} [${pkg.update?.type}]`,
       changelogText(pkg),
     ])
     .flat()
