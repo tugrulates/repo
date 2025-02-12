@@ -80,7 +80,7 @@ async function bumpVersions(
       pkg,
     ) => [
       `# ${pkg.module}@${pkg.version} [${pkg.update?.type}]`,
-      changelogText,
+      changelogText(pkg),
     ])
     .flat()
     .join("\n\n");
