@@ -9,6 +9,7 @@
   ],
   "tasks": {
     "version": "deno run -A internal/version.ts",
+    "bump": "gh workflow run bump",
     "compile": "deno run -A internal/compile.ts",
     "install": "deno task compile --install=$HOME/.local/bin",
     "test": "deno test -A --unstable-kv --doc **/*.ts",
