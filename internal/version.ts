@@ -77,7 +77,6 @@ async function bumpVersions(
         prerelease: [],
         build: [],
       });
-      pkg.config.version = pkg.update.version;
       await writeConfig(pkg);
     }));
     await repo.git.config({ user });
