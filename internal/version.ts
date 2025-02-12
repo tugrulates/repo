@@ -10,6 +10,7 @@ import { git, type User } from "@tugrulates/internal/git";
 import { github, type Repository } from "@tugrulates/internal/github";
 import {
   displayVersion,
+  getPackage,
   getWorkspace,
   type Package,
   PackageError,
@@ -59,10 +60,23 @@ async function bumpVersions(
     console.log("🚫 No packages to bump.");
     return;
   }
+  await Promise.all(packages.map(async (pkg) => {
+    // update config versions
+    assert(pkg.update, "Cannot bump a package without update");
+    pkg.config.version = formatVersion({
+      ...parseVersion(pkg.update.version),
+      prerelease: [],
+      build: [],
+    });
+    await writeConfig(pkg);
+  }));
+  packages = await Promise.all(
+    packages.map(async (pkg) => await getPackage({ directory: pkg.directory })),
+  );
   const title = "chore: release";
   const body = (await Promise.all(packages.map(async (pkg) => {
     return [
-      `# ${pkg.module}@${pkg.update?.version}`,
+      `# ${pkg.module}@${pkg.version}`,
       "",
       await releaseBody(pkg) ?? "",
     ];
@@ -70,15 +84,6 @@ async function bumpVersions(
   {
     // commit version bump changes
     await repo.git.checkout({ newBranch: BRANCH });
-    await Promise.all(packages.map(async (pkg) => {
-      assert(pkg.update, "Cannot bump a package without update");
-      pkg.config.version = formatVersion({
-        ...parseVersion(pkg.update.version),
-        prerelease: [],
-        build: [],
-      });
-      await writeConfig(pkg);
-    }));
     await repo.git.config({ user });
     await repo.git.commit(title, { body, all: true });
   }
