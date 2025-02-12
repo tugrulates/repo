@@ -127,6 +127,7 @@ async function createReleases(
       if (!head) throw new PackageError("Cannot determine current commit");
       const data = {
         name,
+        tag: name,
         body: await releaseBody(pkg),
         isDraft: true,
         isPreRelease: !!version.prerelease?.length,
