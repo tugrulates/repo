@@ -4,15 +4,9 @@
 duolingo:
   - changed-files:
       - any-glob-to-any-file: duolingo/**
-internal:
-  - changed-files:
-      - any-glob-to-any-file: internal/**
 lonely-planet:
   - changed-files:
       - any-glob-to-any-file: lonely-planet/**
 photos:
   - changed-files:
       - any-glob-to-any-file: photos/**
-testing:
-  - changed-files:
-      - any-glob-to-any-file: testing/**
