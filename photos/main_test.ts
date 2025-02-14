@@ -1,7 +1,7 @@
+import { fakeConsole, tempDir } from "@roka/testing";
 import { copy } from "@std/fs";
 import { join } from "@std/path";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { fakeConsole, tempDir } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
 Deno.test(

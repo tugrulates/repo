@@ -52,8 +52,7 @@ jobs:
         uses: denoland/setup-deno@v2
 
       - name: Build
-        # https://github.com/denoland/deno/issues/27988
-        run: deno task compile --concurrency=1
+        run: deno task compile
 
   publish:
     runs-on: ubuntu-latest

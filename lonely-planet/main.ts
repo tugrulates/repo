@@ -1,6 +1,6 @@
 import { Command } from "@cliffy/command";
 import { Table } from "@cliffy/table";
-import { displayVersion } from "@tugrulates/internal/package";
+import { displayVersion } from "@roka/package/version";
 import { LonelyPlanetClient } from "./client.ts";
 import { EMOJIS } from "./data.ts";
 import type { Attraction, Destination } from "./types.ts";

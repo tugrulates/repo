@@ -1,6 +1,6 @@
 import { DOMParser } from "@b-fuze/deno-dom";
+import { JsonClient } from "@roka/http/json";
 import { toPascalCase } from "@std/text";
-import { JsonClient } from "@tugrulates/internal/request";
 import type { Attraction, Destination, Story } from "./types.ts";
 
 const SITE = "https://www.lonelyplanet.com";

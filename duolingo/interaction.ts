@@ -1,4 +1,4 @@
-import { pool } from "@tugrulates/internal/async";
+import { pool } from "@roka/async/pool";
 import type { DuolingoClient } from "./client.ts";
 import { LANGUAGES, REACTIONS } from "./data.ts";
 import type {

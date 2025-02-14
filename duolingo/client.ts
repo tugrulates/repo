@@ -1,4 +1,4 @@
-import { JsonClient } from "@tugrulates/internal/request";
+import { JsonClient } from "@roka/http/json";
 import type { FeedCard, Friend, League, Reaction, User } from "./types.ts";
 
 /**

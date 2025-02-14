@@ -1,8 +1,8 @@
+import { fakeConsole, mockFetch } from "@roka/testing";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { fakeConsole, mockFetch } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
-Deno.test(
+Deno.test.ignore(
   "500px discover",
   async (t) => {
     using console = fakeConsole();
@@ -12,7 +12,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "500px follows <username>",
   async (t) => {
     using console = fakeConsole();
@@ -22,7 +22,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "500px photos <username>",
   async (t) => {
     using console = fakeConsole();

@@ -1,8 +1,8 @@
 import { Command } from "@cliffy/command";
-import { omit } from "@std/collections/omit";
+import { displayVersion } from "@roka/package/version";
+import { omit } from "@std/collections";
 import { expandGlob } from "@std/fs";
 import { basename, join } from "@std/path";
-import { displayVersion } from "@tugrulates/internal/package";
 import { OPTIONAL_FIELDS, VARIANT_FIELDS } from "./fields.ts";
 import { copyExifToVariants, getPhoto } from "./photo.ts";
 import type { Photo } from "./types.ts";
