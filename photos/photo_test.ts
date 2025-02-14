@@ -1,9 +1,9 @@
+import { tempDir } from "@roka/testing";
 import { copy } from "@std/fs";
 import { basename } from "@std/path";
 import { join } from "@std/path/join";
 import { assertSnapshot } from "@std/testing/snapshot";
 import { copyExifToVariants, getPhoto, type Photo } from "@tugrulates/photos";
-import { tempDir } from "../testing/temp.ts";
 
 function trimSource(photo: Photo): Photo {
   return {

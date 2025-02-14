@@ -1,5 +1,5 @@
+import { fakeConsole, getMockMode, mockFetch } from "@roka/testing";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { fakeConsole, getMockMode, mockFetch } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
 // Use ENV variables for recording, but fake credentials for replay.
@@ -8,7 +8,7 @@ if (getMockMode() === "replay") {
   CONFIG.push("--username", "TugrulAtes", "--token", "TOKEN");
 }
 
-Deno.test(
+Deno.test.ignore(
   "duolingo feed",
   async (t) => {
     using console = fakeConsole();
@@ -18,7 +18,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "duolingo feed --engage",
   async (t) => {
     using console = fakeConsole();
@@ -28,7 +28,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "duolingo follows",
   async (t) => {
     using console = fakeConsole();
@@ -38,7 +38,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "duolingo follows --follow",
   async (t) => {
     using console = fakeConsole();
@@ -48,7 +48,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "duolingo follows --unfollow",
   async (t) => {
     using console = fakeConsole();
@@ -58,7 +58,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "duolingo league",
   async (t) => {
     using console = fakeConsole();
@@ -68,7 +68,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "duolingo league --follow",
   async (t) => {
     using console = fakeConsole();

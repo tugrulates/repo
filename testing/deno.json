@@ -1,5 +1,0 @@
-{
-  "name": "@tugrulates/testing",
-  "version": "0.2.0",
-  "exports": "./mod.ts"
-}

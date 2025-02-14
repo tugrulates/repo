@@ -1,6 +1,6 @@
 import { Command, EnumType } from "@cliffy/command";
 import { Table } from "@cliffy/table";
-import { displayVersion } from "@tugrulates/internal/package";
+import { displayVersion } from "@roka/package/version";
 import { FiveHundredPxClient } from "./client.ts";
 import { CATEGORIES } from "./data.ts";
 import type { Photo } from "./types.ts";

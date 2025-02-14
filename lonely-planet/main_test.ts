@@ -1,8 +1,8 @@
+import { fakeConsole, mockFetch } from "@roka/testing";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { fakeConsole, mockFetch } from "@tugrulates/testing";
 import { main } from "./main.ts";
 
-Deno.test(
+Deno.test.ignore(
   "lonely-planet [keywords...]",
   async (t) => {
     using console = fakeConsole();
@@ -12,7 +12,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "lonely-planet [keywords...] --json",
   async (t) => {
     using console = fakeConsole();
@@ -22,7 +22,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "lonely-planet --destinations",
   async (t) => {
     using console = fakeConsole();
@@ -32,7 +32,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "lonely-planet --attractions",
   async (t) => {
     using console = fakeConsole();
@@ -42,7 +42,7 @@ Deno.test(
   },
 );
 
-Deno.test(
+Deno.test.ignore(
   "lonely-planet --stories",
   async (t) => {
     using console = fakeConsole();

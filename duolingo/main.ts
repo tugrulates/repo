@@ -1,9 +1,9 @@
 import { Command } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
-import { pool } from "@tugrulates/internal/async";
-import { Config } from "@tugrulates/internal/config";
-import { displayVersion } from "@tugrulates/internal/package";
+import { pool } from "@roka/async/pool";
+import { Config } from "@roka/cli/config";
+import { displayVersion } from "@roka/package/version";
 import { DuolingoClient } from "./client.ts";
 import { LEAGUES } from "./data.ts";
 import {
