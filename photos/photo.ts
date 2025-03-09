@@ -5,17 +5,15 @@ import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
 import { FIELDS } from "./fields.ts";
 import type { Exif, Photo } from "./types.ts";
 
-class ExifToolResourceManager {
-  private exiftool?: ExifTool = undefined;
+class ExifToolManager {
+  static exiftool?: ExifTool = undefined;
 
-  async get(): Promise<ExifTool> {
+  static async get() {
     if (this.exiftool) return this.exiftool;
     const exiftoolPath = await which("exiftool");
-    return new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} });
-  }
-
-  async [Symbol.asyncDispose]() {
-    await this.exiftool?.end();
+    this.exiftool = new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} });
+    addEventListener("unload", () => this.exiftool?.end());
+    return this.exiftool;
   }
 }
 
@@ -23,8 +21,6 @@ interface PhotoTags extends Tags {
   State?: string;
   License?: string;
 }
-
-await using manager = new ExifToolResourceManager();
 
 function getDate(tags: Tags): string | undefined {
   const date = tags.DateTimeOriginal;
@@ -51,7 +47,7 @@ function getSoftwareAgent(tags: Tags): string | undefined {
  * timezones.
  */
 async function getExif(src: string): Promise<Exif> {
-  const exiftool = await manager.get();
+  const exiftool = await ExifToolManager.get();
   const tags = await exiftool.read<PhotoTags>(src);
   return {
     src,
@@ -82,7 +78,7 @@ async function getExif(src: string): Promise<Exif> {
  * @param photo Photo data for managing EXIF.
  */
 export async function copyExifToVariants(photo: Photo) {
-  const exiftool = await manager.get();
+  const exiftool = await ExifToolManager.get();
   await Promise.all(photo.variants.map(async (variant) => {
     const tags = await exiftool.read<PhotoTags>(photo.src);
     const groupMatch = /.*-(\d+).jpg/.exec(variant.src);
