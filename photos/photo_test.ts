@@ -1,4 +1,4 @@
-import { tempDir } from "@roka/testing";
+import { tempDirectory } from "@roka/testing/temp";
 import { copy } from "@std/fs";
 import { basename } from "@std/path";
 import { join } from "@std/path/join";
@@ -16,28 +16,27 @@ function trimSource(photo: Photo): Photo {
   };
 }
 
-Deno.test(
-  "getPhoto()",
-  // @todo Fix the timer leaks.
-  { sanitizeOps: false, sanitizeResources: false },
-  async (t) => {
-    await using dir = await tempDir();
-    await copy("photos/testdata", dir.path, { overwrite: true });
-    const photo = await getPhoto(join(dir.path, "floating-around/source.jpg"));
-    await assertSnapshot(t, trimSource(photo));
-  },
-);
+Deno.test("getPhoto()", {
+  sanitizeOps: false,
+  sanitizeResources: false,
+}, async (t) => {
+  await using dir = await tempDirectory();
+  await copy("photos/testdata", dir.path(), { overwrite: true });
+  const photo = await getPhoto(
+    join(dir.path(), "floating-around/source.jpg"),
+  );
+  await assertSnapshot(t, trimSource(photo));
+});
 
-Deno.test(
-  "copyExifToVariants()",
-  { sanitizeOps: false, sanitizeResources: false },
-  async (t) => {
-    await using dir = await tempDir();
-    await copy("photos/testdata", dir.path, { overwrite: true });
-    const before = await getPhoto(join(dir.path, "winter-pause/source.jpg"));
-    await assertSnapshot(t, trimSource(before));
-    await copyExifToVariants(before);
-    const after = await getPhoto(join(dir.path, "winter-pause/source.jpg"));
-    await assertSnapshot(t, trimSource(after));
-  },
-);
+Deno.test("copyExifToVariants()", {
+  sanitizeOps: false,
+  sanitizeResources: false,
+}, async (t) => {
+  await using dir = await tempDirectory();
+  await copy("photos/testdata", dir.path(), { overwrite: true });
+  const before = await getPhoto(join(dir.path(), "winter-pause/source.jpg"));
+  await assertSnapshot(t, trimSource(before));
+  await copyExifToVariants(before);
+  const after = await getPhoto(join(dir.path(), "winter-pause/source.jpg"));
+  await assertSnapshot(t, trimSource(after));
+});

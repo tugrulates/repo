@@ -1,5 +1,5 @@
 import { DOMParser } from "@b-fuze/deno-dom";
-import { JsonClient } from "@roka/http/json";
+import { client } from "@roka/http/json/client";
 import { toPascalCase } from "@std/text";
 import type { Attraction, Destination, Story } from "./types.ts";
 
@@ -92,12 +92,12 @@ export class LonelyPlanetClient {
         }],
       };
       const { endpoint, token } = await this.getTypesense();
-      const client = new JsonClient(endpoint);
-      const results = (await client.post<{ results: (Results | Error)[] }>(
+      const api = client(endpoint);
+      const results = (await api.post<{ results: (Results | Error)[] }>(
         `/multi_search?x-typesense-api-key=${token}`,
         body,
       )).results;
-      if (!results[0]) break;
+      if (!results || !results[0]) break;
       if ("error" in results[0]) {
         throw new Error(results[0].error);
       } else if ("hits" in results[0]) {
