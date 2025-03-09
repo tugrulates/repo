@@ -3,7 +3,8 @@
     "./500px",
     "./duolingo",
     "./lonely-planet",
-    "./photos"
+    "./photos",
+    "./roka"
   ],
   "tasks": {
     "version": "deno run -A jsr:@roka/forge/release",
@@ -55,6 +56,26 @@
     "@std/text": "jsr:@std/text@^1.0.10",
     "exiftool-vendored": "npm:exiftool-vendored@^29.0.0",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.17.0",
-    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.17.0"
+    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.17.0",
+    "@roka/async/pool": "./roka/core/async/pool.ts",
+    "@roka/cli/config": "./roka/core/cli/config.ts",
+    "@roka/git": "./roka/core/git/git.ts",
+    "@roka/git/testing": "./roka/core/git/testing.ts",
+    "@roka/git/conventional": "./roka/core/git/conventional.ts",
+    "@roka/github": "./roka/core/github/github.ts",
+    "@roka/github/testing": "./roka/core/github/testing.ts",
+    "@roka/http/graphql/client": "./roka/core/http/graphql/client.ts",
+    "@roka/http/json/client": "./roka/core/http/json/client.ts",
+    "@roka/http/request": "./roka/core/http/request.ts",
+    "@roka/http/testing": "./roka/core/http/testing.ts",
+    "@roka/forge/bump": "./roka/tool/forge/bump.ts",
+    "@roka/forge/changelog": "./roka/tool/forge/changelog.ts",
+    "@roka/forge/compile": "./roka/tool/forge/compile.ts",
+    "@roka/forge/package": "./roka/tool/forge/package.ts",
+    "@roka/forge/release": "./roka/tool/forge/release.ts",
+    "@roka/forge/version": "./roka/tool/forge/version.ts",
+    "@roka/testing/fake": "./roka/core/testing/fake.ts",
+    "@roka/testing/mock": "./roka/core/testing/mock.ts",
+    "@roka/testing/temp": "./roka/core/testing/temp.ts"
   }
 }
