@@ -1,4 +1,4 @@
-import { GraphQLClient } from "@roka/http/graphql";
+import { type Client, client } from "@roka/http/graphql/client";
 import type { Category, Photo, User } from "./types.ts";
 
 /**
@@ -7,7 +7,7 @@ import type { Category, Photo, User } from "./types.ts";
  * Provides the logged out experience, and does not require authentication.
  */
 export class FiveHundredPxClient {
-  private client: GraphQLClient;
+  private client: Client;
 
   /**
    * Creates an instance of the client.
@@ -16,7 +16,7 @@ export class FiveHundredPxClient {
    * @param options.token Optional authentication token.
    */
   constructor(options: { token?: string } = {}) {
-    this.client = new GraphQLClient("https://api.500px.com/graphql", options);
+    this.client = client("https://api.500px.com/graphql", options);
   }
 
   /**
@@ -36,14 +36,17 @@ export class FiveHundredPxClient {
           };
         };
       },
-      Photo
+      Photo,
+      { node: Photo },
+      { endCursor: string; hasNextPage: boolean }
     >(
-      ["graphql/photos", "graphql/photo"],
-      (data) => data.user.photos,
-      (data) =>
-        data.user.photos.pageInfo.hasNextPage
-          ? data.user.photos.pageInfo.endCursor
-          : null,
+      await query(["graphql/photos", "graphql/photo"]),
+      {
+        edges: (data) => data.user.photos.edges,
+        node: (edge) => edge.node,
+        pageInfo: (data) => data.user.photos.pageInfo,
+        cursor: (pageInfo) => pageInfo.hasNextPage ? pageInfo.endCursor : null,
+      },
       { username },
     );
   }
@@ -67,14 +70,17 @@ export class FiveHundredPxClient {
           };
         };
       },
-      User
+      User,
+      { node: User },
+      { endCursor: string; hasNextPage: boolean }
     >(
-      ["graphql/following", "graphql/user"],
-      (data) => data.user.following.users,
-      (data) =>
-        data.user.following.users.pageInfo.hasNextPage
-          ? data.user.following.users.pageInfo.endCursor
-          : null,
+      await query(["graphql/following", "graphql/user"]),
+      {
+        edges: (data) => data.user.following.users.edges,
+        node: (edge) => edge.node,
+        pageInfo: (data) => data.user.following.users.pageInfo,
+        cursor: (pageInfo) => pageInfo.hasNextPage ? pageInfo.endCursor : null,
+      },
       { username },
     );
   }
@@ -98,14 +104,17 @@ export class FiveHundredPxClient {
           };
         };
       },
-      User
+      User,
+      { node: User },
+      { endCursor: string; hasNextPage: boolean }
     >(
-      ["graphql/followers", "graphql/user"],
-      (data) => data.user.followedBy.users,
-      (data) =>
-        data.user.followedBy.users.pageInfo.hasNextPage
-          ? data.user.followedBy.users.pageInfo.endCursor
-          : null,
+      await query(["graphql/followers", "graphql/user"]),
+      {
+        edges: (data) => data.user.followedBy.users.edges,
+        node: (edge) => edge.node,
+        pageInfo: (data) => data.user.followedBy.users.pageInfo,
+        cursor: (pageInfo) => pageInfo.hasNextPage ? pageInfo.endCursor : null,
+      },
       { username },
     );
   }
@@ -129,15 +138,17 @@ export class FiveHundredPxClient {
           pageInfo: { endCursor: string; hasNextPage: boolean };
         };
       },
-      { cardNode: Photo }
+      { cardNode: Photo },
+      { node: { cardNode: Photo } },
+      { endCursor: string; hasNextPage: boolean }
     >(
-      ["graphql/foryou"],
-      (data) => data.feed,
-      (
-        data,
-      ) => (data.feed.pageInfo.hasNextPage
-        ? data.feed.pageInfo.endCursor
-        : null),
+      await query(["graphql/foryou"]),
+      {
+        edges: (data) => data.feed.edges,
+        node: (edge) => edge.node,
+        pageInfo: (data) => data.feed.pageInfo,
+        cursor: (pageInfo) => pageInfo.hasNextPage ? pageInfo.endCursor : null,
+      },
       {
         ...options,
         categories: options.categories?.map((category) => category.id),
@@ -145,4 +156,14 @@ export class FiveHundredPxClient {
       },
     )).map((card) => card.cardNode);
   }
+}
+
+async function query(paths: string[]): Promise<string> {
+  return (await Promise.all(
+    paths.map(async (path) =>
+      await Deno.readTextFile(
+        new URL(`${path}.graphql`, Deno.mainModule),
+      )
+    ),
+  )).join("\n");
 }

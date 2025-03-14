@@ -1,4 +1,4 @@
-import { JsonClient } from "@roka/http/json";
+import { type Client, client } from "@roka/http/json/client";
 import type { FeedCard, Friend, League, Reaction, User } from "./types.ts";
 
 /**
@@ -7,7 +7,7 @@ import type { FeedCard, Friend, League, Reaction, User } from "./types.ts";
  * Requires the JWT (JSON web token) for the logged-in user.
  */
 export class DuolingoClient {
-  private client: JsonClient;
+  private client: Client;
   private userid?: number;
 
   /**
@@ -17,7 +17,7 @@ export class DuolingoClient {
    * @param token The authentication token for the Duolingo user.
    */
   constructor(private username: string, token: string) {
-    this.client = new JsonClient("https://www.duolingo.com", { token });
+    this.client = client("https://www.duolingo.com", { token });
   }
 
   /**
@@ -28,11 +28,11 @@ export class DuolingoClient {
   async getUserId(): Promise<number> {
     if (!this.username) throw new Error("Username is required");
     if (this.userid) return this.userid;
-    const user = (await this.client.get<{ users: { id: number }[] }>(
+    const users = (await this.client.get<{ users: { id: number }[] }>(
       `/2017-06-30/users?fields=users%7Bid%7D&username=${this.username}`,
-    )).users[0];
-    if (!user) throw new Error("User not found");
-    this.userid = user.id;
+    )).users;
+    if (!users || !users[0]) throw new Error("User not found");
+    this.userid = users[0].id;
     return this.userid;
   }
 
@@ -45,7 +45,7 @@ export class DuolingoClient {
     const me = await this.getUserId();
     return (await this.client.get<{ following: { users: Friend[] } }>(
       `/2017-06-30/friends/users/${me}/following`,
-    )).following.users;
+    ))?.following?.users ?? [];
   }
 
   /**
@@ -57,7 +57,7 @@ export class DuolingoClient {
     const me = await this.getUserId();
     return (await this.client.get<{ followers: { users: Friend[] } }>(
       `/2017-06-30/friends/users/${me}/followers`,
-    )).followers.users;
+    ))?.followers?.users ?? [];
   }
 
   /**
@@ -69,7 +69,7 @@ export class DuolingoClient {
     const me = await this.getUserId();
     return (await this.client.get<{ feed: { feedCards: FeedCard[] }[] }>(
       `/2017-06-30/friends/users/${me}/feed/v2?uiLanguage=en`,
-    )).feed.flatMap((feed) => feed.feedCards);
+    ))?.feed?.flatMap((feed) => feed.feedCards) ?? [];
   }
 
   /**
@@ -109,6 +109,7 @@ export class DuolingoClient {
     const user = await this.client.get<Omit<User, "userId">>(
       `/2017-06-30/friends/users/${userId}/profile?pageSize=0`,
     );
+    if (!user) throw new Error("User not found");
     return { userId, ...user };
   }
 

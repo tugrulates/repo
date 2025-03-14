@@ -2,8 +2,8 @@ import { Command } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
-import { Config } from "@roka/cli/config";
-import { displayVersion } from "@roka/package/version";
+import { type Config, config } from "@roka/cli/config";
+import { version } from "@roka/forge/version";
 import { DuolingoClient } from "./client.ts";
 import { LEAGUES } from "./data.ts";
 import {
@@ -17,10 +17,8 @@ import type { FeedCard, League } from "./types.ts";
 type DuolingoConfig = { username: string; token: string };
 
 /** Duolingo client built from common CLI options. */
-async function getClient(
-  config: Config<DuolingoConfig>,
-): Promise<DuolingoClient> {
-  let { username, token } = await config.get();
+async function getClient(cfg: Config<DuolingoConfig>): Promise<DuolingoClient> {
+  let { username, token } = await cfg.get();
   if (!username) username = await Input.prompt("Username");
   if (!token) token = await Secret.prompt("Token");
   if (!username || !token) throw new Error("Username and token are required.");
@@ -85,7 +83,7 @@ function getSummary(card: FeedCard): string {
     : `${card.displayName} ${card.body.toLowerCase()}`;
 }
 
-function getFeedCommand(config: Config<DuolingoConfig>) {
+function getFeedCommand(cfg: Config<DuolingoConfig>) {
   return new Command()
     .description("Prints and interacts with the feed.")
     .example("duolingo feed", "Prints the feed.")
@@ -94,7 +92,7 @@ function getFeedCommand(config: Config<DuolingoConfig>) {
     .option("--engage", "Engage with the feed events.")
     .option("--json", "Output the feed as JSON.")
     .action(async ({ engage, json }) => {
-      const client = await getClient(config);
+      const client = await getClient(cfg);
       const followers = await client.getFollowers();
       const cards = await client.getFeedCards();
       if (json) console.log(JSON.stringify(cards, undefined, 2));
@@ -190,18 +188,18 @@ function getLeagueCommand(config: Config<DuolingoConfig>) {
     });
 }
 
-async function getCommand(config: Config<DuolingoConfig>) {
-  const { username, token } = await config.get();
+async function getCommand(cfg: Config<DuolingoConfig>) {
+  const { username, token } = await cfg.get();
   const command = new Command()
     .name("duolingo")
     .description("Interact with Duolingo.")
     .usage("--username <username> --token <token> <command> [options]")
-    .version(await displayVersion())
+    .version(await version({ target: true }))
     .example("duolingo --username <username> --token <token>", "Configure.")
     .example("duolingo --clear", "Clear the cached configuration.")
     .option("--clear", "Clear the cached configuration.", {
       standalone: true,
-      action: () => config.clear(),
+      action: () => cfg.clear(),
     })
     .globalEnv(
       "DUOLINGO_USERNAME=<username:string>",
@@ -225,16 +223,16 @@ async function getCommand(config: Config<DuolingoConfig>) {
     )
     .help({ colors: Deno.stdout.isTerminal() })
     .noExit()
-    .globalAction((options) => config.set(options))
-    .command("feed", getFeedCommand(config))
-    .command("follows", getFollowsCommand(config))
-    .command("league", getLeagueCommand(config));
+    .globalAction((options) => cfg.set(options))
+    .command("feed", getFeedCommand(cfg))
+    .command("follows", getFollowsCommand(cfg))
+    .command("league", getLeagueCommand(cfg));
   return command;
 }
 
 /** CLI entrypoint. */
 export async function main(args: string[], options?: { path?: string }) {
-  using config = new Config<DuolingoConfig>(options);
-  const command = await getCommand(config);
+  using cfg = config<DuolingoConfig>(options);
+  const command = await getCommand(cfg);
   await command.parse(args);
 }

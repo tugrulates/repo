@@ -10,13 +10,13 @@ export interface User {
   /** The user's unique numeric ID. */
   userId: number;
   /** Whether the user can be followed. */
-  canFollow: boolean;
+  canFollow?: boolean;
   /** Whether the user is followed by the current user. */
-  isFollowedBy: boolean;
+  isFollowedBy?: boolean;
   /** Whether the current user is following the user. */
-  isFollowing: boolean;
+  isFollowing?: boolean;
   /** Whether the user is verified. */
-  isVerified: boolean;
+  isVerified?: boolean;
 }
 
 /** A follower or followed user. */
