@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-console
 import { fakeConsole } from "@roka/testing/fake";
 import { tempDirectory } from "@roka/testing/temp";
 import { copy } from "@std/fs";

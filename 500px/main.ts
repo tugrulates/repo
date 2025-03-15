@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-console
 import { Command, EnumType } from "@cliffy/command";
 import { Table } from "@cliffy/table";
 import { displayVersion } from "@roka/package/version";

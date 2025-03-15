@@ -6,15 +6,11 @@
     "./photos"
   ],
   "tasks": {
-    "version": "deno run -A jsr:@roka/forge/release",
-    "bump": "gh workflow run bump",
-    "compile": "deno run -A jsr:@roka/forge/compile",
-    "install": "deno task compile --install=$HOME/.local/bin",
     "test": "deno test -A --unstable-kv --doc **/*.ts",
     "coverage": "deno task test --coverage && deno coverage --html",
     "lint": "deno fmt -q --check && deno lint -q && deno check -q **/*.ts",
-    "doc": "deno doc --lint --html $(find . -path '**/*.ts' -type file)",
-    "ok": "deno task lint && deno task doc && deno task test"
+    "docs": "deno doc --lint --html $(find . -path '**/*.ts' -type file)",
+    "ok": "deno task lint && deno task docs && deno task test && deno publish --quiet --dry-run --allow-dirty"
   },
   "compilerOptions": {
     "exactOptionalPropertyTypes": true,
@@ -27,9 +23,14 @@
         "camelcase",
         "default-param-last",
         "eqeqeq",
+        "no-await-in-loop",
+        "no-console",
+        "no-eval",
         "no-non-null-assertion",
+        "no-self-compare",
         "no-sync-fn-in-async-fn",
         "no-throw-literal",
+        "no-useless-rename",
         "single-var-declarator"
       ]
     }
