@@ -3,7 +3,7 @@ import { copy } from "@std/fs";
 import { basename } from "@std/path";
 import { join } from "@std/path/join";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { copyExifToVariants, getPhoto, type Photo } from "@tugrulates/photos";
+import { type Photo, photo, sync } from "@tugrulates/photos/photo";
 
 function trimSource(photo: Photo): Photo {
   return {
@@ -21,11 +21,9 @@ Deno.test("getPhoto()", {
   sanitizeResources: false,
 }, async (t) => {
   await using dir = await tempDirectory();
-  await copy("photos/testdata", dir.path(), { overwrite: true });
-  const photo = await getPhoto(
-    join(dir.path(), "floating-around/source.jpg"),
-  );
-  await assertSnapshot(t, trimSource(photo));
+  await copy("photos/__testdata__", dir.path(), { overwrite: true });
+  const src = await photo(join(dir.path(), "floating-around/source.jpg"));
+  await assertSnapshot(t, trimSource(src));
 });
 
 Deno.test("copyExifToVariants()", {
@@ -33,10 +31,10 @@ Deno.test("copyExifToVariants()", {
   sanitizeResources: false,
 }, async (t) => {
   await using dir = await tempDirectory();
-  await copy("photos/testdata", dir.path(), { overwrite: true });
-  const before = await getPhoto(join(dir.path(), "winter-pause/source.jpg"));
+  await copy("photos/__testdata__", dir.path(), { overwrite: true });
+  const before = await photo(join(dir.path(), "winter-pause/source.jpg"));
   await assertSnapshot(t, trimSource(before));
-  await copyExifToVariants(before);
-  const after = await getPhoto(join(dir.path(), "winter-pause/source.jpg"));
+  await sync(before);
+  const after = await photo(join(dir.path(), "winter-pause/source.jpg"));
   await assertSnapshot(t, trimSource(after));
 });

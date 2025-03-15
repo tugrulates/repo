@@ -4,15 +4,15 @@ import { tempDirectory } from "@roka/testing/temp";
 import { copy } from "@std/fs";
 import { join } from "@std/path";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { main } from "./main.ts";
+import { photos } from "@tugrulates/photos";
 
 Deno.test("photos [photo]", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
   using console = fakeConsole();
-  await main(["photos/testdata/floating-around"]);
-  await assertSnapshot(t, console.calls);
+  await photos(["photos/__testdata__/floating-around"]);
+  await assertSnapshot(t, console.output());
 });
 
 Deno.test("photos [photos]", {
@@ -20,11 +20,11 @@ Deno.test("photos [photos]", {
   sanitizeResources: false,
 }, async (t) => {
   using console = fakeConsole();
-  await main([
-    "photos/testdata/floating-around",
-    "photos/testdata/winter-pause",
+  await photos([
+    "photos/__testdata__/floating-around",
+    "photos/__testdata__/winter-pause",
   ]);
-  await assertSnapshot(t, console.calls);
+  await assertSnapshot(t, console.output());
 });
 
 Deno.test("photos [file]", {
@@ -32,8 +32,8 @@ Deno.test("photos [file]", {
   sanitizeResources: false,
 }, async (t) => {
   using console = fakeConsole();
-  await main(["photos/testdata/floating-around/source.jpg"]);
-  await assertSnapshot(t, console.calls);
+  await photos(["photos/__testdata__/floating-around/source.jpg"]);
+  await assertSnapshot(t, console.output());
 });
 
 Deno.test("photos [photo] --json", {
@@ -41,8 +41,8 @@ Deno.test("photos [photo] --json", {
   sanitizeResources: false,
 }, async (t) => {
   using console = fakeConsole();
-  await main(["photos/testdata/floating-around", "--json"]);
-  await assertSnapshot(t, console.calls);
+  await photos(["photos/__testdata__/floating-around", "--json"]);
+  await assertSnapshot(t, console.output());
 });
 
 Deno.test("photos [photo] --copy", {
@@ -50,24 +50,21 @@ Deno.test("photos [photo] --copy", {
   sanitizeResources: false,
 }, async (t) => {
   await using dir = await tempDirectory();
-
-  await copy("photos/testdata", dir.path(), { overwrite: true });
+  await copy("photos/__testdata__", dir.path(), { overwrite: true });
   const photo = join(dir.path(), "winter-pause");
   await t.step("before", async () => {
     using console = fakeConsole();
-    await main([photo]);
-    await assertSnapshot(t, console.calls);
+    await photos([photo]);
+    await assertSnapshot(t, console.output());
   });
-
   await t.step("copy", async () => {
     using console = fakeConsole();
-    await main([photo, "--copy"]);
-    await assertSnapshot(t, console.calls);
+    await photos([photo, "--copy"]);
+    await assertSnapshot(t, console.output());
   });
-
   await t.step("after", async () => {
     using console = fakeConsole();
-    await main([photo]);
-    await assertSnapshot(t, console.calls);
+    await photos([photo]);
+    await assertSnapshot(t, console.output());
   });
 });
