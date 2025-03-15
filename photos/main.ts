@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-console
 import { Command } from "@cliffy/command";
 import { displayVersion } from "@roka/package/version";
 import { omit } from "@std/collections";
@@ -25,8 +26,11 @@ async function* getPhotos(photos: string[]): AsyncGenerator<Photo> {
     }
   }
   for (const photo of photos) {
+    // deno-lint-ignore no-await-in-loop
     if (await isFile(photo)) {
+      // deno-lint-ignore no-await-in-loop
       yield (await getPhoto(photo));
+      // deno-lint-ignore no-await-in-loop
     } else if (await isFile(join(photo, SOURCE_FILE))) {
       yield getPhoto(join(photo, SOURCE_FILE));
     }

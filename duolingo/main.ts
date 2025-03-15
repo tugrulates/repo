@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-console
 import { Command } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";

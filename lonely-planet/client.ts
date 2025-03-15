@@ -91,8 +91,10 @@ export class LonelyPlanetClient {
           page,
         }],
       };
+      // deno-lint-ignore no-await-in-loop
       const { endpoint, token } = await this.getTypesense();
       const api = client(endpoint);
+      // deno-lint-ignore no-await-in-loop
       const results = (await api.post<{ results: (Results | Error)[] }>(
         `/multi_search?x-typesense-api-key=${token}`,
         body,
@@ -136,12 +138,16 @@ export class LonelyPlanetClient {
     for (const script of scripts ?? []) {
       const src = script.attributes.getNamedItem("src")?.value;
       if (!src || !/webpack/.test(src)) continue;
+      // deno-lint-ignore no-await-in-loop
       const response = await fetch(new URL(src, SITE));
       if (!response.ok) throw new Error(`Failed to fetch webpack script`);
+      // deno-lint-ignore no-await-in-loop
       const text = await response.text();
       for (const src of text.matchAll(/"(static\/chunks\/[^"]+?\.js)"/g)) {
+        // deno-lint-ignore no-await-in-loop
         const response = await fetch(new URL(`/_next/${src[1]}`, SITE));
         if (!response.ok) throw new Error(`Failed to fetch next script`);
+        // deno-lint-ignore no-await-in-loop
         const text = await response.text();
         const [, token, host, port, protocol] = TYPESENSE_PATTERN.exec(text) ??
           [];

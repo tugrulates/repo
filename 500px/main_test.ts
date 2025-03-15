@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-console
 import { mockFetch } from "@roka/http/testing";
 import { fakeConsole } from "@roka/testing/fake";
 import { assertSnapshot } from "@std/testing/snapshot";
