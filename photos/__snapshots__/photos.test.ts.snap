@@ -4,7 +4,7 @@ snapshot[`photos [photo] 1`] = `"🖼  Floating Around"`;
 
 snapshot[`photos [photos] 1`] = `
 "🖼  Floating Around
-🖼  Winter Pause [[33mpost-1.jpg:title post-1.jpg:keywords post-1.jpg:date post-1.jpg:location post-1.jpg:city post-1.jpg:state post-1.jpg:country post-1.jpg:camera post-1.jpg:lens post-1.jpg:software post-1.jpg:license post-2.jpg:title post-2.jpg:keywords post-2.jpg:date post-2.jpg:location post-2.jpg:city post-2.jpg:state post-2.jpg:country post-2.jpg:camera post-2.jpg:lens post-2.jpg:software post-2.jpg:license square.jpg:title square.jpg:keywords square.jpg:date square.jpg:location square.jpg:city square.jpg:state square.jpg:country square.jpg:camera square.jpg:lens square.jpg:software square.jpg:license wide.jpg:title wide.jpg:keywords wide.jpg:date wide.jpg:location wide.jpg:city wide.jpg:state wide.jpg:country wide.jpg:camera wide.jpg:lens wide.jpg:software wide.jpg:license[39m]"
+🖼  Winter Pause [[33mpost-1.jpg:title post-1.jpg:keywords post-1.jpg:date post-1.jpg:location post-1.jpg:city post-1.jpg:state post-1.jpg:country post-1.jpg:make post-1.jpg:model post-1.jpg:lens post-1.jpg:software post-1.jpg:license post-2.jpg:title post-2.jpg:keywords post-2.jpg:date post-2.jpg:location post-2.jpg:city post-2.jpg:state post-2.jpg:country post-2.jpg:make post-2.jpg:model post-2.jpg:lens post-2.jpg:software post-2.jpg:license square.jpg:title square.jpg:keywords square.jpg:date square.jpg:location square.jpg:city square.jpg:state square.jpg:country square.jpg:make square.jpg:model square.jpg:lens square.jpg:software square.jpg:license wide.jpg:title wide.jpg:keywords wide.jpg:date wide.jpg:location wide.jpg:city wide.jpg:state wide.jpg:country wide.jpg:make wide.jpg:model wide.jpg:lens wide.jpg:software wide.jpg:license[39m]"
 `;
 
 snapshot[`photos [file] 1`] = `"🖼  Floating Around"`;
@@ -56,7 +56,8 @@ snapshot[`photos [photo] --json 1`] = `
   "city": "San Francisco",
   "state": "California",
   "country": "United States",
-  "camera": "Apple iPhone 13 mini",
+  "make": "Apple",
+  "model": "iPhone 13 mini",
   "lens": "iPhone 13 mini back dual wide camera 5.1mm f/1.6",
   "software": "Affinity Photo 2 2.5.7",
   "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -93,7 +94,7 @@ snapshot[`photos [photo] --json 1`] = `
 }'
 `;
 
-snapshot[`photos [photo] --copy > before 1`] = `"🖼  Winter Pause [[33mpost-1.jpg:title post-1.jpg:keywords post-1.jpg:date post-1.jpg:location post-1.jpg:city post-1.jpg:state post-1.jpg:country post-1.jpg:camera post-1.jpg:lens post-1.jpg:software post-1.jpg:license post-2.jpg:title post-2.jpg:keywords post-2.jpg:date post-2.jpg:location post-2.jpg:city post-2.jpg:state post-2.jpg:country post-2.jpg:camera post-2.jpg:lens post-2.jpg:software post-2.jpg:license square.jpg:title square.jpg:keywords square.jpg:date square.jpg:location square.jpg:city square.jpg:state square.jpg:country square.jpg:camera square.jpg:lens square.jpg:software square.jpg:license wide.jpg:title wide.jpg:keywords wide.jpg:date wide.jpg:location wide.jpg:city wide.jpg:state wide.jpg:country wide.jpg:camera wide.jpg:lens wide.jpg:software wide.jpg:license[39m]"`;
+snapshot[`photos [photo] --copy > before 1`] = `"🖼  Winter Pause [[33mpost-1.jpg:title post-1.jpg:keywords post-1.jpg:date post-1.jpg:location post-1.jpg:city post-1.jpg:state post-1.jpg:country post-1.jpg:make post-1.jpg:model post-1.jpg:lens post-1.jpg:software post-1.jpg:license post-2.jpg:title post-2.jpg:keywords post-2.jpg:date post-2.jpg:location post-2.jpg:city post-2.jpg:state post-2.jpg:country post-2.jpg:make post-2.jpg:model post-2.jpg:lens post-2.jpg:software post-2.jpg:license square.jpg:title square.jpg:keywords square.jpg:date square.jpg:location square.jpg:city square.jpg:state square.jpg:country square.jpg:make square.jpg:model square.jpg:lens square.jpg:software square.jpg:license wide.jpg:title wide.jpg:keywords wide.jpg:date wide.jpg:location wide.jpg:city wide.jpg:state wide.jpg:country wide.jpg:make wide.jpg:model wide.jpg:lens wide.jpg:software wide.jpg:license[39m]"`;
 
 snapshot[`photos [photo] --copy > copy 1`] = `"🖼  Winter Pause"`;
 

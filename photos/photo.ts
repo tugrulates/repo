@@ -3,7 +3,7 @@ import { filterKeys, omit } from "@std/collections";
 import { basename, dirname, join } from "@std/path";
 import { copy, type Exif, exif } from "./exif.ts";
 
-/** A photo returned from the {@linkcode photos} function. */
+/** A photo returned from the {@linkcode photo} function. */
 export interface Photo extends Exif {
   /** Exchangable id of the photo. */
   id: string;
@@ -50,11 +50,7 @@ export async function photo(path: string): Promise<Photo> {
       })),
   };
 }
-/**
- * Copies the EXIF data from photo source to its variants.
- *
- * @param photo Photo data for managing EXIF.
- */
+/** Copies the EXIF data from photo source to its variants. */
 export async function sync(photo: Photo) {
   await pool(photo.variants, async (variant) => {
     const tags = await exif(photo.path);
@@ -67,6 +63,14 @@ export async function sync(photo: Photo) {
   });
 }
 
+/**
+ * Checks the photo for problems.
+ *
+ * Photo missing required fields, and the variants having different field
+ * values than the source photo are considered problems.
+ *
+ * @returns A list of warnings, one for each problem.
+ */
 export function check(photo: Photo): string[] {
   const warnings: string[] = [];
   for (const field in omit(photo, ["city"])) {

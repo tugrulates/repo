@@ -1,8 +1,9 @@
 import { which } from "@david/which";
+import { mapValues } from "@std/collections";
 import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
 
 /**
- * Represents the EXIF (Exchangeable Image File Format) metadata of a photo.
+ * The EXIF data returned from the {@linkcode exif} function.
  *
  * This only lists the fields relevant for my photography workflow.
  */
@@ -27,8 +28,10 @@ export interface Exif {
   state?: string | undefined;
   /** The country that the photo was taken in. */
   country?: string | undefined;
-  /** The camera or phone used to take the photo. */
-  camera?: string | undefined;
+  /** The make of the camera or phone used to take the photo. */
+  make?: string | undefined;
+  /** The model of the camera or phone used to take the photo. */
+  model?: string | undefined;
   /** Lens properties that were used to take the photo. */
   lens?: string | undefined;
   /** The software used to edit the photo. */
@@ -38,7 +41,7 @@ export interface Exif {
 }
 
 /**
- * Returns the EXIF data for the file.
+ * Returns the EXIF (Exchangeable Image File Format) metadata of a photo.
  *
  * @todo This checks if the original date/time has an offset and uses the
  * create date if not. This is a workaround for Affinity Photo not filing
@@ -47,26 +50,10 @@ export interface Exif {
 export async function exif(src: string): Promise<Exif> {
   const exiftool = await ExifToolManager.get();
   const tags = await exiftool.read<PhotoTags>(src);
-  return {
-    width: tags.ImageWidth,
-    height: tags.ImageHeight,
-    title: tags.Headline,
-    description: tags.ImageDescription,
-    keywords: Array.isArray(tags.Keywords)
-      ? tags.Keywords
-      : tags.Keywords
-      ? [tags.Keywords]
-      : [],
-    date: dateFromTags(tags),
-    location: tags.Location,
-    city: tags.City,
-    state: tags.State,
-    country: tags.Country,
-    camera: tags.Make && tags.Model && `${tags.Make} ${tags.Model}`,
-    lens: tags.LensModel,
-    software: softwareAgentFromTags(tags),
-    license: tags.License,
-  };
+  return mapValues(
+    MAPPING,
+    ({ tag, get }) => get ? get(tags) : tags[tag],
+  ) as Exif;
 }
 
 /**
@@ -79,7 +66,7 @@ export async function exif(src: string): Promise<Exif> {
 export async function copy(
   src: string,
   dst: string,
-  exif?: Partial<Exif>,
+  exif?: Partial<Omit<Exif, "width" | "height">>,
 ) {
   const exiftool = await ExifToolManager.get();
   await exiftool.write(dst, {}, {
@@ -88,10 +75,67 @@ export async function copy(
       src,
       "-all",
       "-overwrite_original_in_place",
-      ...(exif?.description ? [`-ImageDescription=${exif.description}`] : []),
+      ...Object.entries(exif ?? {}).map(([key, value]) =>
+        `-${MAPPING[key as keyof Exif]?.tag}=${value}`
+      ),
     ],
   });
 }
+
+interface PhotoTags extends Tags {
+  State?: string;
+  License?: string;
+}
+
+type Mapping = {
+  [K in keyof Exif]: {
+    tag: keyof PhotoTags;
+    get?(tags: PhotoTags): Exif[K];
+  };
+};
+
+const MAPPING: Mapping = {
+  width: { tag: "ImageWidth" },
+  height: { tag: "ImageHeight" },
+  title: { tag: "Headline" },
+  description: { tag: "ImageDescription" },
+  keywords: {
+    tag: "Keywords",
+    get(tags) {
+      return Array.isArray(tags.Keywords)
+        ? tags.Keywords
+        : tags.Keywords
+        ? [tags.Keywords]
+        : [];
+    },
+  },
+  date: {
+    tag: "DateTimeOriginal",
+    get(tags) {
+      const date = tags.DateTimeOriginal;
+      if (date instanceof ExifDateTime) return date.toISOString();
+      return date;
+    },
+  },
+  location: { tag: "Location" },
+  city: { tag: "City" },
+  state: { tag: "State" },
+  country: { tag: "Country" },
+  make: { tag: "Make" },
+  model: { tag: "Model" },
+  lens: { tag: "LensModel" },
+  software: {
+    tag: "Software",
+    get(tags) {
+      const history = tags.History;
+      if (typeof history === "string") return history;
+      return (Array.isArray(history) ? history : [history]).find((h) =>
+        h?.Action === "produced"
+      )?.SoftwareAgent;
+    },
+  },
+  license: { tag: "License" },
+};
 
 class ExifToolManager {
   static exiftool?: ExifTool = undefined;
@@ -103,23 +147,4 @@ class ExifToolManager {
     addEventListener("unload", () => this.exiftool?.end());
     return this.exiftool;
   }
-}
-
-interface PhotoTags extends Tags {
-  State?: string;
-  License?: string;
-}
-
-function dateFromTags(tags: Tags): string | undefined {
-  const date = tags.DateTimeOriginal;
-  if (date instanceof ExifDateTime) return date.toISOString();
-  return date;
-}
-
-function softwareAgentFromTags(tags: Tags): string | undefined {
-  const history = tags.History;
-  if (typeof history === "string") return history;
-  return (Array.isArray(history) ? history : [history]).find((h) =>
-    h?.Action === "produced"
-  )?.SoftwareAgent;
 }
