@@ -4,6 +4,20 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      package:
+        description: "Package"
+        required: false
+        type: choice
+        options:
+          - All packages
+          - 500px
+          - duolingo
+          - lonely-planet
+          - photos
+
+permissions:
+  contents: write
 
 jobs:
   release:
@@ -20,6 +34,10 @@ jobs:
         uses: denoland/setup-deno@v2
 
       - name: Release packages
-        run: deno task version --release
+        run: |
+          if [ "${{ inputs.package }}" != "All packages" ]; then
+            PACKAGE="${{ inputs.package }}"
+          fi
+          deno run -A jsr:@roka/forge release $PACKAGE --draft --emoji
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
