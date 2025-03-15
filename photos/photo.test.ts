@@ -5,36 +5,36 @@ import { join } from "@std/path/join";
 import { assertSnapshot } from "@std/testing/snapshot";
 import { type Photo, photo, sync } from "@tugrulates/photos/photo";
 
-function trimSource(photo: Photo): Photo {
+function stripPath(photo: Photo): Photo {
   return {
     ...photo,
-    src: basename(photo.src),
+    path: basename(photo.path),
     variants: photo.variants.map((v) => ({
       ...v,
-      src: basename(v.src),
+      path: basename(v.path),
     })),
   };
 }
 
-Deno.test("getPhoto()", {
+Deno.test("photo() return EXIF with variants", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
   await using dir = await tempDirectory();
   await copy("photos/__testdata__", dir.path(), { overwrite: true });
   const src = await photo(join(dir.path(), "floating-around/source.jpg"));
-  await assertSnapshot(t, trimSource(src));
+  await assertSnapshot(t, stripPath(src));
 });
 
-Deno.test("copyExifToVariants()", {
+Deno.test("sync() copies EXIF from source photo to variant", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
   await using dir = await tempDirectory();
   await copy("photos/__testdata__", dir.path(), { overwrite: true });
   const before = await photo(join(dir.path(), "winter-pause/source.jpg"));
-  await assertSnapshot(t, trimSource(before));
+  await assertSnapshot(t, stripPath(before));
   await sync(before);
   const after = await photo(join(dir.path(), "winter-pause/source.jpg"));
-  await assertSnapshot(t, trimSource(after));
+  await assertSnapshot(t, stripPath(after));
 });

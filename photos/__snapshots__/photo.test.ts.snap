@@ -1,6 +1,6 @@
 export const snapshot = {};
 
-snapshot[`getPhoto() 1`] = `
+snapshot[`photo() return EXIF with variants 1`] = `
 {
   camera: "Apple iPhone 13 mini",
   city: "San Francisco",
@@ -47,36 +47,36 @@ snapshot[`getPhoto() 1`] = `
   lens: "iPhone 13 mini back dual wide camera 5.1mm f/1.6",
   license: "https://creativecommons.org/licenses/by/4.0/",
   location: "California Academy of Sciences",
+  path: "source.jpg",
   software: "Affinity Photo 2 2.5.7",
-  src: "source.jpg",
   state: "California",
   title: "Floating Around",
   variants: [
     {
       description: "Four jellyfish with translucent bodies and long tentacles float gracefully against a vivid background in an aquarium setting (image 1).",
       height: 135,
-      src: "post-1.jpg",
+      path: "post-1.jpg",
       width: 108,
     },
     {
       description: "Four jellyfish with translucent bodies and long tentacles float gracefully against a vivid background in an aquarium setting (image 2).",
       height: 135,
-      src: "post-2.jpg",
+      path: "post-2.jpg",
       width: 108,
     },
     {
       height: 180,
-      src: "square.jpg",
+      path: "square.jpg",
       width: 180,
     },
     {
       height: 192,
-      src: "story.jpg",
+      path: "story.jpg",
       width: 108,
     },
     {
       height: 180,
-      src: "wide.jpg",
+      path: "wide.jpg",
       width: 320,
     },
   ],
@@ -84,7 +84,7 @@ snapshot[`getPhoto() 1`] = `
 }
 `;
 
-snapshot[`copyExifToVariants() 1`] = `
+snapshot[`sync() copies EXIF from source photo to variant 1`] = `
 {
   camera: "Apple iPhone 13 mini",
   city: "Ankara",
@@ -118,8 +118,8 @@ snapshot[`copyExifToVariants() 1`] = `
   lens: "iPhone 13 mini back dual wide camera 5.1mm f/1.6",
   license: "https://creativecommons.org/licenses/by/4.0/",
   location: "Ankara, Turkey",
+  path: "source.jpg",
   software: "Affinity Photo 2 2.5.7",
-  src: "source.jpg",
   state: "Ankara",
   title: "Winter Pause",
   variants: [
@@ -134,8 +134,8 @@ snapshot[`copyExifToVariants() 1`] = `
       lens: undefined,
       license: undefined,
       location: undefined,
+      path: "post-1.jpg",
       software: undefined,
-      src: "post-1.jpg",
       state: undefined,
       title: undefined,
       width: 108,
@@ -151,8 +151,8 @@ snapshot[`copyExifToVariants() 1`] = `
       lens: undefined,
       license: undefined,
       location: undefined,
+      path: "post-2.jpg",
       software: undefined,
-      src: "post-2.jpg",
       state: undefined,
       title: undefined,
       width: 108,
@@ -168,8 +168,8 @@ snapshot[`copyExifToVariants() 1`] = `
       lens: undefined,
       license: undefined,
       location: undefined,
+      path: "square.jpg",
       software: undefined,
-      src: "square.jpg",
       state: undefined,
       title: undefined,
       width: 180,
@@ -185,8 +185,8 @@ snapshot[`copyExifToVariants() 1`] = `
       lens: undefined,
       license: undefined,
       location: undefined,
+      path: "wide.jpg",
       software: undefined,
-      src: "wide.jpg",
       state: undefined,
       title: undefined,
       width: 320,
@@ -196,7 +196,7 @@ snapshot[`copyExifToVariants() 1`] = `
 }
 `;
 
-snapshot[`copyExifToVariants() 2`] = `
+snapshot[`sync() copies EXIF from source photo to variant 2`] = `
 {
   camera: "Apple iPhone 13 mini",
   city: "Ankara",
@@ -230,31 +230,31 @@ snapshot[`copyExifToVariants() 2`] = `
   lens: "iPhone 13 mini back dual wide camera 5.1mm f/1.6",
   license: "https://creativecommons.org/licenses/by/4.0/",
   location: "Ankara, Turkey",
+  path: "source.jpg",
   software: "Affinity Photo 2 2.5.7",
-  src: "source.jpg",
   state: "Ankara",
   title: "Winter Pause",
   variants: [
     {
       description: "A dark-furred cat silhouetted against a window overlooking a snowy landscape (image 1).",
       height: 144,
-      src: "post-1.jpg",
+      path: "post-1.jpg",
       width: 108,
     },
     {
       description: "A dark-furred cat silhouetted against a window overlooking a snowy landscape (image 2).",
       height: 144,
-      src: "post-2.jpg",
+      path: "post-2.jpg",
       width: 108,
     },
     {
       height: 180,
-      src: "square.jpg",
+      path: "square.jpg",
       width: 180,
     },
     {
       height: 180,
-      src: "wide.jpg",
+      path: "wide.jpg",
       width: 320,
     },
   ],

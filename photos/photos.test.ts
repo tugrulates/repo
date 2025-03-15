@@ -10,39 +10,31 @@ Deno.test("photos [photo]", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
-  using console = fakeConsole();
-  await photos(["photos/__testdata__/floating-around"]);
-  await assertSnapshot(t, console.output());
+  await test(t, ["photos/__testdata__/floating-around"]);
 });
 
 Deno.test("photos [photos]", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
-  using console = fakeConsole();
-  await photos([
+  await test(t, [
     "photos/__testdata__/floating-around",
     "photos/__testdata__/winter-pause",
   ]);
-  await assertSnapshot(t, console.output());
 });
 
 Deno.test("photos [file]", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
-  using console = fakeConsole();
-  await photos(["photos/__testdata__/floating-around/source.jpg"]);
-  await assertSnapshot(t, console.output());
+  await test(t, ["photos/__testdata__/floating-around/source.jpg"]);
 });
 
 Deno.test("photos [photo] --json", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async (t) => {
-  using console = fakeConsole();
-  await photos(["photos/__testdata__/floating-around", "--json"]);
-  await assertSnapshot(t, console.output());
+  await test(t, ["photos/__testdata__/floating-around", "--json"]);
 });
 
 Deno.test("photos [photo] --copy", {
@@ -52,19 +44,13 @@ Deno.test("photos [photo] --copy", {
   await using dir = await tempDirectory();
   await copy("photos/__testdata__", dir.path(), { overwrite: true });
   const photo = join(dir.path(), "winter-pause");
-  await t.step("before", async () => {
-    using console = fakeConsole();
-    await photos([photo]);
-    await assertSnapshot(t, console.output());
-  });
-  await t.step("copy", async () => {
-    using console = fakeConsole();
-    await photos([photo, "--copy"]);
-    await assertSnapshot(t, console.output());
-  });
-  await t.step("after", async () => {
-    using console = fakeConsole();
-    await photos([photo]);
-    await assertSnapshot(t, console.output());
-  });
+  await t.step("before", (t) => test(t, [photo]));
+  await t.step("copy", (t) => test(t, [photo, "--copy"]));
+  await t.step("after", (t) => test(t, [photo]));
 });
+
+async function test(t: Deno.TestContext, args: string[]) {
+  using console = fakeConsole();
+  await photos(args);
+  await assertSnapshot(t, console.output());
+}

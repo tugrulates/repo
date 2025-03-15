@@ -6,9 +6,7 @@ import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
  *
  * This only lists the fields relevant for my photography workflow.
  */
-export interface Exif extends Record<string, unknown> {
-  /** Source file for this photo. */
-  src: string;
+export interface Exif {
   /** The pixel width of the photo. */
   width?: number | undefined;
   /** The pixel height of the photo. */
@@ -50,7 +48,6 @@ export async function exif(src: string): Promise<Exif> {
   const exiftool = await ExifToolManager.get();
   const tags = await exiftool.read<PhotoTags>(src);
   return {
-    src,
     width: tags.ImageWidth,
     height: tags.ImageHeight,
     title: tags.Headline,

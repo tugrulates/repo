@@ -3,17 +3,14 @@ import { filterKeys, omit } from "@std/collections";
 import { basename, dirname, join } from "@std/path";
 import { copy, type Exif, exif } from "./exif.ts";
 
-/**
- * Represents a photo with additional metadata and sizes.
- *
- * @extends Exif with all fields except resolution, which are listed on individial
- * file sizes instead.
- */
+/** A photo returned from the {@linkcode photos} function. */
 export interface Photo extends Exif {
   /** Exchangable id of the photo. */
   id: string;
+  /** Source file path for this photo. */
+  path: string;
   /** Different variants of this photo, with only the differences. */
-  variants: Exif[];
+  variants: (Exif & { path: string })[];
 }
 
 /**
@@ -29,21 +26,28 @@ export async function photo(path: string): Promise<Photo> {
     .filter((f) => f.name.endsWith(".jpg"))
     .map((f) => join(directory, f.name))
     .toSorted();
-  const tags = await pool(files, exif);
-  const photo = tags.find((e) => e.src === path);
-  if (!photo) throw new Error(`EXIF cannot be extracted for ${path}`);
+  const sizes = await pool(
+    files,
+    async (path) => ({ path, ...await exif(path) }),
+  );
+  const source = sizes.find((e) => e.path === path);
+  if (!source) throw new Error(`Source file not found in ${path}`);
+  const variants = sizes.filter((e) => e.path !== path);
   return {
+    ...source,
     id: basename(dirname(path)),
-    ...photo,
-    variants: tags.filter((e) => e.src !== path).map((data) => ({
-      ...filterKeys(
-        data,
-        (k) => JSON.stringify(photo[k]) !== JSON.stringify(data[k]),
-      ),
-      src: data.src,
-      width: data.width,
-      height: data.height,
-    })),
+    variants: variants
+      .map((variant) => ({
+        ...filterKeys(
+          variant,
+          (key) =>
+            JSON.stringify(variant[key as keyof typeof variant]) !==
+              JSON.stringify(source[key as keyof typeof variant]),
+        ),
+        path: variant.path,
+        width: variant.width,
+        height: variant.height,
+      })),
   };
 }
 /**
@@ -53,13 +57,13 @@ export async function photo(path: string): Promise<Photo> {
  */
 export async function sync(photo: Photo) {
   await pool(photo.variants, async (variant) => {
-    const tags = await exif(photo.src);
-    const groupMatch = /.*-(\d+).jpg/.exec(variant.src);
+    const tags = await exif(photo.path);
+    const groupMatch = /.*-(\d+).jpg/.exec(variant.path);
     const description = groupMatch && tags.description?.replace(
       /^(.*?)(\.?)$/,
       `$1 (image ${groupMatch[1]}).`,
     );
-    await copy(photo.src, variant.src, description ? { description } : {});
+    await copy(photo.path, variant.path, description ? { description } : {});
   });
 }
 
@@ -70,9 +74,9 @@ export function check(photo: Photo): string[] {
   }
   for (const variant of photo.variants) {
     for (
-      const field in omit(variant, ["src", "width", "height", "description"])
+      const field in omit(variant, ["path", "width", "height", "description"])
     ) {
-      if (field in variant) warnings.push(`${basename(variant.src)}:${field}`);
+      if (field in variant) warnings.push(`${basename(variant.path)}:${field}`);
     }
   }
   return warnings;
