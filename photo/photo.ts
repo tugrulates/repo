@@ -16,15 +16,14 @@
  * }
  * ```
  *
- * The {@linkcode [cli]} module provides a command-line interface for this
- * library.
+ * The {@link [cli]} module provides a command-line interface for this library.
  *
  * ```sh
  * deno run --A jsr:@tugrulates/photo/cli path/to/photo --json
  * ```
  *
  * The binary for `exiftool` is bundled. However, the binary compiled with
- * {@link forge | https://jsr.io/@roka/forge} needs `exiftool` installation.
+ * {@link https://jsr.io/@roka/forge | forge} needs `exiftool` installation.
  * For macOS, it can be installed using Homebrew with `brew install exiftool`.
  * For other systems, see the [official website](https://exiftool.org/).
  *
@@ -53,7 +52,7 @@ export interface Image extends Exif {
 }
 
 /**
- * Returns the data for a photo using a single file.
+ * Returns a photo from a photo directory or image file path.
  *
  * @param path Source photo to get information for.
  * @returns Data for the photo or file.
