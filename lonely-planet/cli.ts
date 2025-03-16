@@ -2,7 +2,7 @@
 /**
  * A CLI interface to the `lonely-planet` package.
  *
- * @module lonely-planet
+ * @module cli
  */
 
 import { Command } from "@cliffy/command";
@@ -14,8 +14,13 @@ import {
   lonelyPlanet,
 } from "./lonely-planet.ts";
 
-/** CLI entrypoint. */
-export async function cli(args: string[]) {
+/**
+ * Run the `lonely-planet` tool with the given command-line arguments.
+ *
+ * @param args Command-line arguments.
+ * @returns The exit code of the command.
+ */
+export async function cli(args: string[]): Promise<number> {
   const EMOJIS = {
     Continent: "🌍",
     Country: "🏳️",
