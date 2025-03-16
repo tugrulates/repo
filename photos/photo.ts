@@ -1,119 +1,28 @@
-import { which } from "@david/which";
-import { pick } from "@std/collections";
+/**
+ * This module provides operations on {@linkcode Photo} objects.
+ *
+ * @todo Deduce source file name automatically from dimensions.
+ *
+ * @module photo
+ */
+
+import { pool } from "@roka/async/pool";
+import { omit } from "@std/collections";
 import { basename, dirname, join } from "@std/path";
-import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
-import { FIELDS } from "./fields.ts";
-import type { Exif, Photo } from "./types.ts";
+import { type Exif, exif, write } from "./exif.ts";
 
-class ExifToolManager {
-  static exiftool?: ExifTool = undefined;
-
-  static async get() {
-    if (this.exiftool) return this.exiftool;
-    const exiftoolPath = await which("exiftool");
-    this.exiftool = new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} });
-    addEventListener("unload", () => this.exiftool?.end());
-    return this.exiftool;
-  }
+/** A photo returned from the {@linkcode photo} function. */
+export interface Photo extends Image {
+  /** Exchangable id of the photo. */
+  id: string;
+  /** Different variants of this photo. */
+  variants: Image[];
 }
 
-interface PhotoTags extends Tags {
-  State?: string;
-  License?: string;
-}
-
-function getDate(tags: Tags): string | undefined {
-  const date = tags.DateTimeOriginal;
-  if (date instanceof ExifDateTime) return date.toISOString();
-  return date;
-}
-
-function getSoftwareAgent(tags: Tags): string | undefined {
-  const history = tags.History;
-  if (typeof history === "string") return history;
-  return (Array.isArray(history) ? history : [history]).find((h) =>
-    h?.Action === "produced"
-  )?.SoftwareAgent;
-}
-
-/**
- * Returns the EXIF data for the file.
- *
- * @param src File to get EXIF data for.
- * @returns EXIF data for the file.
- *
- * @todo This checks if the original date/time has an offset and uses the
- * create date if not. This is a workaround for Affinity Photo not filing
- * timezones.
- */
-async function getExif(src: string): Promise<Exif> {
-  const exiftool = await ExifToolManager.get();
-  const tags = await exiftool.read<PhotoTags>(src);
-  return {
-    src,
-    width: tags.ImageWidth,
-    height: tags.ImageHeight,
-    title: tags.Headline,
-    description: tags.ImageDescription,
-    keywords: Array.isArray(tags.Keywords)
-      ? tags.Keywords
-      : tags.Keywords
-      ? [tags.Keywords]
-      : [],
-    date: getDate(tags),
-    location: tags.Location,
-    city: tags.City,
-    state: tags.State,
-    country: tags.Country,
-    camera: tags.Make && tags.Model && `${tags.Make} ${tags.Model}`,
-    lens: tags.LensModel,
-    software: getSoftwareAgent(tags),
-    license: tags.License,
-  };
-}
-
-/**
- * Copies the EXIF data from photo source to its variants.
- *
- * @param photo Photo data for managing EXIF.
- */
-export async function copyExifToVariants(photo: Photo) {
-  const exiftool = await ExifToolManager.get();
-  await Promise.all(photo.variants.map(async (variant) => {
-    const tags = await exiftool.read<PhotoTags>(photo.src);
-    const groupMatch = /.*-(\d+).jpg/.exec(variant.src);
-    const description = groupMatch && tags.ImageDescription?.replace(
-      /^(.*?)(\.?)$/,
-      `$1 (image ${groupMatch[1]}).`,
-    );
-    await exiftool.write(
-      variant.src,
-      {},
-      {
-        writeArgs: [
-          "-tagsfromfile",
-          photo.src,
-          "-all",
-          "-overwrite_original_in_place",
-          ...(description ? [`-ImageDescription=${description}`] : []),
-        ],
-      },
-    );
-  }));
-}
-
-/**
- * Returns a list of all JPG files in the directory.
- *
- * @param dir Directory to check.
- * @returns List of all JPG files in the directory.
- */
-async function getFiles(dir: string): Promise<string[]> {
-  return (await Array.fromAsync(Deno.readDir(dir)))
-    .filter((f) => f.isFile)
-    .filter((f) => f.name.endsWith(".jpg"))
-    .map((f) => join(dir, f.name))
-    .toSorted();
+/** A single image file. */
+export interface Image extends Exif {
+  /** File path for this image. */
+  path: string;
 }
 
 /**
@@ -122,24 +31,78 @@ async function getFiles(dir: string): Promise<string[]> {
  * @param path Source photo to get information for.
  * @returns Data for the photo or file.
  */
-export async function getPhoto(path: string): Promise<Photo> {
-  const files = await getFiles(dirname(path));
-  const exif = await Promise.all(files.map((f) => getExif(f)));
-  const photo = exif.find((e) => e.src === path);
-  if (!photo) throw new Error(`EXIF cannot be extracted for ${path}`);
-  return {
-    id: basename(dirname(path)),
-    ...photo,
-    variants: exif.filter((e) => e.src !== path).map((data) => ({
-      ...pick(
-        data,
-        FIELDS.filter((f) =>
-          JSON.stringify(photo[f]) !== JSON.stringify(data[f])
-        ),
-      ),
-      src: data.src,
-      width: data.width,
-      height: data.height,
-    })),
-  };
+export async function photo(path: string): Promise<Photo> {
+  let directory: string;
+  if ((await Deno.stat(path)).isDirectory) {
+    directory = path;
+    path = join(directory, "source.jpg");
+  } else {
+    directory = dirname(path);
+  }
+  const files = (await Array.fromAsync(Deno.readDir(directory)))
+    .filter((f) => f.isFile)
+    .filter((f) => f.name.endsWith(".jpg"))
+    .map((f) => join(directory, f.name))
+    .toSorted();
+  const sizes: Image[] = await pool(
+    files,
+    async (path) => ({ path, ...await exif(path) }),
+  );
+  const source = sizes.find((e) => e.path === path);
+  if (!source) {
+    throw new Deno.errors.NotFound(`Source file not found in ${path}`);
+  }
+  const variants = sizes.filter((e) => e.path !== path);
+  return { ...source, id: basename(dirname(path)), variants };
+}
+
+/**
+ * Checks the photo for problems.
+ *
+ * Photo missing required fields, and the variants having different field
+ * values than the source photo are considered problems.
+ *
+ * @returns A list of warnings, one for each problem.
+ */
+export function check(photo: Photo): string[] {
+  const warnings: string[] = [];
+  for (const field in omit(photo, ["city"])) {
+    const value = photo[field as keyof Image];
+    if (!value || (Array.isArray(value) && !value.length)) {
+      warnings.push(`missing:${field}`);
+    }
+  }
+  for (const variant of photo.variants) {
+    for (
+      const field in omit(variant, ["path", "width", "height", "description"])
+    ) {
+      if (
+        JSON.stringify(variant[field as keyof Image]) !==
+          JSON.stringify(photo[field as keyof Image])
+      ) {
+        warnings.push(`${basename(variant.path)}:${field}`);
+      }
+    }
+  }
+  return warnings;
+}
+
+/** Copies tags from photo source to its variants. */
+export async function sync(photo: Photo) {
+  photo.variants = await pool(photo.variants, async (variant) => {
+    const tags = await exif(photo.path);
+    const groupMatch = /.*-(\d+).jpg/.exec(variant.path);
+    const description = groupMatch && tags.description?.replace(
+      /^(.*?)(\.?)$/,
+      `$1 (image ${groupMatch[1]}).`,
+    );
+    await write(variant.path, {
+      source: photo.path,
+      ...description ? { description } : {},
+    });
+    return {
+      path: variant.path,
+      ...await exif(variant.path),
+    };
+  });
 }
