@@ -1,9 +1,12 @@
 {
   "name": "@tugrulates/lonely-planet",
   "version": "0.1.2",
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./lonely-planet.ts",
+    "./cli": "./cli.ts"
+  },
   "compile": {
-    "main": "mod.ts",
+    "main": "lonely-planet.ts",
     "permissions": {
       "net": true
     }

@@ -41,10 +41,8 @@ for (const test of TESTS) {
     using console = fakeConsole();
     await photos(args);
     // deno-lint-ignore no-console
-    const output = console.output({ wrap: "\n" }).replaceAll(
-      directory.path(),
-      "[directory]",
-    );
+    const output = console.output({ wrap: "\n" })
+      .replaceAll(directory.path(), "[directory]");
     await assertSnapshot(t, output);
   });
 }
