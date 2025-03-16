@@ -7,7 +7,7 @@
  * For macOS, it can be installed using Homebrew with `brew install exiftool`.
  * For other systems, see the [official website](https://exiftool.org/).
  *
- * @module photos
+ * @module cli
  */
 
 import { Command } from "@cliffy/command";

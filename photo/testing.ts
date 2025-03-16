@@ -8,8 +8,8 @@ import { pool } from "@roka/async/pool";
 import { assertExists } from "@std/assert";
 import { copy } from "@std/fs";
 import { join } from "@std/path";
-import { write, type WriteOptions } from "@tugrulates/photos/exif";
-import { type Photo, photo } from "@tugrulates/photos/photo";
+import { write, type WriteOptions } from "./exif.ts";
+import { type Photo, photo } from "./photo.ts";
 
 /**
  * Creates a temporary photo.

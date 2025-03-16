@@ -3,7 +3,7 @@
     "./500px",
     "./duolingo",
     "./lonely-planet",
-    "./photos"
+    "./photo"
   ],
   "tasks": {
     "test": "deno test -A --unstable-kv --doc **/*.ts",

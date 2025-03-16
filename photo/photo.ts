@@ -1,5 +1,32 @@
 /**
- * This module provides operations on {@linkcode Photo} objects.
+ * A library for photography editing and publishing workflows.
+ *
+ * The main module provides access to photo collections, which are different
+ * size and crops of the same photograph via the {@linkcode photo} function.
+ * The main photo in a directory is always named `source.jpg`, and the
+ * variants are found next to the source photo.
+ *
+ * ```ts
+ * import { photo } from "@tugrulates/photo";
+ *
+ * async function usage() {
+ *   const photo = await photo("path/to/photo");
+ *   console.log(photo.title);
+ *   console.log(photo.variants);
+ * }
+ * ```
+ *
+ * The {@linkcode [cli]} module provides a command-line interface for this
+ * library.
+ *
+ * ```sh
+ * deno run --A jsr:@tugrulates/photo/cli path/to/photo --json
+ * ```
+ *
+ * The binary for `exiftool` is bundled. However, the binary compiled with
+ * {@link forge | https://jsr.io/@roka/forge} needs `exiftool` installation.
+ * For macOS, it can be installed using Homebrew with `brew install exiftool`.
+ * For other systems, see the [official website](https://exiftool.org/).
  *
  * @todo Deduce source file name automatically from dimensions.
  *
