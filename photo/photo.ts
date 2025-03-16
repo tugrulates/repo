@@ -22,11 +22,6 @@
  * deno run --A jsr:@tugrulates/photo/cli path/to/photo --json
  * ```
  *
- * The binary for `exiftool` is bundled. However, the binary compiled with
- * {@link https://jsr.io/@roka/forge | forge} needs `exiftool` installation.
- * For macOS, it can be installed using Homebrew with `brew install exiftool`.
- * For other systems, see the [official website](https://exiftool.org/).
- *
  * @todo Deduce source file name automatically from dimensions.
  *
  * @module photo

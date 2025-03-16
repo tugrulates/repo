@@ -15,7 +15,7 @@
  *
  * @example Search Lonely Planet through the command-line application.
  * ```sh
- * deno run -N jsr:@tugrulates/lonely-planet big sur
+ * deno run -N jsr:@tugrulates/lonely-planet/cli big sur
  * ``
  *
  * @module lonely-planet
@@ -142,7 +142,7 @@ interface Error {
 export function lonelyPlanet(): LonelyPlanet {
   let ts: Typesense;
   return {
-    async *destinations(keywords: string[]): AsyncGenerator<Destination> {
+    destinations: async function* (keywords) {
       if (!ts) ts = await typesense();
       for await (
         const document of search<Destination>(ts, "places", keywords)
@@ -150,13 +150,13 @@ export function lonelyPlanet(): LonelyPlanet {
         yield document as Destination;
       }
     },
-    async *attractions(keywords: string[]): AsyncGenerator<Attraction> {
+    attractions: async function* (keywords) {
       if (!ts) ts = await typesense();
       for await (const document of search<Attraction>(ts, "pois", keywords)) {
         yield document as Attraction;
       }
     },
-    async *stories(keywords: string[]): AsyncGenerator<Story> {
+    stories: async function* (keywords) {
       if (!ts) ts = await typesense();
       for await (const document of search<Story>(ts, "articles", keywords)) {
         yield document as Story;
