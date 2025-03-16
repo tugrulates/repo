@@ -52,22 +52,25 @@ export async function photos(args: string[]): Promise<number> {
 }
 
 async function* inputs(paths: string[]): AsyncGenerator<Photo> {
-  const photos = pooled(paths, async (path) => {
-    try {
-      return await photo(path);
-    } catch (e: unknown) {
-      if (!(e instanceof Deno.errors.NotFound)) throw e;
-      return path;
-    }
-  });
-  for await (const input of photos) {
+  function photos(paths: string[]) {
+    return pooled(paths, async (path) => {
+      try {
+        return await photo(path);
+      } catch (e: unknown) {
+        if (!(e instanceof Deno.errors.NotFound)) throw e;
+        return path;
+      }
+    });
+  }
+  for await (const input of photos(paths)) {
     if (typeof input !== "string") yield input;
     if (typeof input !== "string") continue;
-    for await (const path of Deno.readDir(input)) {
-      if (!path.isDirectory) continue;
-      for await (const photo of inputs([join(input, path.name)])) {
-        yield photo;
-      }
+    const paths = (await Array.fromAsync(Deno.readDir(input)))
+      .filter((path) => path.isDirectory)
+      .map((path) => join(input, path.name))
+      .toSorted();
+    for await (const input of photos(paths)) {
+      if (typeof input !== "string") yield input;
     }
   }
 }

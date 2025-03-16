@@ -14,8 +14,8 @@ snapshot[`photos [photo] 1`] = `
 
 snapshot[`photos [directory] 1`] = `
 "
-🖼  Photo 2 [[33mmissing:model[39m]
 🖼  Photo 1
+🖼  Photo 2 [[33mmissing:model[39m]
 "
 `;
 
