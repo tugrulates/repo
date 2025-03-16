@@ -1,35 +1,33 @@
 // deno-lint-ignore-file no-console
+/**
+ * Command-line interface for the `500px` client.
+ *
+ * @module cli
+ */
+
 import { Command, EnumType } from "@cliffy/command";
 import { Table } from "@cliffy/table";
 import { displayVersion } from "@roka/package/version";
-import { FiveHundredPxClient } from "./client.ts";
-import { CATEGORIES } from "./data.ts";
-import type { Photo } from "./types.ts";
+import { CATEGORIES, fiveHundredPx, type Photo } from "./500px.ts";
 
-/**
- * Skip list for user IDs.
- *
- * Skips photos copied from VCG.
- */
-const SKIP = [/^\/vcg-/];
-
-/**
- * Outputs the photos to the console.
- *
- * @param photos Photos to output.
- */
-function output(photos: Photo[]) {
-  new Table()
-    .body(photos.map((photo) => [
-      `🏞️ ${photo.name}`,
-      `📈${photo.pulse.highest}`,
-      `❤️ ${photo.likedByUsers.totalCount}`,
-      `👁️ ${photo.timesViewed}`,
-    ]))
-    .render();
+/** CLI entrypoint. */
+export async function cli(args: string[]): Promise<number> {
+  const command = new Command()
+    .name("500px")
+    .description("Interact with 500px.")
+    .usage("<command> [options]")
+    .version(await displayVersion())
+    .action((): void => command.showHelp())
+    .command("discover", discoverCommand())
+    .command("follows", followsCommand())
+    .command("photos", photosCommand());
+  await command.parse(args);
+  return 0;
 }
 
-function getDiscoverCommand() {
+function discoverCommand() {
+  // skips photos copied from VCG
+  const skip = [/^\/vcg-/];
   return new Command()
     .description("Prints a list of active and high quality users on 500px.")
     .example(
@@ -53,17 +51,17 @@ function getDiscoverCommand() {
       const categories = Object.values(CATEGORIES).filter((c) =>
         !category || category.includes(c.opt)
       );
-      const client = new FiveHundredPxClient();
-      const photos = await client.getForYouFeed({ categories, limit: 1000 });
+      const client = fiveHundredPx();
+      const photos = await client.forYouFeed({ categories, limit: 1000 });
       const users = photos.map((photo) => photo.photographer.canonicalPath)
-        .filter((user) => !SKIP.some((re) => re.test(user)));
+        .filter((user) => !skip.some((re) => re.test(user)));
       const result = { discover: Array.from(new Set(users)) };
       if (json) console.log(JSON.stringify(result, undefined, 2));
       else result.discover.forEach((user) => console.log(`👤 ${user}`));
     });
 }
 
-function getFollowsCommand() {
+function followsCommand() {
   return new Command()
     .description("Prints follower information on 500px.")
     .example("500px follows", "Prints follow counts.")
@@ -86,10 +84,10 @@ function getFollowsCommand() {
     .arguments("<username:string>")
     .option("--json", "Output the follower information as JSON.")
     .action(async ({ json }, username) => {
-      const client = new FiveHundredPxClient();
+      const client = fiveHundredPx();
       const [following, followers] = await Promise.all([
-        client.getFollowing(username),
-        client.getFollowers(username),
+        client.following(username),
+        client.followers(username),
       ]);
       const result = {
         following,
@@ -110,7 +108,7 @@ function getFollowsCommand() {
     });
 }
 
-function getPhotosCommand() {
+function photosCommand() {
   return new Command()
     .description("Prints the list of photos for a 500px user.")
     .example("500px photos <username>", "Prints the list of photos for a user.")
@@ -118,29 +116,23 @@ function getPhotosCommand() {
     .arguments("<username:string>")
     .option("--json", "Output the photo information as JSON.")
     .action(async ({ json }, username) => {
-      const client = new FiveHundredPxClient();
-      const photos = await client.getPhotos(username);
+      const client = fiveHundredPx();
+      const photos = await client.photos(username);
 
       if (json) console.log(JSON.stringify(photos, undefined, 2));
       else output(photos);
     });
 }
 
-async function getCommand() {
-  const command = new Command()
-    .name("500px")
-    .description("Interact with 500px.")
-    .usage("<command> [options]")
-    .version(await displayVersion())
-    .action((): void => command.showHelp())
-    .command("discover", getDiscoverCommand())
-    .command("follows", getFollowsCommand())
-    .command("photos", getPhotosCommand());
-  return command;
+function output(photos: Photo[]) {
+  new Table()
+    .body(photos.map((photo) => [
+      `🏞️ ${photo.name}`,
+      `📈${photo.pulse.highest}`,
+      `❤️ ${photo.likedByUsers.totalCount}`,
+      `👁️ ${photo.timesViewed}`,
+    ]))
+    .render();
 }
 
-/** CLI entrypoint. */
-export async function main(args: string[]) {
-  const command = await getCommand();
-  await command.parse(args);
-}
+if (import.meta.main) Deno.exit(await cli(Deno.args));

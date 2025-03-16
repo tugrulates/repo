@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-console
 /**
- * A CLI interface to the `lonely-planet` package.
+ * Command-line interface for the `lonely-planet` client.
  *
  * @module cli
  */

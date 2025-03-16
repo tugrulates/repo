@@ -1,9 +1,9 @@
 // deno-lint-ignore-file no-console
 /**
- * A tool for photography editing and publishing workflows.
+ * Command-line interface for the `photo` library.
  *
- * The binary for `exiftool` is bundled with this library. However, the
- * compiled binary `photos` requires `exiftool` to be present in the system.
+ * The binary for `exiftool` is bundled. However, the binary compiled with
+ * {@link https://jsr.io/@roka/forge | forge} needs `exiftool` installation.
  * For macOS, it can be installed using Homebrew with `brew install exiftool`.
  * For other systems, see the [official website](https://exiftool.org/).
  *
