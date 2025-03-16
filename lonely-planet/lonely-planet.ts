@@ -115,7 +115,7 @@ export interface Image {
   width: number;
   /** Image height in pixels. */
   height: number;
-  /** Image URL. */
+  /** Image title. */
   title: string;
   /** Image URL. */
   url: string;
