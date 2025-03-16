@@ -10,9 +10,9 @@
  * import { photo } from "@tugrulates/photo";
  *
  * async function usage() {
- *   const photo = await photo("path/to/photo");
- *   console.log(photo.title);
- *   console.log(photo.variants);
+ *   const image = await photo("path/to/photo");
+ *   console.log(image.title);
+ *   console.log(image.variants);
  * }
  * ```
  *
