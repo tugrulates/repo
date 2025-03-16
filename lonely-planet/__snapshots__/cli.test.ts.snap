@@ -1,6 +1,6 @@
 export const snapshot = {};
 
-snapshot[`photos [keywords...] 1`] = `
+snapshot[`lonely-planet [keywords...] 1`] = `
 "
 🏳️ The Netherlands                      [ Europe ]                              
 🏞️ Southeastern Netherlands             [ Europe > The Netherlands ]            
@@ -24,7 +24,7 @@ snapshot[`photos [keywords...] 1`] = `
 "
 `;
 
-snapshot[`photos [keywords...] --json 1`] = `
+snapshot[`lonely-planet [keywords...] --json 1`] = `
 \`
 {"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"}],"excerpt":"Tradition and innovation intertwine here: artistic masterpieces, centuries-old windmills, tulip fields and romantic candlelit cafés coexist with visionary architecture, cutting-edge design and phenomenal nightlife.","featuredImage":{"alt":"Traditional dutch windmills and houses near the canal in Zaanstad village, Zaanse Schans, Netherlands.","caption":"Traditional dutch windmills and houses near the canal in Zaanstad village, Zaanse Schans, Netherlands.","credit":"© Olena_Z/Getty Images/iStockphoto","height":3169,"name":"GettyImages-937057490.jpeg","title":"GettyImages-937057490.jpeg","url":"https://lp-cms-production.imgix.net/2023-03/GettyImages-937057490.jpeg","width":4765},"id":"24256","internalRanking":13.48548,"slug":"the-netherlands","title":"The Netherlands","type":"Country"}
 {"breadcrumb":[{"slug":"europe","title":"Europe","type":"Continent"},{"slug":"the-netherlands","title":"The Netherlands","type":"Country"}],"excerpt":"Things are different below the rivers: the provinces of Noord Brabant and Limburg have a character that's more Catholic, more relaxed, and in the case of southern Limburg, hillier than elsewhere in the Netherlands. Among the obvious southern influences are a preference for good beer and food, as embodied in the concept Bourgondisch: eating and drinking with a verve worthy of the epicurean inhabitants of France's Burgundy.","featuredImage":{"alt":"View over statue of Beeld van Minckelers on markt in Maastricht.\\\\n17th, architecture, attraction, belfort, belfry, benelux, blue, building, century, city, crowd, day, dusk, dutch, europe, european, evening, gathering, hall, historic, history, holland, huge, illumination, landmark, limburg, maastricht, market, netherlands, night, nobody, old, outside, people, pieter, restaurant, scenic, sightseeing, square, tourism, tourist, tower, town, travel, twilight, urban, view","caption":"View over statue of Beeld van Minckelers on markt in Maastricht.\\\\n17th, architecture, attraction, belfort, belfry, benelux, blue, building, century, city, crowd, day, dusk, dutch, europe, european, evening, gathering, hall, historic, history, holland, huge, illumination, landmark, limburg, maastricht, market, netherlands, night, nobody, old, outside, people, pieter, restaurant, scenic, sightseeing, square, tourism, tourist, tower, town, travel, twilight, urban, view","credit":"©pavel dudek/Shutterstock","height":1624,"name":"shutterstockRF303054407.jpg","title":"shutterstockRF303054407.jpg","url":"https://lp-cms-production.imgix.net/2023-09/shutterstockRF303054407.jpg","width":2525},"id":"24546","internalRanking":4.36551,"slug":"the-netherlands/southeastern-netherlands","title":"Southeastern Netherlands","type":"Region"}
@@ -49,7 +49,7 @@ snapshot[`photos [keywords...] --json 1`] = `
 \`
 `;
 
-snapshot[`photos --destinations [keyword] 1`] = `
+snapshot[`lonely-planet --destinations [keyword] 1`] = `
 "
 🏙️ Amsterdam                            [ Europe > The Netherlands ]            
 🏘️ Amsterdam Noord                      [ Europe > The Netherlands > Amsterdam ]
@@ -58,7 +58,7 @@ snapshot[`photos --destinations [keyword] 1`] = `
 "
 `;
 
-snapshot[`photos --attractions [keyword] 1`] = `
+snapshot[`lonely-planet --attractions [keyword] 1`] = `
 "
 🎡 Amsterdam Museum                     [ Europe > The Netherlands > Amsterdam > Medieval Centre & Red Light District > Attractions ]
 🎡 Amsterdam Tulip Museum               [ Europe > The Netherlands > Amsterdam > Jordaan & the West > Attractions ]                  
@@ -254,7 +254,7 @@ snapshot[`photos --attractions [keyword] 1`] = `
 "
 `;
 
-snapshot[`photos --stories [keyword] 1`] = `
+snapshot[`lonely-planet --stories [keyword] 1`] = `
 "
 📰 How to spend the ultimate weekend in Amsterdam                                                                 
 📰 Headed to Amsterdam? Here are 20 top things to do there                                                        
