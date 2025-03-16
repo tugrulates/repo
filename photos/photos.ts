@@ -35,6 +35,7 @@ export async function photos(args: string[]): Promise<number> {
     .option("--sync", "Sync tags from source file to other variants.")
     .option("--json", "Output photo information as JSON.")
     .action(async (options, ...photos) => {
+      if (!photos.length) photos.push(".");
       for await (const photo of inputs(photos)) {
         if (options.sync) await sync(photo);
         if (options.json) console.log(JSON.stringify(photo, null, 2));
