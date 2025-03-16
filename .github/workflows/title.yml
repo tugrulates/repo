@@ -15,6 +15,7 @@ jobs:
   title:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ vars.PACKAGES }}
       - uses: amannn/action-semantic-pull-request@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,8 +32,4 @@ jobs:
             revert
             style
             test
-          scopes: |
-            500px
-            duolingo
-            lonely-planet
-            photos
+          scopes: ${{ vars.PACKAGES }}
