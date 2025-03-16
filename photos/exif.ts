@@ -103,20 +103,28 @@ export async function exif(src: string): Promise<Exif> {
 
 /** Write tags to a photo file. */
 export async function write(path: string, options?: WriteOptions) {
-  const exiftool = await manager.get();
-  const tags = omit(options ?? {}, ["source"]);
-  const result = await exiftool.write(path, {}, {
-    writeArgs: [
-      ...options?.source ? ["-tagsfromfile", options.source, "-all"] : [],
-      "-overwrite_original_in_place",
-      ...Object.keys(tags).map((key) => `-${MAPPING[key as keyof Exif]?.tag}=`),
-      ...Object.entries(tags).map(([key, value]) =>
-        (Array.isArray(value) ? value : [value])
-          .map((x) => `-${MAPPING[key as keyof Exif]?.tag}=${x}`)
-      ).flat(),
-    ],
-  });
-  assertEquals(result.updated, 1);
+  const temp = await Deno.makeTempFile();
+  try {
+    const exiftool = await manager.get();
+    const tags = omit(options ?? {}, ["source"]);
+    const result = await exiftool.write(temp, {}, {
+      writeArgs: [
+        ...options?.source ? ["-tagsfromfile", options.source, "-all"] : [],
+        "-overwrite_original_in_place",
+        ...Object.keys(tags).map((key) =>
+          `-${MAPPING[key as keyof Exif]?.tag}=`
+        ),
+        ...Object.entries(tags).map(([key, value]) =>
+          (Array.isArray(value) ? value : [value])
+            .map((x) => `-${MAPPING[key as keyof Exif]?.tag}=${x}`)
+        ).flat(),
+      ],
+    });
+    assertEquals(result.updated, 1);
+    await Deno.copyFile(temp, path);
+  } finally {
+    await Deno.remove(temp);
+  }
 }
 
 interface PhotoTags extends Tags {
