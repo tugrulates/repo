@@ -8,7 +8,7 @@
     "./testing": "./testing.ts"
   },
   "compile": {
-    "main": "photos.ts",
+    "main": "cli.ts",
     "permissions": {
       "read": true,
       "write": true,
