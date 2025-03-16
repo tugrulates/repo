@@ -7,6 +7,6 @@ duolingo:
 lonely-planet:
   - changed-files:
       - any-glob-to-any-file: lonely-planet/**
-photos:
+photo:
   - changed-files:
-      - any-glob-to-any-file: photos/**
+      - any-glob-to-any-file: photo/**

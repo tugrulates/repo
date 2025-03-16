@@ -12,7 +12,7 @@ on:
           - 500px
           - duolingo
           - lonely-planet
-          - photos
+          - photo
       prerelease:
         description: "Pre-release"
         required: false

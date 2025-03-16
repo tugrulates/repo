@@ -2,9 +2,9 @@ import { tempDirectory } from "@roka/testing/temp";
 import { assertEquals, assertExists } from "@std/assert";
 import { copy } from "@std/fs";
 import { basename, dirname, join } from "@std/path";
-import { write } from "@tugrulates/photos/exif";
-import { check, photo, sync } from "@tugrulates/photos/photo";
-import { tempPhoto } from "@tugrulates/photos/testing";
+import { write } from "./exif.ts";
+import { check, photo, sync } from "./photo.ts";
+import { tempPhoto } from "./testing.ts";
 
 Deno.test("photo() can load from an image file", {
   sanitizeOps: false,

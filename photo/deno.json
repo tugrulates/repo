@@ -1,14 +1,14 @@
 {
-  "name": "@tugrulates/photos",
-  "version": "0.1.5",
+  "name": "@tugrulates/photo",
+  "version": "0.0.0",
   "exports": {
-    ".": "./photos.ts",
+    ".": "./photo.ts",
+    "./cli": "./cli.ts",
     "./exif": "./exif.ts",
-    "./photo": "./photo.ts",
     "./testing": "./testing.ts"
   },
   "compile": {
-    "main": "photos.ts",
+    "main": "cli.ts",
     "permissions": {
       "read": true,
       "write": true,

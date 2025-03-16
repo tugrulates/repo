@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
-import { type Exif, exif, write } from "@tugrulates/photos/exif";
-import { tempPhoto } from "@tugrulates/photos/testing";
+import { type Exif, exif, write } from "./exif.ts";
+import { tempPhoto } from "./testing.ts";
 
 function testExif() {
   return {

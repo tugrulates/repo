@@ -4,9 +4,9 @@ import { assertExists } from "@std/assert";
 import { copy } from "@std/fs/copy";
 import { dirname } from "@std/path";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { photos } from "@tugrulates/photos";
-import { write } from "@tugrulates/photos/exif";
-import { tempPhoto } from "@tugrulates/photos/testing";
+import { photos } from "./cli.ts";
+import { write } from "./exif.ts";
+import { tempPhoto } from "./testing.ts";
 
 const TESTS = [
   "[file]",

@@ -14,7 +14,7 @@ on:
           - 500px
           - duolingo
           - lonely-planet
-          - photos
+          - photo
 
 permissions:
   contents: write

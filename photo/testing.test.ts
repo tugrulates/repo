@@ -5,8 +5,8 @@ import {
   assertRejects,
 } from "@std/assert";
 import { omit } from "@std/collections/omit";
-import { check } from "@tugrulates/photos/photo";
-import { tempPhoto } from "@tugrulates/photos/testing";
+import { check } from "./photo.ts";
+import { tempPhoto } from "./testing.ts";
 
 Deno.test("testPhoto() returns a photo", {
   sanitizeOps: false,
