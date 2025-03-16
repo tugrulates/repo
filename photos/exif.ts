@@ -104,6 +104,7 @@ export async function exif(src: string): Promise<Exif> {
 /** Write tags to a photo file. */
 export async function write(path: string, options?: WriteOptions) {
   const temp = await Deno.makeTempFile();
+  await Deno.copyFile(path, temp);
   try {
     const exiftool = await manager.get();
     const tags = omit(options ?? {}, ["source"]);
@@ -123,6 +124,7 @@ export async function write(path: string, options?: WriteOptions) {
     assertEquals(result.updated, 1);
     await Deno.copyFile(temp, path);
   } finally {
+    // remove when https://github.com/denoland/deno/issues/28440 is fixed
     await Deno.remove(temp);
   }
 }
