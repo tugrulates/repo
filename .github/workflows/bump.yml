@@ -44,7 +44,7 @@ jobs:
           if [ "${{ inputs.prerelease }}" != "true" ]; then
             ARGS="--release --changelog=CHANGELOG.md"
           fi
-          deno run -A jsr:@roka/forge $PACKAGE $ARGS --pr --emoji
+          deno run -A jsr:@roka/forge bump $PACKAGE $ARGS --pr --emoji
         env:
           GIT_NAME: "${{ github.actor }}"
           GIT_EMAIL: "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
