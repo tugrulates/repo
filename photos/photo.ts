@@ -1,5 +1,5 @@
 /**
- * This modules provides operations on {@linkcode Photo} objects.
+ * This module provides operations on {@linkcode Photo} objects.
  *
  * @todo Deduce source file name automatically from dimensions.
  *

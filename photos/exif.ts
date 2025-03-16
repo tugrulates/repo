@@ -1,5 +1,5 @@
 /**
- * This modules provides operations to work with EXIF (Exchangeable Image File
+ * This module provides operations to work with EXIF (Exchangeable Image File
  * Format) tags on image files.
  *
  * @module exif
