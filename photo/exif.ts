@@ -17,35 +17,35 @@ import { ExifDateTime, ExifTool, type Tags } from "exiftool-vendored";
  */
 export interface Exif {
   /** The pixel width of the photo. */
-  width?: number | undefined;
+  width?: number;
   /** The pixel height of the photo. */
-  height?: number | undefined;
+  height?: number;
   /** The title of the photo. */
-  title?: string | undefined;
+  title?: string;
   /** Text describing the contents of the photo. */
-  description?: string | undefined;
+  description?: string;
   /** Keywords for findability. */
-  keywords?: string[] | undefined;
+  keywords?: string[];
   /** The date the photo was taken. */
-  date?: string | undefined;
+  date?: string;
   /** The location where the photo was taken. */
-  location?: string | undefined;
+  location?: string;
   /** The city that the photo was taken in. */
-  city?: string | undefined;
+  city?: string;
   /** The state that the photo was taken in. */
-  state?: string | undefined;
+  state?: string;
   /** The country that the photo was taken in. */
-  country?: string | undefined;
+  country?: string;
   /** The make of the camera or phone used to take the photo. */
-  make?: string | undefined;
+  make?: string;
   /** The model of the camera or phone used to take the photo. */
-  model?: string | undefined;
+  model?: string;
   /** Lens properties that were used to take the photo. */
-  lens?: string | undefined;
+  lens?: string;
   /** The software used to edit the photo. */
-  software?: string | undefined;
+  software?: string;
   /** The license of the photo. */
-  license?: string | undefined;
+  license?: string;
 }
 
 /** Options for the {@linkcode write} function. */

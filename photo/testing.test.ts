@@ -46,7 +46,7 @@ Deno.test("testPhoto() returns a disposable photo", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async () => {
-  let path = null;
+  let path: string;
   {
     await using photo = await tempPhoto();
     path = photo.path;
