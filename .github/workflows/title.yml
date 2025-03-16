@@ -7,15 +7,21 @@ on:
       - reopened
       - edited
       - synchronize
+  workflow_dispatch:
 
 permissions:
   pull-requests: read
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo ${{ vars.PACKAGES }}
+
   title:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ vars.PACKAGES }}
       - uses: amannn/action-semantic-pull-request@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
