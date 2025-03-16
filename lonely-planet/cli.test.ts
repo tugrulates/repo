@@ -13,7 +13,7 @@ const TESTS = [
 ];
 
 for (const test of TESTS) {
-  Deno.test(`photos ${test}`, {
+  Deno.test(`lonely-planet ${test}`, {
     sanitizeOps: false,
     sanitizeResources: false,
   }, async (t) => {
