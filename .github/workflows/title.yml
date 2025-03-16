@@ -31,8 +31,4 @@ jobs:
             revert
             style
             test
-          scopes: |
-            500px
-            duolingo
-            lonely-planet
-            photos
+          scopes: ${{ vars.PACKAGES }}
