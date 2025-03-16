@@ -45,7 +45,7 @@
     "@david/which": "jsr:@david/which@^0.4.1",
     "@roka/async": "jsr:@roka/async@^0.2.0",
     "@roka/cli": "jsr:@roka/cli@^0.2.0",
-    "@roka/forge": "jsr:@roka/forge@^0.1.1",
+    "@roka/forge": "jsr:@roka/forge@^0.1.3",
     "@roka/http": "jsr:@roka/http@^0.2.1",
     "@roka/package": "jsr:@roka/package@^0.0.1",
     "@roka/testing": "jsr:@roka/testing@^0.2.0",
@@ -58,6 +58,6 @@
     "@std/text": "jsr:@std/text@^1.0.10",
     "exiftool-vendored": "npm:exiftool-vendored@^29.2.0",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.25.0",
-    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.0"
+    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.1"
   }
 }
