@@ -3,7 +3,8 @@
   "version": "0.2.0",
   "exports": {
     ".": "./duolingo.ts",
-    "./cli": "./cli.ts"
+    "./cli": "./cli.ts",
+    "./emoji": "./emoji.ts"
   },
   "compile": {
     "main": "cli.ts",
