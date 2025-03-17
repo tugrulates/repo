@@ -11,6 +11,7 @@ import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
 import { type Config, config } from "@roka/cli/config";
 import { version } from "@roka/forge/version";
+import { escape } from "@std/html";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
@@ -23,6 +24,12 @@ export interface CliOptions {
   config?: string;
 }
 
+/**
+ * Run the `duolingo` tool with the given command-line arguments.
+ *
+ * @param args Command-line arguments.
+ * @returns The exit code of the command.
+ */
 export async function cli(
   args: string[],
   options?: CliOptions,
@@ -70,11 +77,14 @@ export async function cli(
 
 function feedCommand(cfg: Config<DuolingoConfig>) {
   function summary(card: FeedCard): string {
+    function plain(html: string) {
+      return escape(html)
+        .replace(/&lt;.*?&gt;/g, "")
+        .replace(/[\u200E-\u200F]/g, "");
+    }
     return card.header
-      ? card.header
-        .replace(/[\u200E-\u200F]/g, "")
-        .replace(/<[^>]+>/g, "")
-      : `${card.displayName} ${card.body.toLowerCase()}`;
+      ? plain(card.header)
+      : `${card.displayName} ${plain(card.body).toLowerCase()}`;
   }
   return new Command()
     .description("Prints and interacts with the feed.")

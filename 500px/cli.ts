@@ -10,7 +10,12 @@ import { Table } from "@cliffy/table";
 import { displayVersion } from "@roka/package/version";
 import { CATEGORIES, fiveHundredPx, type Photo } from "./500px.ts";
 
-/** CLI entrypoint. */
+/**
+ * Run the `500px` tool with the given command-line arguments.
+ *
+ * @param args Command-line arguments.
+ * @returns The exit code of the command.
+ */
 export async function cli(args: string[]): Promise<number> {
   const command = new Command()
     .name("500px")

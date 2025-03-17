@@ -6,7 +6,7 @@
  * ```ts
  * import { duolingo } from "@tugrulates/duolingo";
  *
- * async function usage() {
+ * async function usage(username: string, token: string) {
  *   const api = duolingo({ username, token });
  *   for (const card of await api.feed()) {
  *     console.log(card);
@@ -300,6 +300,7 @@ export const LANGUAGES = {
   zu: "Zulu",
 } as const;
 
+/** Creates a Duolingo API client. */
 export function duolingo(options?: DuolingoOptions): Duolingo {
   const api = client("https://www.duolingo.com", options);
   let me: User | undefined = undefined;
