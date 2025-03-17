@@ -1,9 +1,13 @@
 {
   "name": "@tugrulates/duolingo",
   "version": "0.2.0",
-  "exports": "./mod.ts",
+  "exports": {
+    ".": "./duolingo.ts",
+    "./cli": "./cli.ts",
+    "./emoji": "./emoji.ts"
+  },
   "compile": {
-    "main": "mod.ts",
+    "main": "cli.ts",
     "kv": true,
     "permissions": {
       "read": true,
