@@ -51,6 +51,9 @@ export async function cli(args: string[]): Promise<number> {
           options.destinations = true;
         }
         const client = lonelyPlanet();
+        function breadcrumb(document: Destination | Attraction) {
+          return `[ ${document.breadcrumb.map((x) => x.title).join(" > ")} ]`;
+        }
         const rows: string[][] = [];
         if (options.destinations) {
           for await (const doc of client.destinations(keywords)) {
@@ -74,12 +77,6 @@ export async function cli(args: string[]): Promise<number> {
       },
     ).parse(args);
   return 0;
-}
-
-function breadcrumb(document: Destination | Attraction) {
-  return `[ ${
-    document.breadcrumb.map((breadcrumb) => breadcrumb.title).join(" > ")
-  } ]`;
 }
 
 if (import.meta.main) Deno.exit(await cli(Deno.args));

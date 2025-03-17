@@ -35,6 +35,29 @@ export async function photos(args: string[]): Promise<number> {
     .option("--sync", "Sync tags from source file to other variants.")
     .option("--json", "Output photo information as JSON.")
     .action(async (options, ...photos) => {
+      async function* inputs(paths: string[]): AsyncGenerator<Photo> {
+        function photos(paths: string[]) {
+          return pooled(paths, async (path) => {
+            try {
+              return await photo(path);
+            } catch (e: unknown) {
+              if (!(e instanceof Deno.errors.NotFound)) throw e;
+              return path;
+            }
+          });
+        }
+        for await (const input of photos(paths)) {
+          if (typeof input !== "string") yield input;
+          if (typeof input !== "string") continue;
+          const paths = (await Array.fromAsync(Deno.readDir(input)))
+            .filter((path) => path.isDirectory)
+            .map((path) => join(input, path.name))
+            .toSorted();
+          for await (const input of photos(paths)) {
+            if (typeof input !== "string") yield input;
+          }
+        }
+      }
       if (!photos.length) photos.push(".");
       for await (const photo of inputs(photos)) {
         if (options.sync) await sync(photo);
@@ -50,30 +73,6 @@ export async function photos(args: string[]): Promise<number> {
     })
     .parse(args);
   return 0;
-}
-
-async function* inputs(paths: string[]): AsyncGenerator<Photo> {
-  function photos(paths: string[]) {
-    return pooled(paths, async (path) => {
-      try {
-        return await photo(path);
-      } catch (e: unknown) {
-        if (!(e instanceof Deno.errors.NotFound)) throw e;
-        return path;
-      }
-    });
-  }
-  for await (const input of photos(paths)) {
-    if (typeof input !== "string") yield input;
-    if (typeof input !== "string") continue;
-    const paths = (await Array.fromAsync(Deno.readDir(input)))
-      .filter((path) => path.isDirectory)
-      .map((path) => join(input, path.name))
-      .toSorted();
-    for await (const input of photos(paths)) {
-      if (typeof input !== "string") yield input;
-    }
-  }
 }
 
 if (import.meta.main) Deno.exit(await photos(Deno.args));

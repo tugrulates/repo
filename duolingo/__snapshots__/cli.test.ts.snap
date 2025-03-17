@@ -1,0 +1,147 @@
+export const snapshot = {};
+
+snapshot[`duolingo feed 1`] = `
+"
+🎉 Regulita came back to learn spanish after 1 month!
+🎉 Queenie finished top 3 on the leaderboard and was promoted to the diamond league!
+🎉 sosoxchanel@ collected the march badge!
+💖 Debbie finished top 3 in the diamond league 16 times!
+💖 Atayvia Roberts finished #1 in the diamond league 4 times!
+💖 Denver finished top 3 in the diamond league 45 times!
+💖 Josa Fav finished top 3 in the diamond league 39 times!
+💖 Lorena finished top 3 on the leaderboard and was promoted to the emerald league!
+🎉 Arlette did more than 10 lessons in a day!
+💖 Naysú finished #1 in the diamond league 6 times!
+💖 GULCAN finished #1 in the diamond league 66 times!
+💖 Victor Hugo finished #1 in the diamond league 7 times!
+🎉 Bonnie Alexander did more than 10 lessons in a day!
+💯 おさるのジョージ completed a 3400 day streak!
+💖 Svitlana Nabivach finished top 3 in the diamond league 27 times!
+💖 Paul BOHOLE was promoted to the obsidian league!
+💖 AŽ finished top 3 on the leaderboard and was promoted to the pearl league!
+💖 Abdullah Shosha finished top 3 on the leaderboard and was promoted to the gold league!
+💖 Crodragon finished top 3 on the leaderboard and was promoted to the obsidian league!
+💖 Geral finished top 3 on the leaderboard and was promoted to the diamond league!
+💖 Yeilin Peña finished top 3 on the leaderboard and was promoted to the obsidian league!
+💖 Karine finished top 3 in the diamond league!
+💯 mir learned a total of 2000 words!
+💖 Susi finished top 3 in the diamond league 52 times!
+💖 Petinol finished #1 in the diamond league!
+💪 Santa collected the march badge!
+💪 Sacha collected the march badge!
+💪 Josa Fav collected the march badge!
+🎉 Beyza did more than 10 lessons in a day!
+💯 Валаа Эльхадж completed a 700 day streak!
+💖 Santa finished top 3 on the leaderboard and was promoted to the diamond league!
+💖 Jasper finished top 3 on the leaderboard and was promoted to the diamond league!
+🎉 Atiga did more than 10 lessons in a day!
+💪 L a u r e collected the march badge!
+💖 Юлия finished #1 in the diamond league 29 times!
+💖 Mary finished #1 in the diamond league 2 times!
+💪 Magno Henrique collected the march badge!
+💪 Anémone collected the march badge!
+💖 frankrae finished #1 in the diamond league 3 times!
+💖 Анна finished #1 in the diamond league 18 times!
+🎉 Sony did more than 10 lessons in a day!
+🎉 prinsca mash did more than 10 lessons in a day!
+💪 Hans Svendsen collected the march badge!
+🎉 ELISEI_RO 7 did more than 10 lessons in a day!
+🎉 Yeilin Peña did more than 10 lessons in a day!
+🎉 mir completed 5 friends quests in a row!
+🎉 mir did more than 10 lessons in a day!
+🎉 Anna completed a 125 day streak!
+"
+`;
+
+snapshot[`duolingo feed --engage 1`] = `
+"
+🎉 Regulita came back to learn spanish after 1 month!
+🎉 Queenie finished top 3 on the leaderboard and was promoted to the diamond league!
+🎉 sosoxchanel@ collected the march badge!
+"
+`;
+
+snapshot[`duolingo follows 1`] = `
+"
+👤 Following 400 people.
+👤 Followed by 395 people.
+"
+`;
+
+snapshot[`duolingo follows --follow 1`] = `
+"
+👤 Following 400 people.
+👤 Followed by 395 people.
+"
+`;
+
+snapshot[`duolingo follows --unfollow 1`] = `
+"
+❌ Unfollowed Carmen227854.
+❌ Unfollowed Maga292126..
+❌ Unfollowed MamukaBeri2.
+❌ Unfollowed ywxZ14.
+❌ Unfollowed mokb_IT_security.
+❌ Unfollowed GinaJara.
+❌ Unfollowed JohnLikesKetchup.
+❌ Unfollowed Computerte15.
+❌ Unfollowed MustafaAli586337.
+❌ Unfollowed Nurullah814.
+❌ Unfollowed Lololo124.
+❌ Unfollowed chiedum344211233.
+❌ Unfollowed loan_gmsblay11.
+❌ Unfollowed saraisabely__.
+❌ Unfollowed riwo868.
+❌ Unfollowed .Paluten.
+👤 Following 400 people.
+👤 Followed by 395 people.
+"
+`;
+
+snapshot[`duolingo league 1`] = `
+"
+🖤  Grandmaster League        
+ 1. Bernadette          102 XP
+ 2. Karin Ytsma          81 XP
+ 3. ClaudiaB             70 XP
+ 4. PikaPika1312 😺      50 XP
+ 5. Vesela Ognyanova     45 XP
+ 6. misqsqs 🇫🇷           39 XP
+ 7. Diane Rawlinson      39 XP
+ 8. Catherine            35 XP
+ 9. Klaus                34 XP
+10. Res                  34 XP
+11. Luisa Scholz         30 XP
+12. Anaël                29 XP
+13. Voldie Nsona 🍿      27 XP
+14. Mela Schwalbe 🇯🇵     26 XP
+15. Tuğrul 👀            20 XP
+16. Nadzia 🍿            13 XP
+17. jo kibble            10 XP
+18. Lucie                10 XP
+"
+`;
+
+snapshot[`duolingo league --follow 1`] = `
+"
+🖤  Grandmaster League        
+ 1. Bernadette          102 XP
+ 2. Karin Ytsma          81 XP
+ 3. ClaudiaB             70 XP
+ 4. PikaPika1312 😺      50 XP
+ 5. Vesela Ognyanova     45 XP
+ 6. misqsqs 🇫🇷           39 XP
+ 7. Diane Rawlinson      39 XP
+ 8. Catherine            35 XP
+ 9. Klaus                34 XP
+10. Res                  34 XP
+11. Luisa Scholz         30 XP
+12. Anaël                29 XP
+13. Voldie Nsona 🍿      27 XP
+14. Mela Schwalbe 🇯🇵     26 XP
+15. Tuğrul 👀            20 XP
+16. Nadzia 🍿            13 XP
+17. jo kibble            10 XP
+18. Lucie                10 XP
+"
+`;

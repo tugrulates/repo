@@ -109,6 +109,16 @@ function followsCommand() {
 }
 
 function photosCommand() {
+  function output(photos: Photo[]) {
+    new Table()
+      .body(photos.map((photo) => [
+        `🏞️ ${photo.name}`,
+        `📈${photo.pulse.highest}`,
+        `❤️ ${photo.likedByUsers.totalCount}`,
+        `👁️ ${photo.timesViewed}`,
+      ]))
+      .render();
+  }
   return new Command()
     .description("Prints the list of photos for a 500px user.")
     .example("500px photos <username>", "Prints the list of photos for a user.")
@@ -122,17 +132,6 @@ function photosCommand() {
       if (json) console.log(JSON.stringify(photos, undefined, 2));
       else output(photos);
     });
-}
-
-function output(photos: Photo[]) {
-  new Table()
-    .body(photos.map((photo) => [
-      `🏞️ ${photo.name}`,
-      `📈${photo.pulse.highest}`,
-      `❤️ ${photo.likedByUsers.totalCount}`,
-      `👁️ ${photo.timesViewed}`,
-    ]))
-    .render();
 }
 
 if (import.meta.main) Deno.exit(await cli(Deno.args));
