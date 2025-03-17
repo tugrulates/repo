@@ -23,6 +23,7 @@ for (const test of TESTS) {
     using fetch = mockFetch(t);
     let config: string[] = [];
     if (fetch.mode === "replay") {
+      // use ENV variables for recording, but fake credentials for replay
       config = ["--username", "TugrulAtes", "--token", "token"];
     }
     const args = test.split(" ");
