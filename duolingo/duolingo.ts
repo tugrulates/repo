@@ -8,7 +8,7 @@
  *
  * async function usage(username: string, token: string) {
  *   const api = duolingo({ username, token });
- *   for (const card of await api.feed()) {
+ *   for (const card of await api.feed.get()) {
  *     console.log(card);
  *   }
  * }
