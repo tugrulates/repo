@@ -36,6 +36,7 @@ export async function cli(
   options?: CliOptions,
 ): Promise<number> {
   const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
+  if (options) await cfg.set(options);
   const { username, token } = await cfg.get();
   const cmd = new Command()
     .name("duolingo")
