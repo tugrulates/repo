@@ -303,7 +303,7 @@ export const LANGUAGES = {
 /** Creates a Duolingo API client. */
 export function duolingo(options?: DuolingoOptions): Duolingo {
   const api = client("https://www.duolingo.com", options);
-  let me: User | undefined = undefined;
+  let me: User;
   const duolingo: Duolingo = {
     users: {
       get: async (id) => {
