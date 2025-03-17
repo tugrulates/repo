@@ -20,8 +20,8 @@ type DuolingoConfig = { username: string; token: string };
 
 /** Options for the {@linkcode cli} function. */
 export interface CliOptions {
-  /** Use given configuration file of the default one. */
-  config?: string;
+  /** Use given configuration instead of the default one. */
+  config?: Config<DuolingoConfig>;
 }
 
 /**
@@ -34,9 +34,7 @@ export async function cli(
   args: string[],
   options?: CliOptions,
 ): Promise<number> {
-  const cfg = config<DuolingoConfig>({
-    ...options?.config && { path: options.config },
-  });
+  const cfg = options?.config ?? config<DuolingoConfig>();
   const { username, token } = await cfg.get();
   await new Command()
     .name("duolingo")
