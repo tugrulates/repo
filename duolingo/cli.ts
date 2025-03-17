@@ -16,7 +16,8 @@ import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
 
-type DuolingoConfig = { username: string; token: string };
+/** User configuration for the `duolingo` tool. */
+export type DuolingoConfig = { username: string; token: string };
 
 /** Options for the {@linkcode cli} function. */
 export interface CliOptions {
