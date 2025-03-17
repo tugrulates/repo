@@ -16,16 +16,26 @@ import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
 
-type DuolingoConfig = { username: string; token: string };
+/** Options for the {@link cli} function. */
+export type CliOptions = {
+  /** Duolingo username. */
+  username?: string;
+  /** Duolingo JWT token. */
+  token?: string;
+};
 
 /**
  * Run the `duolingo` tool with the given command-line arguments.
  *
  * @param args Command-line arguments.
+ * @param options Use given config instead of the default user config.
  * @returns The exit code of the command.
  */
-export async function cli(args: string[]): Promise<number> {
-  const cfg = config<DuolingoConfig>();
+export async function cli(
+  args: string[],
+  options?: CliOptions,
+): Promise<number> {
+  const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
   const { username, token } = await cfg.get();
   const cmd = new Command()
     .name("duolingo")
@@ -80,7 +90,7 @@ export async function cli(args: string[]): Promise<number> {
   return 0;
 }
 
-function feedCommand(cfg: Config<DuolingoConfig>) {
+function feedCommand(cfg: Config<CliOptions>) {
   function summary(card: FeedCard): string {
     function plain(html: string) {
       return escape(html)
@@ -133,7 +143,7 @@ function feedCommand(cfg: Config<DuolingoConfig>) {
     });
 }
 
-function followsCommand(config: Config<DuolingoConfig>) {
+function followsCommand(config: Config<CliOptions>) {
   return new Command()
     .description("Prints and manages follower information on Duolingo.")
     .example("duolingo follows", "Prints follow counts.")
@@ -194,7 +204,7 @@ function followsCommand(config: Config<DuolingoConfig>) {
     });
 }
 
-function leagueCommand(config: Config<DuolingoConfig>) {
+function leagueCommand(config: Config<CliOptions>) {
   return new Command()
     .description("Prints and interacts with the current Duolingo league.")
     .example("duolingo league", "Prints the league.")
@@ -230,7 +240,7 @@ function leagueCommand(config: Config<DuolingoConfig>) {
     });
 }
 
-async function api(cfg: Config<DuolingoConfig>): Promise<Duolingo> {
+async function api(cfg: Config<CliOptions>): Promise<Duolingo> {
   let { username, token } = await cfg.get();
   if (!username) username = await Input.prompt("Username");
   if (!token) token = await Secret.prompt("Token");
