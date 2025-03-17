@@ -2,9 +2,12 @@ export const snapshot = {};
 
 snapshot[`duolingo feed 1`] = `
 "
-🎉 Regulita came back to learn spanish after 1 month!
-🎉 Queenie finished top 3 on the leaderboard and was promoted to the diamond league!
-🎉 sosoxchanel@ collected the march badge!
+💖 Blake finished top 3 on the leaderboard and was promoted to the emerald league!
+💖 Ana finished top 3 on the leaderboard and was promoted to the pearl league!
+🎉 Tuğrul finished top 3 on the leaderboard and was promoted to the obsidian league!
+🙏 Regulita came back to learn spanish after 1 month!
+💖 Queenie finished top 3 on the leaderboard and was promoted to the diamond league!
+💪 sosoxchanel@ collected the march badge!
 💖 Debbie finished top 3 in the diamond league 16 times!
 💖 Atayvia Roberts finished #1 in the diamond league 4 times!
 💖 Denver finished top 3 in the diamond league 45 times!
@@ -48,16 +51,12 @@ snapshot[`duolingo feed 1`] = `
 🎉 ELISEI_RO 7 did more than 10 lessons in a day!
 🎉 Yeilin Peña did more than 10 lessons in a day!
 🎉 mir completed 5 friends quests in a row!
-🎉 mir did more than 10 lessons in a day!
-🎉 Anna completed a 125 day streak!
 "
 `;
 
 snapshot[`duolingo feed --engage 1`] = `
 "
-🎉 Regulita came back to learn spanish after 1 month!
-🎉 Queenie finished top 3 on the leaderboard and was promoted to the diamond league!
-🎉 sosoxchanel@ collected the march badge!
+
 "
 `;
 
@@ -77,22 +76,6 @@ snapshot[`duolingo follows --follow 1`] = `
 
 snapshot[`duolingo follows --unfollow 1`] = `
 "
-❌ Unfollowed Carmen227854.
-❌ Unfollowed Maga292126..
-❌ Unfollowed MamukaBeri2.
-❌ Unfollowed ywxZ14.
-❌ Unfollowed mokb_IT_security.
-❌ Unfollowed GinaJara.
-❌ Unfollowed JohnLikesKetchup.
-❌ Unfollowed Computerte15.
-❌ Unfollowed MustafaAli586337.
-❌ Unfollowed Nurullah814.
-❌ Unfollowed Lololo124.
-❌ Unfollowed chiedum344211233.
-❌ Unfollowed loan_gmsblay11.
-❌ Unfollowed saraisabely__.
-❌ Unfollowed riwo868.
-❌ Unfollowed .Paluten.
 👤 Following 400 people.
 👤 Followed by 395 people.
 "
@@ -101,22 +84,22 @@ snapshot[`duolingo follows --unfollow 1`] = `
 snapshot[`duolingo league 1`] = `
 "
 🖤  Grandmaster League        
- 1. Bernadette          102 XP
- 2. Karin Ytsma          81 XP
- 3. ClaudiaB             70 XP
- 4. PikaPika1312 😺      50 XP
- 5. Vesela Ognyanova     45 XP
- 6. misqsqs 🇫🇷           39 XP
- 7. Diane Rawlinson      39 XP
- 8. Catherine            35 XP
- 9. Klaus                34 XP
-10. Res                  34 XP
-11. Luisa Scholz         30 XP
-12. Anaël                29 XP
-13. Voldie Nsona 🍿      27 XP
-14. Mela Schwalbe 🇯🇵     26 XP
-15. Tuğrul 👀            20 XP
-16. Nadzia 🍿            13 XP
+ 1. ClaudiaB            919 XP
+ 2. Res                 824 XP
+ 3. misqsqs 🇫🇷          816 XP
+ 4. PikaPika1312 😺     519 XP
+ 5. Diane Rawlinson     344 XP
+ 6. Bernadette          318 XP
+ 7. Karin Ytsma         165 XP
+ 8. Vesela Ognyanova    157 XP
+ 9. Nadzia 🍿           150 XP
+10. Voldie Nsona 🍿     117 XP
+11. Klaus                85 XP
+12. Catherine            70 XP
+13. Anaël                59 XP
+14. Luisa Scholz         30 XP
+15. Mela Schwalbe 🇯🇵     26 XP
+16. Tuğrul 👀            20 XP
 17. jo kibble            10 XP
 18. Lucie                10 XP
 "
@@ -125,22 +108,22 @@ snapshot[`duolingo league 1`] = `
 snapshot[`duolingo league --follow 1`] = `
 "
 🖤  Grandmaster League        
- 1. Bernadette          102 XP
- 2. Karin Ytsma          81 XP
- 3. ClaudiaB             70 XP
- 4. PikaPika1312 😺      50 XP
- 5. Vesela Ognyanova     45 XP
- 6. misqsqs 🇫🇷           39 XP
- 7. Diane Rawlinson      39 XP
- 8. Catherine            35 XP
- 9. Klaus                34 XP
-10. Res                  34 XP
-11. Luisa Scholz         30 XP
-12. Anaël                29 XP
-13. Voldie Nsona 🍿      27 XP
-14. Mela Schwalbe 🇯🇵     26 XP
-15. Tuğrul 👀            20 XP
-16. Nadzia 🍿            13 XP
+ 1. ClaudiaB            919 XP
+ 2. Res                 824 XP
+ 3. misqsqs 🇫🇷          816 XP
+ 4. PikaPika1312 😺     519 XP
+ 5. Diane Rawlinson     344 XP
+ 6. Bernadette          318 XP
+ 7. Karin Ytsma         165 XP
+ 8. Vesela Ognyanova    157 XP
+ 9. Nadzia 🍿           150 XP
+10. Voldie Nsona 🍿     117 XP
+11. Klaus                85 XP
+12. Catherine            70 XP
+13. Anaël                59 XP
+14. Luisa Scholz         30 XP
+15. Mela Schwalbe 🇯🇵     26 XP
+16. Tuğrul 👀            20 XP
 17. jo kibble            10 XP
 18. Lucie                10 XP
 "

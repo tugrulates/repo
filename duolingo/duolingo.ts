@@ -37,9 +37,9 @@ export interface Duolingo {
     /** Return the user ID of the authenticated user. */
     me(): Promise<User>;
     /** Follow a user. */
-    follow(user: User | number): Promise<void>;
+    follow(user: User | number): Promise<boolean>;
     /** Unfollow a user. */
-    unfollow(user: User | number): Promise<void>;
+    unfollow(user: User | number): Promise<boolean>;
   };
   /** Operations on user's follow lists. */
   follows: {
@@ -326,18 +326,20 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
       follow: async (user) => {
         if (typeof user === "number") user = await duolingo.users.get(user);
         const me = await duolingo.users.me();
-        await api.post(
+        const result = await api.post<{ successful: boolean }>(
           `/2017-06-30/friends/users/${me.userId}/follow/${user.userId}`,
           {},
         );
+        return result.successful ?? false;
       },
       unfollow: async (user) => {
         if (typeof user === "number") user = await duolingo.users.get(user);
         const me = await duolingo.users.me();
-        await api.post(
+        const result = await api.post<{ successful: boolean }>(
           `/2017-06-30/friends/users/${me.userId}/follow/${user.userId}`,
           {},
         );
+        return result.successful ?? false;
       },
     },
     follows: {

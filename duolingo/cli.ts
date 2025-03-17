@@ -159,8 +159,8 @@ function followsCommand(config: Config<DuolingoConfig>) {
             result.notFollowingBack,
             async (user) => {
               if (user.canFollow) {
-                await client.users.follow(user);
-                if (!json) console.log(`✅ Followed ${user.username}.`);
+                const ok = await client.users.follow(user);
+                if (!json && ok) console.log(`✅ Followed ${user.username}.`);
               }
             },
             { concurrency: 1 },
@@ -170,8 +170,8 @@ function followsCommand(config: Config<DuolingoConfig>) {
           await pool(
             result.dontFollowBack,
             async (user) => {
-              await client.users.unfollow(user);
-              if (!json) console.log(`❌ Unfollowed ${user.username}.`);
+              const ok = await client.users.unfollow(user);
+              if (!json && ok) console.log(`❌ Unfollowed ${user.username}.`);
             },
             { concurrency: 1 },
           );
