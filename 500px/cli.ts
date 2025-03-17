@@ -5,7 +5,7 @@
  * @module cli
  */
 
-import { Command, EnumType } from "@cliffy/command";
+import { Command, EnumType, ValidationError } from "@cliffy/command";
 import { Table } from "@cliffy/table";
 import { displayVersion } from "@roka/package/version";
 import { CATEGORIES, fiveHundredPx, type Photo } from "./500px.ts";
@@ -17,16 +17,32 @@ import { CATEGORIES, fiveHundredPx, type Photo } from "./500px.ts";
  * @returns The exit code of the command.
  */
 export async function cli(args: string[]): Promise<number> {
-  const command = new Command()
+  const cmd = new Command()
     .name("500px")
     .description("Interact with 500px.")
     .usage("<command> [options]")
     .version(await displayVersion())
-    .action((): void => command.showHelp())
+    .action((): void => cmd.showHelp())
     .command("discover", discoverCommand())
     .command("follows", followsCommand())
     .command("photos", photosCommand());
-  await command.parse(args);
+  try {
+    await cmd.parse(args);
+  } catch (e: unknown) {
+    if (e instanceof ValidationError) {
+      cmd.showHelp();
+      console.error(`❌ ${e.message}`);
+      return 1;
+    }
+    const errors = (e instanceof AggregateError) ? e.errors : [e];
+    for (const error of errors) {
+      console.error(`❌ ${error.message}`);
+      if (error["cause"] && error["cause"]["error"]) {
+        console.error(error.cause.error);
+      }
+    }
+    return 2;
+  }
   return 0;
 }
 

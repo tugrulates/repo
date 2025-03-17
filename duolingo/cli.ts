@@ -5,7 +5,7 @@
  * @module cli
  */
 
-import { Command } from "@cliffy/command";
+import { Command, ValidationError } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
@@ -27,7 +27,7 @@ type DuolingoConfig = { username: string; token: string };
 export async function cli(args: string[]): Promise<number> {
   const cfg = config<DuolingoConfig>();
   const { username, token } = await cfg.get();
-  await new Command()
+  const cmd = new Command()
     .name("duolingo")
     .description("Interact with Duolingo.")
     .usage("--username <username> --token <token> <command> [options]")
@@ -59,8 +59,24 @@ export async function cli(args: string[]): Promise<number> {
     .globalAction((options) => cfg.set(options))
     .command("feed", feedCommand(cfg))
     .command("follows", followsCommand(cfg))
-    .command("league", leagueCommand(cfg))
-    .parse(args);
+    .command("league", leagueCommand(cfg));
+  try {
+    await cmd.parse(args);
+  } catch (e: unknown) {
+    if (e instanceof ValidationError) {
+      cmd.showHelp();
+      console.error(`❌ ${e.message}`);
+      return 1;
+    }
+    const errors = (e instanceof AggregateError) ? e.errors : [e];
+    for (const error of errors) {
+      console.error(`❌ ${error.message}`);
+      if (error["cause"] && error["cause"]["error"]) {
+        console.error(error.cause.error);
+      }
+    }
+    return 2;
+  }
   return 0;
 }
 

@@ -5,7 +5,7 @@
  * @module cli
  */
 
-import { Command } from "@cliffy/command";
+import { Command, ValidationError } from "@cliffy/command";
 import { Table } from "@cliffy/table";
 import { version } from "@roka/forge/version";
 import {
@@ -31,7 +31,7 @@ export async function cli(args: string[]): Promise<number> {
     Feature: "📰",
     News: "📢",
   };
-  await new Command()
+  const cmd = new Command()
     .name("lonely-planet")
     .description("Explores data from Lonely Planet.")
     .version(await version({ release: true, target: true }))
@@ -75,7 +75,25 @@ export async function cli(args: string[]): Promise<number> {
         }
         Table.from(rows).render();
       },
-    ).parse(args);
+    );
+
+  try {
+    await cmd.parse(args);
+  } catch (e: unknown) {
+    if (e instanceof ValidationError) {
+      cmd.showHelp();
+      console.error(`❌ ${e.message}`);
+      return 1;
+    }
+    const errors = (e instanceof AggregateError) ? e.errors : [e];
+    for (const error of errors) {
+      console.error(`❌ ${error.message}`);
+      if (error["cause"] && error["cause"]["error"]) {
+        console.error(error.cause.error);
+      }
+    }
+    return 2;
+  }
   return 0;
 }
 
