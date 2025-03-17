@@ -2,7 +2,7 @@
 import { mockFetch } from "@roka/http/testing";
 import { fakeConsole } from "@roka/testing/fake";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { cli } from "./cli.ts";
+import { cli, type CliOptions } from "./cli.ts";
 
 const TESTS = [
   "feed",
@@ -21,13 +21,14 @@ for (const test of TESTS) {
   }, async (t) => {
     using console = fakeConsole();
     using fetch = mockFetch(t);
-    let config: string[] = [];
+    const options: CliOptions = {};
     if (fetch.mode === "replay") {
       // use ENV variables for recording, but fake credentials for replay
-      config = ["--username", "TugrulAtes", "--token", "token"];
+      options.username = "TugrulAtes";
+      options.token = "token";
     }
     const args = test.split(" ");
-    await cli([...config, ...args]);
+    await cli(args, options);
     await assertSnapshot(t, console.output({ wrap: "\n" }));
   });
 }
