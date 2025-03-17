@@ -10,7 +10,7 @@
  * @module cli
  */
 
-import { Command } from "@cliffy/command";
+import { Command, ValidationError } from "@cliffy/command";
 import { pooled } from "@roka/async/pool";
 import { version } from "@roka/forge/version";
 import { yellow } from "@std/fmt/colors";
@@ -24,7 +24,7 @@ import { check, type Photo, photo, sync } from "./photo.ts";
  * @returns The exit code of the command.
  */
 export async function photos(args: string[]): Promise<number> {
-  await new Command()
+  const cmd = new Command()
     .name("photos")
     .description("Manage photos.")
     .version(await version({ release: true, target: true }))
@@ -70,8 +70,24 @@ export async function photos(args: string[]): Promise<number> {
           } else console.log(title);
         }
       }
-    })
-    .parse(args);
+    });
+  try {
+    await cmd.parse(args);
+  } catch (e: unknown) {
+    if (e instanceof ValidationError) {
+      cmd.showHelp();
+      console.error(`❌ ${e.message}`);
+      return 1;
+    }
+    const errors = (e instanceof AggregateError) ? e.errors : [e];
+    for (const error of errors) {
+      console.error(`❌ ${error.message}`);
+      if (error["cause"] && error["cause"]["error"]) {
+        console.error(error.cause.error);
+      }
+    }
+    return 2;
+  }
   return 0;
 }
 
