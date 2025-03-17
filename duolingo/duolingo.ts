@@ -2,7 +2,7 @@
 /**
  * Interact with Duolingo, the language learning platform.
  *
- * @example Search 500px through the API client.
+ * @example Get Duolingo feed through the API client.
  * ```ts
  * import { duolingo } from "@tugrulates/duolingo";
  *
@@ -14,7 +14,7 @@
  * }
  * ```
  *
- * @example Search 500px through the command-line application.
+ * @example Get Duolingo feed through the command-line application.
  * ```sh
  * export DUOLINGO_USERNAME=TugrulAtes
  * export DUOLINGO_TOKEN=token
@@ -250,7 +250,7 @@ export const TIERS = {
  *
  * This only lists target languages, and not source languages.
  *
- * @see {@link https://www.duolingo.com/courses/all Duolingo Language Courses}
+ * @see {@link https://www.duolingo.com/courses/all | Duolingo Language Courses}
  */
 export const LANGUAGES = {
   ar: "Arabic",
