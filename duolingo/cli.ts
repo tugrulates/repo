@@ -16,14 +16,7 @@ import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
 
-/** User configuration for the `duolingo` tool. */
-export type DuolingoConfig = { username: string; token: string };
-
-/** Options for the {@linkcode cli} function. */
-export interface CliOptions {
-  /** Use given configuration instead of the default one. */
-  config?: Config<DuolingoConfig>;
-}
+type DuolingoConfig = { username: string; token: string };
 
 /**
  * Run the `duolingo` tool with the given command-line arguments.
@@ -31,11 +24,8 @@ export interface CliOptions {
  * @param args Command-line arguments.
  * @returns The exit code of the command.
  */
-export async function cli(
-  args: string[],
-  options?: CliOptions,
-): Promise<number> {
-  const cfg = options?.config ?? config<DuolingoConfig>();
+export async function cli(args: string[]): Promise<number> {
+  const cfg = config<DuolingoConfig>();
   const { username, token } = await cfg.get();
   await new Command()
     .name("duolingo")

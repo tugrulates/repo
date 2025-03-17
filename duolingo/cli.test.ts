@@ -1,9 +1,8 @@
 // deno-lint-ignore-file no-console
-import { config } from "@roka/cli/config";
 import { mockFetch } from "@roka/http/testing";
 import { fakeConsole } from "@roka/testing/fake";
 import { assertSnapshot } from "@std/testing/snapshot";
-import { cli, type CliOptions } from "./cli.ts";
+import { cli } from "./cli.ts";
 
 const TESTS = [
   "feed",
@@ -20,18 +19,14 @@ for (const test of TESTS) {
     sanitizeOps: false,
     sanitizeResources: false,
   }, async (t) => {
-    const options: CliOptions = {};
-    using fetch = mockFetch(t);
-    if (fetch.mode === "replay") {
-      // Use ENV variables for recording, but fake credentials for replay.
-      options.config = config<{ username: string; token: string }>({
-        path: ":memory:",
-      });
-      await options.config.set({ username: "TugrulAtes", token: "token" });
-    }
     using console = fakeConsole();
-    const args = test.replace("<username>", "tugrulates").split(" ");
-    await cli(args, options);
+    using fetch = mockFetch(t);
+    let config: string[] = [];
+    if (fetch.mode === "replay") {
+      config = ["--username", "TugrulAtes", "--token", "token"];
+    }
+    const args = test.split(" ");
+    await cli([...config, ...args]);
     await assertSnapshot(t, console.output({ wrap: "\n" }));
   });
 }
