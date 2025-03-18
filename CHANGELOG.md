@@ -1,3 +1,7 @@
+## 500px@0.2.1
+
+- 🐛 use `version` from forge (#138)
+
 ## 500px@0.2.0
 
 - ♻️ simplify interfaces (#129) 💥
