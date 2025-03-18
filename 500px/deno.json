@@ -1,6 +1,6 @@
 {
   "name": "@tugrulates/500px",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "exports": {
     ".": "./500px.ts",
     "./cli": "./cli.ts"
