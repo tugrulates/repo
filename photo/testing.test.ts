@@ -4,7 +4,7 @@ import {
   assertGreater,
   assertRejects,
 } from "@std/assert";
-import { omit } from "@std/collections/omit";
+import { omit } from "@std/collections";
 import { check } from "./photo.ts";
 import { tempPhoto } from "./testing.ts";
 

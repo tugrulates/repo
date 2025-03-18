@@ -40,6 +40,7 @@ export async function cli(args: string[]): Promise<number> {
       if (error["cause"] && error["cause"]["error"]) {
         console.error(error.cause.error);
       }
+      console.error(error.cause.error);
     }
     return 2;
   }
@@ -73,7 +74,7 @@ function discoverCommand() {
         !category || category.includes(c.opt)
       );
       const client = fiveHundredPx();
-      const photos = await client.forYouFeed({ categories, limit: 1000 });
+      const photos = await client.feed({ categories, limit: 1000 });
       const users = photos.map((photo) => photo.photographer.canonicalPath)
         .filter((user) => !skip.some((re) => re.test(user)));
       const result = { discover: Array.from(new Set(users)) };
