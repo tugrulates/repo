@@ -6,7 +6,7 @@
 ## duolingo@0.3.0
 
 - ♻️ simplify interfaces (#131) 💥
-- 🐛 fix unit test cloberring user config (#134)
+- 🐛 fix unit test clobbering user config (#134)
 - 🐛 cleaner error message reporting (#133)
 
 ## lonely-planet@0.2.0
@@ -17,7 +17,9 @@
 ## photo@0.1.0
 
 - ♻️ rename from `photos` and make `cli` a submodule (#126) 💥
+- ♻️ simplify interfaces (#121) 💥
 - 🐛 cleaner error message reporting (#133)
+- 🐛 run on current directory when there are no args (#124)
 
 ## duolingo@0.2.0
 
