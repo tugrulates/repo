@@ -7,9 +7,6 @@
   },
   "compile": {
     "main": "cli.ts",
-    "include": [
-      "graphql"
-    ],
     "permissions": {
       "net": "api.500px.com"
     }
