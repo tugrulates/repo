@@ -7,7 +7,7 @@
 
 import { Command, EnumType, ValidationError } from "@cliffy/command";
 import { Table } from "@cliffy/table";
-import { displayVersion } from "@roka/package/version";
+import { version } from "@roka/forge/version";
 import { CATEGORIES, fiveHundredPx, type Photo } from "./500px.ts";
 
 /**
@@ -21,7 +21,7 @@ export async function cli(args: string[]): Promise<number> {
     .name("500px")
     .description("Interact with 500px.")
     .usage("<command> [options]")
-    .version(await displayVersion())
+    .version(await version({ target: true }))
     .action((): void => cmd.showHelp())
     .command("discover", discoverCommand())
     .command("follows", followsCommand())
