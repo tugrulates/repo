@@ -15,13 +15,13 @@
  *
  * @example Search 500px through the command-line application.
  * ```sh
- * deno run -N jsr:@tugrulates/500px/cli photos tugrulates
+ * deno run -A jsr:@tugrulates/500px/cli photos tugrulates
  * ```
  *
  * @module 500px
  */
 
-import { client } from "@roka/http/graphql/client";
+import { client, gql } from "@roka/http/graphql/client";
 
 /** A 500px API client returned from the {@linkcode fiveHundredPx} function. */
 export interface FiveHundredPx {
@@ -35,7 +35,7 @@ export interface FiveHundredPx {
    * Return the recommended feed of photos. Returns a non-personalized list
    * if the client is not authenticated.
    */
-  forYouFeed(options?: ForYouFeedOptions): Promise<Photo[]>;
+  feed(options?: FeedOptions): Promise<Photo[]>;
 }
 
 /** Options for the {@linkcode fiveHundredPx} function. */
@@ -44,8 +44,8 @@ export interface FiveHundredPxOptions {
   token?: string;
 }
 
-/** Options for the {@linkcode FiveHundredPx.forYouFeed} function. */
-export interface ForYouFeedOptions {
+/** Options for the {@linkcode FiveHundredPx.feed} function. */
+export interface FeedOptions {
   /** Categories to filter the feed on. */
   categories?: Category[];
   /** Limit the number of photos returned. */
@@ -135,16 +135,192 @@ export const CATEGORIES = {
   UNCATEGORIZED: { id: 0, opt: "other", nude: false },
 } as const;
 
+const FRAGMENT = {
+  photo: gql`
+    fragment Photo on Photo {
+      id
+      legacyId
+      canonicalPath
+      name
+      description
+      width
+      height
+      categoryId
+      category
+      uploadedAt
+      takenAt
+      longitude
+      latitude
+      location
+      locationDetails {
+        city
+        state
+        country
+      }
+      aperture
+      iso
+      shutterSpeed
+      focalLength
+      tags
+      watermark
+      notSafeForWork
+      photographer: uploader {
+        id
+        legacyId
+        username
+        displayName
+        type
+        isBlockedByMe
+        canonicalPath
+      }
+      timesViewed
+      likedByUsers {
+        totalCount
+      }
+      pulse {
+        highest
+      }
+    }
+  `,
+  user: gql`
+    fragment User on User {
+      id
+      legacyId
+      type
+      canonicalPath
+      displayName
+      active
+      avatar {
+        images(sizes: [MEDIUM, LARGE]) {
+          size
+          url
+          id
+        }
+        id
+      }
+      following {
+        isFollowingMe
+        totalCount
+      }
+      followedBy {
+        isFollowedByMe
+        totalCount
+      }
+    }
+  `,
+};
+
+const QUERY = {
+  photos: gql`
+    query PhotosQuery($username: String!, $cursor: String) {
+      user: userByUsername(username: $username) {
+        photos(
+          first: 50
+          after: $cursor
+          privacy: PROFILE
+          sort: ID_DESC
+          excludeNude: false
+        ) {
+          edges {
+            node {
+              ...Photo
+              __typename
+            }
+          }
+          totalCount
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
+        }
+        id
+      }
+    }
+    ${FRAGMENT.photo}
+  `,
+  followers: gql`
+    query FollowerQuery($username: String!, $cursor: String) {
+      user: userByUsername(username: $username) {
+        followedBy {
+          users: followedByUsers(first: 100, after: $cursor) {
+            edges {
+              node {
+                ...User
+                __typename
+              }
+              cursor
+            }
+            totalCount
+            pageInfo {
+              endCursor
+              hasNextPage
+            }
+          }
+        }
+        id
+      }
+    }
+    ${FRAGMENT.user}
+  `,
+  following: gql`
+    query FollowingQuery($username: String!, $cursor: String) {
+      user: userByUsername(username: $username) {
+        following {
+          users: followingUsers(first: 100, after: $cursor) {
+            edges {
+              node {
+                ...User
+                __typename
+              }
+              cursor
+            }
+            totalCount
+            pageInfo {
+              endCursor
+              hasNextPage
+            }
+          }
+        }
+        id
+      }
+    }
+    ${FRAGMENT.user}
+  `,
+  feed: gql`
+    query FeedQuery($cursor: String, $categories: [Int], $showNude: Boolean) {
+      feed: forYouFeedContent(
+        first: 100
+        after: $cursor
+        categories: $categories
+        contentType: PHOTO
+        showNude: $showNude
+      ) {
+        edges {
+          cursor
+          node {
+            id
+            cardNode {
+              ...Photo
+              __typename
+            }
+            cardType
+            __typename
+          }
+        }
+        totalCount
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+    ${FRAGMENT.photo}
+  `,
+};
+
 /** Creates a 500px API client. */
 export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
   const api = client("https://api.500px.com/graphql", options);
-  async function query(paths: string[]): Promise<string> {
-    return (await Promise.all(
-      paths.map(async (path) =>
-        await Deno.readTextFile(new URL(`${path}.graphql`, Deno.mainModule))
-      ),
-    )).join("\n");
-  }
   return {
     photos: async (username) => {
       return await api.queryPaginated<
@@ -161,7 +337,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
         { node: Photo },
         { endCursor: string; hasNextPage: boolean }
       >(
-        await query(["graphql/photos", "graphql/photo"]),
+        QUERY.photos,
         {
           edges: (data) => data.user.photos.edges,
           node: (edge) => edge.node,
@@ -189,7 +365,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
         { node: User },
         { endCursor: string; hasNextPage: boolean }
       >(
-        await query(["graphql/following", "graphql/user"]),
+        QUERY.following,
         {
           edges: (data) => data.user.following.users.edges,
           node: (edge) => edge.node,
@@ -217,7 +393,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
         { node: User },
         { endCursor: string; hasNextPage: boolean }
       >(
-        await query(["graphql/followers", "graphql/user"]),
+        QUERY.followers,
         {
           edges: (data) => data.user.followedBy.users.edges,
           node: (edge) => edge.node,
@@ -228,7 +404,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
         { username },
       );
     },
-    forYouFeed: async (options) => {
+    feed: async (options) => {
       return (await api.queryPaginated<
         {
           feed: {
@@ -241,7 +417,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
         { node: { cardNode: Photo } },
         { endCursor: string; hasNextPage: boolean }
       >(
-        await query(["graphql/foryou"]),
+        QUERY.feed,
         {
           edges: (data) => data.feed.edges,
           node: (edge) => edge.node,

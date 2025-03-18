@@ -73,7 +73,7 @@ function discoverCommand() {
         !category || category.includes(c.opt)
       );
       const client = fiveHundredPx();
-      const photos = await client.forYouFeed({ categories, limit: 1000 });
+      const photos = await client.feed({ categories, limit: 1000 });
       const users = photos.map((photo) => photo.photographer.canonicalPath)
         .filter((user) => !skip.some((re) => re.test(user)));
       const result = { discover: Array.from(new Set(users)) };
@@ -86,9 +86,6 @@ function followsCommand() {
   return new Command()
     .description("Prints follower information on 500px.")
     .example("500px follows", "Prints follow counts.")
-    .example("500px follows --follows", "Follow users who follow.")
-    .example("500px follows --unfollow", "Unfollow users who dont' follow.")
-    .example("500px follows --follow --unfollow", "Matches both lists.")
     .example("500px follows --json", "Outputs JSON of follower information.")
     .example(
       "500px follows --json | jq",

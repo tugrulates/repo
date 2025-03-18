@@ -19,7 +19,7 @@
     "jsr:@roka/forge@~0.1.5": "0.1.5",
     "jsr:@roka/git@0.2": "0.2.0",
     "jsr:@roka/github@0.2": "0.2.0",
-    "jsr:@roka/http@~0.2.1": "0.2.1",
+    "jsr:@roka/http@~0.2.2": "0.2.2",
     "jsr:@roka/testing@0.2": "0.2.0",
     "jsr:@std/assert@^1.0.10": "1.0.11",
     "jsr:@std/assert@^1.0.11": "1.0.11",
@@ -175,8 +175,8 @@
         "npm:@octokit/rest"
       ]
     },
-    "@roka/http@0.2.1": {
-      "integrity": "21cbb427a755edc5b9d38a940029a6e83cec35776e6b1c524c62ac6fb405c8c3",
+    "@roka/http@0.2.2": {
+      "integrity": "0bab3f4ecf0f3bb081f1861c509e3d3c58816b86f8e217a6abfbffd54f44001d",
       "dependencies": [
         "jsr:@roka/testing",
         "jsr:@std/assert@^1.0.11",
@@ -448,7 +448,7 @@
       "jsr:@roka/async@0.2",
       "jsr:@roka/cli@0.2",
       "jsr:@roka/forge@~0.1.5",
-      "jsr:@roka/http@~0.2.1",
+      "jsr:@roka/http@~0.2.2",
       "jsr:@roka/testing@0.2",
       "jsr:@std/assert@^1.0.11",
       "jsr:@std/collections@^1.0.10",

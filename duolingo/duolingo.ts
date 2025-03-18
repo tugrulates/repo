@@ -26,7 +26,7 @@
 
 import { pool } from "@roka/async/pool";
 import { client } from "@roka/http/json/client";
-import { join } from "@std/path/join";
+import { join } from "@std/path";
 
 /** A Duolingo API client returned from the {@linkcode duolingo} function. */
 export interface Duolingo {
