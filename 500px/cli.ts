@@ -40,7 +40,6 @@ export async function cli(args: string[]): Promise<number> {
       if (error["cause"] && error["cause"]["error"]) {
         console.error(error.cause.error);
       }
-      console.error(error.cause.error);
     }
     return 2;
   }
