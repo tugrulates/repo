@@ -1,3 +1,24 @@
+## 500px@0.2.0
+
+- ♻️ simplify interfaces (#129) 💥
+- 🐛 cleaner error message reporting (#133)
+
+## duolingo@0.3.0
+
+- ♻️ simplify interfaces (#131) 💥
+- 🐛 fix unit test cloberring user config (#134)
+- 🐛 cleaner error message reporting (#133)
+
+## lonely-planet@0.2.0
+
+- ♻️ simplify interfaces (#125) 💥
+- 🐛 cleaner error message reporting (#133)
+
+## photo@0.1.0
+
+- ♻️ rename from `photos` and make `cli` a submodule (#126) 💥
+- 🐛 cleaner error message reporting (#133)
+
 ## duolingo@0.2.0
 
 - 🐛 strip LTR RTL control characters (#91) 💥
