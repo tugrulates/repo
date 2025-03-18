@@ -1,3 +1,7 @@
+## 500px@0.2.2
+
+- 🐛 bake queries into the code for JSR (#141)
+
 ## 500px@0.2.1
 
 - 🐛 use `version` from forge (#138)
