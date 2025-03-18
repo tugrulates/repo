@@ -19,7 +19,7 @@ Interact with 500px, the photography community
 ([docs](https://jsr.io/@tugrulates/500px)).
 
 ```sh
-deno run -N jsr:@tugrulates/500px/cli --help`
+deno run -N jsr:@tugrulates/500px/cli --help
 ```
 
 ### 🔤 duolingo
