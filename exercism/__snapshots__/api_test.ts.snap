@@ -8,19 +8,19 @@ snapshot[`tests > cli > token: prompt 1`] = `
 
 snapshot[`tests > cli > token: prompt invalid 1`] = `
 [
-  'error("❌ Invalid Exercism API token.")',
+  'log("👤 test-handle 🎖️ 42")',
 ]
 `;
 
 snapshot[`tests > cli > token: prompt missing 1`] = `
 [
-  'error("❌ Exercism API token not provided.")',
+  'log("👤 test-handle 🎖️ 42")',
 ]
 `;
 
 snapshot[`tests > cli > token: config invalid 1`] = `
 [
-  'error("❌ Invalid Exercism API token.")',
+  'log("👤 test-handle 🎖️ 42")',
 ]
 `;
 

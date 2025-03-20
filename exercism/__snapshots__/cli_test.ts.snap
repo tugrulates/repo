@@ -356,7 +356,6 @@ Options:
   -q, --quiet           enable quiet mode
   -v, --verbose         enable verbose mode
   --open                open related Exercism pages on browser
-  --token <token>       Exercism API token (default: null)
   -h, --help            display help for command
 
 Commands:
@@ -375,14 +374,13 @@ snapshot[`tests > cli > help 2`] = `
 Show profile information.
 
 Options:
-  -h, --help       display help for command
+  -h, --help     display help for command
 
 Global Options:
-  -V, --version    output the version number
-  -q, --quiet      enable quiet mode
-  -v, --verbose    enable verbose mode
-  --open           open related Exercism pages on browser
-  --token <token>  Exercism API token (default: to*en)
+  -V, --version  output the version number
+  -q, --quiet    enable quiet mode
+  -v, --verbose  enable verbose mode
+  --open         open related Exercism pages on browser
 ")',
 ]
 `;
@@ -404,7 +402,6 @@ Global Options:
   -q, --quiet         enable quiet mode
   -v, --verbose       enable verbose mode
   --open              open related Exercism pages on browser
-  --token <token>     Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -441,7 +438,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 
 Commands:
   start                  start exercise
@@ -490,7 +486,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 
 Commands:
   start                  start exercise
@@ -539,7 +534,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -575,7 +569,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -612,7 +605,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -649,7 +641,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -686,7 +677,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -723,7 +713,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -760,7 +749,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -799,7 +787,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -835,7 +822,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -871,7 +857,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;
@@ -907,7 +892,6 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
 ")',
 ]
 `;

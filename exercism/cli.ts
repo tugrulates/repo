@@ -21,12 +21,6 @@ import type { Tracks } from "./tracks.ts";
 const CONCURRENCY = 10;
 const GLOB_PATTERN = /^[a-z0-9-]*(\*[a-z0-9-]+)*\*?$/;
 
-/** Options for the {@link cli} function. */
-export type CliOptions = {
-  /** Exercism API token. */
-  token?: string;
-};
-
 type AppCommand = Command<
   [],
   {
@@ -38,15 +32,8 @@ type AppCommand = Command<
   }
 >;
 
-async function appCommand(
-  app: App,
-  args: string[],
-  options?: CliOptions,
-): Promise<AppCommand> {
-  const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
-  if (options) await cfg.set(options);
-  const { token } = await cfg.get();
-  const simpleCommand = new Command("exercism")
+async function appCommand(app: App, args: string[]): Promise<AppCommand> {
+  const command = new Command("exercism")
     .exitOverride((err: CommanderError) => {
       throw new CommanderError(err.exitCode, err.message, err.code);
     })
@@ -63,36 +50,36 @@ async function appCommand(
     .option("--open", help.opts.open)
     .addOption(new Option("--sync", help.opts.sync).hideHelp())
     .addOption(new Option("--json", help.opts.json).hideHelp());
-  simpleCommand.parseOptions(args);
-  if (simpleCommand.opts().quiet) console.log = (): void => undefined;
-  if (!simpleCommand.opts().verbose) console.debug = (): void => undefined;
+  command.parseOptions(args);
+  if (command.opts().quiet) console.log = (): void => undefined;
+  if (!command.opts().verbose) console.debug = (): void => undefined;
 
-  const appCommand = simpleCommand
-    .addOption(new Option("--token <token>", help.opts.token).default(token));
-  appCommand.parseOptions(args);
-  const tokenOption = appCommand.opts().token;
-  if (tokenOption) await cfg.set({ token: tokenOption });
+  // const appCommand = command
+  //   .addOption(new Option("--token <token>", help.opts.token).default(token));
+  // command.parseOptions(args);
+  // const tokenOption = appCommand.opts().token;
+  // if (tokenOption) await cfg.set({ token: tokenOption });
 
-  appCommand.addCommand(profileCommand(app.profile, appCommand));
-  appCommand.addCommand(tracksCommand(app.tracks, appCommand));
+  command.addCommand(profileCommand(app.profile, command));
+  command.addCommand(tracksCommand(app.tracks, command));
 
   const tracks = await Array.fromAsync(app.tracks.all());
   const subcommands = await Promise.all(
     tracks.map(async (track) => ({
-      command: await trackCommand(track, appCommand),
+      command: await trackCommand(track, command),
       hidden: !(await track.isJoined()),
     })),
   );
   for (const subcommand of subcommands) {
-    appCommand.addCommand(subcommand.command, { hidden: subcommand.hidden });
+    command.addCommand(subcommand.command, { hidden: subcommand.hidden });
   }
 
-  appCommand.action(async () => {
+  command.action(async () => {
     if (
       await processActionData(
         app,
         { profile: app.profile, tracks: app.tracks },
-        appCommand,
+        command,
       )
     ) return;
     await list([
@@ -101,7 +88,7 @@ async function appCommand(
     ]);
   });
 
-  return appCommand;
+  return command;
 }
 
 function profileCommand(profile: Profile, parent: Command): Command {
@@ -470,7 +457,7 @@ export async function main(
 }
 
 if (import.meta.main) {
-  const cfg = config<CliOptions>();
+  await using cfg = config<{ token: string }>();
   let { token } = await cfg.get();
   if (!token) {
     const input = prompt(
@@ -481,6 +468,7 @@ if (import.meta.main) {
       Deno.exit(1);
     }
     token = input;
+    await cfg.set({ token });
   }
   using app = new App({
     endpoint: "https://exercism.org",

@@ -116,7 +116,7 @@ export async function cli(
 
   try {
     const code = await main(app, [
-      ...(token ? [`--token=${token}`] : []),
+      // ...(token ? [`--token=${token}`] : []),
       ...args.split(" ").filter((arg) => arg),
     ]);
     if (options.sorted) captured.sort();

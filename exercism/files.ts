@@ -5,7 +5,6 @@ import type { CacheGetOptions } from "./cache.ts";
 import type { FilesData } from "./data.ts";
 import { ApiElement } from "./data.ts";
 import type { Exercise } from "./exercise.ts";
-import { Shell } from "./shell.ts";
 import type { Solution } from "./solution.ts";
 import { messages } from "./strings.ts";
 import type { Toolchain } from "./toolchain.ts";
@@ -114,7 +113,7 @@ export class Files extends ApiElement<FilesData> {
   private async runTool(
     tool: (
       toolchain: Toolchain,
-    ) => (shell: Shell, files: Files) => Promise<void>,
+    ) => (files: Files) => Promise<void>,
     messages: { progress: string; success: string; failure: string },
     options: {
       quiet?: boolean;
@@ -125,8 +124,7 @@ export class Files extends ApiElement<FilesData> {
     if (!toolchain) return true;
     console.debug(messages.progress);
     try {
-      const shell = new Shell();
-      await tool(toolchain)(shell, this);
+      await tool(toolchain)(this);
       (options.quiet ? console.debug : console.log)(messages.success);
       return true;
     } catch {

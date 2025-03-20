@@ -3,7 +3,6 @@ import open from "open";
 import { Api } from "./api.ts";
 import { Cache } from "./cache.ts";
 import { Profile } from "./profile.ts";
-import { Shell } from "./shell.ts";
 import { Tracks } from "./tracks.ts";
 import { Urls } from "./urls.ts";
 
@@ -36,9 +35,12 @@ export class App {
   }
 
   async code(files: string[], { diff = false } = {}): Promise<void> {
-    const diffOpts = diff ? ["--wait", "--diff"] : [];
-    await new Shell({ cwd: this.options.workspace })
-      .run("code", ...diffOpts, ...files);
+    const args = [...diff ? ["--wait", "--diff"] : [], ...files];
+    const command = new Deno.Command("code", {
+      cwd: this.options.workspace,
+      args,
+    });
+    await command.output();
   }
 
   open(url: string): void {
