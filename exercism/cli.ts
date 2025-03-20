@@ -6,6 +6,7 @@ import {
   Option,
   type OptionValues,
 } from "@commander-js/extra-typings";
+import { config } from "@roka/cli/config";
 import { pooledMap } from "@std/async";
 import { App, version } from "./app.ts";
 import type { ApiElement } from "./data.ts";
@@ -20,6 +21,12 @@ import type { Tracks } from "./tracks.ts";
 const CONCURRENCY = 10;
 const GLOB_PATTERN = /^[a-z0-9-]*(\*[a-z0-9-]+)*\*?$/;
 
+/** Options for the {@link cli} function. */
+export type CliOptions = {
+  /** Exercism API token. */
+  token?: string;
+};
+
 type AppCommand = Command<
   [],
   {
@@ -31,7 +38,14 @@ type AppCommand = Command<
   }
 >;
 
-async function appCommand(app: App, args: string[]): Promise<AppCommand> {
+async function appCommand(
+  app: App,
+  args: string[],
+  options?: CliOptions,
+): Promise<AppCommand> {
+  const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
+  if (options) await cfg.set(options);
+  const { token } = await cfg.get();
   const simpleCommand = new Command("exercism")
     .exitOverride((err: CommanderError) => {
       throw new CommanderError(err.exitCode, err.message, err.code);
@@ -54,15 +68,10 @@ async function appCommand(app: App, args: string[]): Promise<AppCommand> {
   if (!simpleCommand.opts().verbose) console.debug = (): void => undefined;
 
   const appCommand = simpleCommand
-    .addOption(
-      new Option("--token <token>", help.opts.token).default(
-        await app.token.get({ cacheOnly: true }),
-        (await app.token.obfuscated()) ?? undefined,
-      ),
-    );
+    .addOption(new Option("--token <token>", help.opts.token).default(token));
   appCommand.parseOptions(args);
-  const token = appCommand.opts().token;
-  if (token !== null) await app.token.set(token);
+  const tokenOption = appCommand.opts().token;
+  if (tokenOption) await cfg.set({ token: tokenOption });
 
   appCommand.addCommand(profileCommand(app.profile, appCommand));
   appCommand.addCommand(tracksCommand(app.tracks, appCommand));
@@ -461,8 +470,21 @@ export async function main(
 }
 
 if (import.meta.main) {
+  const cfg = config<CliOptions>();
+  let { token } = await cfg.get();
+  if (!token) {
+    const input = prompt(
+      messages.app.token("https://exercism.org/settings/api_cli").prompt,
+    );
+    if (!input) {
+      console.error(messages.app.token("exercism").missing);
+      Deno.exit(1);
+    }
+    token = input;
+  }
   using app = new App({
     endpoint: "https://exercism.org",
+    token,
     workspace: Deno.cwd(),
   });
   Deno.exit(await main(app, Deno.args));

@@ -68,7 +68,7 @@ export async function cli(
     token?: string | null;
   } = {},
 ): Promise<number> {
-  const token = options.token !== undefined ? options.token : TOKEN;
+  const token = options.token ?? TOKEN;
 
   const captured: string[] = [];
   const capture = (level: string) => (...message: unknown[]) => {
@@ -96,6 +96,7 @@ export async function cli(
 
   using app = new App({
     endpoint: s.server.endpoint,
+    token,
     workspace: s.workspace,
     cachePath: s.cachePath,
     retry: {

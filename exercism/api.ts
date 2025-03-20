@@ -323,7 +323,6 @@ export class Api {
       this.app.urls.url(apiMethod.path),
       {
         method: apiMethod.method,
-        token: await this.app.token.get({ cacheOnly: false }),
         ...this.app.options,
         ...options,
       },
