@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-console
+import { Cell, Row, Table } from "@cliffy/table";
 import {
   Command,
   CommanderError,
@@ -12,10 +13,9 @@ import { App, version } from "./app.ts";
 import type { ApiElement } from "./data.ts";
 import { CommandFailed, InvalidConfig } from "./error.ts";
 import type { Exercise, ExerciseFilter } from "./exercise.ts";
-import { list } from "./list.ts";
-import type { Profile } from "./profile.ts";
-import { help, messages } from "./strings.ts";
-import type { Track } from "./track.ts";
+import { Profile } from "./profile.ts";
+import { display, help, messages } from "./strings.ts";
+import { Track } from "./track.ts";
 import type { Tracks } from "./tracks.ts";
 
 const CONCURRENCY = 10;
@@ -430,6 +430,77 @@ export function parseSlug(slug: string, previous?: string[]): string[] {
   previous = previous ?? [];
   previous.push(slug);
   return previous;
+}
+
+export async function list(
+  items: (Profile | Track | Exercise)[],
+): Promise<void> {
+  const rows = await Promise.all(
+    items.map(async (item) =>
+      item instanceof Profile
+        ? await profileRow(item)
+        : item instanceof Track
+        ? await trackRow(item)
+        : await exerciseRow(item)
+    ),
+  );
+  Table.from(rows).render();
+}
+
+async function profileRow(profile: Profile): Promise<Row> {
+  const messages = await display.profile(profile);
+  return Row.from([messages.handle, right(messages.reputation)]);
+}
+
+async function trackRow(track: Track): Promise<Row> {
+  const messages = await display.track(track);
+  const alert = (await track.hasNotifications())
+    ? link(display.notification, await track.url())
+    : "";
+  if (await track.completed()) {
+    return Row.from([messages.completed, alert, right(messages.numExercises)]);
+  } else if (await track.isJoined()) {
+    return Row.from([messages.joined, alert, right(messages.numCompleted)]);
+  } else {
+    return Row.from([messages.notJoined, alert, right(messages.numExercises)]);
+  }
+}
+
+async function exerciseRow(exercise: Exercise): Promise<Row> {
+  const solution = await exercise.solution();
+  const iteration = await solution?.iteration();
+  const messages = await display.exercise(exercise, solution, iteration);
+  const cells = [
+    link(messages.status, await solution?.url()),
+    link(messages.feedback, await iteration?.url()),
+    link(messages.tests, await iteration?.url()),
+    link(messages.social, await solution?.url()),
+  ];
+  if (!(await exercise.track.isJoined())) {
+    return Row.from([messages.notJoined, ...cells]);
+  } else if (!(await exercise.unlocked())) {
+    return Row.from([messages.locked, ...cells]);
+  } else if (!(await exercise.started())) {
+    return Row.from([messages.new, ...cells]);
+  } else if (solution && !(await solution.completed())) {
+    return Row.from([messages.started, ...cells]);
+  } else if ((await iteration?.failing()) ?? false) {
+    return Row.from([messages.failing, ...cells]);
+  } else if ((await iteration?.hasAutomatedFeedback()) ?? false) {
+    return Row.from([messages.hasFeedback, ...cells]);
+  } else if (iteration && !(await iteration.passing())) {
+    return Row.from([messages.noTestResults, ...cells]);
+  } else {
+    return Row.from([messages.completed, ...cells]);
+  }
+}
+
+function link(text: string, _url?: string): Cell {
+  return new Cell(text);
+}
+
+function right(text: string): Cell {
+  return new Cell(text).align("right");
 }
 
 export async function main(

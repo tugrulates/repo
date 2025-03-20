@@ -1,33 +1,41 @@
 export const snapshot = {};
 
 snapshot[`tests > exercise > new > list 1`] = `
-[
-  'log("✨ bob")',
-]
+"
+✨ bob    
+"
 `;
+
+snapshot[`tests > exercise > new > list 2`] = `[]`;
 
 snapshot[`tests > exercise > new > start 1`] = `
-[
-  'log("💻 Started bob.")',
-]
+"
+💻 Started bob.
+"
 `;
+
+snapshot[`tests > exercise > new > start 2`] = `[]`;
 
 snapshot[`tests > exercise > new > diff 1`] = `
-[
-  'log("💻 Started bob.")',
-  'log("✅ Downloaded bob.")',
-  'warn("⚠️  Changes found in bob.")',
-]
+"
+💻 Started bob.
+✅ Downloaded bob.
+⚠️  Changes found in bob.
+"
 `;
+
+snapshot[`tests > exercise > new > diff 2`] = `[]`;
 
 snapshot[`tests > exercise > new > download 1`] = `
-[
-  'log("💻 Started bob.")',
-  'log("✅ Downloaded bob.")',
-]
+"
+💻 Started bob.
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > new > download 2`] = `
+snapshot[`tests > exercise > new > download 2`] = `[]`;
+
+snapshot[`tests > exercise > new > download 3`] = `
 [
   {
     content: 'export function bob():
@@ -52,53 +60,73 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > new > submit 1`] = `
-[
-  'error("❌ Exercise bob is not started.")',
-]
+"
+❌ Exercise bob is not started.
+"
 `;
 
 snapshot[`tests > exercise > new > submit 2`] = `[]`;
 
+snapshot[`tests > exercise > new > submit 3`] = `[]`;
+
 snapshot[`tests > exercise > new > complete 1`] = `
-[
-  'error("❌ Exercise bob is not started.")',
-]
+"
+❌ Exercise bob is not started.
+"
 `;
+
+snapshot[`tests > exercise > new > complete 2`] = `[]`;
 
 snapshot[`tests > exercise > new > publish 1`] = `
-[
-  'error("❌ Exercise bob is not started.")',
-]
+"
+❌ Exercise bob is not started.
+"
 `;
+
+snapshot[`tests > exercise > new > publish 2`] = `[]`;
 
 snapshot[`tests > exercise > new > update 1`] = `
-[
-  'error("❌ Exercise bob is not started.")',
-]
+"
+❌ Exercise bob is not started.
+"
 `;
+
+snapshot[`tests > exercise > new > update 2`] = `[]`;
 
 snapshot[`tests > exercise > started > list 1`] = `
-[
-  'log("💻 bob")',
-]
+"
+💻 bob    
+"
 `;
 
-snapshot[`tests > exercise > started > start 1`] = `[]`;
+snapshot[`tests > exercise > started > list 2`] = `[]`;
+
+snapshot[`tests > exercise > started > start 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > exercise > started > start 2`] = `[]`;
 
 snapshot[`tests > exercise > started > diff 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'warn("⚠️  Changes found in bob.")',
-]
+"
+✅ Downloaded bob.
+⚠️  Changes found in bob.
+"
 `;
+
+snapshot[`tests > exercise > started > diff 2`] = `[]`;
 
 snapshot[`tests > exercise > started > download 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > download 2`] = `
+snapshot[`tests > exercise > started > download 2`] = `[]`;
+
+snapshot[`tests > exercise > started > download 3`] = `
 [
   {
     content: 'export function bob():
@@ -123,18 +151,22 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > started > download: redownload 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > download: redownload 2`] = `
-[
-  'log("👀 Already downloaded bob.")',
-]
-`;
+snapshot[`tests > exercise > started > download: redownload 2`] = `[]`;
 
 snapshot[`tests > exercise > started > download: redownload 3`] = `
+"
+👀 Already downloaded bob.
+"
+`;
+
+snapshot[`tests > exercise > started > download: redownload 4`] = `[]`;
+
+snapshot[`tests > exercise > started > download: redownload 5`] = `
 [
   {
     content: 'export function bob():
@@ -159,18 +191,22 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > started > download --force 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > download --force 2`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
-`;
+snapshot[`tests > exercise > started > download --force 2`] = `[]`;
 
 snapshot[`tests > exercise > started > download --force 3`] = `
+"
+✅ Downloaded bob.
+"
+`;
+
+snapshot[`tests > exercise > started > download --force 4`] = `[]`;
+
+snapshot[`tests > exercise > started > download --force 5`] = `
 [
   {
     content: 'export function bob():
@@ -195,19 +231,23 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > started > download: skip 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > download: skip 2`] = `
-[
-  'log("📦 Skipping bob.ts.")',
-  'warn("✳️  Downloaded bob, but kept some files.")',
-]
-`;
+snapshot[`tests > exercise > started > download: skip 2`] = `[]`;
 
 snapshot[`tests > exercise > started > download: skip 3`] = `
+"
+📦 Skipping bob.ts.
+✳️  Downloaded bob, but kept some files.
+"
+`;
+
+snapshot[`tests > exercise > started > download: skip 4`] = `[]`;
+
+snapshot[`tests > exercise > started > download: skip 5`] = `
 [
   {
     content: '"bob"',
@@ -231,18 +271,22 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > started > download: overwrite 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > download: overwrite 2`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
-`;
+snapshot[`tests > exercise > started > download: overwrite 2`] = `[]`;
 
 snapshot[`tests > exercise > started > download: overwrite 3`] = `
+"
+✅ Downloaded bob.
+"
+`;
+
+snapshot[`tests > exercise > started > download: overwrite 4`] = `[]`;
+
+snapshot[`tests > exercise > started > download: overwrite 5`] = `
 [
   {
     content: 'export function bob():
@@ -267,19 +311,23 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > started > download: failure 1`] = `
-[
-  'error("❌ RequestError: Not Found")',
-]
+"
+❌ RequestError: Not Found
+"
 `;
+
+snapshot[`tests > exercise > started > download: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > started > submit 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+"
 `;
 
-snapshot[`tests > exercise > started > submit 2`] = `
+snapshot[`tests > exercise > started > submit 2`] = `[]`;
+
+snapshot[`tests > exercise > started > submit 3`] = `
 [
   {
     content: 'export function bob():
@@ -291,18 +339,22 @@ snapshot[`tests > exercise > started > submit 2`] = `
 `;
 
 snapshot[`tests > exercise > started > submit: presubmit failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > submit: presubmit failure 2`] = `
-[
-  'log("✅ Submitted solution for bob.")',
-]
-`;
+snapshot[`tests > exercise > started > submit: presubmit failure 2`] = `[]`;
 
 snapshot[`tests > exercise > started > submit: presubmit failure 3`] = `
+"
+✅ Submitted solution for bob.
+"
+`;
+
+snapshot[`tests > exercise > started > submit: presubmit failure 4`] = `[]`;
+
+snapshot[`tests > exercise > started > submit: presubmit failure 5`] = `
 [
   {
     content: '"bob"',
@@ -313,18 +365,22 @@ snapshot[`tests > exercise > started > submit: presubmit failure 3`] = `
 `;
 
 snapshot[`tests > exercise > started > submit --force 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > started > submit --force 2`] = `
-[
-  'log("✅ Submitted solution for bob.")',
-]
-`;
+snapshot[`tests > exercise > started > submit --force 2`] = `[]`;
 
 snapshot[`tests > exercise > started > submit --force 3`] = `
+"
+✅ Submitted solution for bob.
+"
+`;
+
+snapshot[`tests > exercise > started > submit --force 4`] = `[]`;
+
+snapshot[`tests > exercise > started > submit --force 5`] = `
 [
   {
     content: '"bob"',
@@ -335,124 +391,170 @@ snapshot[`tests > exercise > started > submit --force 3`] = `
 `;
 
 snapshot[`tests > exercise > started > submit --complete 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+👀 Already submitted solution for bob.
+🎉 Completed bob
+"
 `;
+
+snapshot[`tests > exercise > started > submit --complete 2`] = `[]`;
 
 snapshot[`tests > exercise > started > submit --publish 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-  'log("📣 Published bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+👀 Already submitted solution for bob.
+🎉 Completed bob
+📣 Published bob.
+"
 `;
+
+snapshot[`tests > exercise > started > submit --publish 2`] = `[]`;
 
 snapshot[`tests > exercise > started > complete 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+🎉 Completed bob
+"
 `;
+
+snapshot[`tests > exercise > started > complete 2`] = `[]`;
 
 snapshot[`tests > exercise > started > publish 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-  'log("📣 Published bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+🎉 Completed bob
+📣 Published bob.
+"
 `;
+
+snapshot[`tests > exercise > started > publish 2`] = `[]`;
 
 snapshot[`tests > exercise > started > update 1`] = `
-[
-  'warn("👀 Already at the last version of bob.")',
-]
+"
+👀 Already at the last version of bob.
+"
 `;
+
+snapshot[`tests > exercise > started > update 2`] = `[]`;
 
 snapshot[`tests > exercise > iterated > list 1`] = `
-[
-  'log("💻 bob 📜")',
-]
+"
+💻 bob 📜   
+"
 `;
 
-snapshot[`tests > exercise > iterated > start 1`] = `[]`;
+snapshot[`tests > exercise > iterated > list 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > start 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > exercise > iterated > start 2`] = `[]`;
 
 snapshot[`tests > exercise > iterated > diff: same 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > iterated > diff: same 2`] = `
-[
-  'log("✅ No changes found in bob.")',
-]
+snapshot[`tests > exercise > iterated > diff: same 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > diff: same 3`] = `
+"
+✅ No changes found in bob.
+"
 `;
+
+snapshot[`tests > exercise > iterated > diff: same 4`] = `[]`;
 
 snapshot[`tests > exercise > iterated > diff: different 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > iterated > diff: different 2`] = `
-[
-  'warn("⚠️  Changes found in bob.")',
-]
+snapshot[`tests > exercise > iterated > diff: different 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > diff: different 3`] = `
+"
+⚠️  Changes found in bob.
+"
 `;
+
+snapshot[`tests > exercise > iterated > diff: different 4`] = `[]`;
 
 snapshot[`tests > exercise > iterated > diff: missing local 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > iterated > diff: missing local 2`] = `
+snapshot[`tests > exercise > iterated > diff: missing local 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > diff: missing local 3`] = `
+"
+⚠️  Changes found in bob.
+"
+`;
+
+snapshot[`tests > exercise > iterated > diff: missing local 4`] = `
 [
   'code("TMP/bob1.ts", "/dev/null", "{ diff: true }")',
-  'warn("⚠️  Changes found in bob.")',
 ]
 `;
 
 snapshot[`tests > exercise > iterated > diff: missing server 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > iterated > diff: missing server 2`] = `
+snapshot[`tests > exercise > iterated > diff: missing server 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > diff: missing server 3`] = `
+"
+⚠️  Changes found in bob.
+"
+`;
+
+snapshot[`tests > exercise > iterated > diff: missing server 4`] = `
 [
   'code("TMP/bob2.ts", "WORKSPACE/typescript/bob/bob2.ts", "{ diff: true }")',
-  'warn("⚠️  Changes found in bob.")',
 ]
 `;
 
 snapshot[`tests > exercise > iterated > diff: malformed 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > iterated > diff: malformed 2`] = `
-[
-  'error("❌ Failed to download files.")',
-]
+snapshot[`tests > exercise > iterated > diff: malformed 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > diff: malformed 3`] = `
+"
+❌ Failed to download files.
+"
 `;
+
+snapshot[`tests > exercise > iterated > diff: malformed 4`] = `[]`;
 
 snapshot[`tests > exercise > iterated > download 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > iterated > download 2`] = `
+snapshot[`tests > exercise > iterated > download 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > download 3`] = `
 [
   {
     content: 'export function bob():
@@ -477,72 +579,96 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > iterated > download: failure 1`] = `
-[
-  'error("❌ RequestError: Not Found")',
-]
+"
+❌ RequestError: Not Found
+"
 `;
+
+snapshot[`tests > exercise > iterated > download: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > iterated > download: malformed 1`] = `
-[
-  'error("❌ Failed to download files.")',
-  'log("✅ Downloaded bob.")',
-]
+"
+❌ Failed to download files.
+✅ Downloaded bob.
+"
 `;
 
+snapshot[`tests > exercise > iterated > download: malformed 2`] = `[]`;
+
 snapshot[`tests > exercise > iterated > submit 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+"
 `;
 
 snapshot[`tests > exercise > iterated > submit 2`] = `[]`;
 
+snapshot[`tests > exercise > iterated > submit 3`] = `[]`;
+
 snapshot[`tests > exercise > iterated > complete 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+🎉 Completed bob
+"
 `;
+
+snapshot[`tests > exercise > iterated > complete 2`] = `[]`;
 
 snapshot[`tests > exercise > iterated > publish 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-  'log("📣 Published bob.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+🎉 Completed bob
+📣 Published bob.
+"
 `;
+
+snapshot[`tests > exercise > iterated > publish 2`] = `[]`;
 
 snapshot[`tests > exercise > iterated > update 1`] = `
-[
-  'warn("👀 Already at the last version of bob.")',
-]
+"
+👀 Already at the last version of bob.
+"
 `;
+
+snapshot[`tests > exercise > iterated > update 2`] = `[]`;
 
 snapshot[`tests > exercise > completed > list 1`] = `
-[
-  'log("✅ bob 📜")',
-]
+"
+✅ bob 📜   
+"
 `;
 
-snapshot[`tests > exercise > completed > start 1`] = `[]`;
+snapshot[`tests > exercise > completed > list 2`] = `[]`;
+
+snapshot[`tests > exercise > completed > start 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > exercise > completed > start 2`] = `[]`;
 
 snapshot[`tests > exercise > completed > diff 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ No changes found in bob.")',
-]
+"
+✅ Downloaded bob.
+✅ No changes found in bob.
+"
 `;
+
+snapshot[`tests > exercise > completed > diff 2`] = `[]`;
 
 snapshot[`tests > exercise > completed > download 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > completed > download 2`] = `
+snapshot[`tests > exercise > completed > download 2`] = `[]`;
+
+snapshot[`tests > exercise > completed > download 3`] = `
 [
   {
     content: 'export function bob():
@@ -567,82 +693,116 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > completed > submit 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+"
 `;
 
 snapshot[`tests > exercise > completed > submit 2`] = `[]`;
 
+snapshot[`tests > exercise > completed > submit 3`] = `[]`;
+
 snapshot[`tests > exercise > completed > complete 1`] = `
-[
-  'log("👀 Already completed bob.")',
-]
+"
+👀 Already completed bob.
+"
 `;
+
+snapshot[`tests > exercise > completed > complete 2`] = `[]`;
 
 snapshot[`tests > exercise > completed > publish 1`] = `
-[
-  'log("👀 Already completed bob.")',
-  'log("📣 Published bob.")',
-]
+"
+👀 Already completed bob.
+📣 Published bob.
+"
 `;
+
+snapshot[`tests > exercise > completed > publish 2`] = `[]`;
 
 snapshot[`tests > exercise > completed > update 1`] = `
-[
-  'warn("👀 Already at the last version of bob.")',
-]
+"
+👀 Already at the last version of bob.
+"
 `;
+
+snapshot[`tests > exercise > completed > update 2`] = `[]`;
 
 snapshot[`tests > exercise > published > list 1`] = `
-[
-  'log("✅ bob")',
-]
+"
+✅ bob    
+"
 `;
 
-snapshot[`tests > exercise > published > start 1`] = `[]`;
+snapshot[`tests > exercise > published > list 2`] = `[]`;
+
+snapshot[`tests > exercise > published > start 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > exercise > published > start 2`] = `[]`;
 
 snapshot[`tests > exercise > published > code 1`] = `
+"
+✅ Downloaded bob.
+"
+`;
+
+snapshot[`tests > exercise > published > code 2`] = `
 [
-  'log("✅ Downloaded bob.")',
   'code("WORKSPACE/typescript/bob/bob.ts", "{ diff: false }")',
 ]
 `;
 
 snapshot[`tests > exercise > published > diff 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ No changes found in bob.")',
-]
+"
+✅ Downloaded bob.
+✅ No changes found in bob.
+"
 `;
 
-snapshot[`tests > exercise > published > diff 2`] = `
-[
-  'warn("⚠️  Changes found in bob.")',
-]
+snapshot[`tests > exercise > published > diff 2`] = `[]`;
+
+snapshot[`tests > exercise > published > diff 3`] = `
+"
+⚠️  Changes found in bob.
+"
 `;
+
+snapshot[`tests > exercise > published > diff 4`] = `[]`;
 
 snapshot[`tests > exercise > published > diff --code 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ No changes found in bob.")',
-]
+"
+✅ Downloaded bob.
+✅ No changes found in bob.
+"
 `;
 
-snapshot[`tests > exercise > published > diff --code 2`] = `
+snapshot[`tests > exercise > published > diff --code 2`] = `[]`;
+
+snapshot[`tests > exercise > published > diff --code 3`] = `
+"
+⚠️  Changes found in bob.
+"
+`;
+
+snapshot[`tests > exercise > published > diff --code 4`] = `
 [
   'code("TMP/bob.ts", "WORKSPACE/typescript/bob/bob.ts", "{ diff: true }")',
-  'warn("⚠️  Changes found in bob.")',
 ]
 `;
 
 snapshot[`tests > exercise > published > download 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > published > download 2`] = `
+snapshot[`tests > exercise > published > download 2`] = `[]`;
+
+snapshot[`tests > exercise > published > download 3`] = `
 [
   {
     content: 'export function bob():
@@ -667,200 +827,254 @@ describe('Bob', () => {
 `;
 
 snapshot[`tests > exercise > published > submit 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+"
 `;
 
 snapshot[`tests > exercise > published > submit 2`] = `[]`;
 
+snapshot[`tests > exercise > published > submit 3`] = `[]`;
+
 snapshot[`tests > exercise > published > complete 1`] = `
-[
-  'log("👀 Already completed bob.")',
-]
+"
+👀 Already completed bob.
+"
 `;
+
+snapshot[`tests > exercise > published > complete 2`] = `[]`;
 
 snapshot[`tests > exercise > published > publish 1`] = `
-[
-  'log("👀 Already published solution for bob.")',
-]
+"
+👀 Already published solution for bob.
+"
 `;
+
+snapshot[`tests > exercise > published > publish 2`] = `[]`;
 
 snapshot[`tests > exercise > published > update 1`] = `
-[
-  'warn("👀 Already at the last version of bob.")',
-]
+"
+👀 Already at the last version of bob.
+"
 `;
+
+snapshot[`tests > exercise > published > update 2`] = `[]`;
 
 snapshot[`tests > exercise > outdated > update: passing 1`] = `
-[
-  'log("✅ Updated bob.")',
-]
+"
+✅ Updated bob.
+"
 `;
+
+snapshot[`tests > exercise > outdated > update: passing 2`] = `[]`;
 
 snapshot[`tests > exercise > outdated > update: failing 1`] = `
-[
-  'warn("✳️  Updated bob. Tests are now failing.")',
-]
+"
+✳️  Updated bob. Tests are now failing.
+"
 `;
+
+snapshot[`tests > exercise > outdated > update: failing 2`] = `[]`;
 
 snapshot[`tests > exercise > start: failure 1`] = `
-[
-  'error("❌ Failed to start bob.")',
-]
+"
+❌ Failed to start bob.
+"
 `;
+
+snapshot[`tests > exercise > start: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: wait 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+"
 `;
+
+snapshot[`tests > exercise > server test: wait 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: retry max attempts 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'error("❌ RetryError: Retrying exceeded the maxAttempts (5).")',
-]
+"
+✅ Downloaded bob.
+❌ RetryError: Retrying exceeded the maxAttempts (5).
+"
 `;
+
+snapshot[`tests > exercise > server test: retry max attempts 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: not queued 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'warn("⚠️  Test run not queued for bob. Creating iteration without tests.")',
-  'log("✅ Submitted solution for bob.")',
-]
+"
+✅ Downloaded bob.
+⚠️  Test run not queued for bob. Creating iteration without tests.
+✅ Submitted solution for bob.
+"
 `;
+
+snapshot[`tests > exercise > server test: not queued 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'error("❌ Test failed: test-name
-fail")',
-]
+"
+✅ Downloaded bob.
+❌ Test failed: test-name
+fail
+"
 `;
+
+snapshot[`tests > exercise > server test: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: failure but no tests 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'error("❌ Tests for bob failed.")',
-]
+"
+✅ Downloaded bob.
+❌ Tests for bob failed.
+"
 `;
+
+snapshot[`tests > exercise > server test: failure but no tests 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: timeout 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'error("❌ Timeout on bob tests.")',
-]
+"
+✅ Downloaded bob.
+❌ Timeout on bob tests.
+"
 `;
+
+snapshot[`tests > exercise > server test: timeout 2`] = `[]`;
 
 snapshot[`tests > exercise > server test: cancelled 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'error("❌ Tests for bob failed.")',
-]
+"
+✅ Downloaded bob.
+❌ Tests for bob failed.
+"
 `;
+
+snapshot[`tests > exercise > server test: cancelled 2`] = `[]`;
 
 snapshot[`tests > exercise > submit: failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'error("❌ Failed to submit bob.")',
-]
+"
+✅ Downloaded bob.
+❌ Failed to submit bob.
+"
 `;
+
+snapshot[`tests > exercise > submit: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > submit: create iteration failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'error("❌ Failed to create iteration for bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+❌ Failed to create iteration for bob.
+"
 `;
+
+snapshot[`tests > exercise > submit: create iteration failure 2`] = `[]`;
 
 snapshot[`tests > exercise > submit --complete: failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'error("❌ Failed to complete bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+👀 Already submitted solution for bob.
+❌ Failed to complete bob.
+"
 `;
+
+snapshot[`tests > exercise > submit --complete: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > submit --publish: failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("✅ Submitted solution for bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-  'error("❌ Failed to publish solution for bob.")',
-]
+"
+✅ Downloaded bob.
+✅ Submitted solution for bob.
+👀 Already submitted solution for bob.
+🎉 Completed bob
+❌ Failed to publish solution for bob.
+"
 `;
+
+snapshot[`tests > exercise > submit --publish: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > complete: unlock exercises 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'log("🎉 Completed bob")',
-  'log("✨ Unlocked alice.")',
-  'log("✨ Unlocked charlie.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+🎉 Completed bob
+✨ Unlocked alice.
+✨ Unlocked charlie.
+"
 `;
+
+snapshot[`tests > exercise > complete: unlock exercises 2`] = `[]`;
 
 snapshot[`tests > exercise > complete: failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'error("❌ Failed to complete bob.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+❌ Failed to complete bob.
+"
 `;
+
+snapshot[`tests > exercise > complete: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > publish: all iterations 1`] = `
-[
-  'log("👀 Already completed bob.")',
-  'log("📣 Published all iterations for bob.")',
-  'log("📣 Published bob.")',
-]
+"
+👀 Already completed bob.
+📣 Published all iterations for bob.
+📣 Published bob.
+"
 `;
+
+snapshot[`tests > exercise > publish: all iterations 2`] = `[]`;
 
 snapshot[`tests > exercise > publish: publish iterations failure 1`] = `
-[
-  'log("👀 Already completed bob.")',
-  'error("❌ Failed to publish all iterations for bob.")',
-]
+"
+👀 Already completed bob.
+❌ Failed to publish all iterations for bob.
+"
 `;
+
+snapshot[`tests > exercise > publish: publish iterations failure 2`] = `[]`;
 
 snapshot[`tests > exercise > publish: create iteration failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'warn("⚠️  Test run not queued for bob. Creating iteration without tests.")',
-  'log("✅ Submitted solution for bob.")',
-  'error("❌ Failed to create iteration for bob.")',
-]
+"
+✅ Downloaded bob.
+⚠️  Test run not queued for bob. Creating iteration without tests.
+✅ Submitted solution for bob.
+❌ Failed to create iteration for bob.
+"
 `;
+
+snapshot[`tests > exercise > publish: create iteration failure 2`] = `[]`;
 
 snapshot[`tests > exercise > publish: complete failure 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-  'log("👀 Already submitted solution for bob.")',
-  'error("❌ Failed to complete bob.")',
-]
+"
+✅ Downloaded bob.
+👀 Already submitted solution for bob.
+❌ Failed to complete bob.
+"
 `;
+
+snapshot[`tests > exercise > publish: complete failure 2`] = `[]`;
 
 snapshot[`tests > exercise > publish: failure 1`] = `
-[
-  'log("👀 Already completed bob.")',
-  'error("❌ Failed to publish solution for bob.")',
-]
+"
+👀 Already completed bob.
+❌ Failed to publish solution for bob.
+"
 `;
+
+snapshot[`tests > exercise > publish: failure 2`] = `[]`;
 
 snapshot[`tests > exercise > deleted exercise 1`] = `
-[
-  'log("✅ Downloaded bob.")',
-]
+"
+✅ Downloaded bob.
+"
 `;
 
-snapshot[`tests > exercise > deleted exercise 2`] = `
-[
-  'error("❌ Exercise bob not found.")',
-]
+snapshot[`tests > exercise > deleted exercise 2`] = `[]`;
+
+snapshot[`tests > exercise > deleted exercise 3`] = `
+"
+❌ Exercise bob not found.
+"
 `;
+
+snapshot[`tests > exercise > deleted exercise 4`] = `[]`;

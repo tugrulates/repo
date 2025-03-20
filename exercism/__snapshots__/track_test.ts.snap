@@ -1,229 +1,312 @@
 export const snapshot = {};
 
 snapshot[`tests > track > list > name 1`] = `
-[
-  'log("✨ alpha")',
-]
+"
+✨ alpha    
+"
 `;
 
-snapshot[`tests > track > list > name 2`] = `
-[
-  'log("✨ beta")',
-]
-`;
+snapshot[`tests > track > list > name 2`] = `[]`;
 
 snapshot[`tests > track > list > name 3`] = `
-[
-  'log("✨ alpha")',
-  'log("✨ beta")',
-]
+"
+✨ beta    
+"
 `;
 
-snapshot[`tests > track > list > name 4`] = `
-[
-  'log("✨ alpha")',
-]
-`;
+snapshot[`tests > track > list > name 4`] = `[]`;
 
 snapshot[`tests > track > list > name 5`] = `
-[
-  'log("✨ beta")',
-]
+"
+✨ alpha    
+✨ beta     
+"
 `;
 
 snapshot[`tests > track > list > name 6`] = `[]`;
 
 snapshot[`tests > track > list > name 7`] = `
-[
-  'log("✨ alpha")',
-  'log("✨ beta")',
-]
+"
+✨ alpha    
+"
 `;
 
-snapshot[`tests > track > list > name 8`] = `
-[
-  'log("✨ beta")',
-]
+snapshot[`tests > track > list > name 8`] = `[]`;
+
+snapshot[`tests > track > list > name 9`] = `
+"
+✨ beta    
+"
 `;
+
+snapshot[`tests > track > list > name 10`] = `[]`;
+
+snapshot[`tests > track > list > name 11`] = `
+"
+
+"
+`;
+
+snapshot[`tests > track > list > name 12`] = `[]`;
+
+snapshot[`tests > track > list > name 13`] = `
+"
+✨ alpha    
+✨ beta     
+"
+`;
+
+snapshot[`tests > track > list > name 14`] = `[]`;
+
+snapshot[`tests > track > list > name 15`] = `
+"
+✨ beta    
+"
+`;
+
+snapshot[`tests > track > list > name 16`] = `[]`;
 
 snapshot[`tests > track > list > invalid name 1`] = `
-[
-  \`error("error: option '-e, --exercise <slug>' argument '?alpha' is invalid. Invalid slug ?alpha.
-")\`,
-]
+"
+error: option '-e, --exercise <slug>' argument '?alpha' is invalid. Invalid slug ?alpha.
+
+"
 `;
+
+snapshot[`tests > track > list > invalid name 2`] = `[]`;
 
 snapshot[`tests > track > list > unlocked 1`] = `
-[
-  'log("✨ unlocked")',
-]
+"
+✨ unlocked    
+"
 `;
 
-snapshot[`tests > track > list > unlocked 2`] = `
-[
-  'log("✨ unlocked")',
-  'log("🔒 locked")',
-]
-`;
+snapshot[`tests > track > list > unlocked 2`] = `[]`;
 
 snapshot[`tests > track > list > unlocked 3`] = `
-[
-  'log("🔒 locked")',
-]
+"
+✨ unlocked    
+🔒 locked      
+"
 `;
+
+snapshot[`tests > track > list > unlocked 4`] = `[]`;
+
+snapshot[`tests > track > list > unlocked 5`] = `
+"
+🔒 locked    
+"
+`;
+
+snapshot[`tests > track > list > unlocked 6`] = `[]`;
 
 snapshot[`tests > track > list > difficulty 1`] = `
-[
-  'log("✨ easy")',
-]
+"
+✨ easy    
+"
 `;
 
-snapshot[`tests > track > list > difficulty 2`] = `
-[
-  'log("✨ medium")',
-]
-`;
+snapshot[`tests > track > list > difficulty 2`] = `[]`;
 
 snapshot[`tests > track > list > difficulty 3`] = `
-[
-  'log("✨ hard")',
-]
+"
+✨ medium    
+"
 `;
+
+snapshot[`tests > track > list > difficulty 4`] = `[]`;
+
+snapshot[`tests > track > list > difficulty 5`] = `
+"
+✨ hard    
+"
+`;
+
+snapshot[`tests > track > list > difficulty 6`] = `[]`;
 
 snapshot[`tests > track > list > status 1`] = `
-[
-  'log("✨ new")',
-]
+"
+✨ new    
+"
 `;
 
-snapshot[`tests > track > list > status 2`] = `
-[
-  'log("💻 started")',
-  'log("✅ completed 📜")',
-  'log("✅ published")',
-]
-`;
+snapshot[`tests > track > list > status 2`] = `[]`;
 
 snapshot[`tests > track > list > status 3`] = `
-[
-  'log("✅ completed 📜")',
-  'log("✅ published")',
-]
+"
+💻 started        
+✅ completed 📜   
+✅ published      
+"
 `;
 
-snapshot[`tests > track > list > status 4`] = `
-[
-  'log("✅ published")',
-]
-`;
+snapshot[`tests > track > list > status 4`] = `[]`;
 
 snapshot[`tests > track > list > status 5`] = `
-[
-  'log("✅ completed 📜")',
-]
+"
+✅ completed 📜   
+✅ published      
+"
 `;
+
+snapshot[`tests > track > list > status 6`] = `[]`;
+
+snapshot[`tests > track > list > status 7`] = `
+"
+✅ published    
+"
+`;
+
+snapshot[`tests > track > list > status 8`] = `[]`;
+
+snapshot[`tests > track > list > status 9`] = `
+"
+✅ completed 📜   
+"
+`;
+
+snapshot[`tests > track > list > status 10`] = `[]`;
 
 snapshot[`tests > track > list > feedback 1`] = `
-[
-  'warn("%c⚠️  automated-feedback 📜 🤖", "color: yellow")',
-]
+"
+⚠️  automated-feedback 📜 🤖  
+"
 `;
 
-snapshot[`tests > track > list > feedback 2`] = `
-[
-  'log("✅ human-feedback 📜 💡")',
-]
+snapshot[`tests > track > list > feedback 2`] = `[]`;
+
+snapshot[`tests > track > list > feedback 3`] = `
+"
+✅ human-feedback 📜 💡  
+"
 `;
+
+snapshot[`tests > track > list > feedback 4`] = `[]`;
 
 snapshot[`tests > track > list > outdated 1`] = `
-[
-  'log("✅ outdated 🕰️")',
-]
+"
+✅ outdated 🕰️   
+"
 `;
+
+snapshot[`tests > track > list > outdated 2`] = `[]`;
 
 snapshot[`tests > track > list > test status 1`] = `
-[
-  'log("✅ passing                     📜")',
-  'error("%c❌ failing                     📜  🧪", "color: red")',
-  'log("✳️  notQueued [no test results] 📜  🧪")',
-]
+"
+✅ passing                     📜     
+❌ failing                     📜  🧪 
+✳️  notQueued [no test results] 📜  🧪 
+"
 `;
 
-snapshot[`tests > track > list > test status 2`] = `
-[
-  'log("✅ passing 📜")',
-]
-`;
+snapshot[`tests > track > list > test status 2`] = `[]`;
 
 snapshot[`tests > track > list > test status 3`] = `
-[
-  'error("%c❌ failing 📜  🧪", "color: red")',
-]
+"
+✅ passing 📜   
+"
 `;
+
+snapshot[`tests > track > list > test status 4`] = `[]`;
+
+snapshot[`tests > track > list > test status 5`] = `
+"
+❌ failing 📜  🧪 
+"
+`;
+
+snapshot[`tests > track > list > test status 6`] = `[]`;
 
 snapshot[`tests > track > list > social 1`] = `
-[
-  'log("✅ starred    ⭐⭐")',
-  'log("✅ both       ⭐⭐⭐💬💬")',
-]
+"
+✅ starred    ⭐⭐      
+✅ both       ⭐⭐⭐💬💬
+"
 `;
 
-snapshot[`tests > track > list > social 2`] = `
-[
-  'log("✅ commented    💬")',
-  'log("✅ both         ⭐⭐⭐💬💬")',
-]
+snapshot[`tests > track > list > social 2`] = `[]`;
+
+snapshot[`tests > track > list > social 3`] = `
+"
+✅ commented    💬        
+✅ both         ⭐⭐⭐💬💬
+"
 `;
+
+snapshot[`tests > track > list > social 4`] = `[]`;
 
 snapshot[`tests > track > list > not joined 1`] = `
-[
-  'log("🔮 test-exercise")',
-]
+"
+🔮 test-exercise    
+"
 `;
+
+snapshot[`tests > track > list > not joined 2`] = `[]`;
 
 snapshot[`tests > track > subcommand > start 1`] = `
-[
-  'error("❌ Failed to start locked.")',
-  'log("💻 Started unlocked.")',
-]
+"
+
+❌ Failed to start locked.
+💻 Started unlocked."
 `;
+
+snapshot[`tests > track > subcommand > start 2`] = `[]`;
 
 snapshot[`tests > track > subcommand > start: not joined 1`] = `
-[
-  'error("❌ Track not-joined is not joined.")',
-]
+"
+❌ Track not-joined is not joined.
+"
 `;
 
+snapshot[`tests > track > subcommand > start: not joined 2`] = `[]`;
+
 snapshot[`tests > track > subcommand > code 1`] = `
+"
+
+✅ Downloaded unlocked.
+❌ Failed to start locked.
+💻 Started unlocked."
+`;
+
+snapshot[`tests > track > subcommand > code 2`] = `
 [
   'code("WORKSPACE/joined/unlocked/unlocked.joined", "{ diff: false }")',
-  'error("❌ Failed to start locked.")',
-  'log("✅ Downloaded unlocked.")',
-  'log("💻 Started unlocked.")',
 ]
 `;
 
 snapshot[`tests > track > subcommand > diff 1`] = `
-[
-  'error("❌ Failed to start locked.")',
-  'log("✅ Downloaded unlocked.")',
-  'log("💻 Started unlocked.")',
-  'warn("⚠️  Changes found in unlocked.")',
-]
+"
+
+⚠️  Changes found in unlocked.
+✅ Downloaded unlocked.
+❌ Failed to start locked.
+💻 Started unlocked."
 `;
+
+snapshot[`tests > track > subcommand > diff 2`] = `[]`;
 
 snapshot[`tests > track > subcommand > download 1`] = `
-[
-  'error("❌ Failed to start locked.")',
-  'log("✅ Downloaded unlocked.")',
-  'log("💻 Started unlocked.")',
-]
+"
+
+✅ Downloaded unlocked.
+❌ Failed to start locked.
+💻 Started unlocked."
 `;
 
-snapshot[`tests > track > deleted track 1`] = `[]`;
+snapshot[`tests > track > subcommand > download 2`] = `[]`;
 
-snapshot[`tests > track > deleted track 2`] = `
-[
-  'error("❌ Track track is not found.")',
-]
+snapshot[`tests > track > deleted track 1`] = `
+"
+
+"
 `;
+
+snapshot[`tests > track > deleted track 2`] = `[]`;
+
+snapshot[`tests > track > deleted track 3`] = `
+"
+❌ Track track is not found.
+"
+`;
+
+snapshot[`tests > track > deleted track 4`] = `[]`;

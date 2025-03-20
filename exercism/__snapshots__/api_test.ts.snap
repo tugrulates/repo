@@ -1,43 +1,57 @@
 export const snapshot = {};
 
 snapshot[`tests > cli > token: prompt 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-]
+"
+👤 test-handle 🎖️ 42
+"
 `;
+
+snapshot[`tests > cli > token: prompt 2`] = `[]`;
 
 snapshot[`tests > cli > token: prompt invalid 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-]
+"
+👤 test-handle 🎖️ 42
+"
 `;
+
+snapshot[`tests > cli > token: prompt invalid 2`] = `[]`;
 
 snapshot[`tests > cli > token: prompt missing 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-]
+"
+👤 test-handle 🎖️ 42
+"
 `;
+
+snapshot[`tests > cli > token: prompt missing 2`] = `[]`;
 
 snapshot[`tests > cli > token: config invalid 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-]
+"
+👤 test-handle 🎖️ 42
+"
 `;
+
+snapshot[`tests > cli > token: config invalid 2`] = `[]`;
 
 snapshot[`tests > cli > request: not found 1`] = `
-[
-  'error("❌ RequestError: Not Found")',
-]
+"
+❌ RequestError: Not Found
+"
 `;
+
+snapshot[`tests > cli > request: not found 2`] = `[]`;
 
 snapshot[`tests > cli > request: too many requests 1`] = `
-[
-  'error("❌ RequestError: Too Many Requests")',
-]
+"
+❌ RequestError: Too Many Requests
+"
 `;
 
+snapshot[`tests > cli > request: too many requests 2`] = `[]`;
+
 snapshot[`tests > cli > request: too many requests retry 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-]
+"
+👤 test-handle 🎖️ 42
+"
 `;
+
+snapshot[`tests > cli > request: too many requests retry 2`] = `[]`;

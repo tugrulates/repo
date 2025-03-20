@@ -1,13 +1,17 @@
 export const snapshot = {};
 
 snapshot[`tests > profile > list 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-]
+"
+👤 test-handle 🎖️ 42
+"
 `;
 
+snapshot[`tests > profile > list 2`] = `[]`;
+
 snapshot[`tests > profile > list: malformed 1`] = `
-[
-  'log("👤  🎖️ 0")',
-]
+"
+👤  🎖️ 0
+"
 `;
+
+snapshot[`tests > profile > list: malformed 2`] = `[]`;

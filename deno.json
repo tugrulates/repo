@@ -65,7 +65,6 @@
     "exiftool-vendored": "npm:exiftool-vendored@^29.2.0",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.25.0",
     "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.1",
-    "open": "npm:open@^10.1.0",
-    "terminal-link": "npm:terminal-link@^3.0.0"
+    "open": "npm:open@^10.1.0"
   }
 }

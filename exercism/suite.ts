@@ -1,3 +1,4 @@
+import { fakeConsole } from "@roka/testing/fake";
 import { assertExists } from "@std/assert/exists";
 import { expandGlob } from "@std/fs/expand-glob";
 import { join, relative } from "@std/path";
@@ -84,15 +85,6 @@ export async function cli(
       })`,
     );
   };
-  const [debug, log, info, warn, error] = [
-    stub(console, "debug", capture("debug")),
-    stub(console, "log", capture("log")),
-    stub(console, "info", capture("info")),
-    stub(console, "warn", capture("warn")),
-    stub(console, "error", capture("error")),
-  ];
-  const confirm = stub(globalThis, "confirm", () => options.confirm ?? false);
-  const prompt = stub(globalThis, "prompt", () => options.prompt ?? null);
 
   using app = new App({
     endpoint: s.server.endpoint,
@@ -113,25 +105,28 @@ export async function cli(
     },
   );
   const open = stub(app, "open", capture("open"));
-
+  const confirm = stub(globalThis, "confirm", () => options.confirm ?? false);
+  const prompt = stub(globalThis, "prompt", () => options.prompt ?? null);
   try {
+    using console = fakeConsole();
     const code = await main(app, [
       // ...(token ? [`--token=${token}`] : []),
       ...args.split(" ").filter((arg) => arg),
     ]);
-    if (options.sorted) captured.sort();
+    // deno-lint-ignore no-console
+    let output = console.output({ wrap: "\n" });
+    if (options.sorted) {
+      captured.sort();
+      output = output.split("\n").sort().join("\n");
+    }
+    await assertSnapshot(t, output);
     await assertSnapshot(t, captured);
     return code;
   } finally {
-    debug.restore();
-    log.restore();
-    info.restore();
-    warn.restore();
-    error.restore();
+    code.restore();
+    open.restore();
     confirm.restore();
     prompt.restore();
-    open.restore();
-    code.restore();
   }
 }
 

@@ -1,26 +1,36 @@
 export const snapshot = {};
 
 snapshot[`tests > cli > bare 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-  'log("🚀 rust             0 exercises")',
-  'log("🚀 typescript       0 exercises")',
-]
+"
+👤 test-handle 🎖️ 42            
+🚀 rust             0 exercises
+🚀 typescript       0 exercises
+"
 `;
 
-snapshot[`tests > cli > --quiet 1`] = `[]`;
+snapshot[`tests > cli > bare 2`] = `[]`;
+
+snapshot[`tests > cli > --quiet 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --quiet 2`] = `[]`;
 
 snapshot[`tests > cli > --verbose 1`] = `
-[
-  'log("👤 test-handle 🎖️ 42")',
-  'log("🚀 rust             0 exercises")',
-  'log("🚀 typescript       0 exercises")',
-]
+"
+
+👤 test-handle 🎖️ 42            
+🚀 rust             0 exercises
+🚀 typescript       0 exercises"
 `;
 
+snapshot[`tests > cli > --verbose 2`] = `[]`;
+
 snapshot[`tests > cli > --json 1`] = `
-[
-  'info("{
+'
+{
   "profile": {},
   "tracks": [
     {
@@ -66,21 +76,25 @@ snapshot[`tests > cli > --json 1`] = `
       "has_notifications": false
     }
   ]
-}")',
-]
+}
+'
 `;
 
-snapshot[`tests > cli > --json 2`] = `
-[
-  'info("{
-  "profile": {}
-}")',
-]
-`;
+snapshot[`tests > cli > --json 2`] = `[]`;
 
 snapshot[`tests > cli > --json 3`] = `
-[
-  'info("{
+'
+{
+  "profile": {}
+}
+'
+`;
+
+snapshot[`tests > cli > --json 4`] = `[]`;
+
+snapshot[`tests > cli > --json 5`] = `
+'
+{
   "tracks": [
     {
       "slug": "rust",
@@ -131,13 +145,15 @@ snapshot[`tests > cli > --json 3`] = `
       ]
     }
   ]
-}")',
-]
+}
+'
 `;
 
-snapshot[`tests > cli > --json 4`] = `
-[
-  'info("{
+snapshot[`tests > cli > --json 6`] = `[]`;
+
+snapshot[`tests > cli > --json 7`] = `
+'
+{
   "tracks": [
     {
       "slug": "python",
@@ -182,13 +198,15 @@ snapshot[`tests > cli > --json 4`] = `
       "has_notifications": false
     }
   ]
-}")',
-]
+}
+'
 `;
 
-snapshot[`tests > cli > --json 5`] = `
-[
-  'info("{
+snapshot[`tests > cli > --json 8`] = `[]`;
+
+snapshot[`tests > cli > --json 9`] = `
+'
+{
   "track": {
     "slug": "typescript",
     "course": true,
@@ -213,13 +231,15 @@ snapshot[`tests > cli > --json 5`] = `
       }
     ]
   }
-}")',
-]
+}
+'
 `;
 
-snapshot[`tests > cli > --json 6`] = `
-[
-  'info("{
+snapshot[`tests > cli > --json 10`] = `[]`;
+
+snapshot[`tests > cli > --json 11`] = `
+'
+{
   "exercise": {
     "slug": "bob",
     "title": "Bob",
@@ -228,27 +248,71 @@ snapshot[`tests > cli > --json 6`] = `
     "is_unlocked": true,
     "is_recommended": false
   }
-}")',
-]
+}
+'
 `;
 
-snapshot[`tests > cli > --sync 1`] = `[]`;
+snapshot[`tests > cli > --json 12`] = `[]`;
+
+snapshot[`tests > cli > --sync 1`] = `
+"
+
+"
+`;
 
 snapshot[`tests > cli > --sync 2`] = `[]`;
 
-snapshot[`tests > cli > --sync 3`] = `[]`;
+snapshot[`tests > cli > --sync 3`] = `
+"
+
+"
+`;
 
 snapshot[`tests > cli > --sync 4`] = `[]`;
 
-snapshot[`tests > cli > --sync 5`] = `[]`;
+snapshot[`tests > cli > --sync 5`] = `
+"
+
+"
+`;
 
 snapshot[`tests > cli > --sync 6`] = `[]`;
 
-snapshot[`tests > cli > --sync --quiet 1`] = `[]`;
+snapshot[`tests > cli > --sync 7`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --sync 8`] = `[]`;
+
+snapshot[`tests > cli > --sync 9`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --sync 10`] = `[]`;
+
+snapshot[`tests > cli > --sync 11`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --sync 12`] = `[]`;
+
+snapshot[`tests > cli > --sync --quiet 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --sync --quiet 2`] = `[]`;
 
 snapshot[`tests > cli > --sync --json 1`] = `
-[
-  'info("{
+'
+{
   "profile": {
     "handle": "test-handle",
     "total_reputation": 42
@@ -297,57 +361,101 @@ snapshot[`tests > cli > --sync --json 1`] = `
       "has_notifications": false
     }
   ]
-}")',
-]
+}
+'
 `;
 
+snapshot[`tests > cli > --sync --json 2`] = `[]`;
+
 snapshot[`tests > cli > --open 1`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 2`] = `
 [
   'open("http://0.0.0.0:PORT/tracks")',
   'open("http://0.0.0.0:PORT/profiles/test-handle")',
 ]
 `;
 
-snapshot[`tests > cli > --open 2`] = `
+snapshot[`tests > cli > --open 3`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 4`] = `
 [
   'open("http://0.0.0.0:PORT/profiles/test-handle")',
 ]
 `;
 
-snapshot[`tests > cli > --open 3`] = `
+snapshot[`tests > cli > --open 5`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 6`] = `
 [
   'open("http://0.0.0.0:PORT/tracks/rust")',
   'open("http://0.0.0.0:PORT/tracks/typescript")',
 ]
 `;
 
-snapshot[`tests > cli > --open 4`] = `
+snapshot[`tests > cli > --open 7`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 8`] = `
 [
   'open("http://0.0.0.0:PORT/tracks")',
 ]
 `;
 
-snapshot[`tests > cli > --open 5`] = `
+snapshot[`tests > cli > --open 9`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 10`] = `
 [
   'open("http://0.0.0.0:PORT/tracks/typescript")',
 ]
 `;
 
-snapshot[`tests > cli > --open 6`] = `
+snapshot[`tests > cli > --open 11`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 12`] = `
 [
   'open("http://0.0.0.0:PORT/tracks/typescript/exercises/bob")',
 ]
 `;
 
-snapshot[`tests > cli > --open 7`] = `
+snapshot[`tests > cli > --open 13`] = `
+"
+
+"
+`;
+
+snapshot[`tests > cli > --open 14`] = `
 [
   'open("http://0.0.0.0:PORT/tracks/typescript/exercises/bob")',
 ]
 `;
 
 snapshot[`tests > cli > help 1`] = `
-[
-  'info("Usage: exercism [options] [command]
+"
+Usage: exercism [options] [command]
 
 Manage Exercism tracks and exercise solutions.
 
@@ -363,13 +471,15 @@ Commands:
   tracks [options]      list tracks
   rust [options]        manage rust exercises
   typescript [options]  manage typescript exercises
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 2`] = `
-[
-  'info("Usage: exercism profile [options]
+snapshot[`tests > cli > help 2`] = `[]`;
+
+snapshot[`tests > cli > help 3`] = `
+"
+Usage: exercism profile [options]
 
 Show profile information.
 
@@ -381,13 +491,15 @@ Global Options:
   -q, --quiet    enable quiet mode
   -v, --verbose  enable verbose mode
   --open         open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 3`] = `
-[
-  'info("Usage: exercism tracks [options]
+snapshot[`tests > cli > help 4`] = `[]`;
+
+snapshot[`tests > cli > help 5`] = `
+"
+Usage: exercism tracks [options]
 
 Find tracks matching given filters.
 
@@ -402,13 +514,15 @@ Global Options:
   -q, --quiet         enable quiet mode
   -v, --verbose       enable verbose mode
   --open              open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 4`] = `
-[
-  'info("Usage: exercism typescript [options] [command]
+snapshot[`tests > cli > help 6`] = `[]`;
+
+snapshot[`tests > cli > help 7`] = `
+"
+Usage: exercism typescript [options] [command]
 
 Find typescript exercises matching given filters, and perform operations on
 them.
@@ -451,13 +565,15 @@ Commands:
   complete               complete exercise
   publish                publish solution
   update                 update solution
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 5`] = `
-[
-  'info("Usage: exercism typescript bob [options] [command]
+snapshot[`tests > cli > help 8`] = `[]`;
+
+snapshot[`tests > cli > help 9`] = `
+"
+Usage: exercism typescript bob [options] [command]
 
 Perform operations on Bob exercise of typescript track.
 
@@ -499,13 +615,15 @@ Commands:
   complete               complete exercise
   publish                publish solution
   update                 update solution
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 6`] = `
-[
-  'info("Usage: exercism typescript bob start [options]
+snapshot[`tests > cli > help 10`] = `[]`;
+
+snapshot[`tests > cli > help 11`] = `
+"
+Usage: exercism typescript bob start [options]
 
 Start exercises.
 
@@ -534,13 +652,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 7`] = `
-[
-  'info("Usage: exercism typescript bob code [options]
+snapshot[`tests > cli > help 12`] = `[]`;
+
+snapshot[`tests > cli > help 13`] = `
+"
+Usage: exercism typescript bob code [options]
 
 Open solution files on VSCode.
 
@@ -569,13 +689,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 8`] = `
-[
-  'info("Usage: exercism typescript bob format [options]
+snapshot[`tests > cli > help 14`] = `[]`;
+
+snapshot[`tests > cli > help 15`] = `
+"
+Usage: exercism typescript bob format [options]
 
 Format solution files with the code formatters of the track.
 
@@ -605,13 +727,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 9`] = `
-[
-  'info("Usage: exercism typescript bob lint [options]
+snapshot[`tests > cli > help 16`] = `[]`;
+
+snapshot[`tests > cli > help 17`] = `
+"
+Usage: exercism typescript bob lint [options]
 
 Check solution files with the linter(s) of the track.
 
@@ -641,13 +765,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 10`] = `
-[
-  'info("Usage: exercism typescript bob test [options]
+snapshot[`tests > cli > help 18`] = `[]`;
+
+snapshot[`tests > cli > help 19`] = `
+"
+Usage: exercism typescript bob test [options]
 
 Run unittests locally with the framework of the runner.
 
@@ -677,13 +803,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 11`] = `
-[
-  'info("Usage: exercism typescript bob diff [options]
+snapshot[`tests > cli > help 20`] = `[]`;
+
+snapshot[`tests > cli > help 21`] = `
+"
+Usage: exercism typescript bob diff [options]
 
 Compare solution files to latest submitted iteration.
 
@@ -713,13 +841,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 12`] = `
-[
-  'info("Usage: exercism typescript bob download [options]
+snapshot[`tests > cli > help 22`] = `[]`;
+
+snapshot[`tests > cli > help 23`] = `
+"
+Usage: exercism typescript bob download [options]
 
 Download solution files from last submitted iteration.
 
@@ -749,13 +879,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 13`] = `
-[
-  'info("Usage: exercism typescript bob submit [options]
+snapshot[`tests > cli > help 24`] = `[]`;
+
+snapshot[`tests > cli > help 25`] = `
+"
+Usage: exercism typescript bob submit [options]
 
 Submit solution files to Exercism.
 
@@ -787,13 +919,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 14`] = `
-[
-  'info("Usage: exercism typescript bob complete [options]
+snapshot[`tests > cli > help 26`] = `[]`;
+
+snapshot[`tests > cli > help 27`] = `
+"
+Usage: exercism typescript bob complete [options]
 
 Complete exercise, submitting if necessary.
 
@@ -822,13 +956,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 15`] = `
-[
-  'info("Usage: exercism typescript bob publish [options]
+snapshot[`tests > cli > help 28`] = `[]`;
+
+snapshot[`tests > cli > help 29`] = `
+"
+Usage: exercism typescript bob publish [options]
 
 Publish solution, submitting if necessary.
 
@@ -857,13 +993,15 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
 
-snapshot[`tests > cli > help 16`] = `
-[
-  'info("Usage: exercism typescript bob update [options]
+snapshot[`tests > cli > help 30`] = `[]`;
+
+snapshot[`tests > cli > help 31`] = `
+"
+Usage: exercism typescript bob update [options]
 
 Update solution ot the latest version of the exercise.
 
@@ -892,125 +1030,161 @@ Global Options:
   -q, --quiet            enable quiet mode
   -v, --verbose          enable verbose mode
   --open                 open related Exercism pages on browser
-")',
-]
+
+"
 `;
+
+snapshot[`tests > cli > help 32`] = `[]`;
 
 snapshot[`tests > cli > invalid 1`] = `
-[
-  \`error("error: unknown option '--unknown'
-")\`,
-]
+"
+error: unknown option '--unknown'
+
+"
 `;
 
-snapshot[`tests > cli > invalid 2`] = `
-[
-  'error("error: too many arguments. Expected 0 arguments but got 1.
-")',
-]
-`;
+snapshot[`tests > cli > invalid 2`] = `[]`;
 
 snapshot[`tests > cli > invalid 3`] = `
-[
-  \`error("error: too many arguments for 'profile'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 4`] = `
-[
-  \`error("error: too many arguments for 'tracks'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 4`] = `[]`;
 
 snapshot[`tests > cli > invalid 5`] = `
-[
-  \`error("error: too many arguments for 'typescript'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'profile'. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 6`] = `
-[
-  \`error("error: too many arguments for 'bob'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 6`] = `[]`;
 
 snapshot[`tests > cli > invalid 7`] = `
-[
-  \`error("error: too many arguments for 'start'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'tracks'. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 8`] = `
-[
-  \`error("error: too many arguments for 'code'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 8`] = `[]`;
 
 snapshot[`tests > cli > invalid 9`] = `
-[
-  \`error("error: too many arguments for 'format'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'typescript'. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 10`] = `
-[
-  \`error("error: too many arguments for 'lint'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 10`] = `[]`;
 
 snapshot[`tests > cli > invalid 11`] = `
-[
-  \`error("error: too many arguments for 'test'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'bob'. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 12`] = `
-[
-  \`error("error: too many arguments for 'diff'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 12`] = `[]`;
 
 snapshot[`tests > cli > invalid 13`] = `
-[
-  \`error("error: too many arguments for 'download'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'start'. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 14`] = `
-[
-  \`error("error: too many arguments for 'submit'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 14`] = `[]`;
 
 snapshot[`tests > cli > invalid 15`] = `
-[
-  \`error("error: too many arguments for 'complete'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'code'. Expected 0 arguments but got 1.
+
+"
 `;
 
-snapshot[`tests > cli > invalid 16`] = `
-[
-  \`error("error: too many arguments for 'publish'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
+snapshot[`tests > cli > invalid 16`] = `[]`;
 
 snapshot[`tests > cli > invalid 17`] = `
-[
-  \`error("error: too many arguments for 'update'. Expected 0 arguments but got 1.
-")\`,
-]
+"
+error: too many arguments for 'format'. Expected 0 arguments but got 1.
+
+"
 `;
+
+snapshot[`tests > cli > invalid 18`] = `[]`;
+
+snapshot[`tests > cli > invalid 19`] = `
+"
+error: too many arguments for 'lint'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 20`] = `[]`;
+
+snapshot[`tests > cli > invalid 21`] = `
+"
+error: too many arguments for 'test'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 22`] = `[]`;
+
+snapshot[`tests > cli > invalid 23`] = `
+"
+error: too many arguments for 'diff'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 24`] = `[]`;
+
+snapshot[`tests > cli > invalid 25`] = `
+"
+error: too many arguments for 'download'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 26`] = `[]`;
+
+snapshot[`tests > cli > invalid 27`] = `
+"
+error: too many arguments for 'submit'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 28`] = `[]`;
+
+snapshot[`tests > cli > invalid 29`] = `
+"
+error: too many arguments for 'complete'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 30`] = `[]`;
+
+snapshot[`tests > cli > invalid 31`] = `
+"
+error: too many arguments for 'publish'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 32`] = `[]`;
+
+snapshot[`tests > cli > invalid 33`] = `
+"
+error: too many arguments for 'update'. Expected 0 arguments but got 1.
+
+"
+`;
+
+snapshot[`tests > cli > invalid 34`] = `[]`;
