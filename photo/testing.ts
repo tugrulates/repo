@@ -23,7 +23,7 @@ export async function tempPhoto(
   const directory = await Deno.makeTempDir();
   assertExists(import.meta.dirname);
   await copy(
-    join(import.meta.dirname, "__testdata__"),
+    join(import.meta.dirname, "testdata"),
     directory,
     { overwrite: true },
   );
