@@ -1,0 +1,35 @@
+export const snapshot = {};
+
+snapshot[`tests > tracks > name 1`] = `
+[
+  'log("🚀 cpp  100 exercises")',
+]
+`;
+
+snapshot[`tests > tracks > name: invalid 1`] = `
+[
+  \`error("error: option '-e, --track <slug>' argument '?cpp' is invalid. Invalid slug ?cpp.
+")\`,
+]
+`;
+
+snapshot[`tests > tracks > joined 1`] = `
+[
+  'log("🚀 cpp        100 exercises")',
+  'log("🧩 java 🔔 50/100 exercises")',
+]
+`;
+
+snapshot[`tests > tracks > completed 1`] = `
+[
+  'log("🚀 cpp  100 exercises")',
+]
+`;
+
+snapshot[`tests > tracks > all 1`] = `
+[
+  'log("🚀 cpp        100 exercises")',
+  'log("🧩 java 🔔 50/100 exercises")',
+  'log("🔒 php          0 exercises")',
+]
+`;

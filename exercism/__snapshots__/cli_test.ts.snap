@@ -1,0 +1,1069 @@
+export const snapshot = {};
+
+snapshot[`tests > cli > bare 1`] = `
+[
+  'log("👤 test-handle 🎖️ 42")',
+  'log("🚀 rust             0 exercises")',
+  'log("🚀 typescript       0 exercises")',
+]
+`;
+
+snapshot[`tests > cli > --quiet 1`] = `[]`;
+
+snapshot[`tests > cli > --verbose 1`] = `
+[
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/user 200 OK).")',
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/reputation 200 OK).")',
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks 200 OK).")',
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks/python/exercises?sideload[]=solutions 200 OK).")',
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks/rust/exercises?sideload[]=solutions 200 OK).")',
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks/typescript/exercises?sideload[]=solutions 200 OK).")',
+  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/validate_token 200 OK).")',
+  'log("👤 test-handle 🎖️ 42")',
+  'log("🚀 rust             0 exercises")',
+  'log("🚀 typescript       0 exercises")',
+]
+`;
+
+snapshot[`tests > cli > --json 1`] = `
+[
+  'info("{
+  "profile": {},
+  "tracks": [
+    {
+      "slug": "python",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/python.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": false,
+      "has_notifications": false
+    },
+    {
+      "slug": "rust",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/rust.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false
+    },
+    {
+      "slug": "typescript",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/typescript.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false
+    }
+  ]
+}")',
+]
+`;
+
+snapshot[`tests > cli > --json 2`] = `
+[
+  'info("{
+  "profile": {}
+}")',
+]
+`;
+
+snapshot[`tests > cli > --json 3`] = `
+[
+  'info("{
+  "tracks": [
+    {
+      "slug": "rust",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/rust.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false,
+      "exercises": [
+        {
+          "slug": "bob",
+          "title": "Bob",
+          "difficulty": "easy",
+          "blurb": "Exercise bob on Exercism.",
+          "is_unlocked": true,
+          "is_recommended": false
+        }
+      ]
+    },
+    {
+      "slug": "typescript",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/typescript.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false,
+      "exercises": [
+        {
+          "slug": "bob",
+          "title": "Bob",
+          "difficulty": "easy",
+          "blurb": "Exercise bob on Exercism.",
+          "is_unlocked": true,
+          "is_recommended": false
+        }
+      ]
+    }
+  ]
+}")',
+]
+`;
+
+snapshot[`tests > cli > --json 4`] = `
+[
+  'info("{
+  "tracks": [
+    {
+      "slug": "python",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/python.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": false,
+      "has_notifications": false
+    },
+    {
+      "slug": "rust",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/rust.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false
+    },
+    {
+      "slug": "typescript",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/typescript.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false
+    }
+  ]
+}")',
+]
+`;
+
+snapshot[`tests > cli > --json 5`] = `
+[
+  'info("{
+  "track": {
+    "slug": "typescript",
+    "course": true,
+    "icon_url": "https://assets.exercism.org/tracks/typescript.svg",
+    "tags": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "last_touched_at": "2024-01-01T00:00:00Z",
+    "is_new": false,
+    "is_joined": true,
+    "has_notifications": false,
+    "exercises": [
+      {
+        "slug": "bob",
+        "title": "Bob",
+        "difficulty": "easy",
+        "blurb": "Exercise bob on Exercism.",
+        "is_unlocked": true,
+        "is_recommended": false
+      }
+    ]
+  }
+}")',
+]
+`;
+
+snapshot[`tests > cli > --json 6`] = `
+[
+  'info("{
+  "exercise": {
+    "slug": "bob",
+    "title": "Bob",
+    "difficulty": "easy",
+    "blurb": "Exercise bob on Exercism.",
+    "is_unlocked": true,
+    "is_recommended": false
+  }
+}")',
+]
+`;
+
+snapshot[`tests > cli > --sync 1`] = `[]`;
+
+snapshot[`tests > cli > --sync 2`] = `[]`;
+
+snapshot[`tests > cli > --sync 3`] = `[]`;
+
+snapshot[`tests > cli > --sync 4`] = `[]`;
+
+snapshot[`tests > cli > --sync 5`] = `[]`;
+
+snapshot[`tests > cli > --sync 6`] = `[]`;
+
+snapshot[`tests > cli > --sync --quiet 1`] = `[]`;
+
+snapshot[`tests > cli > --sync --json 1`] = `
+[
+  'info("{
+  "profile": {
+    "handle": "test-handle",
+    "total_reputation": 42
+  },
+  "tracks": [
+    {
+      "slug": "python",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/python.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": false,
+      "has_notifications": false
+    },
+    {
+      "slug": "rust",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/rust.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false
+    },
+    {
+      "slug": "typescript",
+      "course": true,
+      "icon_url": "https://assets.exercism.org/tracks/typescript.svg",
+      "tags": [
+        "Windows",
+        "macOS",
+        "Linux"
+      ],
+      "last_touched_at": "2024-01-01T00:00:00Z",
+      "is_new": false,
+      "is_joined": true,
+      "has_notifications": false
+    }
+  ]
+}")',
+]
+`;
+
+snapshot[`tests > cli > --open 1`] = `
+[
+  'open("http://0.0.0.0:PORT/tracks")',
+  'open("http://0.0.0.0:PORT/profiles/test-handle")',
+]
+`;
+
+snapshot[`tests > cli > --open 2`] = `
+[
+  'open("http://0.0.0.0:PORT/profiles/test-handle")',
+]
+`;
+
+snapshot[`tests > cli > --open 3`] = `
+[
+  'open("http://0.0.0.0:PORT/tracks/rust")',
+  'open("http://0.0.0.0:PORT/tracks/typescript")',
+]
+`;
+
+snapshot[`tests > cli > --open 4`] = `
+[
+  'open("http://0.0.0.0:PORT/tracks")',
+]
+`;
+
+snapshot[`tests > cli > --open 5`] = `
+[
+  'open("http://0.0.0.0:PORT/tracks/typescript")',
+]
+`;
+
+snapshot[`tests > cli > --open 6`] = `
+[
+  'open("http://0.0.0.0:PORT/tracks/typescript/exercises/bob")',
+]
+`;
+
+snapshot[`tests > cli > --open 7`] = `
+[
+  'open("http://0.0.0.0:PORT/tracks/typescript/exercises/bob")',
+]
+`;
+
+snapshot[`tests > cli > help 1`] = `
+[
+  'info("Usage: exercism [options] [command]
+
+Manage Exercism tracks and exercise solutions.
+
+Options:
+  -V, --version         output the version number
+  -q, --quiet           enable quiet mode
+  -v, --verbose         enable verbose mode
+  --open                open related Exercism pages on browser
+  --token <token>       Exercism API token (default: null)
+  -h, --help            display help for command
+
+Commands:
+  profile               show profile
+  tracks [options]      list tracks
+  git [options]         push to git repository
+  rust [options]        manage rust exercises
+  typescript [options]  manage typescript exercises
+")',
+]
+`;
+
+snapshot[`tests > cli > help 2`] = `
+[
+  'info("Usage: exercism profile [options]
+
+Show profile information.
+
+Options:
+  -h, --help       display help for command
+
+Global Options:
+  -V, --version    output the version number
+  -q, --quiet      enable quiet mode
+  -v, --verbose    enable verbose mode
+  --open           open related Exercism pages on browser
+  --token <token>  Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 3`] = `
+[
+  'info("Usage: exercism tracks [options]
+
+Find tracks matching given filters.
+
+Options:
+  -e, --track <slug>  only specific tracks
+  --all               all tracks, joined or not
+  --completed         only completed tracks
+  -h, --help          display help for command
+
+Global Options:
+  -V, --version       output the version number
+  -q, --quiet         enable quiet mode
+  -v, --verbose       enable verbose mode
+  --open              open related Exercism pages on browser
+  --token <token>     Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 4`] = `
+[
+  'info("Usage: exercism git [options]
+
+Push solutions for specified tracks to a git repository.
+
+Options:
+  --repo <repo>          the git repository to store solutions
+  -b, --branch <branch>  the git branch to store solutions
+  -n, --dry-run          compare changes, but do not push to git repository
+  -h, --help             display help for command
+
+Global Options:
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 5`] = `
+[
+  'info("Usage: exercism typescript [options] [command]
+
+Find typescript exercises matching given filters, and perform operations on
+them.
+
+Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -h, --help             display help for command
+
+Global Options:
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+
+Commands:
+  start                  start exercise
+  code                   open solution code on IDE
+  format [options]       format solution
+  lint [options]         lint solution
+  test [options]         run unittests
+  diff [options]         compare solution
+  download [options]     download solution
+  submit [options]       submit solution
+  complete               complete exercise
+  publish                publish solution
+  update                 update solution
+")',
+]
+`;
+
+snapshot[`tests > cli > help 6`] = `
+[
+  'info("Usage: exercism typescript bob [options] [command]
+
+Perform operations on Bob exercise of typescript track.
+
+Options:
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+
+Commands:
+  start                  start exercise
+  code                   open solution code on IDE
+  format [options]       format solution
+  lint [options]         lint solution
+  test [options]         run unittests
+  diff [options]         compare solution
+  download [options]     download solution
+  submit [options]       submit solution
+  complete               complete exercise
+  publish                publish solution
+  update                 update solution
+")',
+]
+`;
+
+snapshot[`tests > cli > help 7`] = `
+[
+  'info("Usage: exercism typescript bob start [options]
+
+Start exercises.
+
+Options:
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 8`] = `
+[
+  'info("Usage: exercism typescript bob code [options]
+
+Open solution files on VSCode.
+
+Options:
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 9`] = `
+[
+  'info("Usage: exercism typescript bob format [options]
+
+Format solution files with the code formatters of the track.
+
+Options:
+  --code                 open failing exercises on IDE
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 10`] = `
+[
+  'info("Usage: exercism typescript bob lint [options]
+
+Check solution files with the linter(s) of the track.
+
+Options:
+  --code                 open failing exercises on IDE
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 11`] = `
+[
+  'info("Usage: exercism typescript bob test [options]
+
+Run unittests locally with the framework of the runner.
+
+Options:
+  --code                 open failing exercises on IDE
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 12`] = `
+[
+  'info("Usage: exercism typescript bob diff [options]
+
+Compare solution files to latest submitted iteration.
+
+Options:
+  --code                 open differing files on IDE
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 13`] = `
+[
+  'info("Usage: exercism typescript bob download [options]
+
+Download solution files from last submitted iteration.
+
+Options:
+  --force                force download, overwriting existing files
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 14`] = `
+[
+  'info("Usage: exercism typescript bob submit [options]
+
+Submit solution files to Exercism.
+
+Options:
+  --force                force submit, skipping format, lint, and test checks
+  --complete             complete solution if all tests are passing
+  --publish              publish solution if all tests are passing
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 15`] = `
+[
+  'info("Usage: exercism typescript bob complete [options]
+
+Complete exercise, submitting if necessary.
+
+Options:
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 16`] = `
+[
+  'info("Usage: exercism typescript bob publish [options]
+
+Publish solution, submitting if necessary.
+
+Options:
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > help 17`] = `
+[
+  'info("Usage: exercism typescript bob update [options]
+
+Update solution ot the latest version of the exercise.
+
+Options:
+  -h, --help             display help for command
+
+Global Options:
+  -e, --exercise <slug>  only specific exercises
+  --all                  all exercises, locked or unlocked
+  --locked               only locked exercises
+  --easy                 only easy exercises
+  --medium               only medium exercises
+  --hard                 only hard exercises
+  --new                  only new exercises
+  --started              only started but incomplete exercises
+  --completed            only completed exercises
+  --published            only exercises with published last iteration
+  --draft                only exercises with an unpublished last iteration
+  --passing              only exercises with passing iterations
+  --failing              only exercises with failing iterations
+  --feedback             only exercises with automated feedback
+  --outdated             only exercises on previous versions
+  --starred              only exercises with starred solutions
+  --commented            only exercises with commented solutions
+  -V, --version          output the version number
+  -q, --quiet            enable quiet mode
+  -v, --verbose          enable verbose mode
+  --open                 open related Exercism pages on browser
+  --token <token>        Exercism API token (default: to*en)
+")',
+]
+`;
+
+snapshot[`tests > cli > invalid 1`] = `
+[
+  \`error("error: unknown option '--unknown'
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 2`] = `
+[
+  'error("error: too many arguments. Expected 0 arguments but got 1.
+")',
+]
+`;
+
+snapshot[`tests > cli > invalid 3`] = `
+[
+  \`error("error: too many arguments for 'profile'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 4`] = `
+[
+  \`error("error: too many arguments for 'tracks'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 5`] = `
+[
+  \`error("error: too many arguments for 'git'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 6`] = `
+[
+  \`error("error: too many arguments for 'typescript'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 7`] = `
+[
+  \`error("error: too many arguments for 'bob'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 8`] = `
+[
+  \`error("error: too many arguments for 'start'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 9`] = `
+[
+  \`error("error: too many arguments for 'code'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 10`] = `
+[
+  \`error("error: too many arguments for 'format'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 11`] = `
+[
+  \`error("error: too many arguments for 'lint'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 12`] = `
+[
+  \`error("error: too many arguments for 'test'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 13`] = `
+[
+  \`error("error: too many arguments for 'diff'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 14`] = `
+[
+  \`error("error: too many arguments for 'download'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 15`] = `
+[
+  \`error("error: too many arguments for 'submit'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 16`] = `
+[
+  \`error("error: too many arguments for 'complete'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 17`] = `
+[
+  \`error("error: too many arguments for 'publish'. Expected 0 arguments but got 1.
+")\`,
+]
+`;
+
+snapshot[`tests > cli > invalid 18`] = `
+[
+  \`error("error: too many arguments for 'update'. Expected 0 arguments but got 1.
+")\`,
+]
+`;

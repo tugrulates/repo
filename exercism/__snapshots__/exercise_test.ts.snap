@@ -1,0 +1,866 @@
+export const snapshot = {};
+
+snapshot[`tests > exercise > new > list 1`] = `
+[
+  'log("✨ bob")',
+]
+`;
+
+snapshot[`tests > exercise > new > start 1`] = `
+[
+  'log("💻 Started bob.")',
+]
+`;
+
+snapshot[`tests > exercise > new > diff 1`] = `
+[
+  'log("💻 Started bob.")',
+  'log("✅ Downloaded bob.")',
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > new > download 1`] = `
+[
+  'log("💻 Started bob.")',
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > new > download 2`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > new > submit 1`] = `
+[
+  'error("❌ Exercise bob is not started.")',
+]
+`;
+
+snapshot[`tests > exercise > new > submit 2`] = `[]`;
+
+snapshot[`tests > exercise > new > complete 1`] = `
+[
+  'error("❌ Exercise bob is not started.")',
+]
+`;
+
+snapshot[`tests > exercise > new > publish 1`] = `
+[
+  'error("❌ Exercise bob is not started.")',
+]
+`;
+
+snapshot[`tests > exercise > new > update 1`] = `
+[
+  'error("❌ Exercise bob is not started.")',
+]
+`;
+
+snapshot[`tests > exercise > started > list 1`] = `
+[
+  'log("💻 bob")',
+]
+`;
+
+snapshot[`tests > exercise > started > start 1`] = `[]`;
+
+snapshot[`tests > exercise > started > diff 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download 2`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > download: redownload 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download: redownload 2`] = `
+[
+  'log("👀 Already downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download: redownload 3`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > download --force 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download --force 2`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download --force 3`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > download: skip 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download: skip 2`] = `
+[
+  'log("📦 Skipping bob.ts.")',
+  'warn("✳️  Downloaded bob, but kept some files.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download: skip 3`] = `
+[
+  {
+    content: '"bob"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > download: overwrite 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download: overwrite 2`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > download: overwrite 3`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > download: failure 1`] = `
+[
+  'error("❌ RequestError: Not Found [404].")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit 2`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+    type: "solution",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > submit: presubmit failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit: presubmit failure 2`] = `
+[
+  'log("✅ Submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit: presubmit failure 3`] = `
+[
+  {
+    content: '"bob"',
+    filename: "bob.ts",
+    type: "solution",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > submit --force 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit --force 2`] = `
+[
+  'log("✅ Submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit --force 3`] = `
+[
+  {
+    content: '"bob"',
+    filename: "bob.ts",
+    type: "solution",
+  },
+]
+`;
+
+snapshot[`tests > exercise > started > submit --complete 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+]
+`;
+
+snapshot[`tests > exercise > started > submit --publish 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+  'log("📣 Published bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > complete 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+]
+`;
+
+snapshot[`tests > exercise > started > publish 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+  'log("📣 Published bob.")',
+]
+`;
+
+snapshot[`tests > exercise > started > update 1`] = `
+[
+  'warn("👀 Already at the last version of bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > list 1`] = `
+[
+  'log("💻 bob 📜")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > start 1`] = `[]`;
+
+snapshot[`tests > exercise > iterated > diff: same 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: same 2`] = `
+[
+  'log("✅ No changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: different 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: different 2`] = `
+[
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: missing local 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: missing local 2`] = `
+[
+  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/5703a6becdad541/bob1.ts", "/dev/null", "{ diff: true }")',
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: missing server 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: missing server 2`] = `
+[
+  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/af20d05f555c2c18/bob2.ts", "/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/3f092a65e24be57f/typescript/bob/bob2.ts", "{ diff: true }")',
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: malformed 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > diff: malformed 2`] = `
+[
+  'error("❌ Failed to download files.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > download 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > download 2`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > iterated > download: failure 1`] = `
+[
+  'error("❌ RequestError: Not Found [404].")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > download: malformed 1`] = `
+[
+  'error("❌ Failed to download files.")',
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > submit 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > submit 2`] = `[]`;
+
+snapshot[`tests > exercise > iterated > complete 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > publish 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+  'log("📣 Published bob.")',
+]
+`;
+
+snapshot[`tests > exercise > iterated > update 1`] = `
+[
+  'warn("👀 Already at the last version of bob.")',
+]
+`;
+
+snapshot[`tests > exercise > completed > list 1`] = `
+[
+  'log("✅ bob 📜")',
+]
+`;
+
+snapshot[`tests > exercise > completed > start 1`] = `[]`;
+
+snapshot[`tests > exercise > completed > diff 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ No changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > completed > download 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > completed > download 2`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > completed > submit 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > completed > submit 2`] = `[]`;
+
+snapshot[`tests > exercise > completed > complete 1`] = `
+[
+  'log("👀 Already completed bob.")',
+]
+`;
+
+snapshot[`tests > exercise > completed > publish 1`] = `
+[
+  'log("👀 Already completed bob.")',
+  'log("📣 Published bob.")',
+]
+`;
+
+snapshot[`tests > exercise > completed > update 1`] = `
+[
+  'warn("👀 Already at the last version of bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > list 1`] = `
+[
+  'log("✅ bob")',
+]
+`;
+
+snapshot[`tests > exercise > published > start 1`] = `[]`;
+
+snapshot[`tests > exercise > published > code 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/db4e74d49825003b/typescript/bob/bob.ts", "{ diff: false }")',
+]
+`;
+
+snapshot[`tests > exercise > published > diff 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ No changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > diff 2`] = `
+[
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > diff --code 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ No changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > diff --code 2`] = `
+[
+  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/a710076c8566bec2/bob.ts", "/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/e1000ee8e7b6d0be/typescript/bob/bob.ts", "{ diff: true }")',
+  'warn("⚠️  Changes found in bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > download 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > download 2`] = `
+[
+  {
+    content: 'export function bob():
+  return "Bob!"',
+    filename: "bob.ts",
+  },
+  {
+    content: 'export const BOB = "Bob"',
+    filename: "bob_data.ts",
+  },
+  {
+    content: "import { describe, it, expect } from '@jest/globals'
+import { bob } from './bob.ts'
+describe('Bob', () => {
+  it('says bob', () => {
+    expect(bob()).toEqual('Bob!')
+  });
+});",
+    filename: "bob_test.ts",
+  },
+]
+`;
+
+snapshot[`tests > exercise > published > submit 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > submit 2`] = `[]`;
+
+snapshot[`tests > exercise > published > complete 1`] = `
+[
+  'log("👀 Already completed bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > publish 1`] = `
+[
+  'log("👀 Already published solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > published > update 1`] = `
+[
+  'warn("👀 Already at the last version of bob.")',
+]
+`;
+
+snapshot[`tests > exercise > outdated > update: passing 1`] = `
+[
+  'log("✅ Updated bob.")',
+]
+`;
+
+snapshot[`tests > exercise > outdated > update: failing 1`] = `
+[
+  'warn("✳️  Updated bob. Tests are now failing.")',
+]
+`;
+
+snapshot[`tests > exercise > start: failure 1`] = `
+[
+  'error("❌ Failed to start bob.")',
+]
+`;
+
+snapshot[`tests > exercise > server test: wait 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > server test: retry max attempts 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'error("❌ RetryError: Retrying exceeded the maxAttempts (5).")',
+]
+`;
+
+snapshot[`tests > exercise > server test: not queued 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'warn("⚠️  Test run not queued for bob. Creating iteration without tests.")',
+  'log("✅ Submitted solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > server test: failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'error("❌ Test failed: test-name
+fail")',
+]
+`;
+
+snapshot[`tests > exercise > server test: failure but no tests 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'error("❌ Tests for bob failed.")',
+]
+`;
+
+snapshot[`tests > exercise > server test: timeout 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'error("❌ Timeout on bob tests.")',
+]
+`;
+
+snapshot[`tests > exercise > server test: cancelled 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'error("❌ Tests for bob failed.")',
+]
+`;
+
+snapshot[`tests > exercise > submit: failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'error("❌ Failed to submit bob.")',
+]
+`;
+
+snapshot[`tests > exercise > submit: create iteration failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'error("❌ Failed to create iteration for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > submit --complete: failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'error("❌ Failed to complete bob.")',
+]
+`;
+
+snapshot[`tests > exercise > submit --publish: failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Submitted solution for bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+  'error("❌ Failed to publish solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > complete: unlock exercises 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'log("🎉 Completed bob")',
+  'log("✨ Unlocked alice.")',
+  'log("✨ Unlocked charlie.")',
+]
+`;
+
+snapshot[`tests > exercise > complete: failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'error("❌ Failed to complete bob.")',
+]
+`;
+
+snapshot[`tests > exercise > publish: all iterations 1`] = `
+[
+  'log("👀 Already completed bob.")',
+  'log("📣 Published all iterations for bob.")',
+  'log("📣 Published bob.")',
+]
+`;
+
+snapshot[`tests > exercise > publish: publish iterations failure 1`] = `
+[
+  'log("👀 Already completed bob.")',
+  'error("❌ Failed to publish all iterations for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > publish: create iteration failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'warn("⚠️  Test run not queued for bob. Creating iteration without tests.")',
+  'log("✅ Submitted solution for bob.")',
+  'error("❌ Failed to create iteration for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > publish: complete failure 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("👀 Already submitted solution for bob.")',
+  'error("❌ Failed to complete bob.")',
+]
+`;
+
+snapshot[`tests > exercise > publish: failure 1`] = `
+[
+  'log("👀 Already completed bob.")',
+  'error("❌ Failed to publish solution for bob.")',
+]
+`;
+
+snapshot[`tests > exercise > deleted exercise 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+]
+`;
+
+snapshot[`tests > exercise > deleted exercise 2`] = `
+[
+  'error("❌ Exercise bob not found.")',
+]
+`;

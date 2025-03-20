@@ -1,0 +1,229 @@
+export const snapshot = {};
+
+snapshot[`tests > track > list > name 1`] = `
+[
+  'log("✨ alpha")',
+]
+`;
+
+snapshot[`tests > track > list > name 2`] = `
+[
+  'log("✨ beta")',
+]
+`;
+
+snapshot[`tests > track > list > name 3`] = `
+[
+  'log("✨ alpha")',
+  'log("✨ beta")',
+]
+`;
+
+snapshot[`tests > track > list > name 4`] = `
+[
+  'log("✨ alpha")',
+]
+`;
+
+snapshot[`tests > track > list > name 5`] = `
+[
+  'log("✨ beta")',
+]
+`;
+
+snapshot[`tests > track > list > name 6`] = `[]`;
+
+snapshot[`tests > track > list > name 7`] = `
+[
+  'log("✨ alpha")',
+  'log("✨ beta")',
+]
+`;
+
+snapshot[`tests > track > list > name 8`] = `
+[
+  'log("✨ beta")',
+]
+`;
+
+snapshot[`tests > track > list > invalid name 1`] = `
+[
+  \`error("error: option '-e, --exercise <slug>' argument '?alpha' is invalid. Invalid slug ?alpha.
+")\`,
+]
+`;
+
+snapshot[`tests > track > list > unlocked 1`] = `
+[
+  'log("✨ unlocked")',
+]
+`;
+
+snapshot[`tests > track > list > unlocked 2`] = `
+[
+  'log("✨ unlocked")',
+  'log("🔒 locked")',
+]
+`;
+
+snapshot[`tests > track > list > unlocked 3`] = `
+[
+  'log("🔒 locked")',
+]
+`;
+
+snapshot[`tests > track > list > difficulty 1`] = `
+[
+  'log("✨ easy")',
+]
+`;
+
+snapshot[`tests > track > list > difficulty 2`] = `
+[
+  'log("✨ medium")',
+]
+`;
+
+snapshot[`tests > track > list > difficulty 3`] = `
+[
+  'log("✨ hard")',
+]
+`;
+
+snapshot[`tests > track > list > status 1`] = `
+[
+  'log("✨ new")',
+]
+`;
+
+snapshot[`tests > track > list > status 2`] = `
+[
+  'log("💻 started")',
+  'log("✅ completed 📜")',
+  'log("✅ published")',
+]
+`;
+
+snapshot[`tests > track > list > status 3`] = `
+[
+  'log("✅ completed 📜")',
+  'log("✅ published")',
+]
+`;
+
+snapshot[`tests > track > list > status 4`] = `
+[
+  'log("✅ published")',
+]
+`;
+
+snapshot[`tests > track > list > status 5`] = `
+[
+  'log("✅ completed 📜")',
+]
+`;
+
+snapshot[`tests > track > list > feedback 1`] = `
+[
+  'warn("%c⚠️  automated-feedback 📜 🤖", "color: yellow")',
+]
+`;
+
+snapshot[`tests > track > list > feedback 2`] = `
+[
+  'log("✅ human-feedback 📜 💡")',
+]
+`;
+
+snapshot[`tests > track > list > outdated 1`] = `
+[
+  'log("✅ outdated 🕰️")',
+]
+`;
+
+snapshot[`tests > track > list > test status 1`] = `
+[
+  'log("✅ passing                     📜")',
+  'error("%c❌ failing                     📜  🧪", "color: red")',
+  'log("✳️  notQueued [no test results] 📜  🧪")',
+]
+`;
+
+snapshot[`tests > track > list > test status 2`] = `
+[
+  'log("✅ passing 📜")',
+]
+`;
+
+snapshot[`tests > track > list > test status 3`] = `
+[
+  'error("%c❌ failing 📜  🧪", "color: red")',
+]
+`;
+
+snapshot[`tests > track > list > social 1`] = `
+[
+  'log("✅ starred    ⭐⭐")',
+  'log("✅ both       ⭐⭐⭐💬💬")',
+]
+`;
+
+snapshot[`tests > track > list > social 2`] = `
+[
+  'log("✅ commented    💬")',
+  'log("✅ both         ⭐⭐⭐💬💬")',
+]
+`;
+
+snapshot[`tests > track > list > not joined 1`] = `
+[
+  'log("🔮 test-exercise")',
+]
+`;
+
+snapshot[`tests > track > subcommand > start 1`] = `
+[
+  'error("❌ Failed to start locked.")',
+  'log("💻 Started unlocked.")',
+]
+`;
+
+snapshot[`tests > track > subcommand > start: not joined 1`] = `
+[
+  'error("❌ Track not-joined is not joined.")',
+]
+`;
+
+snapshot[`tests > track > subcommand > code 1`] = `
+[
+  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/f0ed13daadef0d0d/joined/unlocked/unlocked.joined", "{ diff: false }")',
+  'error("❌ Failed to start locked.")',
+  'log("✅ Downloaded unlocked.")',
+  'log("💻 Started unlocked.")',
+]
+`;
+
+snapshot[`tests > track > subcommand > diff 1`] = `
+[
+  'error("❌ Failed to start locked.")',
+  'log("✅ Downloaded unlocked.")',
+  'log("💻 Started unlocked.")',
+  'warn("⚠️  Changes found in unlocked.")',
+]
+`;
+
+snapshot[`tests > track > subcommand > download 1`] = `
+[
+  'error("❌ Failed to start locked.")',
+  'log("✅ Downloaded unlocked.")',
+  'log("💻 Started unlocked.")',
+]
+`;
+
+snapshot[`tests > track > deleted track 1`] = `[]`;
+
+snapshot[`tests > track > deleted track 2`] = `
+[
+  'error("❌ Track track is not found.")',
+]
+`;

@@ -1,0 +1,43 @@
+export const snapshot = {};
+
+snapshot[`tests > cli > token: prompt 1`] = `
+[
+  'log("👤 test-handle 🎖️ 42")',
+]
+`;
+
+snapshot[`tests > cli > token: prompt invalid 1`] = `
+[
+  'error("❌ Invalid Exercism API token.")',
+]
+`;
+
+snapshot[`tests > cli > token: prompt missing 1`] = `
+[
+  'error("❌ Exercism API token not provided.")',
+]
+`;
+
+snapshot[`tests > cli > token: config invalid 1`] = `
+[
+  'error("❌ Invalid Exercism API token.")',
+]
+`;
+
+snapshot[`tests > cli > request: not found 1`] = `
+[
+  'error("❌ RequestError: Not Found [404].")',
+]
+`;
+
+snapshot[`tests > cli > request: too many requests 1`] = `
+[
+  'error("❌ RetryError: Retrying exceeded the maxAttempts (5).")',
+]
+`;
+
+snapshot[`tests > cli > request: too many requests retry 1`] = `
+[
+  'log("👤 test-handle 🎖️ 42")',
+]
+`;

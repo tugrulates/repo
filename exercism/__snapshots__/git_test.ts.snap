@@ -1,0 +1,881 @@
+export const snapshot = {};
+
+snapshot[`tests > git > git: dry-run 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/f5a5cf8d46ba7a6d (dry-run).")',
+]
+`;
+
+snapshot[`tests > git > git: dry-run 2`] = `
+[
+  "HASH (HEAD -> main) Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: dry-run 3`] = `[]`;
+
+snapshot[`tests > git > git: push 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/fff8862d1f4f6c7d.")',
+]
+`;
+
+snapshot[`tests > git > git: push 2`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: push 3`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: no changes 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/126ba523320b9565.")',
+]
+`;
+
+snapshot[`tests > git > git: no changes 2`] = `
+[
+  'warn("❇️  No changes to push to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/126ba523320b9565.")',
+]
+`;
+
+snapshot[`tests > git > git: no changes 3`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: no changes 4`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: remove track 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/df9022bf543de2b4.")',
+]
+`;
+
+snapshot[`tests > git > git: remove track 2`] = `[]`;
+
+snapshot[`tests > git > git: remove track 3`] = `
+[
+  'info("🗑️  Deleting typescript/bob/bob.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/bob/bob_data.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/bob/bob_test.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/pov/pov.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/pov/pov_data.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/pov/pov_test.typescript from the repository.")',
+  'info("📝 Updating README.md in the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/df9022bf543de2b4.")',
+]
+`;
+
+snapshot[`tests > git > git: remove track 4`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: remove track 5`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+]
+`;
+
+snapshot[`tests > git > git: add track 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/6d988ea3b4a39000.")',
+]
+`;
+
+snapshot[`tests > git > git: add track 2`] = `[]`;
+
+snapshot[`tests > git > git: add track 3`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding java/bob/bob.java to the repository.")',
+  'info("🆕 Adding java/bob/bob_data.java to the repository.")',
+  'info("🆕 Adding java/bob/bob_test.java to the repository.")',
+  'info("📝 Updating README.md in the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/6d988ea3b4a39000.")',
+]
+`;
+
+snapshot[`tests > git > git: add track 4`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: add track 5`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |,| [<img src="https://assets.exercism.org/tracks/java.svg" width="40">](http://0.0.0.0:PORT/tracks/java) | 🧩 0% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "java/bob/bob.java",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "java/bob/bob_data.java",
+  },
+  {
+    content: "test-file-contents",
+    filename: "java/bob/bob_test.java",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: add and remove tracks 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/788f90ca77f5cf95.")',
+]
+`;
+
+snapshot[`tests > git > git: add and remove tracks 2`] = `[]`;
+
+snapshot[`tests > git > git: add and remove tracks 3`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'info("🗑️  Deleting typescript/bob/bob.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/bob/bob_data.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/bob/bob_test.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/pov/pov.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/pov/pov_data.typescript from the repository.")',
+  'info("🗑️  Deleting typescript/pov/pov_test.typescript from the repository.")',
+  'info("🏷  Renaming rust/bob/bob.rust -> java/bob/bob.java in the repository.")',
+  'info("🏷  Renaming rust/bob/bob_data.rust -> java/bob/bob_data.java in the repository.")',
+  'info("🏷  Renaming rust/bob/bob_test.rust -> java/bob/bob_test.java in the repository.")',
+  'info("📝 Updating README.md in the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/788f90ca77f5cf95.")',
+]
+`;
+
+snapshot[`tests > git > git: add and remove tracks 4`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: add and remove tracks 5`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/java.svg" width="40">](http://0.0.0.0:PORT/tracks/java) | 🧩 0% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "java/bob/bob.java",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "java/bob/bob_data.java",
+  },
+  {
+    content: "test-file-contents",
+    filename: "java/bob/bob_test.java",
+  },
+]
+`;
+
+snapshot[`tests > git > git: add exercise 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/c9c8b02b1114f945.")',
+]
+`;
+
+snapshot[`tests > git > git: add exercise 2`] = `[]`;
+
+snapshot[`tests > git > git: add exercise 3`] = `
+[
+  'log("✅ Downloaded etl.")',
+  'info("🆕 Adding typescript/etl/etl.typescript to the repository.")',
+  'info("🆕 Adding typescript/etl/etl_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/etl/etl_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/c9c8b02b1114f945.")',
+]
+`;
+
+snapshot[`tests > git > git: add exercise 4`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: add exercise 5`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/etl/etl.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/etl/etl_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/etl/etl_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: remove exercise 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/bb6cb569dd422c83.")',
+]
+`;
+
+snapshot[`tests > git > git: remove exercise 2`] = `[]`;
+
+snapshot[`tests > git > git: remove exercise 3`] = `
+[
+  'warn("❇️  No changes to push to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/bb6cb569dd422c83.")',
+]
+`;
+
+snapshot[`tests > git > git: remove exercise 4`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: remove exercise 5`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: prompt repo 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/1b53f9f468f6a7d2.")',
+]
+`;
+
+snapshot[`tests > git > git: prompt repo 2`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: prompt repo 3`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: invalid repo 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'error("❌ Invalid repository url.")',
+]
+`;
+
+snapshot[`tests > git > git: invalid repo 2`] = `
+[
+  "HASH (HEAD -> main) Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: invalid repo 3`] = `[]`;
+
+snapshot[`tests > git > git: branch 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/2aa97c15d3dee191.")',
+]
+`;
+
+snapshot[`tests > git > git: branch 2`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: branch 3`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;
+
+snapshot[`tests > git > git: wrong branch 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'error("❌ Failed to push changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/8b89853ca6e5de6f.")',
+]
+`;
+
+snapshot[`tests > git > git: wrong branch 2`] = `
+[
+  "HASH (HEAD -> main) Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: wrong branch 3`] = `[]`;
+
+snapshot[`tests > git > git: remember repo 1`] = `
+[
+  'log("✅ Downloaded bob.")',
+  'log("✅ Downloaded pov.")',
+  'log("✅ Downloaded bob.")',
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/d08fad3a7fce307a (dry-run).")',
+]
+`;
+
+snapshot[`tests > git > git: remember repo 2`] = `
+[
+  'info("🆕 Adding README.md to the repository.")',
+  'info("🆕 Adding rust/bob/bob.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_data.rust to the repository.")',
+  'info("🆕 Adding rust/bob/bob_test.rust to the repository.")',
+  'info("🆕 Adding typescript/bob/bob.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/bob/bob_test.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_data.typescript to the repository.")',
+  'info("🆕 Adding typescript/pov/pov_test.typescript to the repository.")',
+  'log("✅ Pushed changes to git repository file:///var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/d08fad3a7fce307a.")',
+]
+`;
+
+snapshot[`tests > git > git: remember repo 3`] = `
+[
+  "HASH (HEAD -> main) Update solutions",
+  "HASH Initial commit",
+]
+`;
+
+snapshot[`tests > git > git: remember repo 4`] = `
+[
+  {
+    content: '# Exercism Solutions ([@test-handle](http://0.0.0.0:PORT/profiles/test-handle))
+
+| Track | Status |
+| ----- | ------ |
+| [<img src="https://assets.exercism.org/tracks/typescript.svg" width="40">](http://0.0.0.0:PORT/tracks/typescript) | 🚀 Completed all exercises! |,| [<img src="https://assets.exercism.org/tracks/rust.svg" width="40">](http://0.0.0.0:PORT/tracks/rust) | 🧩 67% completion. |',
+    filename: "README.md",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "rust/bob/bob.rust",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "rust/bob/bob_data.rust",
+  },
+  {
+    content: "test-file-contents",
+    filename: "rust/bob/bob_test.rust",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/bob/bob.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/bob/bob_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/bob/bob_test.typescript",
+  },
+  {
+    content: "solution-file-contents",
+    filename: "typescript/pov/pov.typescript",
+  },
+  {
+    content: "editor-file-contents",
+    filename: "typescript/pov/pov_data.typescript",
+  },
+  {
+    content: "test-file-contents",
+    filename: "typescript/pov/pov_test.typescript",
+  },
+]
+`;

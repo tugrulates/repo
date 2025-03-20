@@ -2,6 +2,7 @@
   "workspace": [
     "./500px",
     "./duolingo",
+    "./exercism",
     "./lonely-planet",
     "./photo"
   ],
@@ -42,6 +43,7 @@
     "@cliffy/flags": "jsr:@cliffy/flags@1.0.0-rc.7",
     "@cliffy/prompt": "jsr:@cliffy/prompt@1.0.0-rc.7",
     "@cliffy/table": "jsr:@cliffy/table@1.0.0-rc.7",
+    "@commander-js/extra-typings": "npm:@commander-js/extra-typings@^13.1.0",
     "@david/which": "jsr:@david/which@^0.4.1",
     "@roka/async": "jsr:@roka/async@^0.2.0",
     "@roka/cli": "jsr:@roka/cli@^0.2.0",
@@ -49,6 +51,8 @@
     "@roka/http": "jsr:@roka/http@^0.2.2",
     "@roka/testing": "jsr:@roka/testing@^0.2.0",
     "@std/assert": "jsr:@std/assert@^1.0.11",
+    "@std/async": "jsr:@std/async@^1.0.11",
+    "@std/cli": "jsr:@std/cli@^1.0.14",
     "@std/collections": "jsr:@std/collections@^1.0.10",
     "@std/fmt": "jsr:@std/fmt@^1.0.6",
     "@std/fs": "jsr:@std/fs@^1.0.13",
@@ -58,6 +62,8 @@
     "@std/text": "jsr:@std/text@^1.0.10",
     "exiftool-vendored": "npm:exiftool-vendored@^29.2.0",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.25.0",
-    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.1"
+    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.1",
+    "open": "npm:open@^10.1.0",
+    "terminal-link": "npm:terminal-link@^3.0.0"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "name": "@tugrulates/exercism",
+  "exports": {
+    ".": "./exercism.ts",
+    "./cli": "./cli.ts"
+  },
+  "compile": {
+    "main": "cli.ts",
+    "kv": true,
+    "permissions": {
+      "read": true,
+      "write": true
+    }
+  }
+}

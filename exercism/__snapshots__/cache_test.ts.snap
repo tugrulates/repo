@@ -1,0 +1,39 @@
+export const snapshot = {};
+
+snapshot[`tests > cache > cache 1`] = `
+[
+  'info("{
+  "profile": {}
+}")',
+]
+`;
+
+snapshot[`tests > cache > cache 2`] = `
+[
+  'info("{
+  "profile": {
+    "handle": "test-handle",
+    "total_reputation": 42
+  }
+}")',
+]
+`;
+
+snapshot[`tests > cache > cache 3`] = `
+[
+  'info("{
+  "profile": {}
+}")',
+]
+`;
+
+snapshot[`tests > cache > cache 4`] = `
+[
+  'info("{
+  "profile": {
+    "handle": "test-handle",
+    "total_reputation": 42
+  }
+}")',
+]
+`;
