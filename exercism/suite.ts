@@ -43,10 +43,15 @@ export const suite = describe<SuiteContext>("tests", function () {
 });
 
 export function prune(
+  s: SuiteContext,
   value: string,
   { tmp = false, port = false, hash = false } = {},
 ): string {
-  if (tmp) value = value.replace(/\/tmp\/\w+/g, "TMP");
+  value = value.replace(s.workspace, "WORKSPACE");
+  if (tmp) {
+    value = value.replace(/\/tmp\/\w+/g, "TMP");
+    value = value.replace(/\/var\/folders\/.+?\/T\/\w+/g, "TMP");
+  }
   if (port) value = value.replace(/(\w+):\/\/([\w.]+):\d+/g, "$1://$2:PORT");
   if (hash) value = value.replace(/[a-f0-9]{6,}/g, "HASH");
   return value;
@@ -72,7 +77,7 @@ export async function cli(
         message
           .map((m) =>
             typeof m === "string"
-              ? `"${prune(m, { tmp: true, port: true })}"`
+              ? `"${prune(s, m, { tmp: true, port: true })}"`
               : m
           )
           .join(", ")
@@ -148,7 +153,7 @@ export async function assertFiles(
   const contents = await Promise.all(
     files.map(async (file) => ({
       filename: relative(target, file),
-      content: prune(await Deno.readTextFile(file), { port: true }),
+      content: prune(s, await Deno.readTextFile(file), { port: true }),
     })),
   );
   await assertSnapshot(t, contents);

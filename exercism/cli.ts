@@ -11,7 +11,6 @@ import { App, version } from "./app.ts";
 import type { ApiElement } from "./data.ts";
 import { CommandFailed, InvalidConfig } from "./error.ts";
 import type { Exercise, ExerciseFilter } from "./exercise.ts";
-import { GitUpdater } from "./git.ts";
 import { list } from "./list.ts";
 import type { Profile } from "./profile.ts";
 import { help, messages } from "./strings.ts";
@@ -67,7 +66,6 @@ async function appCommand(app: App, args: string[]): Promise<AppCommand> {
 
   appCommand.addCommand(profileCommand(app.profile, appCommand));
   appCommand.addCommand(tracksCommand(app.tracks, appCommand));
-  appCommand.addCommand(await gitCommand(app, appCommand));
 
   const tracks = await Array.fromAsync(app.tracks.all());
   const subcommands = await Promise.all(
@@ -386,35 +384,6 @@ function exerciseCommands(): ExerciseCommand[] {
       concurrency: 1,
     },
   ];
-}
-
-async function gitCommand(app: App, parent: Command): Promise<Command> {
-  const updater = new GitUpdater(app);
-  return parent
-    .createCommand("git")
-    .copyInheritedSettings(parent)
-    .description(help.git.description)
-    .summary(help.git.summary)
-    .option(
-      "--repo <repo>",
-      help.opts.repo,
-      (await updater.repo.get({ cacheOnly: true })) ?? undefined,
-    )
-    .option("-b, --branch <branch>", help.opts.branch)
-    .option("-n, --dry-run", help.opts.dryRun)
-    .hook("preAction", async (command) => {
-      const repo = command.opts().repo;
-      if (repo) await updater.repo.set(repo);
-    })
-    .action(async (options) => {
-      if (await processActionData(app, {}, parent)) return;
-      for await (const track of app.tracks.find({})) {
-        for await (const exercise of track.find({ started: true })) {
-          await exercise.setup();
-        }
-      }
-      await updater.update(options);
-    });
 }
 
 export async function processActionData(

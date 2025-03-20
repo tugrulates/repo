@@ -7,7 +7,6 @@ import type { Iteration } from "./iteration.ts";
 import type { Profile } from "./profile.ts";
 import type { Solution } from "./solution.ts";
 import type { Track } from "./track.ts";
-import type { Tracks } from "./tracks.ts";
 
 export const help = {
   app: {
@@ -21,10 +20,6 @@ export const help = {
   tracks: {
     description: "Find tracks matching given filters.",
     summary: "list tracks",
-  },
-  git: {
-    description: "Push solutions for specified tracks to a git repository.",
-    summary: "push to git repository",
   },
   track: async (track: Track) => ({
     description: `Find ${await track
@@ -146,9 +141,6 @@ export const help = {
     },
     complete: `complete solution if all tests are passing`,
     publish: `publish solution if all tests are passing`,
-    repo: `the git repository to store solutions`,
-    branch: `the git branch to store solutions`,
-    dryRun: `compare changes, but do not push to git repository`,
   },
 } as const;
 
@@ -277,20 +269,6 @@ export const messages: {
     ) => string;
     error: (error: { message: string; type: string }) => string;
     tooManyRequests: string;
-  };
-  git: {
-    repo: {
-      prompt: string;
-      missing: string;
-      invalid: string;
-    };
-    update: (repo: string, dryRun: boolean) => {
-      progress: string;
-      success: string;
-      noChange: string;
-      failure: string;
-    };
-    commitMessage: string;
   };
 } = {
   app: {
@@ -446,22 +424,6 @@ export const messages: {
       `${error.message} [${error.type}].`,
     tooManyRequests: `❌ Too many requests. Please try again later.`,
   },
-  git: {
-    repo: {
-      prompt: `🔧 Enter your git repo url:`,
-      missing: `❌ No repository specified.`,
-      invalid: `❌ Invalid repository url.`,
-    },
-    update: (repo: string, dryRun: boolean) => ({
-      progress: `📝 Updating git repository ${repo}.`,
-      success: `✅ Pushed changes to git repository ${repo}${
-        dryRun ? " (dry-run)" : ""
-      }.`,
-      noChange: `❇️  No changes to push to git repository ${repo}.`,
-      failure: `❌ Failed to push changes to git repository ${repo}.`,
-    }),
-    commitMessage: `Update solutions`,
-  },
 } as const;
 
 export const display = {
@@ -512,41 +474,5 @@ export const generated = {
     docComment: async (exercise: Exercise) =>
       `Solution to ${await exercise.title()} in ${await exercise.track
         .title()} on Exercism.`,
-  },
-  git: {
-    commitMessage: "Update solutions",
-    readme: {
-      filename: "README.md",
-      content: async (profile: Profile, tracks: Tracks) =>
-        [
-          `# Exercism Solutions ([@${await profile.handle()}](${await profile
-            .url()}))`,
-          "",
-          "| Track | Status |",
-          "| ----- | ------ |",
-          await Promise.all(
-            (await Array.fromAsync(tracks.find({}))).map(
-              async (track) =>
-                `| ${(await generated.git.readme.track(track)).logo} ` +
-                `| ${(await generated.git.readme.track(track)).status} |`,
-            ),
-          ),
-        ].join("\n"),
-      track: async (track: Track) => ({
-        logo: `[<img src="${await track.iconUrl()}" width="40">](${await track
-          .url()})`,
-        status: (await track.completed())
-          ? "🚀 Completed all exercises!"
-          : (await track.isJoined())
-          ? "🧩 " +
-            (
-              100 *
-              ((await track.numCompletedExercises()) /
-                (await track.numExercises()))
-            ).toFixed(0) +
-            "% completion."
-          : "🔒 Not joined.",
-      }),
-    },
   },
 };

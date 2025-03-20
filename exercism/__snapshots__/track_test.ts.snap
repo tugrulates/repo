@@ -196,7 +196,7 @@ snapshot[`tests > track > subcommand > start: not joined 1`] = `
 
 snapshot[`tests > track > subcommand > code 1`] = `
 [
-  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/f0ed13daadef0d0d/joined/unlocked/unlocked.joined", "{ diff: false }")',
+  'code("WORKSPACE/joined/unlocked/unlocked.joined", "{ diff: false }")',
   'error("❌ Failed to start locked.")',
   'log("✅ Downloaded unlocked.")',
   'log("💻 Started unlocked.")',

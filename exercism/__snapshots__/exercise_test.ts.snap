@@ -416,7 +416,7 @@ snapshot[`tests > exercise > iterated > diff: missing local 1`] = `
 
 snapshot[`tests > exercise > iterated > diff: missing local 2`] = `
 [
-  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/5703a6becdad541/bob1.ts", "/dev/null", "{ diff: true }")',
+  'code("TMP/bob1.ts", "/dev/null", "{ diff: true }")',
   'warn("⚠️  Changes found in bob.")',
 ]
 `;
@@ -429,7 +429,7 @@ snapshot[`tests > exercise > iterated > diff: missing server 1`] = `
 
 snapshot[`tests > exercise > iterated > diff: missing server 2`] = `
 [
-  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/af20d05f555c2c18/bob2.ts", "/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/3f092a65e24be57f/typescript/bob/bob2.ts", "{ diff: true }")',
+  'code("TMP/bob2.ts", "WORKSPACE/typescript/bob/bob2.ts", "{ diff: true }")',
   'warn("⚠️  Changes found in bob.")',
 ]
 `;
@@ -605,7 +605,7 @@ snapshot[`tests > exercise > published > start 1`] = `[]`;
 snapshot[`tests > exercise > published > code 1`] = `
 [
   'log("✅ Downloaded bob.")',
-  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/db4e74d49825003b/typescript/bob/bob.ts", "{ diff: false }")',
+  'code("WORKSPACE/typescript/bob/bob.ts", "{ diff: false }")',
 ]
 `;
 
@@ -631,7 +631,7 @@ snapshot[`tests > exercise > published > diff --code 1`] = `
 
 snapshot[`tests > exercise > published > diff --code 2`] = `
 [
-  'code("/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/a710076c8566bec2/bob.ts", "/var/folders/9c/3m969_cs0mqgcxqwf3mlddn40000gn/T/e1000ee8e7b6d0be/typescript/bob/bob.ts", "{ diff: true }")',
+  'code("TMP/bob.ts", "WORKSPACE/typescript/bob/bob.ts", "{ diff: true }")',
   'warn("⚠️  Changes found in bob.")',
 ]
 `;

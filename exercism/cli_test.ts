@@ -75,7 +75,6 @@ describe(suite, "cli", function () {
     await cli(s, t, "--help");
     await cli(s, t, "profile --help");
     await cli(s, t, "tracks --help");
-    await cli(s, t, "git --help");
     await cli(s, t, "typescript --help");
     await cli(s, t, "typescript bob --help");
     await cli(s, t, "typescript bob start --help");
@@ -96,7 +95,6 @@ describe(suite, "cli", function () {
     await cli(s, t, "unknown");
     await cli(s, t, "profile unknown");
     await cli(s, t, "tracks unknown");
-    await cli(s, t, "git unknown");
     await cli(s, t, "typescript unknown");
     await cli(s, t, "typescript bob unknown");
     await cli(s, t, "typescript bob start unknown");

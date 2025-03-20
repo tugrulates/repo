@@ -369,7 +369,6 @@ Options:
 Commands:
   profile               show profile
   tracks [options]      list tracks
-  git [options]         push to git repository
   rust [options]        manage rust exercises
   typescript [options]  manage typescript exercises
 ")',
@@ -419,28 +418,6 @@ Global Options:
 
 snapshot[`tests > cli > help 4`] = `
 [
-  'info("Usage: exercism git [options]
-
-Push solutions for specified tracks to a git repository.
-
-Options:
-  --repo <repo>          the git repository to store solutions
-  -b, --branch <branch>  the git branch to store solutions
-  -n, --dry-run          compare changes, but do not push to git repository
-  -h, --help             display help for command
-
-Global Options:
-  -V, --version          output the version number
-  -q, --quiet            enable quiet mode
-  -v, --verbose          enable verbose mode
-  --open                 open related Exercism pages on browser
-  --token <token>        Exercism API token (default: to*en)
-")',
-]
-`;
-
-snapshot[`tests > cli > help 5`] = `
-[
   'info("Usage: exercism typescript [options] [command]
 
 Find typescript exercises matching given filters, and perform operations on
@@ -489,7 +466,7 @@ Commands:
 ]
 `;
 
-snapshot[`tests > cli > help 6`] = `
+snapshot[`tests > cli > help 5`] = `
 [
   'info("Usage: exercism typescript bob [options] [command]
 
@@ -538,7 +515,7 @@ Commands:
 ]
 `;
 
-snapshot[`tests > cli > help 7`] = `
+snapshot[`tests > cli > help 6`] = `
 [
   'info("Usage: exercism typescript bob start [options]
 
@@ -574,7 +551,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 8`] = `
+snapshot[`tests > cli > help 7`] = `
 [
   'info("Usage: exercism typescript bob code [options]
 
@@ -610,7 +587,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 9`] = `
+snapshot[`tests > cli > help 8`] = `
 [
   'info("Usage: exercism typescript bob format [options]
 
@@ -647,7 +624,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 10`] = `
+snapshot[`tests > cli > help 9`] = `
 [
   'info("Usage: exercism typescript bob lint [options]
 
@@ -684,7 +661,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 11`] = `
+snapshot[`tests > cli > help 10`] = `
 [
   'info("Usage: exercism typescript bob test [options]
 
@@ -721,7 +698,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 12`] = `
+snapshot[`tests > cli > help 11`] = `
 [
   'info("Usage: exercism typescript bob diff [options]
 
@@ -758,7 +735,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 13`] = `
+snapshot[`tests > cli > help 12`] = `
 [
   'info("Usage: exercism typescript bob download [options]
 
@@ -795,7 +772,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 14`] = `
+snapshot[`tests > cli > help 13`] = `
 [
   'info("Usage: exercism typescript bob submit [options]
 
@@ -834,7 +811,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 15`] = `
+snapshot[`tests > cli > help 14`] = `
 [
   'info("Usage: exercism typescript bob complete [options]
 
@@ -870,7 +847,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 16`] = `
+snapshot[`tests > cli > help 15`] = `
 [
   'info("Usage: exercism typescript bob publish [options]
 
@@ -906,7 +883,7 @@ Global Options:
 ]
 `;
 
-snapshot[`tests > cli > help 17`] = `
+snapshot[`tests > cli > help 16`] = `
 [
   'info("Usage: exercism typescript bob update [options]
 
@@ -972,96 +949,89 @@ snapshot[`tests > cli > invalid 4`] = `
 
 snapshot[`tests > cli > invalid 5`] = `
 [
-  \`error("error: too many arguments for 'git'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'typescript'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 6`] = `
 [
-  \`error("error: too many arguments for 'typescript'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'bob'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 7`] = `
 [
-  \`error("error: too many arguments for 'bob'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'start'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 8`] = `
 [
-  \`error("error: too many arguments for 'start'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'code'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 9`] = `
 [
-  \`error("error: too many arguments for 'code'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'format'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 10`] = `
 [
-  \`error("error: too many arguments for 'format'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'lint'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 11`] = `
 [
-  \`error("error: too many arguments for 'lint'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'test'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 12`] = `
 [
-  \`error("error: too many arguments for 'test'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'diff'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 13`] = `
 [
-  \`error("error: too many arguments for 'diff'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'download'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 14`] = `
 [
-  \`error("error: too many arguments for 'download'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'submit'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 15`] = `
 [
-  \`error("error: too many arguments for 'submit'. Expected 0 arguments but got 1.
+  \`error("error: too many arguments for 'complete'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
 snapshot[`tests > cli > invalid 16`] = `
 [
-  \`error("error: too many arguments for 'complete'. Expected 0 arguments but got 1.
-")\`,
-]
-`;
-
-snapshot[`tests > cli > invalid 17`] = `
-[
   \`error("error: too many arguments for 'publish'. Expected 0 arguments but got 1.
 ")\`,
 ]
 `;
 
-snapshot[`tests > cli > invalid 18`] = `
+snapshot[`tests > cli > invalid 17`] = `
 [
   \`error("error: too many arguments for 'update'. Expected 0 arguments but got 1.
 ")\`,
