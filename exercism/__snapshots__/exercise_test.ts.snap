@@ -268,7 +268,7 @@ describe('Bob', () => {
 
 snapshot[`tests > exercise > started > download: failure 1`] = `
 [
-  'error("❌ RequestError: Not Found [404].")',
+  'error("❌ RequestError: Not Found")',
 ]
 `;
 
@@ -478,7 +478,7 @@ describe('Bob', () => {
 
 snapshot[`tests > exercise > iterated > download: failure 1`] = `
 [
-  'error("❌ RequestError: Not Found [404].")',
+  'error("❌ RequestError: Not Found")',
 ]
 `;
 

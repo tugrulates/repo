@@ -1,3 +1,5 @@
+import { request, type RequestOptions } from "@roka/http/request";
+import { STATUS_CODE } from "@std/http/status";
 import type { App } from "./app.ts";
 import type { CacheGetOptions } from "./cache.ts";
 import type {
@@ -14,7 +16,6 @@ import type {
   UserData,
 } from "./data.ts";
 import type { Exercise } from "./exercise.ts";
-import { request, type RequestMethod, type RequestOptions } from "./request.ts";
 import type { Solution } from "./solution.ts";
 import type { Track } from "./track.ts";
 
@@ -22,7 +23,7 @@ const CACHE_EXPIRATION_MS = 1000 * 60 * 24;
 
 export interface ApiMethod {
   path: string;
-  method: RequestMethod;
+  method: string;
 }
 
 // https://github.com/exercism/website/blob/main/config/routes/api.rb
@@ -106,12 +107,15 @@ export class Api {
   constructor(readonly app: App) {}
 
   async validateToken(token: string): Promise<boolean> {
-    const { response } = await request(
+    const response = await request(
       this.app.urls.url(methods.validateToken.path),
-      methods.validateToken.method,
-      { token, allowedErrors: ["invalid_auth_token"] },
+      {
+        method: methods.validateToken.method,
+        token,
+        allowedErrors: [STATUS_CODE.Unauthorized],
+      },
     );
-    if (response.ok) response.body?.cancel();
+    response.body?.cancel();
     return response.ok;
   }
 
@@ -250,7 +254,8 @@ export class Api {
       {
         body: JSON.stringify({ files }),
         allowedErrors: ignoreDuplicateSubmission
-          ? ["duplicate_submission"]
+          // ? ["duplicate_submission"]
+          ? [STATUS_CODE.InternalServerError]
           : [],
       },
     );
@@ -301,7 +306,10 @@ export class Api {
     const transform = options.transform ?? ((data) => data);
     const cached = this.app.cache.new(
       ["api", apiMethod.method.toString(), apiMethod.path],
-      async () => transform(await this.request<T>(apiMethod)),
+      async () =>
+        transform(
+          await this.request<T>(apiMethod),
+        ),
       { expireIn: CACHE_EXPIRATION_MS },
     );
     return await cached.get(options);
@@ -311,16 +319,16 @@ export class Api {
     apiMethod: ApiMethod,
     options: RequestOptions & { raw?: boolean } = {},
   ): Promise<Partial<T>> {
-    const { response } = await request(
+    const response = await request(
       this.app.urls.url(apiMethod.path),
-      apiMethod.method,
       {
+        method: apiMethod.method,
         token: await this.app.token.get({ cacheOnly: false }),
         ...this.app.options,
         ...options,
       },
     );
-    const result = options.raw ? response.text() : response.json();
-    return (await result) as Partial<T>;
+    const result = options.raw ? await response.text() : await response.json();
+    return result as Partial<T>;
   }
 }

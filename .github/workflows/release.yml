@@ -13,6 +13,7 @@ on:
           - All packages
           - 500px
           - duolingo
+          - exercism
           - lonely-planet
           - photo
 

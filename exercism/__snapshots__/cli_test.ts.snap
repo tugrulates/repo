@@ -12,13 +12,6 @@ snapshot[`tests > cli > --quiet 1`] = `[]`;
 
 snapshot[`tests > cli > --verbose 1`] = `
 [
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/user 200 OK).")',
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/reputation 200 OK).")',
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks 200 OK).")',
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks/python/exercises?sideload[]=solutions 200 OK).")',
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks/rust/exercises?sideload[]=solutions 200 OK).")',
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/tracks/typescript/exercises?sideload[]=solutions 200 OK).")',
-  'debug("🌍 API request made (GET http://0.0.0.0:PORT/api/v2/validate_token 200 OK).")',
   'log("👤 test-handle 🎖️ 42")',
   'log("🚀 rust             0 exercises")',
   'log("🚀 typescript       0 exercises")',
