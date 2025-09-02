@@ -1,7 +1,9 @@
 {
   "workspace": [
+    "./core/*",
     "./500px",
     "./duolingo",
+    "./exercism",
     "./lonely-planet",
     "./photo"
   ],
@@ -49,15 +51,21 @@
     "@roka/http": "jsr:@roka/http@^0.2.2",
     "@roka/testing": "jsr:@roka/testing@^0.2.0",
     "@std/assert": "jsr:@std/assert@^1.0.11",
+    "@std/async": "jsr:@std/async@^1.0.11",
+    "@std/cli": "jsr:@std/cli@^1.0.14",
     "@std/collections": "jsr:@std/collections@^1.0.10",
     "@std/fmt": "jsr:@std/fmt@^1.0.6",
     "@std/fs": "jsr:@std/fs@^1.0.13",
     "@std/html": "jsr:@std/html@^1.0.3",
+    "@std/http": "jsr:@std/http@^1.0.13",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/testing": "jsr:@std/testing@^1.0.9",
-    "@std/text": "jsr:@std/text@^1.0.10",
+    "@std/text": "jsr:@std/text@^1.0.12",
+    "@urql/core": "npm:@urql/core@^5.1.1",
+    "@urql/exchange-retry": "npm:@urql/exchange-retry@^1.3.1",
     "exiftool-vendored": "npm:exiftool-vendored@^29.2.0",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.25.0",
-    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.1"
+    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.25.1",
+    "open": "npm:open@^10.1.0"
   }
 }

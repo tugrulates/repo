@@ -328,7 +328,6 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         const me = await duolingo.users.me();
         const result = await api.post<{ successful: boolean }>(
           `/2017-06-30/friends/users/${me.userId}/follow/${user.userId}`,
-          {},
         );
         return result.successful ?? false;
       },
@@ -337,7 +336,6 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         const me = await duolingo.users.me();
         const result = await api.post<{ successful: boolean }>(
           `/2017-06-30/friends/users/${me.userId}/follow/${user.userId}`,
-          {},
         );
         return result.successful ?? false;
       },
@@ -396,10 +394,12 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         })();
         const me = await duolingo.users.me();
         await api.post(`/card/reaction`, {
-          groupId: card.eventId,
-          reaction: reaction.toUpperCase(),
-          trackingProperties: { screen: "kudos_feed" },
-          userId: me.userId,
+          body: {
+            groupId: card.eventId,
+            reaction: reaction.toUpperCase(),
+            trackingProperties: { screen: "kudos_feed" },
+            userId: me.userId,
+          },
         });
       },
     },
