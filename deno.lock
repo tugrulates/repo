@@ -12,6 +12,7 @@
     "jsr:@cliffy/table@1": "1.0.0",
     "jsr:@cliffy/table@1.0.0": "1.0.0",
     "jsr:@david/which@~0.4.1": "0.4.1",
+    "jsr:@roka/assert@0.1": "0.1.0",
     "jsr:@roka/async@0.3": "0.3.0",
     "jsr:@roka/config@0.1": "0.1.0",
     "jsr:@roka/deno@0.1": "0.1.0",
@@ -38,10 +39,14 @@
     "jsr:@std/fs@^1.0.21": "1.0.23",
     "jsr:@std/fs@^1.0.22": "1.0.23",
     "jsr:@std/fs@^1.0.23": "1.0.23",
+    "jsr:@std/html@^1.0.5": "1.0.5",
     "jsr:@std/http@^1.0.25": "1.0.25",
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/io@~0.225.3": "0.225.3",
+    "jsr:@std/media-types@^1.1.0": "1.1.0",
+    "jsr:@std/net@^1.0.6": "1.0.6",
     "jsr:@std/path@^1.1.4": "1.1.4",
+    "jsr:@std/regexp@^1.0.1": "1.0.1",
     "jsr:@std/semver@^1.0.8": "1.0.8",
     "jsr:@std/streams@^1.0.17": "1.0.17",
     "jsr:@std/testing@^1.0.17": "1.0.17",
@@ -50,7 +55,8 @@
     "npm:@octokit/rest@^22.0.1": "22.0.1",
     "npm:exiftool-vendored.exe@^13.53.0": "13.53.0",
     "npm:exiftool-vendored.pl@^13.53.0": "13.53.0",
-    "npm:exiftool-vendored@^35.15.1": "35.15.1"
+    "npm:exiftool-vendored@^35.15.1": "35.15.1",
+    "npm:open@11": "11.0.0"
   },
   "jsr": {
     "@b-fuze/deno-dom@0.1.56": {
@@ -109,6 +115,12 @@
     },
     "@david/which@0.4.1": {
       "integrity": "896a682b111f92ab866cc70c5b4afab2f5899d2f9bde31ed00203b9c250f225e"
+    },
+    "@roka/assert@0.1.0": {
+      "integrity": "cc4843932104de4763275bf09c29ff3913479ccf32f9cfecfc316420acb575a5",
+      "dependencies": [
+        "jsr:@std/assert@^1.0.19"
+      ]
     },
     "@roka/async@0.3.0": {
       "integrity": "a5172e5f859825a85cba8386d170f3ec68924595f9ef48822fae238c2b22c4e4",
@@ -262,8 +274,22 @@
         "jsr:@std/path"
       ]
     },
+    "@std/html@1.0.5": {
+      "integrity": "4e2d693f474cae8c16a920fa5e15a3b72267b94b84667f11a50c6dd1cb18d35e"
+    },
     "@std/http@1.0.25": {
-      "integrity": "577b4252290af1097132812b339fffdd55fb0f4aeb98ff11bdbf67998aa17193"
+      "integrity": "577b4252290af1097132812b339fffdd55fb0f4aeb98ff11bdbf67998aa17193",
+      "dependencies": [
+        "jsr:@std/cli",
+        "jsr:@std/encoding",
+        "jsr:@std/fmt",
+        "jsr:@std/fs@^1.0.23",
+        "jsr:@std/html",
+        "jsr:@std/media-types",
+        "jsr:@std/net",
+        "jsr:@std/path",
+        "jsr:@std/streams"
+      ]
     },
     "@std/internal@1.0.12": {
       "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
@@ -271,11 +297,20 @@
     "@std/io@0.225.3": {
       "integrity": "27b07b591384d12d7b568f39e61dff966b8230559122df1e9fd11cc068f7ddd1"
     },
+    "@std/media-types@1.1.0": {
+      "integrity": "c9d093f0c05c3512932b330e3cc1fe1d627b301db33a4c2c2185c02471d6eaa4"
+    },
+    "@std/net@1.0.6": {
+      "integrity": "110735f93e95bb9feb95790a8b1d1bf69ec0dc74f3f97a00a76ea5efea25500c"
+    },
     "@std/path@1.1.4": {
       "integrity": "1d2d43f39efb1b42f0b1882a25486647cb851481862dc7313390b2bb044314b5",
       "dependencies": [
         "jsr:@std/internal"
       ]
+    },
+    "@std/regexp@1.0.1": {
+      "integrity": "5179d823465085c5480dafb44438466e83c424fadc61ba31f744050ecc0f596d"
     },
     "@std/semver@1.0.8": {
       "integrity": "dc830e8b8b6a380c895d53fbfd1258dc253704ca57bbe1629ac65fd7830179b7"
@@ -298,7 +333,10 @@
       ]
     },
     "@std/text@1.0.17": {
-      "integrity": "4b2c4ef67ae5b6c1dfd447c81c83a43718f52e3c7e748d8b33f694aba9895f95"
+      "integrity": "4b2c4ef67ae5b6c1dfd447c81c83a43718f52e3c7e748d8b33f694aba9895f95",
+      "dependencies": [
+        "jsr:@std/regexp"
+      ]
     }
   },
   "npm": {
@@ -399,6 +437,25 @@
     "before-after-hook@4.0.0": {
       "integrity": "sha512-q6tR3RPqIB1pMiTRMFcZwuG5T8vwp+vUvEG0vuI6B+Rikh5BfPp2fQ82c925FOs+b0lcFQ8CFrL+KbilfZFhOQ=="
     },
+    "bundle-name@4.1.0": {
+      "integrity": "sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==",
+      "dependencies": [
+        "run-applescript"
+      ]
+    },
+    "default-browser-id@5.0.1": {
+      "integrity": "sha512-x1VCxdX4t+8wVfd1so/9w+vQ4vx7lKd2Qp5tDRutErwmR85OgmfX7RlLRMWafRMY7hbEiXIbudNrjOAPa/hL8Q=="
+    },
+    "default-browser@5.5.0": {
+      "integrity": "sha512-H9LMLr5zwIbSxrmvikGuI/5KGhZ8E2zH3stkMgM5LpOWDutGM2JZaj460Udnf1a+946zc7YBgrqEWwbk7zHvGw==",
+      "dependencies": [
+        "bundle-name",
+        "default-browser-id"
+      ]
+    },
+    "define-lazy-prop@3.0.0": {
+      "integrity": "sha512-N+MeXYoqr3pOgn8xfyRPREN7gHakLYjhsHhWGT3fWAiL4IkAt0iDw14QiiEm2bE30c5XX5q0FtAA3CK5f9/BUg=="
+    },
     "exiftool-vendored.exe@13.53.0": {
       "integrity": "sha512-CX8w1iVDOdt6iitqoOmUCWLYVmfBVmd59htXGpns/+CItu8LBAT9qVHdBP+Jl0abZyCcDrZf0eaLsfXb9mZOcQ==",
       "os": ["win32"]
@@ -429,14 +486,58 @@
       "integrity": "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==",
       "bin": true
     },
+    "is-docker@3.0.0": {
+      "integrity": "sha512-eljcgEDlEns/7AXFosB5K/2nCM4P7FQPkGc/DWLy5rmFEWvZayGrik1d9/QIY5nJ4f9YsVvBkA6kJpHn9rISdQ==",
+      "bin": true
+    },
+    "is-in-ssh@1.0.0": {
+      "integrity": "sha512-jYa6Q9rH90kR1vKB6NM7qqd1mge3Fx4Dhw5TVlK1MUBqhEOuCagrEHMevNuCcbECmXZ0ThXkRm+Ymr51HwEPAw=="
+    },
+    "is-inside-container@1.0.0": {
+      "integrity": "sha512-KIYLCCJghfHZxqjYBE7rEy0OBuTd5xCHS7tHVgvCLkx7StIoaxwNW3hCALgEUjFfeRk+MG/Qxmp/vtETEF3tRA==",
+      "dependencies": [
+        "is-docker"
+      ],
+      "bin": true
+    },
+    "is-wsl@3.1.1": {
+      "integrity": "sha512-e6rvdUCiQCAuumZslxRJWR/Doq4VpPR82kqclvcS0efgt430SlGIk05vdCN58+VrzgtIcfNODjozVielycD4Sw==",
+      "dependencies": [
+        "is-inside-container"
+      ]
+    },
     "json-with-bigint@3.5.8": {
       "integrity": "sha512-eq/4KP6K34kwa7TcFdtvnftvHCD9KvHOGGICWwMFc4dOOKF5t4iYqnfLK8otCRCRv06FXOzGGyqE8h8ElMvvdw=="
     },
     "luxon@3.7.2": {
       "integrity": "sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew=="
     },
+    "open@11.0.0": {
+      "integrity": "sha512-smsWv2LzFjP03xmvFoJ331ss6h+jixfA4UUV/Bsiyuu4YJPfN+FIQGOIiv4w9/+MoHkfkJ22UIaQWRVFRfH6Vw==",
+      "dependencies": [
+        "default-browser",
+        "define-lazy-prop",
+        "is-in-ssh",
+        "is-inside-container",
+        "powershell-utils",
+        "wsl-utils"
+      ]
+    },
+    "powershell-utils@0.1.0": {
+      "integrity": "sha512-dM0jVuXJPsDN6DvRpea484tCUaMiXWjuCn++HGTqUWzGDjv5tZkEZldAJ/UMlqRYGFrD/etByo4/xOuC/snX2A=="
+    },
+    "run-applescript@7.1.0": {
+      "integrity": "sha512-DPe5pVFaAsinSaV6QjQ6gdiedWDcRCbUuiQfQa2wmWV7+xC9bGulGI8+TdRmoFkAPaBXk8CrAbnlY2ISniJ47Q=="
+    },
     "universal-user-agent@7.0.3": {
       "integrity": "sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A=="
+    },
+    "wsl-utils@0.3.1": {
+      "integrity": "sha512-g/eziiSUNBSsdDJtCLB8bdYEUMj4jR7AGeUo96p/3dTafgjHhpF4RiCFPiRILwjQoDXx5MqkBr4fwWtR3Ky4Wg==",
+      "dependencies": [
+        "is-wsl",
+        "powershell-utils"
+      ]
     }
   },
   "workspace": {
@@ -445,6 +546,7 @@
       "jsr:@cliffy/prompt@1.0.0",
       "jsr:@cliffy/table@1.0.0",
       "jsr:@david/which@~0.4.1",
+      "jsr:@roka/assert@0.1",
       "jsr:@roka/async@0.3",
       "jsr:@roka/config@0.1",
       "jsr:@roka/forge@~0.2.1",
@@ -454,14 +556,18 @@
       "jsr:@roka/maybe@0.1",
       "jsr:@roka/testing@0.3",
       "jsr:@std/assert@^1.0.19",
+      "jsr:@std/async@^1.2.0",
       "jsr:@std/collections@^1.1.6",
       "jsr:@std/fmt@^1.0.9",
       "jsr:@std/fs@^1.0.23",
+      "jsr:@std/http@^1.0.25",
       "jsr:@std/path@^1.1.4",
       "jsr:@std/testing@^1.0.17",
+      "jsr:@std/text@^1.0.17",
       "npm:exiftool-vendored.exe@^13.53.0",
       "npm:exiftool-vendored.pl@^13.53.0",
-      "npm:exiftool-vendored@^35.15.1"
+      "npm:exiftool-vendored@^35.15.1",
+      "npm:open@11"
     ]
   }
 }
