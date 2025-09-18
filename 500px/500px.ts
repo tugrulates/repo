@@ -15,7 +15,7 @@
  *
  * @example Search 500px through the command-line application.
  * ```sh
- * deno run -A jsr:@tugrulates/500px/cli photos tugrulates
+ * deno run -P jsr:@tugrulates/500px/cli photos tugrulates
  * ```
  *
  * @module 500px

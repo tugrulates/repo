@@ -18,7 +18,7 @@
  * ```sh
  * export DUOLINGO_USERNAME=TugrulAtes
  * export DUOLINGO_TOKEN=token
- * deno run -A --unstable-kv jsr:@tugrulates/duolingo/cli feed
+ * deno run -P jsr:@tugrulates/duolingo/cli feed
  * ```
  *
  * @module duolingo

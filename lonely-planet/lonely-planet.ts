@@ -15,7 +15,7 @@
  *
  * @example Search Lonely Planet through the command-line application.
  * ```sh
- * deno run -N jsr:@tugrulates/lonely-planet/cli big sur
+ * deno run -P jsr:@tugrulates/lonely-planet/cli big sur
  * ```
  *
  * @module lonely-planet
