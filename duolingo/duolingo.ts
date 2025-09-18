@@ -396,10 +396,12 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         })();
         const me = await duolingo.users.me();
         await api.post(`/card/reaction`, {
-          groupId: card.eventId,
-          reaction: reaction.toUpperCase(),
-          trackingProperties: { screen: "kudos_feed" },
-          userId: me.userId,
+          body: {
+            groupId: card.eventId,
+            reaction: reaction.toUpperCase(),
+            trackingProperties: { screen: "kudos_feed" },
+            userId: me.userId,
+          },
         });
       },
     },
