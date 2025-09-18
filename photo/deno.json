@@ -7,9 +7,11 @@
     "./exif": "./exif.ts",
     "./testing": "./testing.ts"
   },
-  "compile": {
-    "main": "cli.ts",
-    "permissions": {
+  "forge": {
+    "main": "cli.ts"
+  },
+  "permissions": {
+    "default": {
       "read": true,
       "write": true,
       "env": [
