@@ -11,7 +11,7 @@ import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
 import { type Config, config } from "@roka/cli/config";
 import { version } from "@roka/forge/version";
-import { escape } from "@std/html";
+import { plain } from "@roka/html/plain";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
@@ -88,11 +88,6 @@ export async function cli(options?: CliOptions): Promise<number> {
 
 function feedCommand(cfg: Config<CliOptions>) {
   function summary(card: FeedCard): string {
-    function plain(html: string) {
-      return escape(html)
-        .replace(/&lt;.*?&gt;/g, "")
-        .replace(/[\u200E-\u200F]/g, "");
-    }
     return card.header
       ? plain(card.header)
       : `${card.displayName} ${plain(card.body).toLowerCase()}`;
