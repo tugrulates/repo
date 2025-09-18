@@ -1,34 +1,29 @@
-// deno-lint-ignore-file no-console
 import { mockFetch } from "@roka/http/testing";
-import { fakeConsole } from "@roka/testing/fake";
+import { fakeArgs, fakeConsole } from "@roka/testing/fake";
 import { assertSnapshot } from "@std/testing/snapshot";
 import { cli, type CliOptions } from "./cli.ts";
 
-const TESTS = [
-  "feed",
-  "feed --engage",
-  "follows",
-  "follows --follow",
-  "follows --unfollow",
-  "league",
-  "league --follow",
-];
+const OPTIONS = { sanitizeResources: false };
 
-for (const test of TESTS) {
-  Deno.test(`duolingo ${test}`, {
-    sanitizeOps: false,
-    sanitizeResources: false,
-  }, async (t) => {
-    using console = fakeConsole();
-    using fetch = mockFetch(t);
-    const options: CliOptions = {};
-    if (fetch.mode === "replay") {
-      // use ENV variables for recording, but fake credentials for replay
-      options.username = "TugrulAtes";
-      options.token = "token";
-    }
-    const args = test.split(" ");
-    await cli(args, options);
-    await assertSnapshot(t, console.output({ wrap: "\n" }));
-  });
+async function test(t: Deno.TestContext) {
+  const options: CliOptions = {};
+  using fetch = mockFetch(t);
+  if (fetch.mode === "replay") {
+    // use ENV variables for recording, but fake credentials for replay
+    options.username = "TugrulAtes";
+    options.token = "token";
+  }
+  using _args = fakeArgs(t.name.split(" ").slice(1));
+  using console = fakeConsole();
+  await cli(options);
+  // deno-lint-ignore no-console
+  await assertSnapshot(t, console.output({ wrap: "\n" }));
 }
+
+Deno.test("duolingo feed", OPTIONS, test);
+Deno.test("duolingo feed --engage", OPTIONS, test);
+Deno.test("duolingo follows", OPTIONS, test);
+Deno.test("duolingo follows --follow", OPTIONS, test);
+Deno.test("duolingo follows --unfollow", OPTIONS, test);
+Deno.test("duolingo league", OPTIONS, test);
+Deno.test("duolingo league --follow", OPTIONS, test);

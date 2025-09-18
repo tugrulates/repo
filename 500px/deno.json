@@ -5,10 +5,17 @@
     ".": "./500px.ts",
     "./cli": "./cli.ts"
   },
-  "compile": {
-    "main": "cli.ts",
+  "forge": {
+    "main": "cli.ts"
+  },
+  "permissions": {
+    "default": {
+      "net": ["api.500px.com"]
+    }
+  },
+  "test": {
     "permissions": {
-      "net": "api.500px.com"
+      "read": true
     }
   }
 }
