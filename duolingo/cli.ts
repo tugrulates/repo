@@ -5,13 +5,14 @@
  * @module cli
  */
 
-import { Command, ValidationError } from "@cliffy/command";
+import { Command } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
 import { type Config, config } from "@roka/cli/config";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
+import { maybe } from "@roka/maybe";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
@@ -61,29 +62,15 @@ export async function cli(options?: CliOptions): Promise<number> {
       token ? { default: token } : {},
     )
     .help({ colors: Deno.stdout.isTerminal() })
-    .noExit()
     .globalAction((options) => cfg.set(options))
     .command("feed", feedCommand(cfg))
     .command("follows", followsCommand(cfg))
     .command("league", leagueCommand(cfg));
-  try {
-    await cmd.parse();
-  } catch (e: unknown) {
-    if (e instanceof ValidationError) {
-      cmd.showHelp();
-      console.error(`❌ ${e.message}`);
-      return 1;
-    }
-    const errors = (e instanceof AggregateError) ? e.errors : [e];
-    for (const error of errors) {
-      console.error(`❌ ${error.message}`);
-      if (error["cause"] && error["cause"]["error"]) {
-        console.error(error.cause.error);
-      }
-    }
-    return 2;
+  const { errors } = await maybe(() => cmd.parse());
+  for (const error of errors ?? []) {
+    console.error(`❌ ${error}`);
   }
-  return 0;
+  return errors ? 1 : 0;
 }
 
 function feedCommand(cfg: Config<CliOptions>) {
