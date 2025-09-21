@@ -17,13 +17,8 @@ import { yellow } from "@std/fmt/colors";
 import { join } from "@std/path";
 import { check, type Photo, photo, sync } from "./photo.ts";
 
-/**
- * Run the `photos` tool with the given command-line arguments.
- *
- * @param args Command-line arguments.
- * @returns The exit code of the command.
- */
-export async function photos(args: string[]): Promise<number> {
+/** Run the `photos` tool. */
+export async function cli(): Promise<number> {
   const cmd = new Command()
     .name("photos")
     .description("Manage photos.")
@@ -72,7 +67,7 @@ export async function photos(args: string[]): Promise<number> {
       }
     });
   try {
-    await cmd.parse(args);
+    await cmd.parse();
   } catch (e: unknown) {
     if (e instanceof ValidationError) {
       cmd.showHelp();
@@ -91,4 +86,4 @@ export async function photos(args: string[]): Promise<number> {
   return 0;
 }
 
-if (import.meta.main) Deno.exit(await photos(Deno.args));
+if (import.meta.main) Deno.exit(await cli());

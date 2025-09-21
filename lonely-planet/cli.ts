@@ -14,13 +14,8 @@ import {
   lonelyPlanet,
 } from "./lonely-planet.ts";
 
-/**
- * Run the `lonely-planet` tool with the given command-line arguments.
- *
- * @param args Command-line arguments.
- * @returns The exit code of the command.
- */
-export async function cli(args: string[]): Promise<number> {
+/** Run the `lonely-planet` tool. */
+export async function cli(): Promise<number> {
   const EMOJIS = {
     Continent: "🌍",
     Country: "🏳️",
@@ -78,7 +73,7 @@ export async function cli(args: string[]): Promise<number> {
     );
 
   try {
-    await cmd.parse(args);
+    await cmd.parse();
   } catch (e: unknown) {
     if (e instanceof ValidationError) {
       cmd.showHelp();
@@ -97,4 +92,4 @@ export async function cli(args: string[]): Promise<number> {
   return 0;
 }
 
-if (import.meta.main) Deno.exit(await cli(Deno.args));
+if (import.meta.main) Deno.exit(await cli());

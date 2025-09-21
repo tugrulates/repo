@@ -1,24 +1,22 @@
-// deno-lint-ignore-file no-console
 import { mockFetch } from "@roka/http/testing";
-import { fakeConsole } from "@roka/testing/fake";
+import { fakeArgs, fakeConsole, fakeEnv } from "@roka/testing/fake";
 import { assertSnapshot } from "@std/testing/snapshot";
 import { cli } from "./cli.ts";
 
-const TESTS = [
-  "discover",
-  "follows <username>",
-  "photos <username>",
-];
-
-for (const test of TESTS) {
-  Deno.test(`500px ${test}`, {
-    sanitizeOps: false,
-    sanitizeResources: false,
-  }, async (t) => {
-    using console = fakeConsole();
-    using _fetch = mockFetch(t);
-    const args = test.replace("<username>", "tugrulates").split(" ");
-    await cli(args);
-    await assertSnapshot(t, console.output({ wrap: "\n" }));
-  });
+async function test(t: Deno.TestContext) {
+  using _fetch = mockFetch(t);
+  using _args = fakeArgs(
+    t.name
+      .replaceAll("<username>", "tugrulates")
+      .split(" ").slice(1),
+  );
+  using _env = fakeEnv({});
+  using console = fakeConsole();
+  await cli();
+  // deno-lint-ignore no-console
+  await assertSnapshot(t, console.output({ wrap: "\n" }));
 }
+
+Deno.test("500px discover", test);
+Deno.test("500px follows <username>", test);
+Deno.test("500px photos <username>", test);

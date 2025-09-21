@@ -10,13 +10,8 @@ import { Table } from "@cliffy/table";
 import { version } from "@roka/forge/version";
 import { CATEGORIES, fiveHundredPx, type Photo } from "./500px.ts";
 
-/**
- * Run the `500px` tool with the given command-line arguments.
- *
- * @param args Command-line arguments.
- * @returns The exit code of the command.
- */
-export async function cli(args: string[]): Promise<number> {
+/** Run the `500px` tool. */
+export async function cli(): Promise<number> {
   const cmd = new Command()
     .name("500px")
     .description("Interact with 500px.")
@@ -27,7 +22,7 @@ export async function cli(args: string[]): Promise<number> {
     .command("follows", followsCommand())
     .command("photos", photosCommand());
   try {
-    await cmd.parse(args);
+    await cmd.parse();
   } catch (e: unknown) {
     if (e instanceof ValidationError) {
       cmd.showHelp();
@@ -152,4 +147,4 @@ function photosCommand() {
     });
 }
 
-if (import.meta.main) Deno.exit(await cli(Deno.args));
+if (import.meta.main) Deno.exit(await cli());

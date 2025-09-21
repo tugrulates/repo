@@ -1,29 +1,24 @@
-// deno-lint-ignore-file no-console
 import { mockFetch } from "@roka/http/testing";
-import { fakeConsole } from "@roka/testing/fake";
+import { fakeArgs, fakeConsole } from "@roka/testing/fake";
 import { assertSnapshot } from "@std/testing/snapshot";
 import { cli } from "./cli.ts";
 
-const TESTS = [
-  "[keywords...]",
-  "[keywords...] --json",
-  "--destinations [keyword]",
-  "--attractions [keyword]",
-  "--stories [keyword]",
-];
-
-for (const test of TESTS) {
-  Deno.test(`lonely-planet ${test}`, {
-    sanitizeOps: false,
-    sanitizeResources: false,
-  }, async (t) => {
-    using console = fakeConsole();
-    using _fetch = mockFetch(t);
-    const args = test
-      .replace("[keywords...]", "the netherlands")
-      .replace("[keyword]", "amsterdam")
-      .split(" ");
-    await cli(args);
-    await assertSnapshot(t, console.output({ wrap: "\n" }));
-  });
+async function test(t: Deno.TestContext) {
+  using _fetch = mockFetch(t);
+  using _args = fakeArgs(
+    t.name
+      .replaceAll("[keywords...]", "the netherlands")
+      .replaceAll("[keyword]", "amsterdam")
+      .split(" ").slice(1),
+  );
+  using console = fakeConsole();
+  await cli();
+  // deno-lint-ignore no-console
+  await assertSnapshot(t, console.output({ wrap: "\n" }));
 }
+
+Deno.test("lonely-planet [keywords...]", test);
+Deno.test("lonely-planet [keywords...] --json", test);
+Deno.test("lonely-planet --destinations [keyword]", test);
+Deno.test("lonely-planet --attractions [keyword]", test);
+Deno.test("lonely-planet --stories [keyword]", test);
