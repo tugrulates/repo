@@ -878,9 +878,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1097470925",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -908,9 +906,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/570493908",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -938,9 +934,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/906995086",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -968,9 +962,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/709887304",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -998,9 +990,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/311663321",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1028,9 +1018,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/228038092",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1058,9 +1046,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/998275166",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1088,9 +1074,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/781829468",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1118,9 +1102,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1654139692",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1148,9 +1130,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1100689728",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1178,9 +1158,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1402629271",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1208,9 +1186,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1611280988",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1238,9 +1214,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1455631091",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1268,9 +1242,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1652817015",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1298,9 +1270,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1668908831",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",
@@ -1328,9 +1298,7 @@ mock[`duolingo follows --unfollow > fetch 1`] =
     input: [
       "https://www.duolingo.com/2017-06-30/friends/users/51186082/follow/1624109103",
       {
-        body: "{}",
         headers: {
-          "content-type": "application/json; charset=UTF-8",
           accept: "application/json; charset=UTF-8",
         },
         method: "POST",

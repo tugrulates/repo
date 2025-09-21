@@ -211,7 +211,15 @@ const FRAGMENT = {
 };
 
 const QUERY = {
-  photos: gql`
+  photos: gql<{
+    user: {
+      photos: {
+        edges: { node: Photo }[];
+        totalCount: number;
+        pageInfo: { endCursor: string; hasNextPage: boolean };
+      };
+    };
+  }>`
     query PhotosQuery($username: String!, $cursor: String) {
       user: userByUsername(username: $username) {
         photos(
@@ -238,7 +246,17 @@ const QUERY = {
     }
     ${FRAGMENT.photo}
   `,
-  followers: gql`
+  followers: gql<{
+    user: {
+      followedBy: {
+        users: {
+          edges: { node: User }[];
+          totalCount: number;
+          pageInfo: { endCursor: string; hasNextPage: boolean };
+        };
+      };
+    };
+  }>`
     query FollowerQuery($username: String!, $cursor: String) {
       user: userByUsername(username: $username) {
         followedBy {
@@ -262,7 +280,17 @@ const QUERY = {
     }
     ${FRAGMENT.user}
   `,
-  following: gql`
+  following: gql<{
+    user: {
+      following: {
+        users: {
+          edges: { node: User }[];
+          totalCount: number;
+          pageInfo: { endCursor: string; hasNextPage: boolean };
+        };
+      };
+    };
+  }>`
     query FollowingQuery($username: String!, $cursor: String) {
       user: userByUsername(username: $username) {
         following {
@@ -286,7 +314,13 @@ const QUERY = {
     }
     ${FRAGMENT.user}
   `,
-  feed: gql`
+  feed: gql<{
+    feed: {
+      edges: { node: { cardNode: Photo } }[];
+      totalCount: number;
+      pageInfo: { endCursor: string; hasNextPage: boolean };
+    };
+  }>`
     query FeedQuery($cursor: String, $categories: [Int], $showNude: Boolean) {
       feed: forYouFeedContent(
         first: 100
@@ -323,20 +357,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
   const api = client("https://api.500px.com/graphql", options);
   return {
     photos: async (username) => {
-      return await api.queryPaginated<
-        {
-          user: {
-            photos: {
-              edges: { node: Photo }[];
-              totalCount: number;
-              pageInfo: { endCursor: string; hasNextPage: boolean };
-            };
-          };
-        },
-        Photo,
-        { node: Photo },
-        { endCursor: string; hasNextPage: boolean }
-      >(
+      return await api.queryPaginated(
         QUERY.photos,
         {
           edges: (data) => data.user.photos.edges,
@@ -349,22 +370,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
       );
     },
     following: async (username) => {
-      return await api.queryPaginated<
-        {
-          user: {
-            following: {
-              users: {
-                edges: { node: User }[];
-                totalCount: number;
-                pageInfo: { endCursor: string; hasNextPage: boolean };
-              };
-            };
-          };
-        },
-        User,
-        { node: User },
-        { endCursor: string; hasNextPage: boolean }
-      >(
+      return await api.queryPaginated(
         QUERY.following,
         {
           edges: (data) => data.user.following.users.edges,
@@ -377,22 +383,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
       );
     },
     followers: async (username) => {
-      return await api.queryPaginated<
-        {
-          user: {
-            followedBy: {
-              users: {
-                edges: { node: User }[];
-                totalCount: number;
-                pageInfo: { endCursor: string; hasNextPage: boolean };
-              };
-            };
-          };
-        },
-        User,
-        { node: User },
-        { endCursor: string; hasNextPage: boolean }
-      >(
+      return await api.queryPaginated(
         QUERY.followers,
         {
           edges: (data) => data.user.followedBy.users.edges,
@@ -405,18 +396,7 @@ export function fiveHundredPx(options?: FiveHundredPxOptions): FiveHundredPx {
       );
     },
     feed: async (options) => {
-      return (await api.queryPaginated<
-        {
-          feed: {
-            edges: { node: { cardNode: Photo } }[];
-            totalCount: number;
-            pageInfo: { endCursor: string; hasNextPage: boolean };
-          };
-        },
-        { cardNode: Photo },
-        { node: { cardNode: Photo } },
-        { endCursor: string; hasNextPage: boolean }
-      >(
+      return (await api.queryPaginated(
         QUERY.feed,
         {
           edges: (data) => data.feed.edges,
