@@ -10,6 +10,8 @@
   },
   "permissions": {
     "default": {
+      "read": true,
+      "env": ["HOME", "NODE_ENV"],
       "net": ["api.500px.com"]
     }
   },

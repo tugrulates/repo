@@ -10,12 +10,14 @@
   },
   "permissions": {
     "default": {
+      "read": true,
+      "env": ["HOME"],
       "net": true
     }
   },
   "test": {
     "permissions": {
-      "read": true
+      "net": true
     }
   }
 }
