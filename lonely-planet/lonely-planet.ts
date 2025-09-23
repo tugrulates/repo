@@ -216,7 +216,7 @@ async function* search<T extends Destination | Attraction | Story>(
   typesense: Typesense,
   collection: "places" | "pois" | "articles",
   keywords: string[],
-): AsyncGenerator<T> {
+): AsyncIterableIterator<T> {
   const { endpoint, token } = typesense;
   const api = client(endpoint);
   let page = 1;
