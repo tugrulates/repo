@@ -28,6 +28,7 @@
  */
 
 import { pool } from "@roka/async/pool";
+import { find } from "@roka/fs/find";
 import { omit } from "@std/collections";
 import { basename, dirname, join } from "@std/path";
 import { type Exif, exif, write } from "./exif.ts";
@@ -60,14 +61,13 @@ export async function photo(path: string): Promise<Photo> {
   } else {
     directory = dirname(path);
   }
-  const files = (await Array.fromAsync(Deno.readDir(directory)))
-    .filter((f) => f.isFile)
-    .filter((f) => f.name.endsWith(".jpg"))
-    .map((f) => join(directory, f.name))
-    .toSorted();
+  const files = (await Array.fromAsync(
+    find([directory], { type: "file", name: "*.{jpg,jpeg}" }),
+  )).toSorted();
   const sizes: Image[] = await pool(
     files,
     async (path) => ({ path, ...await exif(path) }),
+    { concurrency: 4 },
   );
   const source = sizes.find((e) => e.path === path);
   if (!source) {
