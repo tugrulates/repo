@@ -2,7 +2,6 @@
   "workspace": [
     "./roka/core/*",
     "./roka/tool/*",
-    "./500px",
     "./duolingo",
     "./lonely-planet",
     "./photo"
@@ -61,8 +60,6 @@
     "@std/streams": "jsr:@std/streams@^1.0.13",
     "@std/testing": "jsr:@std/testing@^1.0.15",
     "@std/text": "jsr:@std/text@^1.0.16",
-    "@urql/core": "npm:@urql/core@^6.0.1",
-    "@urql/exchange-retry": "npm:@urql/exchange-retry@^2.0.0",
     "exiftool-vendored": "npm:exiftool-vendored@^30.5.0",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.36.0",
     "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.36.0"
