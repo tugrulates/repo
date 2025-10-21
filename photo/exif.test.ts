@@ -35,7 +35,7 @@ Deno.test("write() can update tags", {
   assertObjectMatch(await exif(photo.path), TEST_EXIF);
 });
 
-Deno.test("write() can copy tags from a file", {
+Deno.test("write({ source }) copies tags from a file", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async () => {
