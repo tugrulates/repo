@@ -23,7 +23,7 @@
 
 import { DOMParser } from "@b-fuze/deno-dom";
 import { pool } from "@roka/async/pool";
-import { client } from "@roka/http/json/client";
+import { client } from "@roka/http/json";
 import { toPascalCase } from "@std/text";
 
 /**
@@ -227,7 +227,7 @@ async function* search<T extends Destination | Attraction | Story>(
     // deno-lint-ignore no-await-in-loop
     const results = (await api.post<{ results: (Results | Error)[] }>(
       `/multi_search?x-typesense-api-key=${token}`,
-      body,
+      { body },
     )).results;
     if (!results || !results[0]) break;
     if ("error" in results[0]) {
