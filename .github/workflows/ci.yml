@@ -5,19 +5,6 @@ on: [push]
 permissions: {}
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup
-        uses: denoland/setup-deno@v2
-
-      - name: Test
-        run: deno task lint
-
   test:
     runs-on: ubuntu-latest
 
@@ -29,13 +16,12 @@ jobs:
         uses: denoland/setup-deno@v2
 
       - name: Test
-        run: deno task test --coverage
+        run: deno run -Pq jsr:@roka/flow --check .
 
       - name: Coverage
-        run: deno coverage --lcov --output=cov.lcov
-
-      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
 
   build:
     runs-on: ubuntu-latest

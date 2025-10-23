@@ -5,12 +5,13 @@
  * ```ts
  * import { lonelyPlanet } from "@tugrulates/lonely-planet";
  *
- * async function usage() {
+ * (async () => {
  *   const api = lonelyPlanet();
  *   for await (const destination of api.destinations(["big sur"])) {
+ *     // deno-lint-ignore no-console
  *     console.log(destination.title);
  *   }
- * }
+ * });
  * ```
  *
  * @example Search Lonely Planet through the command-line application.
