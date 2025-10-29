@@ -12,7 +12,7 @@
   },
   "lint": {
     "rules": {
-      "tags": ["recommended", "jsr"],
+      "tags": ["recommended", "workspace", "jsr"],
       "include": [
         "camelcase",
         "default-param-last",
