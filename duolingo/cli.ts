@@ -25,16 +25,11 @@ export type CliOptions = {
 };
 
 /**
- * Run the `duolingo` tool with the given command-line arguments.
+ * Run the `duolingo` tool.
  *
- * @param args Command-line arguments.
  * @param options Use given config instead of the default user config.
- * @returns The exit code of the command.
  */
-export async function cli(
-  args: string[],
-  options?: CliOptions,
-): Promise<number> {
+export async function cli(options?: CliOptions): Promise<number> {
   const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
   if (options) await cfg.set(options);
   const { username, token } = await cfg.get();
@@ -72,7 +67,7 @@ export async function cli(
     .command("follows", followsCommand(cfg))
     .command("league", leagueCommand(cfg));
   try {
-    await cmd.parse(args);
+    await cmd.parse();
   } catch (e: unknown) {
     if (e instanceof ValidationError) {
       cmd.showHelp();
@@ -249,4 +244,4 @@ async function api(cfg: Config<CliOptions>): Promise<Duolingo> {
   return duolingo({ username, token });
 }
 
-if (import.meta.main) Deno.exit(await cli(Deno.args));
+if (import.meta.main) Deno.exit(await cli());
