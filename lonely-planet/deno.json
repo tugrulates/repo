@@ -5,9 +5,19 @@
     ".": "./lonely-planet.ts",
     "./cli": "./cli.ts"
   },
-  "compile": {
-    "main": "lonely-planet.ts",
+  "forge": {
+    "main": "cli.ts"
+  },
+  "permissions": {
+    "default": {
+      "read": true,
+      "env": ["HOME"],
+      "net": true
+    }
+  },
+  "test": {
     "permissions": {
+      "read": true,
       "net": true
     }
   }

@@ -5,17 +5,18 @@
  * ```ts
  * import { lonelyPlanet } from "@tugrulates/lonely-planet";
  *
- * async function usage() {
+ * (async () => {
  *   const api = lonelyPlanet();
  *   for await (const destination of api.destinations(["big sur"])) {
+ *     // deno-lint-ignore no-console
  *     console.log(destination.title);
  *   }
- * }
+ * });
  * ```
  *
  * @example Search Lonely Planet through the command-line application.
  * ```sh
- * deno run -N jsr:@tugrulates/lonely-planet/cli big sur
+ * deno run -P jsr:@tugrulates/lonely-planet/cli big sur
  * ```
  *
  * @module lonely-planet
@@ -23,7 +24,7 @@
 
 import { DOMParser } from "@b-fuze/deno-dom";
 import { pool } from "@roka/async/pool";
-import { client } from "@roka/http/json/client";
+import { client } from "@roka/http/json";
 import { toPascalCase } from "@std/text";
 
 /**
@@ -216,7 +217,7 @@ async function* search<T extends Destination | Attraction | Story>(
   typesense: Typesense,
   collection: "places" | "pois" | "articles",
   keywords: string[],
-): AsyncGenerator<T> {
+): AsyncIterableIterator<T> {
   const { endpoint, token } = typesense;
   const api = client(endpoint);
   let page = 1;
@@ -227,7 +228,7 @@ async function* search<T extends Destination | Attraction | Story>(
     // deno-lint-ignore no-await-in-loop
     const results = (await api.post<{ results: (Results | Error)[] }>(
       `/multi_search?x-typesense-api-key=${token}`,
-      body,
+      { body },
     )).results;
     if (!results || !results[0]) break;
     if ("error" in results[0]) {

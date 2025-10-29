@@ -5,27 +5,27 @@
  * @example Get Duolingo feed through the API client.
  * ```ts
  * import { duolingo } from "@tugrulates/duolingo";
- *
- * async function usage(username: string, token: string) {
+ * (async (username: string, token: string) => {
  *   const api = duolingo({ username, token });
  *   for (const card of await api.feed.get()) {
+ *     // deno-lint-ignore no-console
  *     console.log(card);
  *   }
- * }
+ * });
  * ```
  *
  * @example Get Duolingo feed through the command-line application.
  * ```sh
  * export DUOLINGO_USERNAME=TugrulAtes
  * export DUOLINGO_TOKEN=token
- * deno run -A --unstable-kv jsr:@tugrulates/duolingo/cli feed
+ * deno run -P jsr:@tugrulates/duolingo/cli feed
  * ```
  *
  * @module duolingo
  */
 
 import { pool } from "@roka/async/pool";
-import { client } from "@roka/http/json/client";
+import { client } from "@roka/http/json";
 import { join } from "@std/path";
 
 /** A Duolingo API client returned from the {@linkcode duolingo} function. */
@@ -250,7 +250,7 @@ export const TIERS = {
  *
  * This only lists target languages, and not source languages.
  *
- * @see {@link https://www.duolingo.com/courses/all | Duolingo Language Courses}
+ * @see {@link https://www.duolingo.com/courses/all Duolingo Language Courses}
  */
 export const LANGUAGES = {
   ar: "Arabic",
@@ -396,10 +396,12 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         })();
         const me = await duolingo.users.me();
         await api.post(`/card/reaction`, {
-          groupId: card.eventId,
-          reaction: reaction.toUpperCase(),
-          trackingProperties: { screen: "kudos_feed" },
-          userId: me.userId,
+          body: {
+            groupId: card.eventId,
+            reaction: reaction.toUpperCase(),
+            trackingProperties: { screen: "kudos_feed" },
+            userId: me.userId,
+          },
         });
       },
     },

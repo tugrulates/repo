@@ -5,13 +5,14 @@
  * @module cli
  */
 
-import { Command, ValidationError } from "@cliffy/command";
+import { Command } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
 import { type Config, config } from "@roka/cli/config";
 import { version } from "@roka/forge/version";
-import { escape } from "@std/html";
+import { plain } from "@roka/html/plain";
+import { maybe } from "@roka/maybe";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
@@ -25,16 +26,11 @@ export type CliOptions = {
 };
 
 /**
- * Run the `duolingo` tool with the given command-line arguments.
+ * Run the `duolingo` tool.
  *
- * @param args Command-line arguments.
  * @param options Use given config instead of the default user config.
- * @returns The exit code of the command.
  */
-export async function cli(
-  args: string[],
-  options?: CliOptions,
-): Promise<number> {
+export async function cli(options?: CliOptions): Promise<number> {
   const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
   if (options) await cfg.set(options);
   const { username, token } = await cfg.get();
@@ -66,38 +62,19 @@ export async function cli(
       token ? { default: token } : {},
     )
     .help({ colors: Deno.stdout.isTerminal() })
-    .noExit()
     .globalAction((options) => cfg.set(options))
     .command("feed", feedCommand(cfg))
     .command("follows", followsCommand(cfg))
     .command("league", leagueCommand(cfg));
-  try {
-    await cmd.parse(args);
-  } catch (e: unknown) {
-    if (e instanceof ValidationError) {
-      cmd.showHelp();
-      console.error(`❌ ${e.message}`);
-      return 1;
-    }
-    const errors = (e instanceof AggregateError) ? e.errors : [e];
-    for (const error of errors) {
-      console.error(`❌ ${error.message}`);
-      if (error["cause"] && error["cause"]["error"]) {
-        console.error(error.cause.error);
-      }
-    }
-    return 2;
+  const { errors } = await maybe(() => cmd.parse());
+  for (const error of errors ?? []) {
+    console.error(`❌ ${error}`);
   }
-  return 0;
+  return errors ? 1 : 0;
 }
 
 function feedCommand(cfg: Config<CliOptions>) {
   function summary(card: FeedCard): string {
-    function plain(html: string) {
-      return escape(html)
-        .replace(/&lt;.*?&gt;/g, "")
-        .replace(/[\u200E-\u200F]/g, "");
-    }
     return card.header
       ? plain(card.header)
       : `${card.displayName} ${plain(card.body).toLowerCase()}`;
@@ -249,4 +226,4 @@ async function api(cfg: Config<CliOptions>): Promise<Duolingo> {
   return duolingo({ username, token });
 }
 
-if (import.meta.main) Deno.exit(await cli(Deno.args));
+if (import.meta.main) Deno.exit(await cli());

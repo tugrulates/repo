@@ -5,22 +5,18 @@
  * @module cli
  */
 
-import { Command, ValidationError } from "@cliffy/command";
+import { Command } from "@cliffy/command";
 import { Table } from "@cliffy/table";
 import { version } from "@roka/forge/version";
+import { maybe } from "@roka/maybe";
 import {
   type Attraction,
   type Destination,
   lonelyPlanet,
 } from "./lonely-planet.ts";
 
-/**
- * Run the `lonely-planet` tool with the given command-line arguments.
- *
- * @param args Command-line arguments.
- * @returns The exit code of the command.
- */
-export async function cli(args: string[]): Promise<number> {
+/** Run the `lonely-planet` tool. */
+export async function cli(): Promise<number> {
   const EMOJIS = {
     Continent: "🌍",
     Country: "🏳️",
@@ -76,25 +72,11 @@ export async function cli(args: string[]): Promise<number> {
         Table.from(rows).render();
       },
     );
-
-  try {
-    await cmd.parse(args);
-  } catch (e: unknown) {
-    if (e instanceof ValidationError) {
-      cmd.showHelp();
-      console.error(`❌ ${e.message}`);
-      return 1;
-    }
-    const errors = (e instanceof AggregateError) ? e.errors : [e];
-    for (const error of errors) {
-      console.error(`❌ ${error.message}`);
-      if (error["cause"] && error["cause"]["error"]) {
-        console.error(error.cause.error);
-      }
-    }
-    return 2;
+  const { errors } = await maybe(() => cmd.parse());
+  for (const error of errors ?? []) {
+    console.error(`❌ ${error}`);
   }
-  return 0;
+  return errors ? 1 : 0;
 }
 
-if (import.meta.main) Deno.exit(await cli(Deno.args));
+if (import.meta.main) Deno.exit(await cli());

@@ -6,14 +6,20 @@
     "./cli": "./cli.ts",
     "./emoji": "./emoji.ts"
   },
-  "compile": {
-    "main": "cli.ts",
-    "kv": true,
-    "permissions": {
+  "forge": {
+    "main": "cli.ts"
+  },
+  "permissions": {
+    "default": {
       "read": true,
       "write": true,
-      "net": "www.duolingo.com",
-      "env": "HOME"
+      "net": ["www.duolingo.com"],
+      "env": ["HOME"]
+    }
+  },
+  "test": {
+    "permissions": {
+      "read": true
     }
   }
 }
