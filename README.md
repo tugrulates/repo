@@ -12,6 +12,5 @@ Various libraries and applications, built with 🦕
 | Package                                                  | Purpose                                                 |
 | :------------------------------------------------------- | :------------------------------------------------------ |
 | 📸 [**photo**](https://jsr.io/@tugrulates/photo)         | Manage photograph metadata for publishing.              |
-| 📸 [**500px**](https://jsr.io/@tugrulates/500px)         | Interact with 500px, the photography community.         |
 | 🔤 [**duolingo**](https://jsr.io/@tugrulates/500px)      | Interact with Duolingo, the language learning platform. |
 | 🧳 [**lonely-planet**](https://jsr.io/@tugrulates/500px) | Interact with Lonely Planet, the travel guide.          |
