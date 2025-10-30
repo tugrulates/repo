@@ -1,0 +1,26 @@
+{
+  "workspace": ["./test"],
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended", "workspace", "jsr"],
+      "include": [
+        "camelcase",
+        "default-param-last",
+        "eqeqeq",
+        "no-await-in-loop",
+        "no-console",
+        "no-eval",
+        "no-non-null-assertion",
+        "no-self-compare",
+        "no-sync-fn-in-async-fn",
+        "no-throw-literal",
+        "no-useless-rename",
+        "single-var-declarator"
+      ]
+    }
+  }
+}

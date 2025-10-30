@@ -1,0 +1,8 @@
+{
+  "name": "@tugrulates/test",
+  "version": "0.0.0-test.11",
+  "exports": {
+    ".": "./test.ts",
+    "./module": "./module.ts"
+  }
+}
