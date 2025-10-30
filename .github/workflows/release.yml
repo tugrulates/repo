@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      package:
+        description: "Package"
+        required: false
+        type: choice
+        options:
+          - All packages
+          - 500px
+          - duolingo
+          - lonely-planet
+          - photo
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Release packages
+        run: |
+          if [ "${{ inputs.package }}" != "All packages" ]; then
+            PACKAGE="${{ inputs.package }}"
+          fi
+          deno run -A jsr:@roka/forge release $PACKAGE --draft --emoji
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}

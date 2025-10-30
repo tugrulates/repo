@@ -1,0 +1,12 @@
+500px:
+  - changed-files:
+      - any-glob-to-any-file: 500px/**
+duolingo:
+  - changed-files:
+      - any-glob-to-any-file: duolingo/**
+lonely-planet:
+  - changed-files:
+      - any-glob-to-any-file: lonely-planet/**
+photo:
+  - changed-files:
+      - any-glob-to-any-file: photo/**

@@ -1,0 +1,37 @@
+name: CI
+
+on: [push]
+
+permissions: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Test
+        run: deno run -Pq jsr:@roka/flow --check .
+
+      - name: Coverage
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Build
+        run: deno run -A jsr:@roka/forge compile
