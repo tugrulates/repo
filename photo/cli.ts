@@ -13,8 +13,10 @@
 import { Command, ValidationError } from "@cliffy/command";
 import { pooled } from "@roka/async/pool";
 import { version } from "@roka/forge/version";
+import { find } from "@roka/fs/find";
+import { distinct } from "@std/collections";
 import { yellow } from "@std/fmt/colors";
-import { dirname } from "node:path";
+import { dirname } from "@std/path";
 import { check, photo, sync } from "./photo.ts";
 
 /** Run the `photos` tool. */
