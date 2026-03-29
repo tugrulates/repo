@@ -43,6 +43,7 @@
     "@roka/fs": "jsr:@roka/fs@^0.1.0",
     "@roka/html": "jsr:@roka/html@^0.1.0",
     "@roka/http": "jsr:@roka/http@^0.3.0",
+    "@roka/maybe": "jsr:@roka/maybe@^0.1.0",
     "@roka/testing": "jsr:@roka/testing@^0.3.0",
     "@std/assert": "jsr:@std/assert@^1.0.19",
     "@std/collections": "jsr:@std/collections@^1.1.6",

@@ -10,10 +10,11 @@
  * @module cli
  */
 
-import { Command, ValidationError } from "@cliffy/command";
+import { Command } from "@cliffy/command";
 import { pooled } from "@roka/async/pool";
 import { version } from "@roka/forge/version";
 import { find } from "@roka/fs/find";
+import { maybe } from "@roka/maybe";
 import { distinct } from "@std/collections";
 import { yellow } from "@std/fmt/colors";
 import { dirname } from "@std/path";
@@ -48,24 +49,11 @@ export async function cli(): Promise<number> {
         }
       }
     });
-  try {
-    await cmd.parse();
-  } catch (e: unknown) {
-    if (e instanceof ValidationError) {
-      cmd.showHelp();
-      console.error(`❌ ${e.message}`);
-      return 1;
-    }
-    const errors = (e instanceof AggregateError) ? e.errors : [e];
-    for (const error of errors) {
-      console.error(`❌ ${error.message}`);
-      if (error["cause"] && error["cause"]["error"]) {
-        console.error(error.cause.error);
-      }
-    }
-    return 2;
+  const { errors } = await maybe(() => cmd.parse());
+  for (const error of errors ?? []) {
+    console.error(`❌ ${error}`);
   }
-  return 0;
+  return errors ? 1 : 0;
 }
 
 if (import.meta.main) Deno.exit(await cli());
