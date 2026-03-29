@@ -3,13 +3,6 @@
     "./duolingo",
     "./photo"
   ],
-  "tasks": {
-    "test": "deno test -A --unstable-kv --doc **/*.ts",
-    "coverage": "deno task test --coverage && deno coverage --html",
-    "lint": "deno fmt -q --check && deno lint -q && deno check -q **/*.ts",
-    "docs": "deno doc --lint --html $(find . -path '**/*.ts' -type file)",
-    "ok": "deno task lint && deno task docs && deno task test && deno publish --quiet --dry-run --allow-dirty"
-  },
   "compilerOptions": {
     "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true
@@ -54,5 +47,6 @@
     "exiftool-vendored": "npm:exiftool-vendored@^35.15.1",
     "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.53.0",
     "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.53.0"
-  }
+  },
+  "unstable": ["kv"]
 }

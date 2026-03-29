@@ -7,13 +7,14 @@
  * variants are found next to the source photo.
  *
  * ```ts
+ * // deno-lint-ignore-file no-console
  * import { photo } from "@tugrulates/photo";
  *
- * async function usage() {
+ * (async () => {
  *   const image = await photo("path/to/photo");
  *   console.log(image.title);
  *   console.log(image.variants);
- * }
+ * });
  * ```
  *
  * The {@link [cli]} module provides a command-line interface for this library.
