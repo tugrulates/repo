@@ -8,7 +8,7 @@ import { omit } from "@std/collections";
 import { check } from "./photo.ts";
 import { tempPhoto } from "./testing.ts";
 
-Deno.test("testPhoto() returns a photo", {
+Deno.test("tempPhoto() returns a photo", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async () => {
@@ -42,7 +42,7 @@ Deno.test("testPhoto() returns a photo", {
   }
 });
 
-Deno.test("testPhoto() returns a disposable photo", {
+Deno.test("tempPhoto() returns a disposable photo", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async () => {
@@ -54,7 +54,7 @@ Deno.test("testPhoto() returns a disposable photo", {
   await assertRejects(() => Deno.lstat(path), Deno.errors.NotFound);
 });
 
-Deno.test("testPhoto() returns a photo with given tags", {
+Deno.test("tempPhoto({ keywords }) returns a photo with given tags", {
   sanitizeOps: false,
   sanitizeResources: false,
 }, async () => {
