@@ -9,7 +9,7 @@ Various libraries and applications, built with 🦕
 [Deno](https://github.com/denoland/deno) and 🌱
 [Roka](https://github.com/withroka/roka).
 
-| Package                                                  | Purpose                                                 |
-| :------------------------------------------------------- | :------------------------------------------------------ |
-| 📸 [**photo**](https://jsr.io/@tugrulates/photo)         | Manage photograph metadata for publishing.              |
-| 🔤 [**duolingo**](https://jsr.io/@tugrulates/500px)      | Interact with Duolingo, the language learning platform. |
+| Package                                             | Purpose                                                 |
+| :-------------------------------------------------- | :------------------------------------------------------ |
+| 📸 [**photo**](https://jsr.io/@tugrulates/photo)    | Manage photograph metadata for publishing.              |
+| 🔤 [**duolingo**](https://jsr.io/@tugrulates/500px) | Interact with Duolingo, the language learning platform. |
