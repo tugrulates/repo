@@ -11,9 +11,7 @@ on:
         type: choice
         options:
           - All packages
-          - 500px
           - duolingo
-          - lonely-planet
           - photo
 
 permissions:
