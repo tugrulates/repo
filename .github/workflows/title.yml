@@ -15,20 +15,14 @@ jobs:
   title:
     runs-on: ubuntu-latest
     steps:
-      - uses: amannn/action-semantic-pull-request@v6
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+
+      - name: Check PR title
+        run: deno run -A jsr:@roka/forge title "$TITLE" --types \
+          build,chore,ci,docs,feat,fix,perf,refactor,revert,style,test
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          types: |
-            build
-            chore
-            ci
-            docs
-            feat
-            fix
-            perf
-            refactor
-            revert
-            style
-            test
-          scopes: ${{ vars.PACKAGES }}
+          TITLE: ${{ github.event.pull_request.title }}
