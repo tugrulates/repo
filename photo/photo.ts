@@ -20,7 +20,7 @@
  * The {@link [cli]} module provides a command-line interface for this library.
  *
  * ```sh
- * deno run --A jsr:@tugrulates/photo/cli path/to/photo --json
+ * dx jsr:@tugrulates/photo/cli path/to/photo --json
  * ```
  *
  * @todo Deduce source file name automatically from dimensions.
