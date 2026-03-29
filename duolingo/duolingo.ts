@@ -250,7 +250,7 @@ export const TIERS = {
  *
  * This only lists target languages, and not source languages.
  *
- * @see {@link https://www.duolingo.com/courses/all | Duolingo Language Courses}
+ * @see {@link https://www.duolingo.com/courses/all Duolingo Language Courses}
  */
 export const LANGUAGES = {
   ar: "Arabic",
