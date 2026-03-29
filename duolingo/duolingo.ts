@@ -25,7 +25,7 @@
  */
 
 import { pool } from "@roka/async/pool";
-import { client } from "@roka/http/json/client";
+import { client } from "@roka/http/json";
 import { join } from "@std/path";
 
 /** A Duolingo API client returned from the {@linkcode duolingo} function. */
@@ -396,10 +396,12 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         })();
         const me = await duolingo.users.me();
         await api.post(`/card/reaction`, {
-          groupId: card.eventId,
-          reaction: reaction.toUpperCase(),
-          trackingProperties: { screen: "kudos_feed" },
-          userId: me.userId,
+          body: {
+            groupId: card.eventId,
+            reaction: reaction.toUpperCase(),
+            trackingProperties: { screen: "kudos_feed" },
+            userId: me.userId,
+          },
         });
       },
     },

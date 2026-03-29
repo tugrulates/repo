@@ -1,5 +1,5 @@
+import { tempDirectory } from "@roka/fs/temp";
 import { fakeConsole } from "@roka/testing/fake";
-import { tempDirectory } from "@roka/testing/temp";
 import { assertExists } from "@std/assert";
 import { copy } from "@std/fs/copy";
 import { dirname } from "@std/path";
