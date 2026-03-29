@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@b-fuze/deno-dom@~0.1.56": "0.1.56",
     "jsr:@cliffy/ansi@1.0.0": "1.0.0",
     "jsr:@cliffy/command@1": "1.0.0",
     "jsr:@cliffy/command@1.0.0": "1.0.0",
@@ -18,6 +19,7 @@
     "jsr:@roka/fs@0.1": "0.1.0",
     "jsr:@roka/git@0.4": "0.4.0",
     "jsr:@roka/github@0.3": "0.3.0",
+    "jsr:@roka/html@0.1": "0.1.0",
     "jsr:@roka/http@0.3": "0.3.0",
     "jsr:@roka/maybe@0.1": "0.1.0",
     "jsr:@roka/testing@0.3": "0.3.0",
@@ -36,7 +38,6 @@
     "jsr:@std/fs@^1.0.21": "1.0.23",
     "jsr:@std/fs@^1.0.22": "1.0.23",
     "jsr:@std/fs@^1.0.23": "1.0.23",
-    "jsr:@std/html@^1.0.5": "1.0.5",
     "jsr:@std/http@^1.0.25": "1.0.25",
     "jsr:@std/internal@^1.0.12": "1.0.12",
     "jsr:@std/io@~0.225.3": "0.225.3",
@@ -52,6 +53,9 @@
     "npm:exiftool-vendored@^35.15.1": "35.15.1"
   },
   "jsr": {
+    "@b-fuze/deno-dom@0.1.56": {
+      "integrity": "8030e2dc1d8750f1682b53462ab893d9c3470f2287feecbe22f44a88c54ab148"
+    },
     "@cliffy/ansi@1.0.0": {
       "integrity": "987008f74e50aa72cc1517ffccc769711734a14927bc4599e052efe1b9a840e2",
       "dependencies": [
@@ -179,6 +183,12 @@
         "npm:@octokit/rest"
       ]
     },
+    "@roka/html@0.1.0": {
+      "integrity": "69d71d4e61e6df99554b623cd5e4437de808d607540d234ce2b880552f312a77",
+      "dependencies": [
+        "jsr:@b-fuze/deno-dom"
+      ]
+    },
     "@roka/http@0.3.0": {
       "integrity": "46a7c410b2cbdedb20568bc83d0d9c4f5e2d2a784a4417ae9a2485170abdea53",
       "dependencies": [
@@ -251,9 +261,6 @@
         "jsr:@std/internal",
         "jsr:@std/path"
       ]
-    },
-    "@std/html@1.0.5": {
-      "integrity": "4e2d693f474cae8c16a920fa5e15a3b72267b94b84667f11a50c6dd1cb18d35e"
     },
     "@std/http@1.0.25": {
       "integrity": "577b4252290af1097132812b339fffdd55fb0f4aeb98ff11bdbf67998aa17193"
@@ -442,13 +449,13 @@
       "jsr:@roka/config@0.1",
       "jsr:@roka/forge@~0.2.1",
       "jsr:@roka/fs@0.1",
+      "jsr:@roka/html@0.1",
       "jsr:@roka/http@0.3",
       "jsr:@roka/testing@0.3",
       "jsr:@std/assert@^1.0.19",
       "jsr:@std/collections@^1.1.6",
       "jsr:@std/fmt@^1.0.9",
       "jsr:@std/fs@^1.0.23",
-      "jsr:@std/html@^1.0.5",
       "jsr:@std/path@^1.1.4",
       "jsr:@std/testing@^1.0.17",
       "npm:exiftool-vendored.exe@^13.53.0",
