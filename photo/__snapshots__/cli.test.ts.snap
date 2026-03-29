@@ -69,7 +69,7 @@ snapshot[`photos [photo] --json 1`] = `
     "Swimming",
     "Tentacle"
   ],
-  "date": "2023-12-10T14:28:09-08:00",
+  "date": "2023-12-10T14:28:09.320-08:00",
   "location": "California Academy of Sciences",
   "city": "San Francisco",
   "state": "California",
@@ -122,7 +122,7 @@ snapshot[`photos [photo] --json 1`] = `
         "Swimming",
         "Tentacle"
       ],
-      "date": "2023-12-10T14:28:09-08:00",
+      "date": "2023-12-10T14:28:09.320-08:00",
       "location": "California Academy of Sciences",
       "city": "San Francisco",
       "state": "California",
@@ -174,7 +174,7 @@ snapshot[`photos [photo] --json 1`] = `
         "Swimming",
         "Tentacle"
       ],
-      "date": "2023-12-10T14:28:09-08:00",
+      "date": "2023-12-10T14:28:09.320-08:00",
       "location": "California Academy of Sciences",
       "city": "San Francisco",
       "state": "California",
@@ -226,7 +226,7 @@ snapshot[`photos [photo] --json 1`] = `
         "Swimming",
         "Tentacle"
       ],
-      "date": "2023-12-10T14:28:09-08:00",
+      "date": "2023-12-10T14:28:09.320-08:00",
       "location": "California Academy of Sciences",
       "city": "San Francisco",
       "state": "California",
@@ -278,7 +278,7 @@ snapshot[`photos [photo] --json 1`] = `
         "Swimming",
         "Tentacle"
       ],
-      "date": "2023-12-10T14:28:09-08:00",
+      "date": "2023-12-10T14:28:09.320-08:00",
       "location": "California Academy of Sciences",
       "city": "San Francisco",
       "state": "California",
@@ -330,7 +330,7 @@ snapshot[`photos [photo] --json 1`] = `
         "Swimming",
         "Tentacle"
       ],
-      "date": "2023-12-10T14:28:09-08:00",
+      "date": "2023-12-10T14:28:09.320-08:00",
       "location": "California Academy of Sciences",
       "city": "San Francisco",
       "state": "California",

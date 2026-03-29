@@ -9,7 +9,7 @@ import { Command, ValidationError } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
-import { type Config, config } from "@roka/cli/config";
+import { type Config, config } from "@roka/config";
 import { version } from "@roka/forge/version";
 import { escape } from "@std/html";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
