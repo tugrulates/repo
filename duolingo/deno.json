@@ -20,5 +20,10 @@
         "HOME"
       ]
     }
+  },
+  "test": {
+    "permissions": {
+      "read": true
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { tempDirectory } from "@roka/fs/temp";
-import { assertEquals, assertExists } from "@std/assert";
+import { assertEquals, assertExists, assertObjectMatch } from "@std/assert";
 import { copy } from "@std/fs";
 import { basename, dirname, join } from "@std/path";
 import { write } from "./exif.ts";
@@ -15,10 +15,12 @@ Deno.test("photo() can load from an image file", {
   const path = join(directory.path(), "source.jpg");
   await copy(testPhoto.path, path);
   const source = await photo(path);
-  assertEquals(source.id, basename(directory.path()));
-  assertEquals(source.path, path);
-  assertEquals(source.title, "test-title");
-  assertEquals(source.variants, []);
+  assertObjectMatch(source, {
+    id: basename(directory.path()),
+    path,
+    title: "test-title",
+    variants: [],
+  });
 });
 
 Deno.test("photo() can load from a directory", {
@@ -30,7 +32,7 @@ Deno.test("photo() can load from a directory", {
   const path = join(directory.path(), "source.jpg");
   await copy(testPhoto.path, path);
   const source = await photo(directory.path());
-  assertEquals(source.path, path);
+  assertObjectMatch(source, { path });
 });
 
 Deno.test("photo() can load variants", {
@@ -48,11 +50,13 @@ Deno.test("photo() can load variants", {
   await copy(testPhoto.variants[0]?.path, variant1);
   await copy(testPhoto.variants[1]?.path, variant2);
   const source = await photo(directory.path());
-  assertEquals(source.path, path);
-  assertEquals(source.variants[0]?.path, variant1);
-  assertEquals(source.variants[1]?.path, variant2);
-  assertEquals(source.variants[0]?.title, "test-title");
-  assertEquals(source.variants[1]?.title, "test-title");
+  assertObjectMatch(source, {
+    path,
+    variants: [{ path: variant1, title: "test-title" }, {
+      path: variant2,
+      title: "test-title",
+    }],
+  });
 });
 
 Deno.test("check() accepts a photo without problems", {
