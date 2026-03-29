@@ -15,11 +15,15 @@ async function test(t: Deno.TestContext) {
   const photo1 = await tempPhoto({ title: "Photo 1", model: "Model 1" });
   const photo2 = await tempPhoto({ title: "Photo 2", model: "" });
   assertExists(photo1.variants[0]);
-  write(photo1.variants[0].path, { title: "Variant 1" });
+  await write(photo1.variants[0].path, { title: "Variant 1" });
   await Deno.mkdir(directory.path("photo1"));
   await Deno.mkdir(directory.path("photo2"));
-  copy(dirname(photo1.path), directory.path("photo1"), { overwrite: true });
-  copy(dirname(photo2.path), directory.path("photo2"), { overwrite: true });
+  await copy(dirname(photo1.path), directory.path("photo1"), {
+    overwrite: true,
+  });
+  await copy(dirname(photo2.path), directory.path("photo2"), {
+    overwrite: true,
+  });
   using _args = fakeArgs(
     t.name
       .replaceAll("[file]", directory.path("photo1/source.jpg"))
