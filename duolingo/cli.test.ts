@@ -13,9 +13,11 @@ async function test(t: Deno.TestContext) {
     options.username = "TugrulAtes";
     options.token = "token";
   }
-  using _args = fakeArgs(t.name.split(" ").slice(1));
   using console = fakeConsole();
-  await cli(options);
+  {
+    using _args = fakeArgs(t.name.split(" ").slice(1));
+    await cli(options);
+  }
   // deno-lint-ignore no-console
   await assertSnapshot(t, console.output({ wrap: "\n" }));
 }

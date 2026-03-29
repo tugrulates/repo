@@ -2,26 +2,26 @@ export const snapshot = {};
 
 snapshot[`photos [file] 1`] = `
 "
-🖼  Photo 1
+🖼  Photo 1 [[33mpost-1.jpg:title[39m]
 "
 `;
 
 snapshot[`photos [photo] 1`] = `
 "
-🖼  Photo 1
+🖼  Photo 1 [[33mpost-1.jpg:title[39m]
 "
 `;
 
 snapshot[`photos [directory] 1`] = `
 "
-🖼  Photo 1
+🖼  Photo 1 [[33mpost-1.jpg:title[39m]
 🖼  Photo 2 [[33mmissing:model[39m]
 "
 `;
 
 snapshot[`photos [photo1] [photo2] 1`] = `
 "
-🖼  Photo 1
+🖼  Photo 1 [[33mpost-1.jpg:title[39m]
 🖼  Photo 2 [[33mmissing:model[39m]
 "
 `;
@@ -85,7 +85,7 @@ snapshot[`photos [photo] --json 1`] = `
       "path": "[directory]/photo1/post-1.jpg",
       "width": 108,
       "height": 135,
-      "title": "Photo 1",
+      "title": "Variant 1",
       "description": "Four jellyfish with translucent bodies and long tentacles float gracefully against a vivid background in an aquarium setting (image 1).",
       "keywords": [
         "California Academy Of Sciences",

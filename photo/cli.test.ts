@@ -24,17 +24,19 @@ async function test(t: Deno.TestContext) {
   await copy(dirname(photo2.path), directory.path("photo2"), {
     overwrite: true,
   });
-  using _args = fakeArgs(
-    t.name
-      .replaceAll("[file]", directory.path("photo1/source.jpg"))
-      .replaceAll("[photo]", directory.path("photo1"))
-      .replaceAll("[photo1]", directory.path("photo1"))
-      .replaceAll("[photo2]", directory.path("photo2"))
-      .replaceAll("[directory]", directory.path())
-      .split(" ").slice(1),
-  );
   using console = fakeConsole();
-  await cli();
+  {
+    using _args = fakeArgs(
+      t.name
+        .replaceAll("[file]", directory.path("photo1/source.jpg"))
+        .replaceAll("[photo]", directory.path("photo1"))
+        .replaceAll("[photo1]", directory.path("photo1"))
+        .replaceAll("[photo2]", directory.path("photo2"))
+        .replaceAll("[directory]", directory.path())
+        .split(" ").slice(1),
+    );
+    await cli();
+  }
   // deno-lint-ignore no-console
   const output = console.output({ wrap: "\n" })
     .replaceAll(directory.path(), "[directory]");
