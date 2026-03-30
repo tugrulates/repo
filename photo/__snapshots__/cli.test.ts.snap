@@ -2,27 +2,27 @@ export const snapshot = {};
 
 snapshot[`photos [file] 1`] = `
 "
-🖼  Photo 1 [[33mpost-1.jpg:title[39m]
+🖼  Photo 1 [post-1.jpg:title]
 "
 `;
 
 snapshot[`photos [photo] 1`] = `
 "
-🖼  Photo 1 [[33mpost-1.jpg:title[39m]
+🖼  Photo 1 [post-1.jpg:title]
 "
 `;
 
 snapshot[`photos [directory] 1`] = `
 "
-🖼  Photo 1 [[33mpost-1.jpg:title[39m]
-🖼  Photo 2 [[33mmissing:model[39m]
+🖼  Photo 1 [post-1.jpg:title]
+🖼  Photo 2 [missing:model]
 "
 `;
 
 snapshot[`photos [photo1] [photo2] 1`] = `
 "
-🖼  Photo 1 [[33mpost-1.jpg:title[39m]
-🖼  Photo 2 [[33mmissing:model[39m]
+🖼  Photo 1 [post-1.jpg:title]
+🖼  Photo 2 [missing:model]
 "
 `;
 

@@ -13,7 +13,7 @@
     "jsr:@cliffy/table@1.0.0": "1.0.0",
     "jsr:@david/which@~0.4.1": "0.4.1",
     "jsr:@roka/async@0.3": "0.3.0",
-    "jsr:@roka/config@0.1": "0.1.0",
+    "jsr:@roka/cli@0.3": "0.3.0",
     "jsr:@roka/deno@0.1": "0.1.0",
     "jsr:@roka/forge@~0.2.1": "0.2.1",
     "jsr:@roka/fs@0.1": "0.1.0",
@@ -27,7 +27,6 @@
     "jsr:@std/assert@^1.0.17": "1.0.19",
     "jsr:@std/assert@^1.0.18": "1.0.19",
     "jsr:@std/assert@^1.0.19": "1.0.19",
-    "jsr:@std/async@^1.1.0": "1.2.0",
     "jsr:@std/async@^1.2.0": "1.2.0",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
     "jsr:@std/cli@^1.0.28": "1.0.28",
@@ -46,7 +45,6 @@
     "jsr:@std/streams@^1.0.17": "1.0.17",
     "jsr:@std/testing@^1.0.17": "1.0.17",
     "jsr:@std/text@^1.0.17": "1.0.17",
-    "npm:@octokit/openapi-types@27": "27.0.0",
     "npm:@octokit/rest@^22.0.1": "22.0.1",
     "npm:exiftool-vendored.exe@^13.53.0": "13.53.0",
     "npm:exiftool-vendored.pl@^13.53.0": "13.53.0",
@@ -113,12 +111,13 @@
     "@roka/async@0.3.0": {
       "integrity": "a5172e5f859825a85cba8386d170f3ec68924595f9ef48822fae238c2b22c4e4",
       "dependencies": [
-        "jsr:@std/async@^1.2.0"
+        "jsr:@std/async"
       ]
     },
-    "@roka/config@0.1.0": {
-      "integrity": "0b0d5ef4883817f6fe5616aeae2b93bd3a1d580b748bfcbb9c3bb35d1b10d7ad",
+    "@roka/cli@0.3.0": {
+      "integrity": "7308adcafb38d2c86174ca2a841e1ee4b4ed6e14a96af6235eeba3116bacaf87",
       "dependencies": [
+        "jsr:@std/fmt",
         "jsr:@std/path"
       ]
     },
@@ -179,7 +178,6 @@
         "jsr:@roka/git",
         "jsr:@std/assert@^1.0.19",
         "jsr:@std/path",
-        "npm:@octokit/openapi-types",
         "npm:@octokit/rest"
       ]
     },
@@ -195,7 +193,7 @@
         "jsr:@roka/maybe",
         "jsr:@roka/testing",
         "jsr:@sigma/deno-compile-extra",
-        "jsr:@std/async@^1.2.0",
+        "jsr:@std/async",
         "jsr:@std/collections",
         "jsr:@std/http"
       ]
@@ -211,7 +209,7 @@
       "dependencies": [
         "jsr:@roka/maybe",
         "jsr:@std/assert@^1.0.19",
-        "jsr:@std/async@^1.2.0",
+        "jsr:@std/async",
         "jsr:@std/fmt",
         "jsr:@std/path",
         "jsr:@std/streams",
@@ -290,7 +288,6 @@
       "integrity": "87bdc2700fa98249d48a17cd72413352d3d3680dcfbdb64947fd0982d6bbf681",
       "dependencies": [
         "jsr:@std/assert@^1.0.17",
-        "jsr:@std/async@^1.1.0",
         "jsr:@std/data-structures",
         "jsr:@std/fs@^1.0.22",
         "jsr:@std/internal",
@@ -446,7 +443,7 @@
       "jsr:@cliffy/table@1.0.0",
       "jsr:@david/which@~0.4.1",
       "jsr:@roka/async@0.3",
-      "jsr:@roka/config@0.1",
+      "jsr:@roka/cli@0.3",
       "jsr:@roka/forge@~0.2.1",
       "jsr:@roka/fs@0.1",
       "jsr:@roka/html@0.1",

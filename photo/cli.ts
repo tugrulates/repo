@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-console
 /**
  * Command-line interface for the `photo` library.
  *
@@ -12,6 +11,7 @@
 
 import { Command } from "@cliffy/command";
 import { pooled } from "@roka/async/pool";
+import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { find } from "@roka/fs/find";
 import { maybe } from "@roka/maybe";
