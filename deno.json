@@ -38,7 +38,7 @@
     "@cliffy/table": "jsr:@cliffy/table@1.0.0",
     "@david/which": "jsr:@david/which@^0.4.1",
     "@roka/async": "jsr:@roka/async@^0.3.0",
-    "@roka/config": "jsr:@roka/config@^0.1.0",
+    "@roka/cli": "jsr:@roka/cli@^0.3.0",
     "@roka/forge": "jsr:@roka/forge@^0.2.1",
     "@roka/fs": "jsr:@roka/fs@^0.1.0",
     "@roka/html": "jsr:@roka/html@^0.1.0",

@@ -1,4 +1,3 @@
-// deno-lint-ignore-file no-console
 /**
  * Command-line interface for the `duolingo` client.
  *
@@ -9,7 +8,8 @@ import { Command } from "@cliffy/command";
 import { Input, Secret } from "@cliffy/prompt";
 import { Table } from "@cliffy/table";
 import { pool } from "@roka/async/pool";
-import { type Config, config } from "@roka/config";
+import { type Config, config } from "@roka/cli/config";
+import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
