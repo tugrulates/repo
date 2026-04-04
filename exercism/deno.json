@@ -1,0 +1,22 @@
+{
+  "name": "@tugrulates/exercism",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./exercism.ts",
+    "./cli": "./cli.ts",
+    "./client": "./client.ts"
+  },
+  "forge": {
+    "main": "./cli.ts"
+  },
+  "permissions": {
+    "default": {
+      "read": true,
+      "write": true,
+      "env": true,
+      "net": [
+        "exercism.org"
+      ]
+    }
+  }
+}
