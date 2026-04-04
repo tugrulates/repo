@@ -2,7 +2,7 @@
 /**
  * Interact with Duolingo, the language learning platform.
  *
- * @example Get Duolingo feed through the API client.
+ * @example Duolingo feed through the API client
  * ```ts
  * import { duolingo } from "@tugrulates/duolingo";
  *
@@ -15,11 +15,11 @@
  * }
  * ```
  *
- * @example Get Duolingo feed through the command-line application.
+ * @example Duolingo feed through the command-line application
  * ```sh
  * export DUOLINGO_USERNAME=TugrulAtes
  * export DUOLINGO_TOKEN=token
- * dx --unstable-kv jsr:@tugrulates/duolingo/cli feed
+ * deno run -A --unstable-kv jsr:@tugrulates/duolingo/cli feed
  * ```
  *
  * @module duolingo
