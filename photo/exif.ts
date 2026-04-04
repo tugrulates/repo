@@ -101,7 +101,7 @@ export async function exif(src: string): Promise<Exif> {
   ) as Exif;
 }
 
-/** Write tags to a photo file. */
+/** Writes tags to a photo file. */
 export async function write(path: string, options?: WriteOptions) {
   const temp = await Deno.makeTempFile();
   await Deno.copyFile(path, temp);

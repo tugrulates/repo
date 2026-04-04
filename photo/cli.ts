@@ -20,7 +20,7 @@ import { yellow } from "@std/fmt/colors";
 import { dirname } from "@std/path";
 import { check, photo, sync } from "./photo.ts";
 
-/** Run the `photos` tool. */
+/** Runs the `photos` tool. */
 export async function cli(): Promise<number> {
   const cmd = new Command()
     .name("photos")

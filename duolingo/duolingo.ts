@@ -1,6 +1,6 @@
 // deno-lint-ignore-file camelcase
 /**
- * Interact with Duolingo, the language learning platform.
+ * Interacts with Duolingo, the language learning platform.
  *
  * @example Get Duolingo feed through the API client.
  * ```ts
@@ -33,30 +33,30 @@ import { join } from "@std/path";
 export interface Duolingo {
   /** Operations on users. */
   users: {
-    /** Return a user's profile. */
+    /** Returns a user's profile. */
     get(id: number): Promise<User>;
-    /** Return the user ID of the authenticated user. */
+    /** Returns the user ID of the authenticated user. */
     me(): Promise<User>;
-    /** Follow a user. */
+    /** Follows a user. */
     follow(user: User | number): Promise<boolean>;
-    /** Unfollow a user. */
+    /** Unfollows a user. */
     unfollow(user: User | number): Promise<boolean>;
   };
   /** Operations on user's follow lists. */
   follows: {
-    /** Return the users followed by and following the authenticated user. */
+    /** Returns the users followed by and following the authenticated user. */
     get(): Promise<Follows>;
-    /** Return the users followed by the authenticated user. */
+    /** Returns the users followed by the authenticated user. */
     following(): Promise<Friend[]>;
-    /** Return the users following the authenticated user. */
+    /** Returns the users following the authenticated user. */
     followers(): Promise<Friend[]>;
   };
   /** Operations on the user's feed. */
   feed: {
-    /** Return the feed of the authenticated user. */
+    /** Returns the feed of the authenticated user. */
     get(): Promise<FeedCard[]>;
     /**
-     * React to a feed event.
+     * Reacts to a feed event.
      *
      * If a reaction is not provided, one based on the card content will be
      * picked.
@@ -65,9 +65,9 @@ export interface Duolingo {
   };
   /** Operations on the user's league. */
   league: {
-    /** Return the league of the authenticated user. */
+    /** Returns the league of the authenticated user. */
     get(): Promise<League | undefined>;
-    /** Follow all users in the league. */
+    /** Follows all users in the league. */
     follow(league: League): Promise<void>;
   };
 }
