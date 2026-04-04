@@ -5,13 +5,14 @@
  * @example Get Duolingo feed through the API client.
  * ```ts
  * import { duolingo } from "@tugrulates/duolingo";
- * (async (username: string, token: string) => {
+ *
+ * async function _usage(username: string, token: string) {
  *   const api = duolingo({ username, token });
  *   for (const card of await api.feed.get()) {
  *     // deno-lint-ignore no-console
  *     console.log(card);
  *   }
- * });
+ * }
  * ```
  *
  * @example Get Duolingo feed through the command-line application.
