@@ -35,7 +35,7 @@ export interface Duolingo {
   users: {
     /** Returns a user's profile. */
     get(id: number): Promise<User>;
-    /** Returns the user ID of the authenticated user. */
+    /** Returns the the authenticated user. */
     me(): Promise<User>;
     /** Follows a user. */
     follow(user: User | number): Promise<boolean>;
