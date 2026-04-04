@@ -14,8 +14,8 @@ import { type Photo, photo } from "./photo.ts";
 /**
  * Creates a temporary photo.
  *
- * @param options Update photo with given tags.
- * @returns A disposable photo with variants.
+ * @param options Update photo with given tags
+ * @returns A disposable photo with variants
  */
 export async function tempPhoto(
   options?: WriteOptions,

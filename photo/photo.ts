@@ -51,8 +51,8 @@ export interface Image extends Exif {
 /**
  * Returns a photo from a photo directory or image file path.
  *
- * @param path Source photo to get information for.
- * @returns Data for the photo or file.
+ * @param path Source photo to get information for
+ * @returns Data for the photo or file
  */
 export async function photo(path: string): Promise<Photo> {
   let directory: string;
@@ -84,7 +84,7 @@ export async function photo(path: string): Promise<Photo> {
  * Photo missing required fields, and the variants having different field
  * values than the source photo are considered problems.
  *
- * @returns A list of warnings, one for each problem.
+ * @returns A list of warnings, one for each problem
  */
 export function check(photo: Photo): string[] {
   const warnings: string[] = [];
