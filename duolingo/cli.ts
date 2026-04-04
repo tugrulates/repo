@@ -28,7 +28,7 @@ export type CliOptions = {
 /**
  * Runs the `duolingo` tool.
  *
- * @param options Use given config instead of the default user config.
+ * @param options Uses given config instead of the default user config
  */
 export async function cli(options?: CliOptions): Promise<number> {
   const cfg = config<CliOptions>(options ? { path: ":memory:" } : {});
