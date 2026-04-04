@@ -1,0 +1,7 @@
+{
+  "name": "@tugrulates/test",
+  "version": "0.0.1-bug-dx-unstable.1",
+  "license": "MIT",
+  "exports": "./test.ts",
+  "unstable": ["kv"]
+}
