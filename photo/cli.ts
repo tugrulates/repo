@@ -23,12 +23,12 @@ import { check, photo, sync } from "./photo.ts";
 /** Runs the `photos` tool. */
 export async function cli(): Promise<number> {
   const cmd = new Command()
-    .name("photos")
+    .name("photo")
     .description("Manage photos.")
     .version(await version({ release: true, target: true }))
-    .example("photos", "Lists all photos under current directory.")
-    .example("photos [photo] --json", "Data of a photo with all variants.")
-    .example("photos [photo] --sync", "Copy tags to all variants.")
+    .example("photo", "Lists all photos under current directory.")
+    .example("photo [photo] --json", "Data of a photo with all variants.")
+    .example("photo [photo] --sync", "Copy tags to all variants.")
     .arguments("[photos...:file]")
     .option("--sync", "Sync tags from source file to other variants.")
     .option("--json", "Output photo information as JSON.")
