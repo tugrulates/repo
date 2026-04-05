@@ -20,7 +20,9 @@ import { yellow } from "@std/fmt/colors";
 import { dirname } from "@std/path";
 import { check, photo, sync } from "./photo.ts";
 
-/** Runs the `photo` tool. */
+const CONCURRENCY = 4;
+
+/** Runs the `photos` tool. */
 export async function cli(): Promise<number> {
   const cmd = new Command()
     .name("photo")
@@ -37,7 +39,7 @@ export async function cli(): Promise<number> {
         find([...photos], { name: "*.{jpg,jpeg}" }),
       );
       const dirs = distinct(images.map(dirname)).sort();
-      for await (const p of pooled(dirs, (dir) => photo(dir))) {
+      for await (const p of pooled(dirs, photo, { concurrency: CONCURRENCY })) {
         if (options.sync) await sync(p);
         if (options.json) console.log(JSON.stringify(p, null, 2));
         else {
