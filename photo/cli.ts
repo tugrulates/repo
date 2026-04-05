@@ -36,7 +36,7 @@ export async function cli(): Promise<number> {
     .option("--json", "Output photo information as JSON.")
     .action(async (options, ...photos) => {
       const images = await Array.fromAsync(
-        find([...photos], { name: "*.{jpg,jpeg}" }),
+        find(photos.length ? [...photos] : ["."], { name: "*.{jpg,jpeg}" }),
       );
       const dirs = distinct(images.map(dirname)).sort();
       for await (const p of pooled(dirs, photo, { concurrency: CONCURRENCY })) {
