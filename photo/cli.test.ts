@@ -43,9 +43,9 @@ async function test(t: Deno.TestContext) {
   await assertSnapshot(t, output);
 }
 
-Deno.test("photos [file]", OPTIONS, test);
-Deno.test("photos [photo]", OPTIONS, test);
-Deno.test("photos [directory]", OPTIONS, test);
-Deno.test("photos [photo1] [photo2]", OPTIONS, test);
-Deno.test("photos [photo] --json", OPTIONS, test);
-Deno.test("photos [photo] --sync", OPTIONS, test);
+Deno.test("photo [file]", OPTIONS, test);
+Deno.test("photo [photo]", OPTIONS, test);
+Deno.test("photo [directory]", OPTIONS, test);
+Deno.test("photo [photo1] [photo2]", OPTIONS, test);
+Deno.test("photo [photo] --json", OPTIONS, test);
+Deno.test("photo [photo] --sync", OPTIONS, test);
