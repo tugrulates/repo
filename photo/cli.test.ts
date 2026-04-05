@@ -11,7 +11,7 @@ import { tempPhoto } from "./testing.ts";
 const OPTIONS = { sanitizeOps: false, sanitizeResources: false };
 
 async function test(t: Deno.TestContext) {
-  await using directory = await tempDirectory();
+  await using directory = await tempDirectory({ chdir: true });
   const photo1 = await tempPhoto({ title: "Photo 1", model: "Model 1" });
   const photo2 = await tempPhoto({ title: "Photo 2", model: "" });
   assertExists(photo1.variants[0]);
@@ -43,6 +43,7 @@ async function test(t: Deno.TestContext) {
   await assertSnapshot(t, output);
 }
 
+Deno.test("photo", OPTIONS, test);
 Deno.test("photo [file]", OPTIONS, test);
 Deno.test("photo [photo]", OPTIONS, test);
 Deno.test("photo [directory]", OPTIONS, test);
