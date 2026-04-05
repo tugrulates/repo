@@ -52,8 +52,8 @@
     "@std/path": "jsr:@std/path@^1.1.4",
     "@std/testing": "jsr:@std/testing@^1.0.17",
     "exiftool-vendored": "npm:exiftool-vendored@^35.15.1",
-    "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.53.0",
-    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.53.0"
+    "exiftool-vendored.exe": "npm:exiftool-vendored.exe@^13.54.0",
+    "exiftool-vendored.pl": "npm:exiftool-vendored.pl@^13.54.0"
   },
   "unstable": [
     "kv"

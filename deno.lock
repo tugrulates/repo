@@ -27,6 +27,7 @@
     "jsr:@std/assert@^1.0.17": "1.0.19",
     "jsr:@std/assert@^1.0.18": "1.0.19",
     "jsr:@std/assert@^1.0.19": "1.0.19",
+    "jsr:@std/async@^1.1.0": "1.2.0",
     "jsr:@std/async@^1.2.0": "1.2.0",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
     "jsr:@std/cli@^1.0.28": "1.0.28",
@@ -45,9 +46,10 @@
     "jsr:@std/streams@^1.0.17": "1.0.17",
     "jsr:@std/testing@^1.0.17": "1.0.17",
     "jsr:@std/text@^1.0.17": "1.0.17",
+    "npm:@octokit/openapi-types@27": "27.0.0",
     "npm:@octokit/rest@^22.0.1": "22.0.1",
-    "npm:exiftool-vendored.exe@^13.53.0": "13.53.0",
-    "npm:exiftool-vendored.pl@^13.53.0": "13.53.0",
+    "npm:exiftool-vendored.exe@^13.54.0": "13.54.0",
+    "npm:exiftool-vendored.pl@^13.54.0": "13.54.0",
     "npm:exiftool-vendored@^35.15.1": "35.15.1"
   },
   "jsr": {
@@ -111,7 +113,7 @@
     "@roka/async@0.3.0": {
       "integrity": "a5172e5f859825a85cba8386d170f3ec68924595f9ef48822fae238c2b22c4e4",
       "dependencies": [
-        "jsr:@std/async"
+        "jsr:@std/async@^1.2.0"
       ]
     },
     "@roka/cli@0.3.0": {
@@ -178,6 +180,7 @@
         "jsr:@roka/git",
         "jsr:@std/assert@^1.0.19",
         "jsr:@std/path",
+        "npm:@octokit/openapi-types",
         "npm:@octokit/rest"
       ]
     },
@@ -193,7 +196,7 @@
         "jsr:@roka/maybe",
         "jsr:@roka/testing",
         "jsr:@sigma/deno-compile-extra",
-        "jsr:@std/async",
+        "jsr:@std/async@^1.2.0",
         "jsr:@std/collections",
         "jsr:@std/http"
       ]
@@ -209,7 +212,7 @@
       "dependencies": [
         "jsr:@roka/maybe",
         "jsr:@std/assert@^1.0.19",
-        "jsr:@std/async",
+        "jsr:@std/async@^1.2.0",
         "jsr:@std/fmt",
         "jsr:@std/path",
         "jsr:@std/streams",
@@ -288,6 +291,7 @@
       "integrity": "87bdc2700fa98249d48a17cd72413352d3d3680dcfbdb64947fd0982d6bbf681",
       "dependencies": [
         "jsr:@std/assert@^1.0.17",
+        "jsr:@std/async@^1.1.0",
         "jsr:@std/data-structures",
         "jsr:@std/fs@^1.0.22",
         "jsr:@std/internal",
@@ -400,8 +404,17 @@
       "integrity": "sha512-CX8w1iVDOdt6iitqoOmUCWLYVmfBVmd59htXGpns/+CItu8LBAT9qVHdBP+Jl0abZyCcDrZf0eaLsfXb9mZOcQ==",
       "os": ["win32"]
     },
+    "exiftool-vendored.exe@13.54.0": {
+      "integrity": "sha512-SlwI+Nklc9wJj4JB+S4yPDzrRFGSOvDPX8l2CEnhyoovWP2jzg9Md3gvejm0ah2xu4xpSNQBVkK7vOf0bG3HCA==",
+      "os": ["win32"]
+    },
     "exiftool-vendored.pl@13.53.0": {
       "integrity": "sha512-D/3yJymCPeMQPtQA9Q8ou/+vvEeQcTjrNt2jT7GS2A9tE0s0NiMNVc62HaKdwm5reQXQRbPrnp56sNxWpNCHKA==",
+      "os": ["!win32"],
+      "bin": true
+    },
+    "exiftool-vendored.pl@13.54.0": {
+      "integrity": "sha512-x0Ai1pFLg7ZWG49U+Fyn0LBg3HlOWLNTU+lm9hUI4BMIkUJ1oQ/gl+QCVAvbtrP81oHiSg6TSqtHrjyvuKuq4Q==",
       "os": ["!win32"],
       "bin": true
     },
@@ -415,8 +428,8 @@
         "luxon"
       ],
       "optionalDependencies": [
-        "exiftool-vendored.exe",
-        "exiftool-vendored.pl"
+        "exiftool-vendored.exe@13.53.0",
+        "exiftool-vendored.pl@13.53.0"
       ]
     },
     "fast-content-type-parse@3.0.0": {
@@ -456,8 +469,8 @@
       "jsr:@std/fs@^1.0.23",
       "jsr:@std/path@^1.1.4",
       "jsr:@std/testing@^1.0.17",
-      "npm:exiftool-vendored.exe@^13.53.0",
-      "npm:exiftool-vendored.pl@^13.53.0",
+      "npm:exiftool-vendored.exe@^13.54.0",
+      "npm:exiftool-vendored.pl@^13.54.0",
       "npm:exiftool-vendored@^35.15.1"
     ]
   }
