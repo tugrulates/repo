@@ -2,34 +2,34 @@ export const snapshot = {};
 
 snapshot[`photo 1`] = `
 "
-🖼  Photo 1 [post-1.jpg:title]
-🖼  Photo 2 [missing:model]
+Photo 1 [post-1.jpg:title]
+Photo 2 [missing:model]
 "
 `;
 
 snapshot[`photo [file] 1`] = `
 "
-🖼  Photo 1 [post-1.jpg:title]
+Photo 1 [post-1.jpg:title]
 "
 `;
 
 snapshot[`photo [photo] 1`] = `
 "
-🖼  Photo 1 [post-1.jpg:title]
+Photo 1 [post-1.jpg:title]
 "
 `;
 
 snapshot[`photo [directory] 1`] = `
 "
-🖼  Photo 1 [post-1.jpg:title]
-🖼  Photo 2 [missing:model]
+Photo 1 [post-1.jpg:title]
+Photo 2 [missing:model]
 "
 `;
 
 snapshot[`photo [photo1] [photo2] 1`] = `
 "
-🖼  Photo 1 [post-1.jpg:title]
-🖼  Photo 2 [missing:model]
+Photo 1 [post-1.jpg:title]
+Photo 2 [missing:model]
 "
 `;
 
@@ -355,6 +355,6 @@ snapshot[`photo [photo] --json 1`] = `
 
 snapshot[`photo [photo] --sync 1`] = `
 "
-🖼  Photo 1
+Photo 1
 "
 `;

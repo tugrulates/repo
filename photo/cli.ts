@@ -16,11 +16,12 @@ import { version } from "@roka/forge/version";
 import { find } from "@roka/fs/find";
 import { maybe } from "@roka/maybe";
 import { distinct } from "@std/collections";
-import { yellow } from "@std/fmt/colors";
+import { red, yellow } from "@std/fmt/colors";
 import { dirname } from "@std/path";
 import { check, photo, sync } from "./photo.ts";
 
 const CONCURRENCY = 4;
+const ERROR = red("✘");
 
 /** Runs the `photos` tool. */
 export async function cli(): Promise<number> {
@@ -34,6 +35,11 @@ export async function cli(): Promise<number> {
     .arguments("[photos...:file]")
     .option("--sync", "Sync tags from source file to other variants.")
     .option("--json", "Output photo information as JSON.")
+    .option("--verbose", "Print additional information.", {
+      hidden: true,
+      global: true,
+      action: () => console.verbose = true,
+    })
     .action(async (options, ...photos) => {
       const images = await Array.fromAsync(
         find(photos.length ? [...photos] : ["."], { name: "*.{jpg,jpeg}" }),
@@ -44,16 +50,16 @@ export async function cli(): Promise<number> {
         if (options.json) console.log(JSON.stringify(p, null, 2));
         else {
           const warnings = check(p);
-          const title = `🖼  ${p.title}`;
           if (warnings.length) {
-            console.log(`${title} [${yellow(warnings.join(" "))}]`);
-          } else console.log(title);
+            console.log(p.title, `[${yellow(warnings.join(" "))}]`);
+          } else console.log(p.title);
         }
       }
     });
   const { errors } = await maybe(() => cmd.parse());
   for (const error of errors ?? []) {
-    console.error(`❌ ${error}`);
+    console.error(ERROR, red(error.message));
+    console.debug(error);
   }
   return errors ? 1 : 0;
 }
