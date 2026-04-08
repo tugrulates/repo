@@ -58,32 +58,19 @@ export interface WriteOptions extends Omit<Exif, "width" | "height"> {
   source?: string;
 }
 
-// remove when https://github.com/denoland/deno/issues/28440 is fixed
-class manager {
-  static exiftool?: ExifTool = undefined;
-  static async get() {
+await using manager = {
+  exiftool: undefined as Promise<ExifTool> | undefined,
+  get(): Promise<ExifTool> {
     if (this.exiftool) return this.exiftool;
-    const exiftoolPath = await which("exiftool");
-    this.exiftool = new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} });
-    addEventListener(
-      "unload",
-      () => this.exiftool?.end(),
+    this.exiftool = which("exiftool").then((exiftoolPath) =>
+      new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} })
     );
     return this.exiftool;
-  }
-}
-// await using manager = {
-//   exiftool: undefined as ExifTool | undefined,
-//   async get() {
-//     if (this.exiftool) return this.exiftool;
-//     const exiftoolPath = await which("exiftool");
-//     this.exiftool = new ExifTool({ ...exiftoolPath ? { exiftoolPath } : {} });
-//     return this.exiftool;
-//   },
-//   async [Symbol.asyncDispose]() {
-//     return await this.exiftool?.end();
-//   },
-// };
+  },
+  async [Symbol.asyncDispose]() {
+    return (await this.exiftool)?.end();
+  },
+};
 
 /**
  * Retrieves tags from a photo file.
