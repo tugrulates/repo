@@ -81,7 +81,7 @@ export interface Friend {
   userId: number;
   /** The user's unique profile handle. */
   username: string;
-  /** The user's unique profile handle. */
+  /** The user's display name. */
   displayName: string;
   /** Whether the user can be followed. */
   canFollow: boolean;
@@ -156,14 +156,6 @@ export interface FeedCard {
   learningLanguage: string;
   /** Display type of the card notification. */
   notificationType?: "MILESTONE" | "OFFER";
-  /** The number of reactions to the card. */
-  reactionCounts: {
-    cheer?: number;
-    congrats?: number;
-    high_five?: number;
-    love?: number;
-    support?: number;
-  };
   /** The type of reaction already left on the card. */
   reactionType?: null | Reaction;
   /** The timestamp of the event. */
@@ -189,7 +181,7 @@ export interface League {
   creation_date: string;
   /** The league tier, Bronze, Silver, Gold, etc. */
   tier: keyof typeof TIERS;
-  /** List of users on the leauge ordered by XP. */
+  /** List of users on the league ordered by XP. */
   rankings: Ranking[];
 }
 
@@ -309,7 +301,7 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
           api.get<User>(
             `/2023-05-23/users/${id}?fields=id,username,name,streak,totalXp`,
           ),
-          api.get<User>(
+          api.get<Friend>(
             `/2017-06-30/friends/users/${id}/profile?pageSize=1`,
           ),
         ]);
@@ -342,7 +334,7 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         }
         const me = await duolingo.users.me();
         const result = await api.post<{ successful: boolean }>(
-          `/2017-06-30/friends/users/${me.id}/follow/${friend.userId}`,
+          `/2017-06-30/friends/users/${me.id}/unfollow/${friend.userId}`,
         );
         return result.successful ?? false;
       },
@@ -366,44 +358,30 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
       },
       following: async () => {
         const me = await duolingo.users.me();
-        return (await api.get<{ followers: { users: Friend[] } }>(
-          `/2017-06-30/friends/users/${me.id}/followers`,
-        ))?.followers?.users ?? [];
-      },
-      followers: async () => {
-        const me = await duolingo.users.me();
         return (await api.get<{ following: { users: Friend[] } }>(
           `/2017-06-30/friends/users/${me.id}/following`,
         ))?.following?.users ?? [];
+      },
+      followers: async () => {
+        const me = await duolingo.users.me();
+        return (await api.get<{ followers: { users: Friend[] } }>(
+          `/2017-06-30/friends/users/${me.id}/followers`,
+        ))?.followers?.users ?? [];
       },
     },
     feed: {
       get: async () => {
         const me = await duolingo.users.me();
         return (await api.get<{ feed: { feedCards: FeedCard[] }[] }>(
-          `/2017-06-30/friends/users/${me.id}/feed/v2?uiLanguage=en`,
+          `/2023-05-23/friends/users/${me.id}/feed/v2?uiLanguage=en`,
         ))?.feed?.flatMap((feed) => feed.feedCards) ?? [];
       },
-      react: async (card, reaction) => {
-        reaction ??= (() => {
-          if (card.reactionType) return card.reactionType;
-          if (card.cardType === "SHARE_SENTENCE_OFFER") return "like";
-          const number = card.body.match(/\d+/);
-          if (number && Number(number[0]) % 100 === 0) return "cheer";
-          if (
-            card.triggerType === "top_three" ||
-            card.triggerType === "league_promotion"
-          ) return "love";
-          if (card.triggerType === "resurrection") return "high_five";
-          if (card.triggerType === "monthly_goal") return "support";
-          if (card.defaultReaction !== null) return card.defaultReaction;
-          return "cheer";
-        })();
+      react: async (card) => {
         const me = await duolingo.users.me();
         await api.post(`/card/reaction`, {
           body: {
             groupId: card.eventId,
-            reaction: reaction.toUpperCase(),
+            reaction: "LOVE",
             trackingProperties: { screen: "kudos_feed" },
             userId: me.id,
           },

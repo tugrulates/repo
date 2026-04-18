@@ -4,29 +4,7 @@
  * @module emoji
  */
 
-import type {
-  FeedCard,
-  LanguageCode,
-  League,
-  Ranking,
-  Reaction,
-} from "./duolingo.ts";
-
-/** Returns an emoji corresponding to a reaction. */
-export function reactionEmoji(reaction: Reaction | FeedCard): string {
-  if (typeof reaction !== "string") {
-    reaction = reaction.reactionType ?? "congrats";
-  }
-  return {
-    congrats: "🎉",
-    high_five: "🙏",
-    support: "💪",
-    cheer: "💯",
-    love: "💖",
-    like: "👍",
-    haha: "😂",
-  }[reaction];
-}
+import type { LanguageCode, League, Ranking } from "./duolingo.ts";
 
 /** Returns an emoji corresponding to a league tier. */
 export function leagueEmoji(league: League): string {

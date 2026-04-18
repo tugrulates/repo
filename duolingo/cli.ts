@@ -13,12 +13,13 @@ import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
-import { red } from "@std/fmt/colors";
+import { green, red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
-import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
+import { leagueEmoji, leagueUserEmoji } from "./emoji.ts";
 
 const ERROR = red("✘");
+const KUDOS = green("♥︎");
 
 /** Options for the {@link cli} function. */
 export type CliOptions = {
@@ -95,20 +96,15 @@ function feedCommand(cfg: Config<CliOptions>) {
     .option("--engage", "Engage with the feed events.")
     .option("--follow", "Re-follow followers.")
     .option("--json", "Output the feed as JSON.")
-    .action(async ({ engage, follow, json }) => {
+    .action(async ({ engage, json }) => {
       const client = await api(cfg);
-      const followers = follow ? await client.follows.followers() : [];
       const cards = await client.feed.get();
       async function react(card: FeedCard): Promise<boolean> {
         if (card.cardType === "FOLLOW") {
-          if (follow) {
-            const user = followers.find((friend) =>
-              friend.userId === card.userId
-            );
-            if (!user?.isFollowing && !user?.canFollow) {
-              await client.users.follow(card.userId);
-              return true;
-            }
+          const user = await client.users.get(card.userId);
+          if (user && !user.isFollowing && user.canFollow) {
+            await client.users.follow(card.userId);
+            return true;
           }
         } else if (
           card.cardType === "KUDOS_OFFER" ||
@@ -125,8 +121,12 @@ function feedCommand(cfg: Config<CliOptions>) {
       await pool(
         cards,
         async (card) => {
-          if (!engage || await react(card)) {
-            if (!json) console.log(`${reactionEmoji(card)} ${summary(card)}`);
+          if (engage) await react(card);
+          if (!json) {
+            console.log(
+              card.reactionType || engage ? KUDOS : " ",
+              summary(card),
+            );
           }
         },
         { concurrency: 1 },
@@ -138,7 +138,7 @@ function followsCommand(config: Config<CliOptions>) {
   return new Command()
     .description("Prints and manages follower information on Duolingo.")
     .example("duolingo follows", "Prints follow counts.")
-    .example("duolingo follows --follows", "Follow active users who follow.")
+    .example("duolingo follows --follow", "Follow active users who follow.")
     .example(
       "duolingo follows --unfollow",
       "Unfollow inactive of non-following users.",
