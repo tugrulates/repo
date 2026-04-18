@@ -13,9 +13,12 @@ import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
+import { red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, TIERS } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji, reactionEmoji } from "./emoji.ts";
+
+const ERROR = red("✘");
 
 /** Options for the {@link cli} function. */
 export type CliOptions = {
@@ -61,6 +64,10 @@ export async function cli(options?: CliOptions): Promise<number> {
       "JWT token.",
       token ? { default: token } : {},
     )
+    .globalOption("--verbose", "Print additional information.", {
+      hidden: true,
+      action: () => console.verbose = true,
+    })
     .help({ colors: Deno.stdout.isTerminal() })
     .globalAction((options) => cfg.set(options))
     .command("feed", feedCommand(cfg))
@@ -68,7 +75,8 @@ export async function cli(options?: CliOptions): Promise<number> {
     .command("league", leagueCommand(cfg));
   const { errors } = await maybe(() => cmd.parse());
   for (const error of errors ?? []) {
-    console.error(`❌ ${error}`);
+    console.error(ERROR, red(error.message));
+    console.debug(error);
   }
   return errors ? 1 : 0;
 }
