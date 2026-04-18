@@ -4,44 +4,18 @@
  * @module emoji
  */
 
-import type {
-  FeedCard,
-  LanguageCode,
-  League,
-  LeagueUser,
-  Reaction,
-} from "./duolingo.ts";
-
-/** Returns an emoji corresponding to a reaction. */
-export function reactionEmoji(reaction: Reaction | FeedCard): string {
-  if (typeof reaction !== "string") {
-    reaction = reaction.reactionType ?? "congrats";
-  }
-  return {
-    congrats: "🎉",
-    high_five: "🙏",
-    support: "💪",
-    cheer: "💯",
-    love: "💖",
-    like: "👍",
-    haha: "😂",
-  }[reaction];
-}
+import type { LanguageCode, League, Ranking } from "./duolingo.ts";
 
 /** Returns an emoji corresponding to a league tier. */
 export function leagueEmoji(league: League): string {
   return {
-    0: "🧡",
-    1: "🤍",
-    2: "💛",
-    3: "💙",
-    4: "❤️",
-    5: "💚",
-    6: "💜",
-    7: "🩷",
-    8: "🖤",
-    9: "💎",
-    10: "🏆",
+    0: "🏆",
+    1: "🟤",
+    2: "⚪",
+    3: "🟡",
+    4: "🔷",
+    5: "♦️",
+    6: "💎",
   }[league.tier];
 }
 
@@ -97,7 +71,7 @@ export function languageEmoji(code: LanguageCode): string {
 }
 
 /** Returns an emoji corresponding to a league user. */
-export function leagueUserEmoji(user: LeagueUser): string {
+export function leagueUserEmoji(user: Ranking): string {
   if (user.reaction === "ANGRY") return "😡";
   if (user.reaction === "CAT") return "😺";
   if (user.reaction === "EYES") return "👀";
