@@ -93,23 +93,28 @@ function feedCommand(cfg: Config<CliOptions>) {
     .example("duolingo feed --engage", "Engages with the feed.")
     .example("duolingo feed --json | jq", "Query JSON over the feed.")
     .option("--engage", "Engage with the feed events.")
+    .option("--follow", "Re-follow followers.")
     .option("--json", "Output the feed as JSON.")
-    .action(async ({ engage, json }) => {
+    .action(async ({ engage, follow, json }) => {
       const client = await api(cfg);
-      const followers = await client.follows.followers();
+      const followers = follow ? await client.follows.followers() : [];
       const cards = await client.feed.get();
       async function react(card: FeedCard): Promise<boolean> {
         if (card.cardType === "FOLLOW") {
-          const user = followers.find((user) => user.userId === card.userId);
-          if (!user?.isFollowing && !user?.canFollow) {
-            await client.users.follow(card.userId);
-            return true;
+          if (follow) {
+            const user = followers.find((friend) =>
+              friend.userId === card.userId
+            );
+            if (!user?.isFollowing && !user?.canFollow) {
+              await client.users.follow(card.userId);
+              return true;
+            }
           }
         } else if (
           card.cardType === "KUDOS_OFFER" ||
           card.cardType === "SHARE_SENTENCE_OFFER"
         ) {
-          if (!card.reactionType) {
+          if (engage && !card.reactionType) {
             await client.feed.react(card);
             return true;
           }
@@ -133,8 +138,11 @@ function followsCommand(config: Config<CliOptions>) {
   return new Command()
     .description("Prints and manages follower information on Duolingo.")
     .example("duolingo follows", "Prints follow counts.")
-    .example("duolingo follows --follows", "Follow users who follow.")
-    .example("duolingo follows --unfollow", "Unfollow users who dont' follow.")
+    .example("duolingo follows --follows", "Follow active users who follow.")
+    .example(
+      "duolingo follows --unfollow",
+      "Unfollow inactive of non-following users.",
+    )
     .example("duolingo follows --follow --unfollow", "Matches both lists.")
     .example("duolingo follows --json", "Outputs JSON of follower information.")
     .example(
@@ -149,21 +157,23 @@ function followsCommand(config: Config<CliOptions>) {
       "duolingo follows --json | jq '.notFollowingBack[].username'",
       "List users who follow but are not followed back.",
     )
-    .option("--follow", "Follow users who follow.")
-    .option("--unfollow", "Unfollow users who don't follow.")
+    .option("--follow", "Follow users who follow.", { default: false })
+    .option("--unfollow", "Unfollow users who don't follow.", {
+      default: false,
+    })
     .option("--json", "Output the follower information as JSON.")
     .action(async ({ follow, unfollow, json }) => {
       const client = await api(config);
       let result = await client.follows.get();
-
       if (follow || unfollow) {
         if (follow) {
           await pool(
             result.notFollowingBack,
-            async (user) => {
-              if (user.canFollow) {
-                const ok = await client.users.follow(user);
-                if (!json && ok) console.log(`✅ Followed ${user.username}.`);
+            async (friend) => {
+              if (!friend.canFollow) return;
+              const ok = await client.users.follow(friend);
+              if (!json && ok) {
+                console.log(`✅ Followed ${friend.displayName}.`);
               }
             },
             { concurrency: 1 },
@@ -172,9 +182,11 @@ function followsCommand(config: Config<CliOptions>) {
         if (unfollow) {
           await pool(
             result.dontFollowBack,
-            async (user) => {
-              const ok = await client.users.unfollow(user);
-              if (!json && ok) console.log(`❌ Unfollowed ${user.username}.`);
+            async (friend) => {
+              const ok = await client.users.unfollow(friend);
+              if (!json && ok) {
+                console.log(`❌ Unfollowed ${friend.displayName}.`);
+              }
             },
             { concurrency: 1 },
           );
@@ -212,7 +224,9 @@ function leagueCommand(config: Config<CliOptions>) {
               league.rankings.map((user, index) => [
                 `${index + 1}.`,
                 `${user.display_name} ${leagueUserEmoji(user)}`,
-                following.find((f) => f.userId === user.user_id) ? "👤" : "",
+                following.find((friend) => friend.userId === user.user_id)
+                  ? "👤"
+                  : "",
                 `${user.score.toString()} XP`,
               ]),
             )

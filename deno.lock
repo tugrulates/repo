@@ -22,7 +22,8 @@
     "jsr:@roka/html@0.1": "0.1.0",
     "jsr:@roka/http@0.3": "0.3.0",
     "jsr:@roka/maybe@0.1": "0.1.0",
-    "jsr:@roka/testing@0.3": "0.3.0",
+    "jsr:@roka/testing@0.3": "0.3.1",
+    "jsr:@roka/testing@~0.3.1": "0.3.1",
     "jsr:@sigma/deno-compile-extra@0.13": "0.13.0",
     "jsr:@std/assert@^1.0.17": "1.0.19",
     "jsr:@std/assert@^1.0.18": "1.0.19",
@@ -194,7 +195,7 @@
       "integrity": "46a7c410b2cbdedb20568bc83d0d9c4f5e2d2a784a4417ae9a2485170abdea53",
       "dependencies": [
         "jsr:@roka/maybe",
-        "jsr:@roka/testing",
+        "jsr:@roka/testing@0.3",
         "jsr:@sigma/deno-compile-extra",
         "jsr:@std/async@^1.2.0",
         "jsr:@std/collections",
@@ -207,8 +208,8 @@
         "jsr:@std/assert@^1.0.19"
       ]
     },
-    "@roka/testing@0.3.0": {
-      "integrity": "b2e6f69fca16655697439282976616e6cf2beba954358f163c069909734683b4",
+    "@roka/testing@0.3.1": {
+      "integrity": "c23327078f00b1d59e228162a24268435d180f743026f693e931fbf30b03971e",
       "dependencies": [
         "jsr:@roka/maybe",
         "jsr:@std/assert@^1.0.19",
@@ -462,7 +463,7 @@
       "jsr:@roka/html@0.1",
       "jsr:@roka/http@0.3",
       "jsr:@roka/maybe@0.1",
-      "jsr:@roka/testing@0.3",
+      "jsr:@roka/testing@~0.3.1",
       "jsr:@std/assert@^1.0.19",
       "jsr:@std/collections@^1.1.6",
       "jsr:@std/fmt@^1.0.9",

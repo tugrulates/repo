@@ -1,130 +1,113 @@
 export const snapshot = {};
 
+snapshot[`duolingo feed --verbose 1`] = `
+"
+🎉 YOONA did more than 10 lessons in a day!
+👍 Ella shared a sentence
+💪 Lea collected the april badge!
+👍 Rieke_24 shared a sentence
+💪 Karolina collected the april badge!
+🎉 ecgEva completed a 14 day streak!
+💪 susan collected the april badge!
+🎉 rita did more than 10 lessons in a day!
+💪 Rieke_24 collected the april badge!
+💪 ✍️Viking L Belgium collected the april badge!
+💪 rita collected the april badge!
+🎉 Quỳnh Anh did more than 10 lessons in a day!
+💖 Deborah finished top 3 and was promoted to the amethyst league!
+👍 Ника shared a sentence
+👍 Ника shared a sentence
+🎉 Ferdinand Greger did more than 10 lessons in a day!
+💖 Quỳnh Anh finished top 3 and was promoted to the ruby league!
+🎉 Victor Hugo did more than 10 lessons in a day!
+💪 Lynda collected the april badge!
+💪 Naysú collected the april badge!
+🎉 Naysú did more than 10 lessons in a day!
+💪 Kiku collected the april badge!
+💯 Mary Borisova completed a 900 day streak!
+💪 Roberto collected the april badge!
+💪 ❤️ ❤️ Simba ❤️ ❤️ collected the april badge!
+🎉 Bar Pab completed a 365 day streak!
+💯 Muhammet Ali Iskırık earned a total of 12500 xp!
+🎉 Wagner Souto did more than 10 lessons in a day!
+💪 Wagner Souto collected the april badge!
+💪 Weronika collected the april badge!
+💪 Mélanie collected the april badge!
+💯 Fatma Bensoy completed a 200 day streak!
+💪 Timo collected the april badge!
+💪 angeles soto lopez collected the april badge!
+👍 Rieke_24 shared a sentence
+🎉 Teddísek completed a 50 day streak!
+🎉 Gunita did more than 10 lessons in a day!
+💪 Анна collected the april badge!
+🙏 Lisa102017 came back to learn after a long time!
+💪 Cookie collected the april badge!
+👍 Vanessa shared a sentence
+🎉 Cookie completed a 7 day streak!
+💪 Eli collected the april badge!
+💪 Elisa collected the april badge!
+🙏 Mona came back to learn spanish after 1 month!
+👍 Rieke_24 shared a sentence
+💪 Jenny Lee collected the april badge!
+🎉 Машенька did more than 10 lessons in a day!
+"
+`;
+
 snapshot[`duolingo feed 1`] = `
 "
-💖 Blake finished top 3 on the leaderboard and was promoted to the emerald league!
-💖 Ana finished top 3 on the leaderboard and was promoted to the pearl league!
-🎉 Tuğrul finished top 3 on the leaderboard and was promoted to the obsidian league!
-🙏 Regulita came back to learn spanish after 1 month!
-💖 Queenie finished top 3 on the leaderboard and was promoted to the diamond league!
-💪 sosoxchanel@ collected the march badge!
-💖 Debbie finished top 3 in the diamond league 16 times!
-💖 Atayvia Roberts finished #1 in the diamond league 4 times!
-💖 Denver finished top 3 in the diamond league 45 times!
-💖 Josa Fav finished top 3 in the diamond league 39 times!
-💖 Lorena finished top 3 on the leaderboard and was promoted to the emerald league!
-🎉 Arlette did more than 10 lessons in a day!
-💖 Naysú finished #1 in the diamond league 6 times!
-💖 GULCAN finished #1 in the diamond league 66 times!
-💖 Victor Hugo finished #1 in the diamond league 7 times!
-🎉 Bonnie Alexander did more than 10 lessons in a day!
-💯 おさるのジョージ completed a 3400 day streak!
-💖 Svitlana Nabivach finished top 3 in the diamond league 27 times!
-💖 Paul BOHOLE was promoted to the obsidian league!
-💖 AŽ finished top 3 on the leaderboard and was promoted to the pearl league!
-💖 Abdullah Shosha finished top 3 on the leaderboard and was promoted to the gold league!
-💖 Crodragon finished top 3 on the leaderboard and was promoted to the obsidian league!
-💖 Geral finished top 3 on the leaderboard and was promoted to the diamond league!
-💖 Yeilin Peña finished top 3 on the leaderboard and was promoted to the obsidian league!
-💖 Karine finished top 3 in the diamond league!
-💯 mir learned a total of 2000 words!
-💖 Susi finished top 3 in the diamond league 52 times!
-💖 Petinol finished #1 in the diamond league!
-💪 Santa collected the march badge!
-💪 Sacha collected the march badge!
-💪 Josa Fav collected the march badge!
-🎉 Beyza did more than 10 lessons in a day!
-💯 Валаа Эльхадж completed a 700 day streak!
-💖 Santa finished top 3 on the leaderboard and was promoted to the diamond league!
-💖 Jasper finished top 3 on the leaderboard and was promoted to the diamond league!
-🎉 Atiga did more than 10 lessons in a day!
-💪 L a u r e collected the march badge!
-💖 Юлия finished #1 in the diamond league 29 times!
-💖 Mary finished #1 in the diamond league 2 times!
-💪 Magno Henrique collected the march badge!
-💪 Anémone collected the march badge!
-💖 frankrae finished #1 in the diamond league 3 times!
-💖 Анна finished #1 in the diamond league 18 times!
-🎉 Sony did more than 10 lessons in a day!
-🎉 prinsca mash did more than 10 lessons in a day!
-💪 Hans Svendsen collected the march badge!
-🎉 ELISEI_RO 7 did more than 10 lessons in a day!
-🎉 Yeilin Peña did more than 10 lessons in a day!
-🎉 mir completed 5 friends quests in a row!
+🎉 YOONA did more than 10 lessons in a day!
+👍 Ella shared a sentence
+💪 Lea collected the april badge!
+👍 Rieke_24 shared a sentence
+💪 Karolina collected the april badge!
+🎉 ecgEva completed a 14 day streak!
+💪 susan collected the april badge!
+🎉 rita did more than 10 lessons in a day!
+💪 Rieke_24 collected the april badge!
+💪 ✍️Viking L Belgium collected the april badge!
+💪 rita collected the april badge!
+🎉 Quỳnh Anh did more than 10 lessons in a day!
+💖 Deborah finished top 3 and was promoted to the amethyst league!
+👍 Ника shared a sentence
+👍 Ника shared a sentence
+🎉 Ferdinand Greger did more than 10 lessons in a day!
+💖 Quỳnh Anh finished top 3 and was promoted to the ruby league!
+🎉 Victor Hugo did more than 10 lessons in a day!
+💪 Lynda collected the april badge!
+💪 Naysú collected the april badge!
+🎉 Naysú did more than 10 lessons in a day!
+💪 Kiku collected the april badge!
+💯 Mary Borisova completed a 900 day streak!
+💪 Roberto collected the april badge!
+💪 ❤️ ❤️ Simba ❤️ ❤️ collected the april badge!
+🎉 Bar Pab completed a 365 day streak!
+💯 Muhammet Ali Iskırık earned a total of 12500 xp!
+🎉 Wagner Souto did more than 10 lessons in a day!
+💪 Wagner Souto collected the april badge!
+💪 Weronika collected the april badge!
+💪 Mélanie collected the april badge!
+💯 Fatma Bensoy completed a 200 day streak!
+💪 Timo collected the april badge!
+💪 angeles soto lopez collected the april badge!
+👍 Rieke_24 shared a sentence
+🎉 Teddísek completed a 50 day streak!
+🎉 Gunita did more than 10 lessons in a day!
+💪 Анна collected the april badge!
+🙏 Lisa102017 came back to learn after a long time!
+💪 Cookie collected the april badge!
+👍 Vanessa shared a sentence
+🎉 Cookie completed a 7 day streak!
+💪 Eli collected the april badge!
+💪 Elisa collected the april badge!
+🙏 Mona came back to learn spanish after 1 month!
+👍 Rieke_24 shared a sentence
+💪 Jenny Lee collected the april badge!
+🎉 Машенька did more than 10 lessons in a day!
 "
 `;
 
 snapshot[`duolingo feed --engage 1`] = `
 "
 
-"
-`;
-
-snapshot[`duolingo follows 1`] = `
-"
-👤 Following 400 people.
-👤 Followed by 395 people.
-"
-`;
-
-snapshot[`duolingo follows --follow 1`] = `
-"
-👤 Following 400 people.
-👤 Followed by 395 people.
-"
-`;
-
-snapshot[`duolingo follows --unfollow 1`] = `
-"
-👤 Following 400 people.
-👤 Followed by 395 people.
-"
-`;
-
-snapshot[`duolingo league 1`] = `
-"
-🖤  Grandmaster League        
- 1. ClaudiaB            919 XP
- 2. Res                 824 XP
- 3. misqsqs 🇫🇷          816 XP
- 4. PikaPika1312 😺     519 XP
- 5. Diane Rawlinson     344 XP
- 6. Bernadette          318 XP
- 7. Karin Ytsma         165 XP
- 8. Vesela Ognyanova    157 XP
- 9. Nadzia 🍿           150 XP
-10. Voldie Nsona 🍿     117 XP
-11. Klaus                85 XP
-12. Catherine            70 XP
-13. Anaël                59 XP
-14. Luisa Scholz         30 XP
-15. Mela Schwalbe 🇯🇵     26 XP
-16. Tuğrul 👀            20 XP
-17. jo kibble            10 XP
-18. Lucie                10 XP
-"
-`;
-
-snapshot[`duolingo league --follow 1`] = `
-"
-🖤  Grandmaster League        
- 1. ClaudiaB            919 XP
- 2. Res                 824 XP
- 3. misqsqs 🇫🇷          816 XP
- 4. PikaPika1312 😺     519 XP
- 5. Diane Rawlinson     344 XP
- 6. Bernadette          318 XP
- 7. Karin Ytsma         165 XP
- 8. Vesela Ognyanova    157 XP
- 9. Nadzia 🍿           150 XP
-10. Voldie Nsona 🍿     117 XP
-11. Klaus                85 XP
-12. Catherine            70 XP
-13. Anaël                59 XP
-14. Luisa Scholz         30 XP
-15. Mela Schwalbe 🇯🇵     26 XP
-16. Tuğrul 👀            20 XP
-17. jo kibble            10 XP
-18. Lucie                10 XP
 "
 `;

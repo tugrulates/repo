@@ -38,9 +38,9 @@ export interface Duolingo {
     /** Returns the the authenticated user. */
     me(): Promise<User>;
     /** Follows a user. */
-    follow(user: User | number): Promise<boolean>;
+    follow(user: Friend | number): Promise<boolean>;
     /** Unfollows a user. */
-    unfollow(user: User | number): Promise<boolean>;
+    unfollow(user: Friend | number): Promise<boolean>;
   };
   /** Operations on user's follow lists. */
   follows: {
@@ -76,35 +76,33 @@ export interface Duolingo {
 export type LanguageCode = keyof typeof LANGUAGES;
 
 /** A user other than the current user on Duolingo. */
-export interface User {
+export interface Friend {
   /** The user's unique numeric ID. */
   userId: number;
-  /** Whether the user can be followed. */
-  canFollow?: boolean;
-  /** Whether the user is followed by the current user. */
-  isFollowedBy?: boolean;
-  /** Whether the current user is following the user. */
-  isFollowing?: boolean;
-  /** Whether the user is verified. */
-  isVerified?: boolean;
-}
-
-/** A follower or followed user. */
-export interface Friend extends User {
-  /** The user's display name. */
-  displayName: string;
-  /** Whether the user has a subscription to Duolingo Plus. */
-  hasSubscription: boolean;
-  /** Whether the user is recently active. */
-  isCurrentlyActive: boolean;
-  /** The user's profile picture URL. */
-  picture: string;
-  /** The user's Duolingo subscription type. */
-  subscriptionItemType: string;
-  /** The user's total experience points. */
-  totalXp: number;
   /** The user's unique profile handle. */
   username: string;
+  /** The user's unique profile handle. */
+  displayName: string;
+  /** Whether the user can be followed. */
+  canFollow: boolean;
+  /** Whether the user is followed by the current user. */
+  isFollowedBy: boolean;
+  /** Whether the current user is following the user. */
+  isFollowing: boolean;
+  /** Whether the user is verified. */
+  isVerified: boolean;
+}
+
+/** A user other than the current user on Duolingo. */
+export interface User extends Friend {
+  /** The user's unique numeric ID. */
+  id: number;
+  /** The user's display name. */
+  name: string;
+  /** The user's Duolingo streak. */
+  streak: number;
+  /** Total experience points the user has earned. */
+  totalXp: number;
 }
 
 /** A user's follow relationships. */
@@ -192,11 +190,11 @@ export interface League {
   /** The league tier, Bronze, Silver, Gold, etc. */
   tier: keyof typeof TIERS;
   /** List of users on the leauge ordered by XP. */
-  rankings: LeagueUser[];
+  rankings: Ranking[];
 }
 
 /** A user in a Duolingo league. */
-export interface LeagueUser {
+export interface Ranking {
   /** The user's profile picture URL. */
   avatar_url: string;
   /** The user's display name. */
@@ -236,14 +234,13 @@ export interface DuolingoOptions {
 
 /** A Duolingo league tier. */
 export const TIERS = {
+  0: "Diamond Tournament",
   1: "Bronze",
   2: "Silver",
   3: "Gold",
   4: "Sapphire",
   5: "Ruby",
   6: "Diamond",
-  7: "Master",
-  8: "Grandmaster",
 } as const;
 
 /**
@@ -308,37 +305,44 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
   const duolingo: Duolingo = {
     users: {
       get: async (id) => {
-        const user = await api.get<Omit<User, "userId">>(
-          `/2017-06-30/friends/users/${id}/profile?pageSize=0`,
-        );
-        if (!user) throw new Error("User not found");
-        return { userId: id, ...user };
+        const [user, friend] = await Promise.all([
+          api.get<User>(
+            `/2023-05-23/users/${id}?fields=id,username,name,streak,totalXp`,
+          ),
+          api.get<User>(
+            `/2017-06-30/friends/users/${id}/profile?pageSize=1`,
+          ),
+        ]);
+        if (!user || !friend) throw new Error("User not found");
+        return { ...user, ...friend } as User;
       },
       me: async () => {
         if (me) return me;
         if (!options?.username) throw new Error("Username is required");
         const { users } = await api.get<{ users: { id: number }[] }>(
-          `/2017-06-30/users?fields=users%7Bid%7D&username=${options.username}`,
+          `/2023-05-23/users?fields=users%7Bid%7D&username=${options.username}`,
         );
         if (!users || !users[0]) throw new Error("User not found");
         me = await duolingo.users.get(users[0].id);
         return me;
       },
-      follow: async (user) => {
-        if (typeof user === "number") user = await duolingo.users.get(user);
+      follow: async (friend) => {
+        if (typeof friend === "number") {
+          friend = await duolingo.users.get(friend);
+        }
         const me = await duolingo.users.me();
         const result = await api.post<{ successful: boolean }>(
-          `/2017-06-30/friends/users/${me.userId}/follow/${user.userId}`,
-          {},
+          `/2017-06-30/friends/users/${me.id}/follow/${friend.userId}`,
         );
         return result.successful ?? false;
       },
-      unfollow: async (user) => {
-        if (typeof user === "number") user = await duolingo.users.get(user);
+      unfollow: async (friend) => {
+        if (typeof friend === "number") {
+          friend = await duolingo.users.get(friend);
+        }
         const me = await duolingo.users.me();
         const result = await api.post<{ successful: boolean }>(
-          `/2017-06-30/friends/users/${me.userId}/follow/${user.userId}`,
-          {},
+          `/2017-06-30/friends/users/${me.id}/follow/${friend.userId}`,
         );
         return result.successful ?? false;
       },
@@ -352,24 +356,24 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         return {
           following,
           followers,
-          dontFollowBack: following.filter(({ userId: id }) =>
-            !followers.some((user) => user.userId === id)
+          dontFollowBack: following.filter(({ userId }) =>
+            !followers.some((friend) => friend.userId === userId)
           ),
-          notFollowingBack: followers.filter(({ userId: id }) =>
-            !following.some((user) => user.userId === id)
+          notFollowingBack: followers.filter(({ userId }) =>
+            !following.some((friend) => friend.userId === userId)
           ),
         };
       },
       following: async () => {
         const me = await duolingo.users.me();
         return (await api.get<{ followers: { users: Friend[] } }>(
-          `/2017-06-30/friends/users/${me.userId}/followers`,
+          `/2017-06-30/friends/users/${me.id}/followers`,
         ))?.followers?.users ?? [];
       },
       followers: async () => {
         const me = await duolingo.users.me();
         return (await api.get<{ following: { users: Friend[] } }>(
-          `/2017-06-30/friends/users/${me.userId}/following`,
+          `/2017-06-30/friends/users/${me.id}/following`,
         ))?.following?.users ?? [];
       },
     },
@@ -377,7 +381,7 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
       get: async () => {
         const me = await duolingo.users.me();
         return (await api.get<{ feed: { feedCards: FeedCard[] }[] }>(
-          `/2017-06-30/friends/users/${me.userId}/feed/v2?uiLanguage=en`,
+          `/2017-06-30/friends/users/${me.id}/feed/v2?uiLanguage=en`,
         ))?.feed?.flatMap((feed) => feed.feedCards) ?? [];
       },
       react: async (card, reaction) => {
@@ -401,7 +405,7 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
             groupId: card.eventId,
             reaction: reaction.toUpperCase(),
             trackingProperties: { screen: "kudos_feed" },
-            userId: me.userId,
+            userId: me.id,
           },
         });
       },
@@ -409,13 +413,13 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
     league: {
       get: async () => {
         const me = await duolingo.users.me();
-        const response = await api.get<{ active: { cohort: League } }>(
+        const { active } = await api.get<{ active: { cohort: League } }>(
           join(
             "/leaderboards/7d9f5dd1-8423-491a-91f2-2532052038ce/users",
-            `${me.userId}?client_unlocked=true&get_reactions=true`,
+            `${me.id}?client_unlocked=true&get_reactions=true`,
           ),
         );
-        return response.active?.cohort;
+        return active?.cohort;
       },
       follow: async (league) => {
         const users = await Promise.all(
