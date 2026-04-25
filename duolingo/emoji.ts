@@ -4,23 +4,29 @@
  * @module emoji
  */
 
-import type { LanguageCode, League, Ranking } from "./duolingo.ts";
+import type { League, Ranking } from "./duolingo.ts";
 
 /** Returns an emoji corresponding to a league tier. */
 export function leagueEmoji(league: League): string {
   return {
-    0: "🏆",
-    1: "🟤",
-    2: "⚪",
-    3: "🟡",
-    4: "🔷",
-    5: "♦️",
-    6: "💎",
+    0: "🤎",
+    1: "🩶",
+    2: "💛",
+    3: "💙",
+    4: "❤️",
+    5: "💚",
+    6: "💜",
+    7: "🩷",
+    8: "🖤",
+    9: "💎",
+    10: "🏆",
+    11: "🏆",
+    12: "🏆",
   }[league.tier];
 }
 
 /** Returns an emoji corresponding to a language code. */
-export function languageEmoji(code: LanguageCode): string {
+export function languageEmoji(code: string): string {
   return {
     ar: "🇸🇦",
     ca: "🇪🇸",
@@ -50,8 +56,6 @@ export function languageEmoji(code: LanguageCode): string {
     kl: "🖖",
     ko: "🇰🇷",
     la: "🏛️",
-    math: "🔢",
-    music: "🎵",
     nb: "🇳🇴",
     nv: "🏜️",
     pl: "🇵🇱",
@@ -67,7 +71,10 @@ export function languageEmoji(code: LanguageCode): string {
     zc: "🇭🇰",
     zs: "🇨🇳",
     zu: "🇿🇦",
-  }[code];
+    chess: "♟️",
+    math: "🔢",
+    music: "🎵",
+  }[code] ?? "";
 }
 
 /** Returns an emoji corresponding to a league user. */
@@ -78,9 +85,12 @@ export function leagueUserEmoji(user: Ranking): string {
   if (user.reaction === "FLEX") return "💪";
   if (user.reaction === "POOP") return "💩";
   if (user.reaction === "POPCORN") return "🍿";
+  if (user.reaction === "POPPER") return "🎉";
   if (user.reaction === "SUNGLASSES") return "😎";
+  if (user.reaction.startsWith("TROPHY")) return "🏆";
+  if (user.reaction.startsWith("YEAR_IN_REVIEW")) return "💫";
   if (user.reaction.startsWith("FLAG")) {
-    return languageEmoji(user.reaction.split(",")[1] as LanguageCode);
+    return languageEmoji(user.reaction.split(",")[1] ?? "");
   }
   return "";
 }

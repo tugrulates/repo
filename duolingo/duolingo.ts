@@ -25,7 +25,6 @@
  * @module duolingo
  */
 
-import { pool } from "@roka/async/pool";
 import { client } from "@roka/http/json";
 import { join } from "@std/path";
 
@@ -38,9 +37,9 @@ export interface Duolingo {
     /** Returns the the authenticated user. */
     me(): Promise<User>;
     /** Follows a user. */
-    follow(user: Friend | number): Promise<boolean>;
+    follow(id: number): Promise<boolean>;
     /** Unfollows a user. */
-    unfollow(user: Friend | number): Promise<boolean>;
+    unfollow(id: number): Promise<boolean>;
   };
   /** Operations on user's follow lists. */
   follows: {
@@ -67,22 +66,11 @@ export interface Duolingo {
   league: {
     /** Returns the league of the authenticated user. */
     get(): Promise<League | undefined>;
-    /** Follows all users in the league. */
-    follow(league: League): Promise<void>;
   };
 }
 
-/** Code for a language track on Duolingo. */
-export type LanguageCode = keyof typeof LANGUAGES;
-
-/** A user other than the current user on Duolingo. */
-export interface Friend {
-  /** The user's unique numeric ID. */
-  userId: number;
-  /** The user's unique profile handle. */
-  username: string;
-  /** The user's display name. */
-  displayName: string;
+/** Fields related to following and followers of a user on Duolingo. */
+export interface Followable {
   /** Whether the user can be followed. */
   canFollow: boolean;
   /** Whether the user is followed by the current user. */
@@ -94,9 +82,21 @@ export interface Friend {
 }
 
 /** A user other than the current user on Duolingo. */
-export interface User extends Friend {
+export interface Friend extends Followable {
+  /** The user's unique numeric ID. */
+  userId: number;
+  /** The user's unique profile handle. */
+  username: string;
+  /** The user's display name. */
+  displayName: string;
+}
+
+/** A user other than the current user on Duolingo. */
+export interface User extends Followable {
   /** The user's unique numeric ID. */
   id: number;
+  /** The user's unique profile handle. */
+  username: string;
   /** The user's display name. */
   name: string;
   /** The user's Duolingo streak. */
@@ -137,6 +137,7 @@ export interface FeedCard {
   cardType:
     | "FOLLOW"
     | "FOLLOW_BACK"
+    | "GIFT_SENT"
     | "KUDOS_MILESTONE"
     | "KUDOS_OFFER"
     | "SHARE_SENTENCE_OFFER";
@@ -148,12 +149,10 @@ export interface FeedCard {
   eventId: string;
   /** The title for the card. */
   header?: string;
-  /** Whether the card allows interaction. */
-  isInteractionEnabled: boolean;
   /** Whether the user is verified. */
   isVerified: boolean;
   /** The active language of the user of the card. */
-  learningLanguage: string;
+  learningLanguageAbbrev: string;
   /** Display type of the card notification. */
   notificationType?: "MILESTONE" | "OFFER";
   /** The type of reaction already left on the card. */
@@ -161,16 +160,7 @@ export interface FeedCard {
   /** The timestamp of the event. */
   timestamp: number;
   /** The reason for the event. */
-  triggerType?:
-    | "friends_quest_complete"
-    | "friends_quest_streak"
-    | "league_promotion"
-    | "monthly_goal"
-    | "resurrection"
-    | "sage"
-    | "streak_milestone"
-    | "top_three"
-    | "x_lesson";
+  triggerType: string;
   /** The user's unique numeric ID. */
   userId: number;
 }
@@ -180,7 +170,7 @@ export interface League {
   /** Date when the league started. */
   creation_date: string;
   /** The league tier, Bronze, Silver, Gold, etc. */
-  tier: keyof typeof TIERS;
+  tier: keyof typeof LEAGUES;
   /** List of users on the league ordered by XP. */
   rankings: Ranking[];
 }
@@ -196,18 +186,7 @@ export interface Ranking {
   /** Whether the use is recently active. */
   has_recent_activity_15: boolean;
   /** The user's reaction symbol. */
-  reaction:
-    | "NONE"
-    | "ANGRY"
-    | "CAT"
-    | "EYES"
-    | `FLAG,${LanguageCode}`
-    | "FLEX"
-    | "POOP"
-    | "POPCORN"
-    | "SUNGLASSES"
-    | "YEAR_IN_REVIEW,2023_top1"
-    | "YIR_2022";
+  reaction: string;
   /** The user's total XP. */
   score: number;
   /** Whether the user has gained XP today. */
@@ -222,77 +201,33 @@ export interface DuolingoOptions {
   username: string;
   /** The authentication token for the Duolingo user. */
   token: string;
+  /** Caching strategy for API requests. */
+  cache?: RequestCache;
 }
 
 /** A Duolingo league tier. */
-export const TIERS = {
-  0: "Diamond Tournament",
-  1: "Bronze",
-  2: "Silver",
-  3: "Gold",
-  4: "Sapphire",
-  5: "Ruby",
-  6: "Diamond",
-} as const;
-
-/**
- * Language codes on Duolingo, with their names, and flags.
- *
- * This only lists target languages, and not source languages.
- *
- * @see {@link https://www.duolingo.com/courses/all Duolingo Language Courses}
- */
-export const LANGUAGES = {
-  ar: "Arabic",
-  ca: "Catalan",
-  cs: "Czech",
-  cy: "Welsh",
-  da: "Danish",
-  de: "German",
-  dn: "Dutch",
-  el: "Greek",
-  en: "English",
-  eo: "Esperanto",
-  es: "Spanish",
-  fi: "Finnish",
-  fr: "French",
-  ga: "Irish",
-  gd: "Scottish Gaelic",
-  gn: "Guarani",
-  he: "Hebrew",
-  hi: "Hindi",
-  ht: "Haitian Creole",
-  hu: "Hungarian",
-  hv: "High Valyrian",
-  hw: "Hawaiian",
-  id: "Indonesian",
-  it: "Italian",
-  ja: "Japanese",
-  kl: "Klingon",
-  ko: "Korean",
-  la: "Latin",
-  math: "Math",
-  music: "Music",
-  nb: "Norwegian (Bokmål)",
-  nv: "Navajo",
-  pl: "Polish",
-  pt: "Portuguese",
-  ro: "Romanian",
-  ru: "Russian",
-  sv: "Swedish",
-  sw: "Swahili",
-  tr: "Turkish",
-  uk: "Ukrainian",
-  vi: "Vietnamese",
-  yi: "Yiddish",
-  zc: "Chinese (Cantonese)",
-  zs: "Chinese",
-  zu: "Zulu",
+export const LEAGUES = {
+  0: "Bronze League",
+  1: "Silver League",
+  2: "Gold League",
+  3: "Sapphire League",
+  4: "Ruby League",
+  5: "Emerald League",
+  6: "Amethyst League",
+  7: "Pearl League",
+  8: "Obsidian League",
+  9: "Diamond League",
+  10: "Quarterfinals",
+  11: "Semifinals",
+  12: "Finals",
 } as const;
 
 /** Creates a Duolingo API client. */
 export function duolingo(options?: DuolingoOptions): Duolingo {
-  const api = client("https://www.duolingo.com", options);
+  const api = client("https://ios-api-cf.duolingo.com", {
+    agent: "DuolingoMobile/7.119.0 (iPhone; iOS 26.3.1; Scale/3.00)",
+    ...options,
+  });
   let me: User;
   const duolingo: Duolingo = {
     users: {
@@ -302,11 +237,11 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
             `/2023-05-23/users/${id}?fields=id,username,name,streak,totalXp`,
           ),
           api.get<Friend>(
-            `/2017-06-30/friends/users/${id}/profile?pageSize=1`,
+            `/2023-05-23/friends/users/${id}/profile?pageSize=1`,
           ),
         ]);
         if (!user || !friend) throw new Error("User not found");
-        return { ...user, ...friend } as User;
+        return { ...user, ...friend } as User & Friend;
       },
       me: async () => {
         if (me) return me;
@@ -318,23 +253,17 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
         me = await duolingo.users.get(users[0].id);
         return me;
       },
-      follow: async (friend) => {
-        if (typeof friend === "number") {
-          friend = await duolingo.users.get(friend);
-        }
+      follow: async (id) => {
         const me = await duolingo.users.me();
         const result = await api.post<{ successful: boolean }>(
-          `/2017-06-30/friends/users/${me.id}/follow/${friend.userId}`,
+          `/2023-05-23/friends/users/${me.id}/follow/${id}`,
         );
         return result.successful ?? false;
       },
-      unfollow: async (friend) => {
-        if (typeof friend === "number") {
-          friend = await duolingo.users.get(friend);
-        }
+      unfollow: async (id) => {
         const me = await duolingo.users.me();
-        const result = await api.post<{ successful: boolean }>(
-          `/2017-06-30/friends/users/${me.id}/unfollow/${friend.userId}`,
+        const result = await api.delete<{ successful: boolean }>(
+          `/2023-05-23/friends/users/${me.id}/follow/${id}`,
         );
         return result.successful ?? false;
       },
@@ -358,15 +287,37 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
       },
       following: async () => {
         const me = await duolingo.users.me();
-        return (await api.get<{ following: { users: Friend[] } }>(
-          `/2017-06-30/friends/users/${me.id}/following`,
-        ))?.following?.users ?? [];
+        let cursor = null;
+        const result: Friend[] = [];
+        do {
+          type Following = { cursor: string | null; users: Friend[] };
+          // deno-lint-ignore no-await-in-loop
+          const following: Following | undefined = (await api.get<
+            { following: Following }
+          >(`/2023-05-23/friends/users/${me.id}/following${
+            cursor ? `?pageAfter=${cursor}` : ""
+          }`))?.following;
+          cursor = following?.cursor;
+          result.push(...following?.users ?? []);
+        } while (cursor);
+        return result;
       },
       followers: async () => {
         const me = await duolingo.users.me();
-        return (await api.get<{ followers: { users: Friend[] } }>(
-          `/2017-06-30/friends/users/${me.id}/followers`,
-        ))?.followers?.users ?? [];
+        let cursor = null;
+        const result: Friend[] = [];
+        do {
+          type Followers = { cursor: string | null; users: Friend[] };
+          // deno-lint-ignore no-await-in-loop
+          const followers: Followers | undefined = (await api.get<
+            { followers: Followers }
+          >(`/2023-05-23/friends/users/${me.id}/followers${
+            cursor ? `?pageAfter=${cursor}` : ""
+          }`))?.followers;
+          cursor = followers?.cursor;
+          result.push(...followers?.users ?? []);
+        } while (cursor);
+        return result;
       },
     },
     feed: {
@@ -391,23 +342,18 @@ export function duolingo(options?: DuolingoOptions): Duolingo {
     league: {
       get: async () => {
         const me = await duolingo.users.me();
-        const { active } = await api.get<{ active: { cohort: League } }>(
+        const { active } = await api.get<{
+          active: { cohort: League; contest: { ruleset: { tiered: boolean } } };
+        }>(
           join(
             "/leaderboards/7d9f5dd1-8423-491a-91f2-2532052038ce/users",
             `${me.id}?client_unlocked=true&get_reactions=true`,
           ),
         );
+        if (active?.contest?.ruleset?.tiered && active?.cohort?.tier) {
+          active.cohort.tier += 10;
+        }
         return active?.cohort;
-      },
-      follow: async (league) => {
-        const users = await Promise.all(
-          league.rankings.map((user) => duolingo.users.get(user.user_id)),
-        );
-        await pool(
-          users.filter((user) => user.canFollow && !user.isFollowing),
-          async (user) => await duolingo.users.follow(user),
-          { concurrency: 1 },
-        );
       },
     },
   };

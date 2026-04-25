@@ -1,160 +1,306 @@
 export const snapshot = {};
 
-snapshot[`duolingo feed --verbose 1`] = `
-"
-♥︎ Sandy collected the april badge!
-♥︎ YOONA did more than 10 lessons in a day!
-♥︎ Ella shared a sentence
-♥︎ Lea collected the april badge!
-♥︎ Rieke_24 shared a sentence
-♥︎ Karolina collected the april badge!
-♥︎ ecgEva completed a 14 day streak!
-♥︎ susan collected the april badge!
-♥︎ rita did more than 10 lessons in a day!
-  Rieke_24 collected the april badge!
-♥︎ ✍️Viking L Belgium collected the april badge!
-♥︎ rita collected the april badge!
-  Quỳnh Anh did more than 10 lessons in a day!
-♥︎ Deborah finished top 3 and was promoted to the amethyst league!
-♥︎ Ника shared a sentence
-♥︎ Ника shared a sentence
-♥︎ Ferdinand Greger did more than 10 lessons in a day!
-  Quỳnh Anh finished top 3 and was promoted to the ruby league!
-♥︎ Victor Hugo did more than 10 lessons in a day!
-♥︎ Lynda collected the april badge!
-  Naysú collected the april badge!
-  Naysú did more than 10 lessons in a day!
-  Kiku collected the april badge!
-♥︎ Mary Borisova completed a 900 day streak!
-♥︎ Roberto collected the april badge!
-♥︎ ❤️ ❤️ Simba ❤️ ❤️ collected the april badge!
-♥︎ Bar Pab completed a 365 day streak!
-♥︎ Muhammet Ali Iskırık earned a total of 12500 xp!
-♥︎ Wagner Souto did more than 10 lessons in a day!
-♥︎ Wagner Souto collected the april badge!
-♥︎ Weronika collected the april badge!
-♥︎ Mélanie collected the april badge!
-♥︎ Fatma Bensoy completed a 200 day streak!
-♥︎ Timo collected the april badge!
-♥︎ angeles soto lopez collected the april badge!
-♥︎ Rieke_24 shared a sentence
-♥︎ Teddísek completed a 50 day streak!
-♥︎ Gunita did more than 10 lessons in a day!
-♥︎ Анна collected the april badge!
-♥︎ Lisa102017 came back to learn after a long time!
-♥︎ Cookie collected the april badge!
-♥︎ Vanessa shared a sentence
-♥︎ Cookie completed a 7 day streak!
-♥︎ Eli collected the april badge!
-♥︎ Elisa collected the april badge!
-♥︎ Mona came back to learn spanish after 1 month!
-♥︎ Rieke_24 shared a sentence
-♥︎ Jenny Lee collected the april badge!
-"
-`;
-
 snapshot[`duolingo feed 1`] = `
 "
-♥︎ Sandy collected the april badge!
-♥︎ YOONA did more than 10 lessons in a day!
-♥︎ Ella shared a sentence
-♥︎ Lea collected the april badge!
-♥︎ Rieke_24 shared a sentence
-♥︎ Karolina collected the april badge!
-♥︎ ecgEva completed a 14 day streak!
-♥︎ susan collected the april badge!
-♥︎ rita did more than 10 lessons in a day!
-  Rieke_24 collected the april badge!
-♥︎ ✍️Viking L Belgium collected the april badge!
-♥︎ rita collected the april badge!
-  Quỳnh Anh did more than 10 lessons in a day!
-♥︎ Deborah finished top 3 and was promoted to the amethyst league!
-♥︎ Ника shared a sentence
-♥︎ Ника shared a sentence
-♥︎ Ferdinand Greger did more than 10 lessons in a day!
-  Quỳnh Anh finished top 3 and was promoted to the ruby league!
-♥︎ Victor Hugo did more than 10 lessons in a day!
-♥︎ Lynda collected the april badge!
-  Naysú collected the april badge!
-  Naysú did more than 10 lessons in a day!
-  Kiku collected the april badge!
-♥︎ Mary Borisova completed a 900 day streak!
-♥︎ Roberto collected the april badge!
-♥︎ ❤️ ❤️ Simba ❤️ ❤️ collected the april badge!
-♥︎ Bar Pab completed a 365 day streak!
-♥︎ Muhammet Ali Iskırık earned a total of 12500 xp!
-♥︎ Wagner Souto did more than 10 lessons in a day!
-♥︎ Wagner Souto collected the april badge!
-♥︎ Weronika collected the april badge!
-♥︎ Mélanie collected the april badge!
-♥︎ Fatma Bensoy completed a 200 day streak!
-♥︎ Timo collected the april badge!
-♥︎ angeles soto lopez collected the april badge!
-♥︎ Rieke_24 shared a sentence
-♥︎ Teddísek completed a 50 day streak!
-♥︎ Gunita did more than 10 lessons in a day!
-♥︎ Анна collected the april badge!
-♥︎ Lisa102017 came back to learn after a long time!
-♥︎ Cookie collected the april badge!
+  Mary Borisova did more than 10 lessons in a day!
+  Ольга ✨ reached a duolingo english score of 127!
+  susan completed 70 friends quests in a row!
+  Zaineb collected the april badge!
+  Zaineb completed 3 friends quests in a row!
+  huyen did more than 10 lessons in a day!
+♥︎ Ariana Khodyreva played 5 chess matches in a day!
+♥︎ it's nazli 12 tacowa played 5 chess matches in a day!
+♥︎ it's nazli 12 tacowa did more than 10 lessons in a day!
+♥︎ Ariana Khodyreva won 10 chess matches. check and mate!
+♥︎ piccola reached a duolingo italian score of 63!
+♥︎ Anna and Sandra reached a 125 day friend streak!
+♥︎ angeles soto lopez completed 15 friends quests in a row!
+♥︎ Cindy finished #1 in the diamond league 100 times!
+♥︎ &ko collected the april badge!
+♥︎ Piet collected the april badge!
+♥︎ Татьяна completed 65 friends quests in a row!
+♥︎ Vanessa Ortega completed a 100 day streak!
+♥︎ Vanessa and Daicy reached a 50 day friend streak!
+♥︎ ♡M♡ shared a sentence
+♥︎ Kitsunet20170403 completed a 250 day streak!
+♥︎ Smt S completed 35 friends quests in a row!
+♥︎ Arlette and El reached a 575 day friend streak!
+♥︎ ✨ and Reyyan reached a 30 day friend streak!
+♥︎ ♡M♡ shared a sentence
+♥︎ ♡M♡ shared a sentence
+♥︎ Ricky Harper reached a duolingo english score of 130!
+♥︎ Roberto completed 5 friends quests in a row!
+♥︎ HalloI’m Japanese I like game finished top 3 and was promoted to the amethyst league!
+♥︎ mi completed 10 friends quests in a row!
+♥︎ carito and LizzyLegend#7 reached a 3 day friend streak!
+♥︎ Bob advanced to the finals of the diamond tournament!
+♥︎ liseth Castro completed a 7 day streak!
+♥︎ Mayara advanced to the semifinals of the diamond tournament!
+♥︎ Svitlana and Stephen reached a 675 day friend streak!
+♥︎ AŽ collected the april badge!
+♥︎ @Amin_mgh99 collected the april badge!
+♥︎ Quintin and Ibtissam reached a 30 day friend streak!
+♥︎ Regulita and gaborke reached a 50 day friend streak!
+♥︎ Smt and Bahar reached a 200 day friend streak!
+♥︎ CashBuckets reached a duolingo english score of 60!
+♥︎ Sarka completed 80 friends quests in a row!
+♥︎ Aylin and Leyla reached a 75 day friend streak!
+♥︎ Theodor Berkinblit collected the april badge!
+♥︎ Vicky collected the april badge!
+♥︎ Lololo124 reached a duolingo italian score of 8!
+♥︎ Bilge Özkan Özkavak collected the april badge!
+♥︎ محمد اسماعيل علي مهدي الموشكي reached a duolingo english score of 78!
+♥︎ [♤you and Nurettin reached a 3 day friend streak!
 ♥︎ Vanessa shared a sentence
-♥︎ Cookie completed a 7 day streak!
-♥︎ Eli collected the april badge!
-♥︎ Elisa collected the april badge!
-♥︎ Mona came back to learn spanish after 1 month!
-♥︎ Rieke_24 shared a sentence
-♥︎ Jenny Lee collected the april badge!
+♥︎ Татьяна did more than 10 lessons in a day!
+♥︎ Vanessa shared a sentence
+♥︎ Hamza reached a duolingo english score of 88!
+♥︎ Damla completed 3 friends quests in a row!
+♥︎ Миша and Светлана reached a 3 day friend streak!
+♥︎ Cris completed 5 friends quests in a row!
+♥︎ Sebastian and Ailing reached a 125 day friend streak!
+♥︎ kocymm completed a total of 50 perfect lessons!
+♥︎ منصف did more than 10 lessons in a day!
+♥︎ io finished top 3 and was promoted to the amethyst league!
+♥︎ Çınar Sezen reached a duolingo english score of 129!
+♥︎ Jacksmack704 collected the april badge!
+♥︎ rita and Deme reached a 325 day friend streak!
+♥︎ Koss collected the april badge!
+♥︎ Çınar Sezen won 50 chess matches. check and mate!
+♥︎ Cris and Антон reached a 3 day friend streak!
+♥︎ Cemre and Eda reached a 50 day friend streak!
+♥︎ abc completed 30 friends quests in a row!
+♥︎ abc and Yuu reached a 14 day friend streak!
+♥︎ Mapali and Werner reached a 200 day friend streak!
+♥︎ Elenise did more than 10 lessons in a day!
+♥︎ ANONYME 2015 won their first chess match. checkmate!
+♥︎ Erone2016 collected the april badge!
+♥︎ Sandra reached a duolingo spanish score of 91!
+♥︎ Robin and Donncha reached a 650 day friend streak!
+♥︎ atas and Natalia reached a 365 day friend streak!
+♥︎ Mobsbacke and Charlie reached a 14 day friend streak!
+♥︎ leroi555 collected the april badge!
+♥︎ Jun and Милана reached a 3 day friend streak!
+♥︎ Anna won 4350 chess matches. check and mate!
+  undefined struggling to know *which* chess move is best during your games? read our tips!
+♥︎ Emine and nguyễn reached a 550 day friend streak!
+♥︎ Nick and Fred reached a 475 day friend streak!
+♥︎ Delcy and Zulay reached a 675 day friend streak!
+♥︎ Trần HaNa won their first chess match. checkmate!
+♥︎ Ricky Harper completed 3 friends quests in a row!
+♥︎ Mobsbacke completed a 50 day streak!
+♥︎ Trần HaNa reached a duolingo english score of 25!
+♥︎ Trần HaNa collected the april badge!
+♥︎ Sandra completed 55 friends quests in a row!
+♥︎ Mərdan Abdullayev earned a total of 30000 xp!
+♥︎ Koteczek and Джек reached a 275 day friend streak!
+♥︎ minh đăng completed a 200 day streak!
+♥︎ Гончаров кинни бсд Пётр |[フΨ] collected the april badge!
+♥︎ hajun16kim and 또잉 reached a 7 day friend streak!
+♥︎ Bin played 5 chess matches in a day!
+♥︎ 青色 and あやや reached a 7 day friend streak!
+♥︎ K.EMBAPPE and Samtherizzman123 reached a 3 day friend streak!
+♥︎ yamamamayamama did more than 10 lessons in a day!
+♥︎ Yic0714 and tammam reached a 150 day friend streak!
 "
 `;
 
 snapshot[`duolingo feed --engage 1`] = `
 "
-♥︎ Sandy collected the april badge!
-♥︎ YOONA did more than 10 lessons in a day!
-♥︎ Ella shared a sentence
-♥︎ Lea collected the april badge!
-♥︎ Rieke_24 shared a sentence
-♥︎ Karolina collected the april badge!
-♥︎ ecgEva completed a 14 day streak!
-♥︎ susan collected the april badge!
-♥︎ rita did more than 10 lessons in a day!
-♥︎ Rieke_24 collected the april badge!
-♥︎ ✍️Viking L Belgium collected the april badge!
-♥︎ rita collected the april badge!
-♥︎ Quỳnh Anh did more than 10 lessons in a day!
-♥︎ Deborah finished top 3 and was promoted to the amethyst league!
-♥︎ Ника shared a sentence
-♥︎ Ника shared a sentence
-♥︎ Ferdinand Greger did more than 10 lessons in a day!
-♥︎ Quỳnh Anh finished top 3 and was promoted to the ruby league!
-♥︎ Victor Hugo did more than 10 lessons in a day!
-♥︎ Lynda collected the april badge!
-♥︎ Naysú collected the april badge!
-♥︎ Naysú did more than 10 lessons in a day!
-♥︎ Kiku collected the april badge!
-♥︎ Mary Borisova completed a 900 day streak!
-♥︎ Roberto collected the april badge!
-♥︎ ❤️ ❤️ Simba ❤️ ❤️ collected the april badge!
-♥︎ Bar Pab completed a 365 day streak!
-♥︎ Muhammet Ali Iskırık earned a total of 12500 xp!
-♥︎ Wagner Souto did more than 10 lessons in a day!
-♥︎ Wagner Souto collected the april badge!
-♥︎ Weronika collected the april badge!
-♥︎ Mélanie collected the april badge!
-♥︎ Fatma Bensoy completed a 200 day streak!
-♥︎ Timo collected the april badge!
-♥︎ angeles soto lopez collected the april badge!
-♥︎ Rieke_24 shared a sentence
-♥︎ Teddísek completed a 50 day streak!
-♥︎ Gunita did more than 10 lessons in a day!
-♥︎ Анна collected the april badge!
-♥︎ Lisa102017 came back to learn after a long time!
-♥︎ Cookie collected the april badge!
+♥︎ Mary Borisova did more than 10 lessons in a day!
+♥︎ Ольга ✨ reached a duolingo english score of 127!
+♥︎ susan completed 70 friends quests in a row!
+♥︎ Zaineb collected the april badge!
+♥︎ Zaineb completed 3 friends quests in a row!
+♥︎ huyen did more than 10 lessons in a day!
+♥︎ Ariana Khodyreva played 5 chess matches in a day!
+♥︎ it's nazli 12 tacowa played 5 chess matches in a day!
+♥︎ it's nazli 12 tacowa did more than 10 lessons in a day!
+♥︎ Ariana Khodyreva won 10 chess matches. check and mate!
+♥︎ piccola reached a duolingo italian score of 63!
+♥︎ Anna and Sandra reached a 125 day friend streak!
+♥︎ angeles soto lopez completed 15 friends quests in a row!
+♥︎ Cindy finished #1 in the diamond league 100 times!
+♥︎ &ko collected the april badge!
+♥︎ Piet collected the april badge!
+♥︎ Татьяна completed 65 friends quests in a row!
+♥︎ Vanessa Ortega completed a 100 day streak!
+♥︎ Vanessa and Daicy reached a 50 day friend streak!
+♥︎ ♡M♡ shared a sentence
+♥︎ Kitsunet20170403 completed a 250 day streak!
+♥︎ Smt S completed 35 friends quests in a row!
+♥︎ Arlette and El reached a 575 day friend streak!
+♥︎ ✨ and Reyyan reached a 30 day friend streak!
+♥︎ ♡M♡ shared a sentence
+♥︎ ♡M♡ shared a sentence
+♥︎ Ricky Harper reached a duolingo english score of 130!
+♥︎ Roberto completed 5 friends quests in a row!
+♥︎ HalloI’m Japanese I like game finished top 3 and was promoted to the amethyst league!
+♥︎ mi completed 10 friends quests in a row!
+♥︎ carito and LizzyLegend#7 reached a 3 day friend streak!
+♥︎ Bob advanced to the finals of the diamond tournament!
+♥︎ liseth Castro completed a 7 day streak!
+♥︎ Mayara advanced to the semifinals of the diamond tournament!
+♥︎ Svitlana and Stephen reached a 675 day friend streak!
+♥︎ AŽ collected the april badge!
+♥︎ @Amin_mgh99 collected the april badge!
+♥︎ Quintin and Ibtissam reached a 30 day friend streak!
+♥︎ Regulita and gaborke reached a 50 day friend streak!
+♥︎ Smt and Bahar reached a 200 day friend streak!
+♥︎ CashBuckets reached a duolingo english score of 60!
+♥︎ Sarka completed 80 friends quests in a row!
+♥︎ Aylin and Leyla reached a 75 day friend streak!
+♥︎ Theodor Berkinblit collected the april badge!
+♥︎ Vicky collected the april badge!
+♥︎ Lololo124 reached a duolingo italian score of 8!
+♥︎ Bilge Özkan Özkavak collected the april badge!
+♥︎ محمد اسماعيل علي مهدي الموشكي reached a duolingo english score of 78!
+♥︎ [♤you and Nurettin reached a 3 day friend streak!
 ♥︎ Vanessa shared a sentence
-♥︎ Cookie completed a 7 day streak!
-♥︎ Eli collected the april badge!
-♥︎ Elisa collected the april badge!
-♥︎ Mona came back to learn spanish after 1 month!
-♥︎ Rieke_24 shared a sentence
-♥︎ Jenny Lee collected the april badge!
+♥︎ Татьяна did more than 10 lessons in a day!
+♥︎ Vanessa shared a sentence
+♥︎ Hamza reached a duolingo english score of 88!
+♥︎ Damla completed 3 friends quests in a row!
+♥︎ Миша and Светлана reached a 3 day friend streak!
+♥︎ Cris completed 5 friends quests in a row!
+♥︎ Sebastian and Ailing reached a 125 day friend streak!
+♥︎ kocymm completed a total of 50 perfect lessons!
+♥︎ منصف did more than 10 lessons in a day!
+♥︎ io finished top 3 and was promoted to the amethyst league!
+♥︎ Çınar Sezen reached a duolingo english score of 129!
+♥︎ Jacksmack704 collected the april badge!
+♥︎ rita and Deme reached a 325 day friend streak!
+♥︎ Koss collected the april badge!
+♥︎ Çınar Sezen won 50 chess matches. check and mate!
+♥︎ Cris and Антон reached a 3 day friend streak!
+♥︎ Cemre and Eda reached a 50 day friend streak!
+♥︎ abc completed 30 friends quests in a row!
+♥︎ abc and Yuu reached a 14 day friend streak!
+♥︎ Mapali and Werner reached a 200 day friend streak!
+♥︎ Elenise did more than 10 lessons in a day!
+♥︎ ANONYME 2015 won their first chess match. checkmate!
+♥︎ Erone2016 collected the april badge!
+♥︎ Sandra reached a duolingo spanish score of 91!
+♥︎ Robin and Donncha reached a 650 day friend streak!
+♥︎ atas and Natalia reached a 365 day friend streak!
+♥︎ Mobsbacke and Charlie reached a 14 day friend streak!
+♥︎ leroi555 collected the april badge!
+♥︎ Jun and Милана reached a 3 day friend streak!
+♥︎ Anna won 4350 chess matches. check and mate!
+♥︎ undefined struggling to know *which* chess move is best during your games? read our tips!
+♥︎ Emine and nguyễn reached a 550 day friend streak!
+♥︎ Nick and Fred reached a 475 day friend streak!
+♥︎ Delcy and Zulay reached a 675 day friend streak!
+♥︎ Trần HaNa won their first chess match. checkmate!
+♥︎ Ricky Harper completed 3 friends quests in a row!
+♥︎ Mobsbacke completed a 50 day streak!
+♥︎ Trần HaNa reached a duolingo english score of 25!
+♥︎ Trần HaNa collected the april badge!
+♥︎ Sandra completed 55 friends quests in a row!
+♥︎ Mərdan Abdullayev earned a total of 30000 xp!
+♥︎ Koteczek and Джек reached a 275 day friend streak!
+♥︎ minh đăng completed a 200 day streak!
+♥︎ Гончаров кинни бсд Пётр |[フΨ] collected the april badge!
+♥︎ hajun16kim and 또잉 reached a 7 day friend streak!
+♥︎ Bin played 5 chess matches in a day!
+♥︎ 青色 and あやや reached a 7 day friend streak!
+♥︎ K.EMBAPPE and Samtherizzman123 reached a 3 day friend streak!
+♥︎ yamamamayamama did more than 10 lessons in a day!
+♥︎ Yic0714 and tammam reached a 150 day friend streak!
+"
+`;
+
+snapshot[`duolingo follows 1`] = `
+"
+👤 Following 525 people.
+👤 Followed by 1026 people.
+"
+`;
+
+snapshot[`duolingo follows --follow 1`] = `
+"
+👤 Following 525 people.
+👤 Followed by 1026 people.
+✅ Followed carky crak.
+✅ Followed herkal.
+✅ Followed jeannemiaou..
+"
+`;
+
+snapshot[`duolingo follows --unfollow 1`] = `
+"
+👤 Following 528 people.
+👤 Followed by 1026 people.
+❌ Unfollowed Stina.
+❌ Unfollowed Erivan.
+❌ Unfollowed Andrii.
+❌ Unfollowed i'm quitting because of hiatus.
+❌ Unfollowed Сергей Иванищев.
+❌ Unfollowed LadyBug_en Paris.
+❌ Unfollowed Anaya.
+❌ Unfollowed Чипупеля.
+❌ Unfollowed Elif Öncel.
+❌ Unfollowed Юрий,(тех поддержка ) Яковенко.
+❌ Unfollowed slime804.
+❌ Unfollowed Ebrar Altınözek.
+❌ Unfollowed Quỳnh Anh.
+❌ Unfollowed dəfnə ibayeva.
+❌ Unfollowed Oscar♟.
+"
+`;
+
+snapshot[`duolingo league 1`] = `
+"
+🏆  Finals                         
+ 1. Tuğrul 👀               7653 XP
+ 2. Greg Stone 🇪🇸           3427 XP
+ 3. Stina 🎉                3165 XP
+ 4. jeannette van alteren   2930 XP
+ 5. Veaceslav Dinga         2809 XP
+ 6. annita                  2285 XP
+ 7. katyalingo 😺           2146 XP
+ 8. Craig                   2101 XP
+ 9. Jens Lütkemeier         2047 XP
+10. Denis 💪                2001 XP
+11. Lily 😎                 1952 XP
+12. Wilco van Es            1891 XP
+13. Magic Bensn 😎          1799 XP
+14. Svitlana                1577 XP
+15. LauraMeisje LMH 🇯🇵      1385 XP
+"
+`;
+
+snapshot[`duolingo league --follow 1`] = `
+"
+✅ Followed Greg Stone.
+✅ Followed Stina.
+✅ Followed jeannette van alteren.
+✅ Followed Veaceslav Dinga.
+✅ Followed annita.
+✅ Followed katyalingo.
+✅ Followed Craig.
+✅ Followed Jens Lütkemeier.
+✅ Followed Denis.
+✅ Followed Lily.
+✅ Followed Wilco van Es.
+✅ Followed Magic Bensn.
+✅ Followed Svitlana.
+✅ Followed LauraMeisje LMH.
+🏆  Finals                         
+ 1. Tuğrul 👀               7653 XP
+ 2. Greg Stone 🇪🇸           3427 XP
+ 3. Stina 🎉                3165 XP
+ 4. jeannette van alteren   2930 XP
+ 5. Veaceslav Dinga         2809 XP
+ 6. annita                  2285 XP
+ 7. katyalingo 😺           2146 XP
+ 8. Craig                   2101 XP
+ 9. Jens Lütkemeier         2047 XP
+10. Denis 💪                2001 XP
+11. Lily 😎                 1952 XP
+12. Wilco van Es            1891 XP
+13. Magic Bensn 😎          1799 XP
+14. Svitlana                1577 XP
+15. LauraMeisje LMH 🇯🇵      1385 XP
 "
 `;

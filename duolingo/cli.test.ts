@@ -6,7 +6,7 @@ import { cli, type CliOptions } from "./cli.ts";
 const OPTIONS = { sanitizeResources: false };
 
 async function test(t: Deno.TestContext) {
-  const options: CliOptions = {};
+  const options: CliOptions = { cache: "no-store" };
   using fetch = mockFetch(t);
   if (fetch.mode === "replay") {
     // use ENV variables for recording, but fake credentials for replay
@@ -22,11 +22,10 @@ async function test(t: Deno.TestContext) {
   await assertSnapshot(t, console.output({ wrap: "\n" }));
 }
 
-Deno.test("duolingo feed --verbose", OPTIONS, test);
 Deno.test("duolingo feed", OPTIONS, test);
 Deno.test("duolingo feed --engage", OPTIONS, test);
-// Deno.test("duolingo follows", OPTIONS, test);
-// Deno.test("duolingo follows --follow", OPTIONS, test);
-// Deno.test("duolingo follows --unfollow", OPTIONS, test);
-// Deno.test("duolingo league", OPTIONS, test);
-// Deno.test("duolingo league --follow", OPTIONS, test);
+Deno.test("duolingo follows", OPTIONS, test);
+Deno.test("duolingo follows --follow", OPTIONS, test);
+Deno.test("duolingo follows --unfollow", OPTIONS, test);
+Deno.test("duolingo league", OPTIONS, test);
+Deno.test("duolingo league --follow", OPTIONS, test);

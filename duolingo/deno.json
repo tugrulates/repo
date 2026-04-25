@@ -14,7 +14,7 @@
       "read": true,
       "write": true,
       "net": [
-        "www.duolingo.com"
+        "ios-api-cf.duolingo.com"
       ],
       "env": [
         "HOME"

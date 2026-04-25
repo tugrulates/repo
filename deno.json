@@ -49,6 +49,7 @@
     "@std/collections": "jsr:@std/collections@^1.1.7",
     "@std/fmt": "jsr:@std/fmt@^1.0.10",
     "@std/fs": "jsr:@std/fs@^1.0.23",
+    "@std/http": "jsr:@std/http@^1.1.0",
     "@std/path": "jsr:@std/path@^1.1.4",
     "@std/testing": "jsr:@std/testing@^1.0.18",
     "exiftool-vendored": "npm:exiftool-vendored@^35.19.0",
