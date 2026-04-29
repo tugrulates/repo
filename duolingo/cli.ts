@@ -17,6 +17,7 @@ import { green, red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, LEAGUES } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji } from "./emoji.ts";
+import { distinctBy } from "@std/collections";
 
 const ERROR = red("✘");
 const KUDOS = green("♥︎");
@@ -182,6 +183,7 @@ function followsCommand(config: Config<CliOptions>) {
               const user = await client.users.get(friend.userId);
               return { ...friend, streak: user.streak };
             },
+            { concurrency: 8 },
           )).filter((friend) => friend.streak > 0);
           await pool(
             active,
@@ -201,7 +203,7 @@ function followsCommand(config: Config<CliOptions>) {
           }, { concurrency: 8 }))
             .filter((friend) => friend.streak === 0);
           await pool(
-            result.dontFollowBack.concat(inactive),
+            distinctBy(result.dontFollowBack.concat(inactive), (friend) => friend.userId),
             async (friend) => {
               const ok = await client.users.unfollow(friend.userId);
               if (!json && ok) {

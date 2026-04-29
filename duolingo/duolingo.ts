@@ -19,7 +19,7 @@
  * ```sh
  * export DUOLINGO_USERNAME=TugrulAtes
  * export DUOLINGO_TOKEN=token
- * deno run -A --unstable-kv jsr:@tugrulates/duolingo/cli feed
+ * deno run -P jsr:@tugrulates/duolingo/cli feed
  * ```
  *
  * @module duolingo
@@ -138,11 +138,12 @@ export interface FeedCard {
     | "FOLLOW"
     | "FOLLOW_BACK"
     | "GIFT_SENT"
+    | "NEWS"
     | "KUDOS_MILESTONE"
     | "KUDOS_OFFER"
     | "SHARE_SENTENCE_OFFER";
   /** The user's display name. */
-  displayName: string;
+  displayName?: string;
   /** The suggested reaction to the card. */
   defaultReaction: null | Reaction;
   /** The unique identifier of the event. */
