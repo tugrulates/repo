@@ -19,7 +19,7 @@
  * ```sh
  * export DUOLINGO_USERNAME=TugrulAtes
  * export DUOLINGO_TOKEN=token
- * deno run -P jsr:@tugrulates/duolingo/cli feed
+ * deno run -A jsr:@tugrulates/duolingo/cli feed
  * ```
  *
  * @module duolingo
