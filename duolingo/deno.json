@@ -17,6 +17,8 @@
         "ios-api-cf.duolingo.com"
       ],
       "env": [
+        "DUOLINGO_TOKEN",
+        "DUOLINGO_USERNAME",
         "HOME"
       ]
     }
