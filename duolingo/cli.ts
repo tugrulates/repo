@@ -13,7 +13,7 @@ import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
-import { distinctBy } from "@std/collections";
+import { distinctBy, pick } from "@std/collections";
 import { green, red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, LEAGUES } from "./duolingo.ts";
@@ -79,7 +79,7 @@ export async function cli(options?: CliOptions): Promise<number> {
       { hidden: true, action: () => console.verbose = true },
     )
     .help({ colors: Deno.stdout.isTerminal() })
-    .globalAction((options) => cfg.set(options))
+    .globalAction((options) => cfg.set(pick(options, ["username", "token"])))
     .command("feed", feedCommand(cfg))
     .command("follows", followsCommand(cfg))
     .command("league", leagueCommand(cfg));
