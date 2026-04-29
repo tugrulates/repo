@@ -13,9 +13,10 @@ import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
+import { distinctBy } from "@std/collections";
 import { green, red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
-import { duolingo, TIERS } from "./duolingo.ts";
+import { duolingo, LEAGUES } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji } from "./emoji.ts";
 
 const ERROR = red("✘");
@@ -27,6 +28,8 @@ export type CliOptions = {
   username?: string;
   /** Duolingo JWT token. */
   token?: string;
+  /** Caching strategy for API requests. */
+  cache?: RequestCache;
 };
 
 /**
@@ -84,9 +87,9 @@ export async function cli(options?: CliOptions): Promise<number> {
 
 function feedCommand(cfg: Config<CliOptions>) {
   function summary(card: FeedCard): string {
-    return card.header
-      ? plain(card.header)
-      : `${card.displayName} ${plain(card.body).toLowerCase()}`;
+    return `${card.header ? plain(card.header) : card.displayName} ${
+      plain(card.body).toLowerCase()
+    }`.trimEnd();
   }
   return new Command()
     .description("Prints and interacts with the feed.")
@@ -98,19 +101,21 @@ function feedCommand(cfg: Config<CliOptions>) {
     .option("--json", "Output the feed as JSON.")
     .action(async ({ engage, json }) => {
       const client = await api(cfg);
+      const me = await client.users.me();
       const cards = await client.feed.get();
       async function react(card: FeedCard): Promise<boolean> {
         if (card.cardType === "FOLLOW") {
           const user = await client.users.get(card.userId);
           if (user && !user.isFollowing && user.canFollow) {
-            await client.users.follow(card.userId);
+            const ok = await client.users.follow(card.userId);
+            if (ok) console.log(`✅ Followed ${card.displayName}.`);
             return true;
           }
         } else if (
           card.cardType === "KUDOS_OFFER" ||
           card.cardType === "SHARE_SENTENCE_OFFER"
         ) {
-          if (engage && !card.reactionType) {
+          if (engage && !card.reactionType && card.userId !== me.id) {
             await client.feed.react(card);
             return true;
           }
@@ -141,7 +146,7 @@ function followsCommand(config: Config<CliOptions>) {
     .example("duolingo follows --follow", "Follow active users who follow.")
     .example(
       "duolingo follows --unfollow",
-      "Unfollow inactive of non-following users.",
+      "Unfollow inactive or non-following users.",
     )
     .example("duolingo follows --follow --unfollow", "Matches both lists.")
     .example("duolingo follows --json", "Outputs JSON of follower information.")
@@ -165,13 +170,25 @@ function followsCommand(config: Config<CliOptions>) {
     .action(async ({ follow, unfollow, json }) => {
       const client = await api(config);
       let result = await client.follows.get();
+      if (json) console.log(JSON.stringify(result, undefined, 2));
+      else {
+        console.log(`👤 Following ${result.following.length} people.`);
+        console.log(`👤 Followed by ${result.followers.length} people.`);
+      }
       if (follow || unfollow) {
         if (follow) {
-          await pool(
-            result.notFollowingBack,
+          const active = (await pool(
+            result.notFollowingBack.filter((friend) => friend.canFollow),
             async (friend) => {
-              if (!friend.canFollow) return;
-              const ok = await client.users.follow(friend);
+              const user = await client.users.get(friend.userId);
+              return { ...friend, streak: user.streak };
+            },
+            { concurrency: 8 },
+          )).filter((friend) => friend.streak > 0);
+          await pool(
+            active,
+            async (friend) => {
+              const ok = await client.users.follow(friend.userId);
               if (!json && ok) {
                 console.log(`✅ Followed ${friend.displayName}.`);
               }
@@ -180,10 +197,18 @@ function followsCommand(config: Config<CliOptions>) {
           );
         }
         if (unfollow) {
+          const inactive = (await pool(result.following, async (friend) => {
+            const { streak } = await client.users.get(friend.userId);
+            return { ...friend, streak };
+          }, { concurrency: 8 }))
+            .filter((friend) => friend.streak === 0);
           await pool(
-            result.dontFollowBack,
+            distinctBy(
+              result.dontFollowBack.concat(inactive),
+              (friend) => friend.userId,
+            ),
             async (friend) => {
-              const ok = await client.users.unfollow(friend);
+              const ok = await client.users.unfollow(friend.userId);
               if (!json && ok) {
                 console.log(`❌ Unfollowed ${friend.displayName}.`);
               }
@@ -192,12 +217,6 @@ function followsCommand(config: Config<CliOptions>) {
           );
         }
         result = await client.follows.get();
-      }
-
-      if (json) console.log(JSON.stringify(result, undefined, 2));
-      else {
-        console.log(`👤 Following ${result.following.length} people.`);
-        console.log(`👤 Followed by ${result.followers.length} people.`);
       }
     });
 }
@@ -214,17 +233,28 @@ function leagueCommand(config: Config<CliOptions>) {
       const client = await api(config);
       const league = await client.league.get();
       if (league) {
-        if (follow) await client.league.follow(league);
+        const users = await Promise.all(
+          league.rankings.map((user) => client.users.get(user.user_id)),
+        );
+        if (follow) {
+          await pool(
+            users.filter((user) => user.canFollow && !user.isFollowing),
+            async (user) => {
+              const ok = await client.users.follow(user.id);
+              if (!json && ok) console.log(`✅ Followed ${user.name}.`);
+            },
+            { concurrency: 1 },
+          );
+        }
         if (json) console.log(JSON.stringify(league, undefined, 2));
         else {
-          const following = await client.follows.following();
           new Table()
-            .header([leagueEmoji(league), `${TIERS[league.tier]} League`])
+            .header([leagueEmoji(league), LEAGUES[league.tier]])
             .body(
               league.rankings.map((user, index) => [
                 `${index + 1}.`,
                 `${user.display_name} ${leagueUserEmoji(user)}`,
-                following.find((friend) => friend.userId === user.user_id)
+                users.find((u) => u.id === user.user_id && u.isFollowing)
                   ? "👤"
                   : "",
                 `${user.score.toString()} XP`,
@@ -241,11 +271,11 @@ function leagueCommand(config: Config<CliOptions>) {
 }
 
 async function api(cfg: Config<CliOptions>): Promise<Duolingo> {
-  let { username, token } = await cfg.get();
+  let { username, token, cache } = await cfg.get();
   if (!username) username = await Input.prompt("Username");
   if (!token) token = await Secret.prompt("Token");
   if (!username || !token) throw new Error("Username and token are required.");
-  return duolingo({ username, token });
+  return duolingo({ username, token, ...cache && { cache } });
 }
 
 if (import.meta.main) Deno.exit(await cli());
