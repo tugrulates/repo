@@ -14,13 +14,12 @@ import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
 import { distinctBy, pick } from "@std/collections";
-import { green, red } from "@std/fmt/colors";
+import { red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, LEAGUES } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji } from "./emoji.ts";
 
 const ERROR = red("✘");
-const KUDOS = green("♥︎");
 
 /** Options for the {@link cli} function. */
 export type CliOptions = {
@@ -93,9 +92,10 @@ export async function cli(options?: CliOptions): Promise<number> {
 
 function feedCommand(cfg: Config<CliOptions>) {
   function summary(card: FeedCard): string {
-    return `${card.header ? plain(card.header) : card.displayName} ${
-      plain(card.body).toLowerCase()
-    }`.trimEnd();
+    const name = card.header ? plain(card.header) : card.displayName;
+    const body = plain(card.body).trimEnd();
+    if (!name || body.startsWith(name)) return body;
+    return `${name} ${body.toLowerCase()}`;
   }
   return new Command()
     .description("Prints and interacts with the feed.")
@@ -135,7 +135,7 @@ function feedCommand(cfg: Config<CliOptions>) {
           if (engage) await react(card);
           if (!json) {
             console.log(
-              card.reactionType || engage ? KUDOS : " ",
+              card.reactionType || engage ? "💚" : "  ",
               summary(card),
             );
           }
@@ -260,7 +260,9 @@ function leagueCommand(config: Config<CliOptions>) {
               league.rankings.map((user, index) => [
                 `${index + 1}.`,
                 `${user.display_name} ${leagueUserEmoji(user)}`,
-                users.find((u) => u.id === user.user_id && u.isFollowing)
+                users.find((u) =>
+                    u.id === user.user_id && u.isFollowing && u.isFollowedBy
+                  )
                   ? "👤"
                   : "",
                 `${user.score.toString()} XP`,
