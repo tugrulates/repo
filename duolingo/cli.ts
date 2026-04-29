@@ -48,30 +48,36 @@ export async function cli(options?: CliOptions): Promise<number> {
     .version(await version({ target: true }))
     .example("duolingo --username <username> --token <token>", "Configure.")
     .example("duolingo --clear", "Clear the cached configuration.")
-    .option("--clear", "Clear the cached configuration.", {
-      standalone: true,
-      action: () => cfg.clear(),
-    })
-    .globalEnv("DUOLINGO_USERNAME=<username:string>", "Username.", {
-      prefix: "DUOLINGO_",
-    })
+    .option(
+      "--clear",
+      "Clear the cached configuration.",
+      { standalone: true, action: () => cfg.clear() },
+    )
+    .globalEnv(
+      "DUOLINGO_USERNAME=<username:string>",
+      "Username.",
+      { prefix: "DUOLINGO_" },
+    )
     .globalOption(
       "--username <username:string>",
       "Username.",
       username ? { default: username } : {},
     )
-    .globalEnv("DUOLINGO_TOKEN=<token:string>", "JWT token.", {
-      prefix: "DUOLINGO_",
-    })
+    .globalEnv(
+      "DUOLINGO_TOKEN=<token:secret>",
+      "JWT token.",
+      { prefix: "DUOLINGO_" },
+    )
     .globalOption(
-      "--token <token:string>",
+      "--token <token:secret>",
       "JWT token.",
       token ? { default: token } : {},
     )
-    .globalOption("--verbose", "Print additional information.", {
-      hidden: true,
-      action: () => console.verbose = true,
-    })
+    .globalOption(
+      "--verbose",
+      "Print additional information.",
+      { hidden: true, action: () => console.verbose = true },
+    )
     .help({ colors: Deno.stdout.isTerminal() })
     .globalAction((options) => cfg.set(options))
     .command("feed", feedCommand(cfg))
