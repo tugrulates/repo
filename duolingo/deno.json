@@ -1,6 +1,6 @@
 {
   "name": "@tugrulates/duolingo",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "exports": {
     ".": "./duolingo.ts",
     "./cli": "./cli.ts",

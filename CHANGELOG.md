@@ -1,3 +1,19 @@
+## duolingo@0.3.1
+
+- 🐛 use iOS endpoint (#190)
+- 🐛 fix feed queries (#188)
+- 🐛 add verbose option (#187)
+- 🐛 use terminal-aware `console` (#172)
+
+## photo@0.1.1
+
+- 🐛 fix exiftool resource clash (#186)
+- 🐛 verbose option and emojiless (#185)
+- 🐛 use current directory if no arguments are passed (#183)
+- 🐛 limit CLI spawn concurrency (#182)
+- 🐛 correct command name on CLI help (#181)
+- 🐛 use terminal-aware `console` (#172)
+
 ## 500px@0.2.2
 
 - 🐛 bake queries into the code for JSR (#141)
