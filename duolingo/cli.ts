@@ -13,11 +13,11 @@ import { console } from "@roka/cli/console";
 import { version } from "@roka/forge/version";
 import { plain } from "@roka/html/plain";
 import { maybe } from "@roka/maybe";
+import { distinctBy } from "@std/collections";
 import { green, red } from "@std/fmt/colors";
 import type { Duolingo, FeedCard } from "./duolingo.ts";
 import { duolingo, LEAGUES } from "./duolingo.ts";
 import { leagueEmoji, leagueUserEmoji } from "./emoji.ts";
-import { distinctBy } from "@std/collections";
 
 const ERROR = red("✘");
 const KUDOS = green("♥︎");
@@ -203,7 +203,10 @@ function followsCommand(config: Config<CliOptions>) {
           }, { concurrency: 8 }))
             .filter((friend) => friend.streak === 0);
           await pool(
-            distinctBy(result.dontFollowBack.concat(inactive), (friend) => friend.userId),
+            distinctBy(
+              result.dontFollowBack.concat(inactive),
+              (friend) => friend.userId,
+            ),
             async (friend) => {
               const ok = await client.users.unfollow(friend.userId);
               if (!json && ok) {
