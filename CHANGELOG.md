@@ -1,3 +1,8 @@
+## duolingo@0.3.2
+
+- 🐛 fix CLI outputs for feed and league (#194)
+- 🐛 change token type to secret (#193)
+
 ## duolingo@0.3.1
 
 - 🐛 use iOS endpoint (#190)
