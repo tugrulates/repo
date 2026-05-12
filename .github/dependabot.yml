@@ -1,6 +1,13 @@
 version: 2
+enable-beta-ecosystems: true
 updates:
   - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+  - package-ecosystem: "deno"
     directory: "/"
     schedule:
       interval: "monthly"
